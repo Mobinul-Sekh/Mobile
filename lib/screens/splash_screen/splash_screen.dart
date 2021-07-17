@@ -4,6 +4,7 @@ import 'package:bitecope/screens/splash_screen/components/wave_clipper.dart';
 import 'package:bitecope/widgets/rounded_wide_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class SplashScreen extends StatefulWidget {
   SplashScreen({Key? key}) : super(key: key);
@@ -33,9 +34,7 @@ class _SplashScreenState extends State<SplashScreen> {
             ),
             Column(
               children: [
-                Image(
-                  image: AssetImage('assets/images/logo.png'),
-                ),
+                SvgPicture.asset('assets/images/logo.svg'),
                 Text(
                   "Bitecope",
                   style: Theme.of(context).textTheme.headline5?.copyWith(
