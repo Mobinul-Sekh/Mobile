@@ -1,4 +1,4 @@
-import 'package:bitecope/data/account_repository.dart';
+import 'package:bitecope/data/repositories/account_repository.dart';
 import 'package:bloc/bloc.dart';
 
 part 'authentication_state.dart';

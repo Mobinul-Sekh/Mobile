@@ -5,6 +5,7 @@ import 'package:bitecope/widgets/rounded_wide_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class SplashScreen extends StatefulWidget {
   SplashScreen({Key? key}) : super(key: key);
@@ -36,14 +37,14 @@ class _SplashScreenState extends State<SplashScreen> {
               children: [
                 SvgPicture.asset('assets/images/logo.svg'),
                 Text(
-                  "Bitecope",
+                  AppLocalizations.of(context)!.appName,
                   style: Theme.of(context).textTheme.headline5?.copyWith(
                         color: AppColors.white,
                         fontFamily: 'Righteous',
                       ),
                 ),
                 Text(
-                  "Connecting every bit",
+                  AppLocalizations.of(context)!.appSlogan,
                   style: Theme.of(context).textTheme.bodyText1?.copyWith(
                         color: AppColors.white,
                         fontFamily: 'Poppins',

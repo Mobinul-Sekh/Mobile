@@ -12,7 +12,7 @@ class NotFound extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Icon(
-              Icons.not_accessible_rounded,
+              Icons.block,
               size: 100,
             ),
             const SizedBox(height: 12),

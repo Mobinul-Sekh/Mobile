@@ -1,9 +1,10 @@
-import 'package:bitecope/logic/authentication/authentication_bloc.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:bitecope/config/router.dart';
 import 'package:bitecope/config/theme.dart';
 import 'package:bitecope/screens/splash_screen/splash_screen.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:bitecope/logic/authentication/authentication_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -23,7 +24,9 @@ class _BiteCopeState extends State<BiteCope> {
     return BlocProvider<AuthenticationBloc>(
       create: (context) => AuthenticationBloc(),
       child: MaterialApp(
-        title: 'BiteCope',
+        localizationsDelegates: AppLocalizations.localizationsDelegates,
+        supportedLocales: AppLocalizations.supportedLocales,
+        onGenerateTitle: (context) => AppLocalizations.of(context)!.appName,
         theme: AppTheme.of(context),
         onGenerateRoute: appRouter.onGenerateRoute,
         home: SplashScreen(),

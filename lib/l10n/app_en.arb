@@ -1,0 +1,10 @@
+{
+    "appName": "Bitecope",
+    "@appName": {
+      "description": "Name of the application"
+    },
+    "appSlogan": "Connecting every bit",
+    "@appSlogan": {
+        "description": "Slogan of the application"
+    }
+}
