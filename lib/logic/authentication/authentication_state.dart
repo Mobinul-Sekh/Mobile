@@ -1,6 +1,6 @@
 part of 'authentication_bloc.dart';
 
-class AuthenticationState {
+class AuthenticationState with EquatableMixin {
   AuthenticationStatus status;
   String? username;
   String? token;
@@ -10,6 +10,9 @@ class AuthenticationState {
     this.username,
     this.token,
   });
+
+  @override
+  List<Object?> get props => [status, username, token];
 }
 
 enum AuthenticationStatus {
