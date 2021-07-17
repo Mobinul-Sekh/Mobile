@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class NotFound extends StatelessWidget {
   const NotFound({Key? key}) : super(key: key);
@@ -16,7 +17,7 @@ class NotFound extends StatelessWidget {
               size: 100,
             ),
             const SizedBox(height: 12),
-            Text("404: Page Not Found"),
+            Text(AppLocalizations.of(context)!.notFound),
           ],
         ),
       ),

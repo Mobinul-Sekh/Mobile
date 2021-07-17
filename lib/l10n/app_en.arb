@@ -6,5 +6,17 @@
     "appSlogan": "Connecting every bit",
     "@appSlogan": {
         "description": "Slogan of the application"
+    },
+    "notFound": "Error 404: Page not found",
+    "@notFound": {
+      "description": "Error message for unknown route"
+    },
+    "signIn": "Sign IN",
+    "@signIn": {
+      "description": "Text for sign in button"
+    },
+    "signUp": "Sign UP",
+    "@signUP": {
+      "description": "Text for sign up button"
     }
 }

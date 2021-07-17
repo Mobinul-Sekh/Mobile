@@ -67,7 +67,7 @@ class _SplashScreenState extends State<SplashScreen> {
                         RoundedWideButton(
                           child: Center(
                             child: Text(
-                              "Sign IN",
+                              AppLocalizations.of(context)!.signIn,
                               style: Theme.of(context).textTheme.headline6,
                             ),
                           ),
@@ -85,7 +85,7 @@ class _SplashScreenState extends State<SplashScreen> {
                         RoundedWideButton(
                           child: Center(
                             child: Text(
-                              "Sign UP",
+                              AppLocalizations.of(context)!.signUp,
                               style: Theme.of(context).textTheme.headline6,
                             ),
                           ),
