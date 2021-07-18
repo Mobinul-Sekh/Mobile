@@ -13,7 +13,7 @@ void main() {
     test('Start |  Status: Loading', () {
       expect(
         authenticationBloc.state,
-        AuthenticationState(status: AuthenticationStatus.loading),
+        AuthenticationState(),
       );
     });
     test('Null Token | Status: Logged Out', () {

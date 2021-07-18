@@ -10,11 +10,11 @@ class AppRouter {
     switch (routeSettings.name) {
       case '/':
         return MaterialPageRoute(
-          builder: (_) => SplashScreen(),
+          builder: (_) => const SplashScreen(),
         );
       default:
         return MaterialPageRoute(
-          builder: (_) => NotFound(),
+          builder: (_) => const NotFound(),
         );
     }
   }

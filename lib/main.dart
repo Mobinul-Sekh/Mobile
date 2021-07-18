@@ -29,7 +29,7 @@ class _BiteCopeState extends State<BiteCope> {
         onGenerateTitle: (context) => AppLocalizations.of(context)!.appName,
         theme: AppTheme.of(context),
         onGenerateRoute: appRouter.onGenerateRoute,
-        home: SplashScreen(),
+        home: const SplashScreen(),
       ),
     );
   }
