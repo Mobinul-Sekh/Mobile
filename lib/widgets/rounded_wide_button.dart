@@ -27,7 +27,7 @@ class RoundedWideButton extends StatelessWidget {
           padding: const EdgeInsets.all(12),
           decoration: BoxDecoration(
             color: fillColor ?? Theme.of(context).primaryColor,
-            border: border ?? null,
+            border: border,
             borderRadius: BorderRadius.circular(100),
           ),
           child: child,

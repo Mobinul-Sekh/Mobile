@@ -22,22 +22,18 @@ class AppGradients {
       AppColors.lightBlue1,
       AppColors.lightBlue2,
     ],
-    begin: Alignment.centerLeft,
-    end: Alignment.centerRight,
   );
   static const accentGradient = LinearGradient(
     colors: <Color>[
       AppColors.orange1,
       AppColors.orange2,
     ],
-    begin: Alignment.centerLeft,
-    end: Alignment.centerRight,
   );
 }
 
 class AppTheme {
   static ThemeData of(BuildContext context) {
-    var theme = Theme.of(context);
+    final theme = Theme.of(context);
     return theme.copyWith(
       brightness: Brightness.light,
       primaryColor: AppColors.nearBlack,
