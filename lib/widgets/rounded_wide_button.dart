@@ -18,19 +18,22 @@ class RoundedWideButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: InkWell(
-        borderRadius: BorderRadius.circular(100),
-        onTap: onTap,
-        child: Ink(
-          width: width ?? 220,
-          padding: const EdgeInsets.all(12),
-          decoration: BoxDecoration(
-            color: fillColor ?? Theme.of(context).primaryColor,
-            border: border,
-            borderRadius: BorderRadius.circular(100),
+    return Material(
+      color: Colors.transparent,
+      child: Center(
+        child: InkWell(
+          borderRadius: BorderRadius.circular(100),
+          onTap: onTap,
+          child: Ink(
+            width: width ?? 220,
+            padding: const EdgeInsets.all(12),
+            decoration: BoxDecoration(
+              color: fillColor ?? Theme.of(context).primaryColor,
+              border: border,
+              borderRadius: BorderRadius.circular(100),
+            ),
+            child: child,
           ),
-          child: child,
         ),
       ),
     );

@@ -7,14 +7,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class SplashScreen extends StatefulWidget {
+class SplashScreen extends StatelessWidget {
   const SplashScreen({Key? key}) : super(key: key);
 
-  @override
-  _SplashScreenState createState() => _SplashScreenState();
-}
-
-class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -88,7 +83,7 @@ class _SplashScreenState extends State<SplashScreen> {
                             width: 2,
                           ),
                           onTap: () {
-                            //* Push Sign Up Page
+                            Navigator.of(context).pushNamed('/signUp');
                           },
                           child: Center(
                             child: Text(
