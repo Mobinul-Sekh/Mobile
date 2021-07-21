@@ -1,5 +1,5 @@
 import 'package:bitecope/logic/sign_up/sign_up_bloc.dart';
-import 'package:bitecope/screens/sign_up/sign_up.dart';
+import 'package:bitecope/screens/sign_up/pages/sign_up_one.dart';
 import 'package:bitecope/screens/splash_screen/splash_screen.dart';
 import 'package:bitecope/screens/not_found/not_found.dart';
 import 'package:flutter/material.dart';
@@ -19,7 +19,7 @@ class AppRouter {
           builder: (_) {
             return BlocProvider<SignUpBloc>(
               create: (context) => SignUpBloc(),
-              child: const SignUp(),
+              child: const SignUpOne(),
             );
           },
         );

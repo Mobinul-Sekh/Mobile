@@ -29,6 +29,7 @@ class SignUpWrapper extends StatelessWidget {
         body: Container(
           margin: const EdgeInsets.only(top: 30),
           height: double.infinity,
+          width: double.infinity,
           decoration: BoxDecoration(
             borderRadius: const BorderRadius.only(
               topLeft: Radius.circular(30),
@@ -36,7 +37,13 @@ class SignUpWrapper extends StatelessWidget {
             ),
             color: Theme.of(context).backgroundColor,
           ),
-          child: child,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(
+              vertical: 30.0,
+              horizontal: 40.0,
+            ),
+            child: child,
+          ),
         ),
       ),
     );

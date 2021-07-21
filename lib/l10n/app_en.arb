@@ -18,5 +18,137 @@
     "signUp": "Sign UP",
     "@signUP": {
       "description": "Text for sign up button"
+    },
+    "email": "Email",
+    "@email": {
+      "description": "Label text for email field"
+    },
+    "emailEmpty": "Please enter an email",
+    "@emailEmpty": {
+      "description": "Error text for empty email"
+    },
+    "emailInvalid": "Please enter a valid email",
+    "@emailInvalid": {
+      "description": "Error text for invalid email"
+    },
+    "username": "Username",
+    "@username": {
+      "description": "Label text for username field"
+    },
+    "usernameEmpty": "Please enter a username",
+    "@usernameEmpty": {
+      "description": "Error text for empty username"
+    },
+    "phoneNumber": "Phone Number",
+    "@phoneNumber": {
+      "description": "Label text for phone number field"
+    },
+    "phoneNumberEmpty": "Please enter a phone number",
+    "@phoneNumberEmpty": {
+      "description": "Error text for empty phone number"
+    },
+    "password": "Password",
+    "@password": {
+      "description": "Label text for password field"
+    },
+    "passwordEmpty": "Please enter password",
+    "@passwordEmpty": {
+      "description": "Error text for empty password"
+    },
+    "passwordWeak": "Password too short; must be at least 6 characters",
+    "@passwordWeak": {
+      "description": "Error text for weak password"
+    },
+    "confirmPassword": "Confirm Password",
+    "@confirmPassword": {
+      "description": "Label text for confirm password field"
+    },
+    "confirmPasswordEmpty": "Please re-enter the password",
+    "@confirmPasswordEmpty": {
+      "description": "Error text for empty confirm password"
+    },
+    "confirmPasswordMismatch": "Passwords do not match",
+    "@confirmPasswordMismatch": {
+      "description": "Error text for mismatched passwords"
+    },
+    "next": "Next",
+    "@next": {
+      "description": "Button text: next"
+    },
+    "recoveryQuestion": "Recovery Question",
+    "@recoveryQuestion": {
+      "description": "Label text for recovery question field"
+    },
+    "recoveryAnswer": "Recovery Answer",
+    "@recoveryAnswer": {
+      "description": "Label text for recovery answer field"
+    },
+    "recoveryQuestion1": "What is your mother's maiden name?",
+    "@recoveryQuestion1": {
+      "description": "Recovery question"
+    },
+    "recoveryQuestion2": "What is the name of your first pet?",
+    "@recoveryQuestion2": {
+      "description": "Recovery question"
+    },
+    "recoveryQuestion3": "What was your first car?",
+    "@recoveryQuestion3": {
+      "description": "Recovery question"
+    },
+    "recoveryQuestion4": "What elementary school did you attend?",
+    "@recoveryQuestion4": {
+      "description": "Recovery question"
+    },
+    "recoveryQuestion5": "What is the name of the town where you were born?",
+    "@recoveryQuestion5": {
+      "description": "Recovery question"
+    },
+    "userType": "User Type",
+    "@userType": {
+      "description": "Label text for user type field"
+    },
+    "owner": "Owner",
+    "@owner": {
+      "description": "Label text for owner radio button"
+    },
+    "worker": "Worker",
+    "@worker": {
+      "description": "Label text for worker radio button"
+    },
+    "ownerName": "Owner Name",
+    "@ownerName": {
+      "description": "Label text for owner name field"
+    },
+    "agreeTerms": "I agree to the ",
+    "@agreeTerms": {
+      "description": "Label text (partial) for terms and condition agreement"
+    },
+    "tnc": "T&C",
+    "@tnc": {
+      "description": "Acronym for Terms and Conditions"
+    },
+    "and": " and ",
+    "@and": {
+      "description": "Conjunction: and"
+    },
+    "privacyPolicy": "Privacy Policy",
+    "@privacyPolicy": {
+      "description": "Label text (partial) for privacy policy agreement"
+    },
+    "recoveryQuestionEmpty": "Please choose a recovery question",
+    "@recoveryQuestionEmpty": {
+      "description": "Error text for empty recovery question"
+    },
+    "recoveryAnswerEmpty": "Please enter an answer to the recovery question",
+    "@recoveryAnswerEmpty": {
+      "description": "Error text for empty recovery answer"
+    },
+    "userTypeEmpty": "Please choose user type",
+    "@userTypeEmpty": {
+      "description": "Error text for empty user type"
+    },
+    "ownerNameEmpty": "Please enter owner name",
+    "@ownerNameEmpty": {
+      "description": "Error text for empty owner name"
     }
 }

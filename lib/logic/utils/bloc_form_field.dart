@@ -1,8 +1,9 @@
+import 'package:bitecope/config/typedefs.dart';
 import 'package:equatable/equatable.dart';
 
 class BlocFormField<T> with EquatableMixin {
   T? value;
-  String? error;
+  LocaleString? error;
 
   BlocFormField([this.value, this.error]);
 
@@ -11,7 +12,7 @@ class BlocFormField<T> with EquatableMixin {
 
   BlocFormField<T> copyWith({
     T? value,
-    String? error,
+    LocaleString? error,
   }) {
     return BlocFormField<T>(
       value ?? this.value,

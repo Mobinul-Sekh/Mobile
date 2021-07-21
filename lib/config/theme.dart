@@ -63,6 +63,13 @@ class AppTheme {
         bodyText2: theme.textTheme.bodyText2?.copyWith(
           color: AppColors.shadowText,
         ),
+        caption: theme.textTheme.caption?.copyWith(
+          color: AppColors.nearBlack,
+        ),
+        subtitle2: theme.textTheme.subtitle2?.copyWith(
+          fontSize: 13,
+          color: AppColors.nearBlack,
+        ),
       ),
       floatingActionButtonTheme: theme.floatingActionButtonTheme.copyWith(
         backgroundColor: AppColors.nearBlack,

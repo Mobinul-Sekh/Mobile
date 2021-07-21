@@ -1,9 +1,13 @@
 import 'package:bitecope/config/theme.dart';
 import 'package:bitecope/logic/sign_up/sign_up_bloc.dart';
+import 'package:bitecope/screens/sign_up/components/form_field_decoration.dart';
+import 'package:bitecope/screens/sign_up/components/sign_up_wrapper.dart';
+import 'package:bitecope/screens/sign_up/pages/sign_up_two.dart';
 import 'package:bitecope/widgets/gradient_widget.dart';
 import 'package:bitecope/widgets/rounded_wide_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class SignUpOne extends StatefulWidget {
   const SignUpOne({Key? key}) : super(key: key);
@@ -13,6 +17,13 @@ class SignUpOne extends StatefulWidget {
 }
 
 class _SignUpOneState extends State<SignUpOne> {
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _usernameController = TextEditingController();
+  final TextEditingController _phoneNumberController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _confirmPasswordController =
+      TextEditingController();
+
   final FocusNode _emailNode = FocusNode();
   final FocusNode _usernameNode = FocusNode();
   final FocusNode _phoneNumberNode = FocusNode();
@@ -23,139 +34,175 @@ class _SignUpOneState extends State<SignUpOne> {
   bool _hideConfirmPassword = true;
 
   @override
+  void initState() {
+    super.initState();
+    final state = context.read<SignUpBloc>().state;
+    _emailController.text = state.email.value ?? "";
+    _usernameController.text = state.username.value ?? "";
+    _phoneNumberController.text = state.phoneNumber.value ?? "";
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return BlocConsumer<SignUpBloc, SignUpState>(
-      listener: (context, state) {},
-      builder: (context, state) => Column(
-        children: [
-          Expanded(
-            child: SingleChildScrollView(
-              child: Column(
-                children: [
-                  TextFormField(
-                    initialValue: state.email.value,
-                    focusNode: _emailNode,
-                    autofocus: true,
-                    textInputAction: TextInputAction.next,
-                    onEditingComplete: () => _usernameNode.requestFocus(),
-                    style: Theme.of(context).textTheme.bodyText2,
-                    decoration: formFieldDecoration(
-                      labelText: "Email",
-                      errorText: state.email.error,
-                      suffixIcon: Icons.mail_outline_rounded,
+    return SignUpWrapper(
+      child: BlocBuilder<SignUpBloc, SignUpState>(
+        builder: (context, state) => Column(
+          children: [
+            Expanded(
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    TextField(
+                      controller: _emailController,
+                      focusNode: _emailNode,
+                      textInputAction: TextInputAction.next,
+                      onEditingComplete: () => _usernameNode.requestFocus(),
+                      style: Theme.of(context).textTheme.bodyText2,
+                      decoration: formFieldDecoration(
+                        context,
+                        labelText: AppLocalizations.of(context)!.email,
+                        errorText: state.email.error != null
+                            ? state.email.error!(context)
+                            : null,
+                        suffixIcon: Icons.mail_outline_rounded,
+                      ),
                     ),
-                  ),
-                  const SizedBox(height: 36),
-                  TextFormField(
-                    initialValue: state.username.value,
-                    focusNode: _usernameNode,
-                    textInputAction: TextInputAction.next,
-                    onEditingComplete: () => _phoneNumberNode.requestFocus(),
-                    style: Theme.of(context).textTheme.bodyText2,
-                    decoration: formFieldDecoration(
-                      labelText: "Username",
-                      errorText: state.username.error,
-                      suffixIcon: Icons.person,
+                    const SizedBox(height: 36),
+                    TextField(
+                      controller: _usernameController,
+                      focusNode: _usernameNode,
+                      textInputAction: TextInputAction.next,
+                      onEditingComplete: () => _phoneNumberNode.requestFocus(),
+                      style: Theme.of(context).textTheme.bodyText2,
+                      decoration: formFieldDecoration(
+                        context,
+                        labelText: AppLocalizations.of(context)!.username,
+                        errorText: state.username.error != null
+                            ? state.username.error!(context)
+                            : null,
+                        suffixIcon: Icons.person,
+                      ),
                     ),
-                  ),
-                  const SizedBox(height: 36),
-                  TextFormField(
-                    initialValue: state.phoneNumber.value,
-                    focusNode: _phoneNumberNode,
-                    textInputAction: TextInputAction.next,
-                    onEditingComplete: () => _passwordNode.requestFocus(),
-                    style: Theme.of(context).textTheme.bodyText2,
-                    decoration: formFieldDecoration(
-                      labelText: "Phone Number",
-                      errorText: state.phoneNumber.error,
-                      suffixIcon: Icons.phone_outlined,
+                    const SizedBox(height: 36),
+                    TextField(
+                      controller: _phoneNumberController,
+                      focusNode: _phoneNumberNode,
+                      textInputAction: TextInputAction.next,
+                      onEditingComplete: () => _passwordNode.requestFocus(),
+                      style: Theme.of(context).textTheme.bodyText2,
+                      decoration: formFieldDecoration(
+                        context,
+                        labelText: AppLocalizations.of(context)!.phoneNumber,
+                        errorText: state.phoneNumber.error != null
+                            ? state.phoneNumber.error!(context)
+                            : null,
+                        suffixIcon: Icons.phone_outlined,
+                      ),
                     ),
-                  ),
-                  const SizedBox(height: 36),
-                  TextFormField(
-                    initialValue: state.password.value,
-                    focusNode: _passwordNode,
-                    textInputAction: TextInputAction.next,
-                    onEditingComplete: () =>
-                        _confirmPasswordNode.requestFocus(),
-                    obscureText: _hidePassword,
-                    style: Theme.of(context).textTheme.bodyText2,
-                    decoration: formFieldDecoration(
-                      labelText: "Password",
-                      errorText: state.password.error,
-                      suffixIcon: _hidePassword
-                          ? Icons.visibility_off
-                          : Icons.visibility,
-                      onTap: () {
-                        setState(() {
-                          _hidePassword = !_hidePassword;
-                        });
-                      },
+                    const SizedBox(height: 36),
+                    TextField(
+                      controller: _passwordController,
+                      focusNode: _passwordNode,
+                      textInputAction: TextInputAction.next,
+                      onEditingComplete: () =>
+                          _confirmPasswordNode.requestFocus(),
+                      obscureText: _hidePassword,
+                      style: Theme.of(context).textTheme.bodyText2,
+                      decoration: formFieldDecoration(
+                        context,
+                        labelText: AppLocalizations.of(context)!.password,
+                        errorText: state.password.error != null
+                            ? state.password.error!(context)
+                            : null,
+                        suffixIcon: _hidePassword
+                            ? Icons.visibility_off
+                            : Icons.visibility,
+                        onTap: () {
+                          setState(() {
+                            _hidePassword = !_hidePassword;
+                          });
+                        },
+                      ),
                     ),
-                  ),
-                  const SizedBox(height: 36),
-                  TextFormField(
-                    initialValue: state.confirmPassword.value,
-                    focusNode: _confirmPasswordNode,
-                    textInputAction: TextInputAction.done,
-                    onEditingComplete: () => FocusScope.of(context).unfocus(),
-                    obscureText: _hideConfirmPassword,
-                    style: Theme.of(context).textTheme.bodyText2,
-                    decoration: formFieldDecoration(
-                      labelText: "Confirm Password",
-                      errorText: state.confirmPassword.error,
-                      suffixIcon: _hideConfirmPassword
-                          ? Icons.visibility_off
-                          : Icons.visibility,
-                      onTap: () {
-                        setState(() {
-                          _hideConfirmPassword = !_hideConfirmPassword;
-                        });
-                      },
+                    const SizedBox(height: 36),
+                    TextField(
+                      controller: _confirmPasswordController,
+                      focusNode: _confirmPasswordNode,
+                      textInputAction: TextInputAction.done,
+                      onEditingComplete: () => FocusScope.of(context).unfocus(),
+                      obscureText: _hideConfirmPassword,
+                      style: Theme.of(context).textTheme.bodyText2,
+                      decoration: formFieldDecoration(
+                        context,
+                        labelText:
+                            AppLocalizations.of(context)!.confirmPassword,
+                        errorText: state.confirmPassword.error != null
+                            ? state.confirmPassword.error!(context)
+                            : null,
+                        suffixIcon: _hideConfirmPassword
+                            ? Icons.visibility_off
+                            : Icons.visibility,
+                        onTap: () {
+                          setState(() {
+                            _hideConfirmPassword = !_hideConfirmPassword;
+                          });
+                        },
+                      ),
                     ),
-                  ),
-                  const SizedBox(height: 36),
-                ],
+                    const SizedBox(height: 36),
+                  ],
+                ),
               ),
             ),
-          ),
-          const SizedBox(height: 36),
-          RoundedWideButton(
-            onTap: () {
-              context.read<SignUpBloc>().validatePageOne();
-            },
-            child: GradientWidget(
-              gradient: AppGradients.primaryGradient,
-              child: Text(
-                "Next",
-                style: Theme.of(context).primaryTextTheme.headline6,
-                textAlign: TextAlign.center,
+            const SizedBox(height: 36),
+            RoundedWideButton(
+              onTap: () {
+                final bool _isValid =
+                    context.read<SignUpBloc>().validatePageOne(
+                          email: _emailController.text,
+                          username: _usernameController.text,
+                          phoneNumber: _phoneNumberController.text,
+                          password: _passwordController.text,
+                          confirmPassword: _confirmPasswordController.text,
+                        );
+                if (_isValid) {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (_) => BlocProvider.value(
+                        value: context.read<SignUpBloc>(),
+                        child: const SignUpTwo(),
+                      ),
+                    ),
+                  );
+                }
+              },
+              child: GradientWidget(
+                gradient: AppGradients.primaryGradient,
+                child: Text(
+                  AppLocalizations.of(context)!.next,
+                  style: Theme.of(context).primaryTextTheme.headline6,
+                  textAlign: TextAlign.center,
+                ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
 
-  InputDecoration formFieldDecoration({
-    required String labelText,
-    required IconData suffixIcon,
-    String? errorText,
-    VoidCallback? onTap,
-  }) {
-    return InputDecoration(
-      errorText: errorText,
-      floatingLabelBehavior: FloatingLabelBehavior.always,
-      labelText: labelText,
-      labelStyle: Theme.of(context).textTheme.bodyText1,
-      suffixIcon: IconButton(
-        onPressed: onTap,
-        icon: Icon(
-          suffixIcon,
-          color: Theme.of(context).primaryColor,
-        ),
-      ),
-    );
+  @override
+  void dispose() {
+    _emailController.dispose();
+    _emailNode.dispose();
+    _usernameController.dispose();
+    _usernameNode.dispose();
+    _phoneNumberController.dispose();
+    _phoneNumberNode.dispose();
+    _passwordController.dispose();
+    _passwordNode.dispose();
+    _confirmPasswordController.dispose();
+    _confirmPasswordNode.dispose();
+    super.dispose();
   }
 }

@@ -4,14 +4,14 @@ class RoundedWideButton extends StatelessWidget {
   const RoundedWideButton({
     Key? key,
     required this.child,
-    required this.onTap,
+    this.onTap,
     this.width,
     this.fillColor,
     this.border,
   }) : super(key: key);
 
   final Widget child;
-  final GestureTapCallback onTap;
+  final GestureTapCallback? onTap;
   final double? width;
   final Color? fillColor;
   final Border? border;
