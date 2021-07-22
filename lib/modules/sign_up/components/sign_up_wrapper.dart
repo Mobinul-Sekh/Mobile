@@ -1,4 +1,4 @@
-import 'package:bitecope/config/theme.dart';
+import 'package:bitecope/config/themes/theme.dart';
 import 'package:bitecope/widgets/custom_back_button.dart';
 import 'package:bitecope/widgets/gradient_widget.dart';
 import 'package:flutter/material.dart';

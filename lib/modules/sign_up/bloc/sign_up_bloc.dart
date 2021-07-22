@@ -1,8 +1,8 @@
-import 'package:bitecope/config/typedefs.dart';
-import 'package:bitecope/data/models/sign_up_response.dart';
-import 'package:bitecope/data/models/user.dart';
-import 'package:bitecope/data/repositories/account_repository.dart';
-import 'package:bitecope/logic/utils/bloc_form_field.dart';
+import 'package:bitecope/config/utils/typedefs.dart';
+import 'package:bitecope/core/authentication/models/user.dart';
+import 'package:bitecope/modules/sign_up/models/sign_up_response.dart';
+import 'package:bitecope/modules/sign_up/repositories/sign_up_repository.dart';
+import 'package:bitecope/utils/bloc_utils/bloc_form_field.dart';
 import 'package:bloc/bloc.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:equatable/equatable.dart';
@@ -12,7 +12,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 part 'sign_up_state.dart';
 
 class SignUpBloc extends Cubit<SignUpState> {
-  AccountRepository accountRepository;
+  SignUpRepository accountRepository;
 
   SignUpBloc({required this.accountRepository}) : super(SignUpState());
 

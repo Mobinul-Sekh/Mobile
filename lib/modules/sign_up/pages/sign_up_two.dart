@@ -1,10 +1,10 @@
-import 'package:bitecope/config/constants.dart';
-import 'package:bitecope/config/theme.dart';
-import 'package:bitecope/data/models/user.dart';
-import 'package:bitecope/logic/sign_up/sign_up_bloc.dart';
-import 'package:bitecope/screens/sign_up/components/form_field_decoration.dart';
-import 'package:bitecope/screens/sign_up/components/sign_up_wrapper.dart';
-import 'package:bitecope/screens/sign_up/pages/sign_up_complete.dart';
+import 'package:bitecope/config/constants/app_urls.dart';
+import 'package:bitecope/config/themes/theme.dart';
+import 'package:bitecope/core/authentication/models/user.dart';
+import 'package:bitecope/modules/sign_up/bloc/sign_up_bloc.dart';
+import 'package:bitecope/modules/sign_up/components/form_field_decoration.dart';
+import 'package:bitecope/modules/sign_up/components/sign_up_wrapper.dart';
+import 'package:bitecope/modules/sign_up/pages/sign_up_complete.dart';
 import 'package:bitecope/widgets/gradient_widget.dart';
 import 'package:bitecope/widgets/rounded_wide_button.dart';
 import 'package:flutter/gestures.dart';
@@ -270,7 +270,7 @@ class _SignUpTwoState extends State<SignUpTwo> {
                                       ),
                               recognizer: TapGestureRecognizer()
                                 ..onTap = () {
-                                  launch(AppConstants.tncURL);
+                                  launch(AppURLs.tnc);
                                 },
                             ),
                             TextSpan(text: AppLocalizations.of(context)!.and),
@@ -283,7 +283,7 @@ class _SignUpTwoState extends State<SignUpTwo> {
                                       ),
                               recognizer: TapGestureRecognizer()
                                 ..onTap = () {
-                                  launch(AppConstants.privacyURL);
+                                  launch(AppURLs.privacy);
                                 },
                             ),
                           ],

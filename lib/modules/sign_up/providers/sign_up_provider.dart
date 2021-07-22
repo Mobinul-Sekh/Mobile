@@ -1,13 +1,13 @@
-import 'package:bitecope/config/constants.dart';
-import 'package:bitecope/data/models/sign_up_request.dart';
+import 'package:bitecope/config/constants/app_urls.dart';
+import 'package:bitecope/modules/sign_up/models/sign_up_request.dart';
 import 'package:dio/dio.dart';
 
-class AccountProvider {
+class SignUpProvider {
   static Dio dio = Dio();
 
   Future<Map<String, dynamic>?> register(SignUpRequest request) async {
     final Response response = await dio.post(
-      AppConstants.registerURL,
+      AppURLs.register,
       data: {
         'username': request.username,
         'phone_no': request.phoneNumber,

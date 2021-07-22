@@ -1,8 +1,8 @@
-import 'package:bitecope/config/theme.dart';
-import 'package:bitecope/logic/sign_up/sign_up_bloc.dart';
-import 'package:bitecope/screens/sign_up/components/form_field_decoration.dart';
-import 'package:bitecope/screens/sign_up/components/sign_up_wrapper.dart';
-import 'package:bitecope/screens/sign_up/pages/sign_up_two.dart';
+import 'package:bitecope/config/themes/theme.dart';
+import 'package:bitecope/modules/sign_up/bloc/sign_up_bloc.dart';
+import 'package:bitecope/modules/sign_up/components/form_field_decoration.dart';
+import 'package:bitecope/modules/sign_up/components/sign_up_wrapper.dart';
+import 'package:bitecope/modules/sign_up/pages/sign_up_two.dart';
 import 'package:bitecope/widgets/gradient_widget.dart';
 import 'package:bitecope/widgets/rounded_wide_button.dart';
 import 'package:flutter/material.dart';

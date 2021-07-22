@@ -1,4 +1,4 @@
-import 'package:bitecope/config/theme.dart';
+import 'package:bitecope/config/themes/theme.dart';
 import 'package:bitecope/widgets/rounded_wide_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';

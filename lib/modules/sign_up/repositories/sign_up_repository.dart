@@ -1,11 +1,11 @@
-import 'package:bitecope/data/models/sign_up_request.dart';
-import 'package:bitecope/data/models/sign_up_response.dart';
-import 'package:bitecope/data/models/user.dart';
-import 'package:bitecope/data/providers/account_provider.dart';
+import 'package:bitecope/core/authentication/models/user.dart';
+import 'package:bitecope/modules/sign_up/models/sign_up_request.dart';
+import 'package:bitecope/modules/sign_up/models/sign_up_response.dart';
+import 'package:bitecope/modules/sign_up/providers/sign_up_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class AccountRepository {
-  final AccountProvider _accountProvider = AccountProvider();
+class SignUpRepository {
+  final SignUpProvider _accountProvider = SignUpProvider();
 
   Future<String?> getToken() async {
     final prefs = await SharedPreferences.getInstance();

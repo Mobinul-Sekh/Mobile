@@ -1,6 +1,6 @@
-import 'package:bitecope/config/theme.dart';
-import 'package:bitecope/logic/authentication/authentication_bloc.dart';
-import 'package:bitecope/screens/splash_screen/components/wave_clipper.dart';
+import 'package:bitecope/config/themes/theme.dart';
+import 'package:bitecope/core/authentication/bloc/authentication_bloc.dart';
+import 'package:bitecope/utils/ui_utils/wave_clipper.dart';
 import 'package:bitecope/widgets/rounded_wide_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

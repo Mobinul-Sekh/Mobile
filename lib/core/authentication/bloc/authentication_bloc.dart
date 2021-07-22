@@ -1,4 +1,4 @@
-import 'package:bitecope/data/repositories/account_repository.dart';
+import 'package:bitecope/modules/sign_up/repositories/sign_up_repository.dart';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 
@@ -10,7 +10,7 @@ class AuthenticationBloc extends Cubit<AuthenticationState> {
   }
 
   Future<void> checkStatus() async {
-    setStatus(await AccountRepository().getToken());
+    setStatus(await SignUpRepository().getToken());
   }
 
   void setStatus([String? token]) {

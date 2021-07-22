@@ -1,4 +1,4 @@
-import 'package:bitecope/config/typedefs.dart';
+import 'package:bitecope/config/utils/typedefs.dart';
 import 'package:equatable/equatable.dart';
 
 class BlocFormField<T> with EquatableMixin {
