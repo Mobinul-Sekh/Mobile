@@ -7,5 +7,5 @@ class AppURLs {
 
   // API URLs
   static const String baseAPI = "http://bitecope.co.in:8080";
-  static const String register = "$baseAPI/register";
+  static const String register = "$baseAPI/register/";
 }
