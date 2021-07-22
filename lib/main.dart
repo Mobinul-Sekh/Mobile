@@ -1,9 +1,9 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
-import 'package:bitecope/config/router.dart';
-import 'package:bitecope/config/theme.dart';
-import 'package:bitecope/screens/splash_screen/splash_screen.dart';
-import 'package:bitecope/logic/authentication/authentication_bloc.dart';
+import 'package:bitecope/config/routes/router.dart';
+import 'package:bitecope/config/themes/theme.dart';
+import 'package:bitecope/modules/splash_screen/splash_screen.dart';
+import 'package:bitecope/core/authentication/authentication_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 void main() {

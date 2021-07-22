@@ -1,4 +1,4 @@
-import 'package:bitecope/data/repositories/account_repository.dart';
+import 'package:bitecope/modules/splash_screen/repositories/account_repository.dart';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 

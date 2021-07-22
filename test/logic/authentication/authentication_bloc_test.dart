@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:bitecope/logic/authentication/authentication_bloc.dart';
+import 'package:bitecope/core/authentication/authentication_bloc.dart';
 
 void main() {
   group('Authentication Bloc -> ', () {

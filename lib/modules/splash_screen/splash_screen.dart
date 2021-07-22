@@ -1,6 +1,6 @@
-import 'package:bitecope/config/theme.dart';
-import 'package:bitecope/logic/authentication/authentication_bloc.dart';
-import 'package:bitecope/screens/splash_screen/components/wave_clipper.dart';
+import 'package:bitecope/config/themes/theme.dart';
+import 'package:bitecope/core/authentication/authentication_bloc.dart';
+import 'package:bitecope/modules/splash_screen/components/wave_clipper.dart';
 import 'package:bitecope/widgets/rounded_wide_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -71,7 +71,7 @@ class _SplashScreenState extends State<SplashScreen> {
                             width: 2,
                           ),
                           onTap: () {
-                            //* Push Sign In Page
+                            Navigator.of(context).pushNamed("/Signin");
                           },
                           child: Center(
                             child: Text(

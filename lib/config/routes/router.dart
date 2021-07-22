@@ -1,6 +1,7 @@
-import 'package:bitecope/logic/authentication/authentication_bloc.dart';
-import 'package:bitecope/screens/splash_screen/splash_screen.dart';
-import 'package:bitecope/screens/not_found/not_found.dart';
+import 'package:bitecope/core/authentication/authentication_bloc.dart';
+import 'package:bitecope/modules/signin/screens/signinpage.dart';
+import 'package:bitecope/modules/splash_screen/splash_screen.dart';
+import 'package:bitecope/modules/not_found/not_found.dart';
 import 'package:flutter/material.dart';
 
 class AppRouter {
@@ -11,6 +12,10 @@ class AppRouter {
       case '/':
         return MaterialPageRoute(
           builder: (_) => const SplashScreen(),
+        );
+      case '/Signin':
+        return MaterialPageRoute(
+          builder: (_) => const SignInPage(),
         );
       default:
         return MaterialPageRoute(
