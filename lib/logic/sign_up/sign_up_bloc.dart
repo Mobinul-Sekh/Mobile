@@ -1,5 +1,7 @@
 import 'package:bitecope/config/typedefs.dart';
+import 'package:bitecope/data/models/sign_up_response.dart';
 import 'package:bitecope/data/models/user.dart';
+import 'package:bitecope/data/repositories/account_repository.dart';
 import 'package:bitecope/logic/utils/bloc_form_field.dart';
 import 'package:bloc/bloc.dart';
 import 'package:email_validator/email_validator.dart';
@@ -10,9 +12,11 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 part 'sign_up_state.dart';
 
 class SignUpBloc extends Cubit<SignUpState> {
-  SignUpBloc() : super(SignUpState());
+  AccountRepository accountRepository;
 
-  bool validatePageOne({
+  SignUpBloc({required this.accountRepository}) : super(SignUpState());
+
+  void validatePageOne({
     String? email,
     String? username,
     String? phoneNumber,
@@ -26,6 +30,8 @@ class SignUpBloc extends Cubit<SignUpState> {
       "password": _validatePassword(password),
       "confirmPassword": _validateConfirmPassword(password, confirmPassword),
     };
+
+    final bool _isValid = !_errors.values.any((_error) => _error != null);
 
     emit(state.copyWith(
       email: BlocFormField(
@@ -48,12 +54,12 @@ class SignUpBloc extends Cubit<SignUpState> {
         confirmPassword,
         _errors["confirmPassword"],
       ),
+      signUpStatus:
+          _isValid ? SignUpStatus.pageOneValidated : SignUpStatus.pageOne,
     ));
-
-    return !_errors.values.any((_error) => _error != null);
   }
 
-  bool validatePageTwo({
+  void validatePageTwo({
     String? recoveryQuestion,
     String? recoveryAnswer,
     UserType? userType,
@@ -65,6 +71,8 @@ class SignUpBloc extends Cubit<SignUpState> {
       "userType": _validateUserType(userType),
       "ownerName": _validateOwnerName(userType, ownerName),
     };
+
+    final bool _isValid = !_errors.values.any((_error) => _error != null);
 
     emit(state.copyWith(
       recoveryQuestion: BlocFormField(
@@ -83,9 +91,42 @@ class SignUpBloc extends Cubit<SignUpState> {
         ownerName,
         _errors["ownerName"],
       ),
+      signUpStatus:
+          _isValid ? SignUpStatus.pageTwoValidated : SignUpStatus.pageTwo,
     ));
 
-    return !_errors.values.any((_error) => _error != null);
+    if (_isValid) {
+      registerUser();
+    }
+  }
+
+  Future<void> registerUser() async {
+    emit(state.copyWith(signUpStatus: SignUpStatus.registering));
+
+    final SignUpResponse? response = await accountRepository.registerUser(
+      username: state.username.value!,
+      email: state.email.value!,
+      phoneNumber: state.phoneNumber.value!,
+      password: state.password.value!,
+      confirmPassword: state.confirmPassword.value!,
+      recoveryQuestion: state.recoveryQuestion.value!,
+      recoveryAnswer: state.recoveryAnswer.value!,
+      userType: state.userType.value!,
+    );
+    if (response != null) {
+      if (response.token != null) {
+        accountRepository.setToken(response.token!);
+        if (state.userType.value == UserType.owner) {
+          //TODO Add owner; generate activation code
+          emit(state.copyWith(signUpStatus: SignUpStatus.activation));
+        } else {
+          //TODO Add worker
+          emit(state.copyWith(signUpStatus: SignUpStatus.done));
+        }
+      } else {
+        _setErrors(response);
+      }
+    }
   }
 
   LocaleString? _validateEmail(String? email) {
@@ -171,5 +212,68 @@ class SignUpBloc extends Cubit<SignUpState> {
           AppLocalizations.of(context)!.ownerNameEmpty;
     }
     return null;
+  }
+
+  void _setErrors(SignUpResponse response) {
+    //TODO Need a list of possible API errors for each field to localize them; for now returning the errors as they are.
+    bool _goToPageOne = false;
+    emit(state.copyWith(
+      email: state.email.copyWith(
+        error: response.emailErr != null
+            ? () {
+                _goToPageOne = true;
+                return (BuildContext context) => response.emailErr;
+              }()
+            : null,
+      ),
+      username: state.username.copyWith(
+        error: response.usernameErr != null
+            ? () {
+                _goToPageOne = true;
+                return (BuildContext context) => response.usernameErr;
+              }()
+            : null,
+      ),
+      phoneNumber: state.phoneNumber.copyWith(
+        error: response.phoneNumberErr != null
+            ? () {
+                _goToPageOne = true;
+                return (BuildContext context) => response.phoneNumberErr;
+              }()
+            : null,
+      ),
+      password: state.password.copyWith(
+        error: response.passwordErr != null
+            ? () {
+                _goToPageOne = true;
+                return (BuildContext context) => response.passwordErr;
+              }()
+            : null,
+      ),
+      confirmPassword: state.confirmPassword.copyWith(
+        error: response.confirmPasswordErr != null
+            ? () {
+                _goToPageOne = true;
+                return (BuildContext context) => response.confirmPasswordErr;
+              }()
+            : null,
+      ),
+      recoveryQuestion: state.recoveryQuestion.copyWith(
+        error: response.recoveryQuestionErr != null
+            ? (BuildContext context) => response.recoveryQuestionErr
+            : null,
+      ),
+      recoveryAnswer: state.recoveryAnswer.copyWith(
+        error: response.recoveryAnswerErr != null
+            ? (BuildContext context) => response.recoveryAnswerErr
+            : null,
+      ),
+      userType: state.userType.copyWith(
+        error: response.userTypeErr != null
+            ? (BuildContext context) => response.userTypeErr
+            : null,
+      ),
+      signUpStatus: _goToPageOne ? SignUpStatus.pageOne : SignUpStatus.pageTwo,
+    ));
   }
 }

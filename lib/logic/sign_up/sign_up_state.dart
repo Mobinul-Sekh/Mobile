@@ -10,6 +10,7 @@ class SignUpState with EquatableMixin {
   late final BlocFormField<String> recoveryAnswer;
   late final BlocFormField<UserType> userType;
   late final BlocFormField<String> ownerName;
+  SignUpStatus signUpStatus;
 
   SignUpState({
     BlocFormField<String>? username,
@@ -21,6 +22,7 @@ class SignUpState with EquatableMixin {
     BlocFormField<String>? recoveryAnswer,
     BlocFormField<UserType>? userType,
     BlocFormField<String>? ownerName,
+    this.signUpStatus = SignUpStatus.pageOne,
   }) {
     this.username = username ?? BlocFormField();
     this.email = email ?? BlocFormField();
@@ -44,6 +46,7 @@ class SignUpState with EquatableMixin {
         recoveryAnswer,
         userType,
         ownerName,
+        signUpStatus,
       ];
 
   SignUpState copyWith({
@@ -56,6 +59,7 @@ class SignUpState with EquatableMixin {
     BlocFormField<String>? recoveryAnswer,
     BlocFormField<UserType>? userType,
     BlocFormField<String>? ownerName,
+    SignUpStatus? signUpStatus,
   }) {
     return SignUpState(
       username: username ?? this.username,
@@ -67,6 +71,19 @@ class SignUpState with EquatableMixin {
       recoveryAnswer: recoveryAnswer ?? this.recoveryAnswer,
       userType: userType ?? this.userType,
       ownerName: ownerName ?? this.ownerName,
+      signUpStatus: signUpStatus ?? this.signUpStatus,
     );
   }
+}
+
+enum SignUpStatus {
+  pageOne,
+  pageOneValidated,
+  pageTwo,
+  pageTwoValidated,
+  registering,
+  registered,
+  activation,
+  activating,
+  done,
 }

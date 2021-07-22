@@ -45,7 +45,19 @@ class _SignUpOneState extends State<SignUpOne> {
   @override
   Widget build(BuildContext context) {
     return SignUpWrapper(
-      child: BlocBuilder<SignUpBloc, SignUpState>(
+      child: BlocConsumer<SignUpBloc, SignUpState>(
+        listener: (context, state) {
+          if (state.signUpStatus == SignUpStatus.pageOneValidated) {
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (_) => BlocProvider.value(
+                  value: context.read<SignUpBloc>(),
+                  child: const SignUpTwo(),
+                ),
+              ),
+            );
+          }
+        },
         builder: (context, state) => Column(
           children: [
             Expanded(
@@ -157,24 +169,13 @@ class _SignUpOneState extends State<SignUpOne> {
             const SizedBox(height: 36),
             RoundedWideButton(
               onTap: () {
-                final bool _isValid =
-                    context.read<SignUpBloc>().validatePageOne(
-                          email: _emailController.text,
-                          username: _usernameController.text,
-                          phoneNumber: _phoneNumberController.text,
-                          password: _passwordController.text,
-                          confirmPassword: _confirmPasswordController.text,
-                        );
-                if (_isValid) {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (_) => BlocProvider.value(
-                        value: context.read<SignUpBloc>(),
-                        child: const SignUpTwo(),
-                      ),
-                    ),
-                  );
-                }
+                context.read<SignUpBloc>().validatePageOne(
+                      email: _emailController.text,
+                      username: _usernameController.text,
+                      phoneNumber: _phoneNumberController.text,
+                      password: _passwordController.text,
+                      confirmPassword: _confirmPasswordController.text,
+                    );
               },
               child: GradientWidget(
                 gradient: AppGradients.primaryGradient,

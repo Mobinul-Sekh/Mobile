@@ -4,6 +4,7 @@ import 'package:bitecope/data/models/user.dart';
 import 'package:bitecope/logic/sign_up/sign_up_bloc.dart';
 import 'package:bitecope/screens/sign_up/components/form_field_decoration.dart';
 import 'package:bitecope/screens/sign_up/components/sign_up_wrapper.dart';
+import 'package:bitecope/screens/sign_up/pages/sign_up_complete.dart';
 import 'package:bitecope/widgets/gradient_widget.dart';
 import 'package:bitecope/widgets/rounded_wide_button.dart';
 import 'package:flutter/gestures.dart';
@@ -56,7 +57,27 @@ class _SignUpTwoState extends State<SignUpTwo> {
   @override
   Widget build(BuildContext context) {
     return SignUpWrapper(
-      child: BlocBuilder<SignUpBloc, SignUpState>(
+      child: BlocConsumer<SignUpBloc, SignUpState>(
+        listener: (context, state) {
+          if (state.signUpStatus == SignUpStatus.pageOne) {
+            Navigator.of(context).maybePop();
+          } else if (state.signUpStatus == SignUpStatus.activation) {
+            //TODO Push to owner account activation; for now pushing to complete
+            Navigator.of(context).popUntil(ModalRoute.withName('/'));
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (context) => const SignUpComplete(),
+              ),
+            );
+          } else if (state.signUpStatus == SignUpStatus.done) {
+            Navigator.of(context).popUntil(ModalRoute.withName('/'));
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (context) => const SignUpComplete(),
+              ),
+            );
+          }
+        },
         builder: (context, state) {
           return Column(
             children: [
@@ -222,52 +243,56 @@ class _SignUpTwoState extends State<SignUpTwo> {
               ),
               Column(
                 children: [
-                  ListTile(
-                    leading: Checkbox(
-                      value: _agreedTerms,
-                      onChanged: (value) {
-                        setState(() {
-                          _agreedTerms = !_agreedTerms;
-                        });
-                      },
-                    ),
-                    title: RichText(
-                      text: TextSpan(
-                        style: Theme.of(context).textTheme.caption,
-                        children: [
-                          TextSpan(
-                              text: AppLocalizations.of(context)!.agreeTerms),
-                          TextSpan(
-                            text: AppLocalizations.of(context)!.tnc,
-                            style:
-                                Theme.of(context).textTheme.caption?.copyWith(
-                                      color: AppColors.lightBlue1,
-                                      decoration: TextDecoration.underline,
-                                    ),
-                            recognizer: TapGestureRecognizer()
-                              ..onTap = () {
-                                launch(AppConstants.tncURL);
-                              },
-                          ),
-                          TextSpan(text: AppLocalizations.of(context)!.and),
-                          TextSpan(
-                            text: AppLocalizations.of(context)!.privacyPolicy,
-                            style:
-                                Theme.of(context).textTheme.caption?.copyWith(
-                                      color: AppColors.lightBlue1,
-                                      decoration: TextDecoration.underline,
-                                    ),
-                            recognizer: TapGestureRecognizer()
-                              ..onTap = () {
-                                launch(AppConstants.privacyURL);
-                              },
-                          ),
-                        ],
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Checkbox(
+                        value: _agreedTerms,
+                        onChanged: (value) {
+                          setState(() {
+                            _agreedTerms = !_agreedTerms;
+                          });
+                        },
                       ),
-                    ),
+                      const SizedBox(width: 12),
+                      RichText(
+                        text: TextSpan(
+                          style: Theme.of(context).textTheme.caption,
+                          children: [
+                            TextSpan(
+                                text: AppLocalizations.of(context)!.agreeTerms),
+                            TextSpan(
+                              text: AppLocalizations.of(context)!.tnc,
+                              style:
+                                  Theme.of(context).textTheme.caption?.copyWith(
+                                        color: AppColors.lightBlue1,
+                                        decoration: TextDecoration.underline,
+                                      ),
+                              recognizer: TapGestureRecognizer()
+                                ..onTap = () {
+                                  launch(AppConstants.tncURL);
+                                },
+                            ),
+                            TextSpan(text: AppLocalizations.of(context)!.and),
+                            TextSpan(
+                              text: AppLocalizations.of(context)!.privacyPolicy,
+                              style:
+                                  Theme.of(context).textTheme.caption?.copyWith(
+                                        color: AppColors.lightBlue1,
+                                        decoration: TextDecoration.underline,
+                                      ),
+                              recognizer: TapGestureRecognizer()
+                                ..onTap = () {
+                                  launch(AppConstants.privacyURL);
+                                },
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
                   ),
                   const SizedBox(height: 12),
-                  signUpButton(),
+                  signUpButton(state.signUpStatus),
                 ],
               ),
             ],
@@ -277,28 +302,33 @@ class _SignUpTwoState extends State<SignUpTwo> {
     );
   }
 
-  Widget signUpButton() {
+  Widget signUpButton(SignUpStatus status) {
     if (_agreedTerms) {
       return RoundedWideButton(
-        onTap: () {
-          final bool _isValid = context.read<SignUpBloc>().validatePageTwo(
-                recoveryQuestion: _selectedQuestion,
-                recoveryAnswer: _recoveryAnswerController.text,
-                userType: _userType,
-                ownerName: _ownerNameController.text,
-              );
-          if (_isValid) {
-            Navigator.of(context).pop();
-          }
-        },
-        child: GradientWidget(
-          gradient: AppGradients.primaryGradient,
-          child: Text(
-            AppLocalizations.of(context)!.signUp,
-            style: Theme.of(context).textTheme.headline6,
-            textAlign: TextAlign.center,
-          ),
-        ),
+        onTap: status != SignUpStatus.registering
+            ? () {
+                context.read<SignUpBloc>().validatePageTwo(
+                      recoveryQuestion: _selectedQuestion,
+                      recoveryAnswer: _recoveryAnswerController.text,
+                      userType: _userType,
+                      ownerName: _ownerNameController.text,
+                    );
+              }
+            : null,
+        child: status != SignUpStatus.registering
+            ? GradientWidget(
+                gradient: AppGradients.primaryGradient,
+                child: Text(
+                  AppLocalizations.of(context)!.signUp,
+                  style: Theme.of(context).textTheme.headline6,
+                  textAlign: TextAlign.center,
+                ),
+              )
+            : const SizedBox(
+                height: 15,
+                width: 15,
+                child: CircularProgressIndicator(),
+              ),
       );
     } else {
       return RoundedWideButton(

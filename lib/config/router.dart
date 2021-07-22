@@ -1,3 +1,4 @@
+import 'package:bitecope/data/repositories/account_repository.dart';
 import 'package:bitecope/logic/sign_up/sign_up_bloc.dart';
 import 'package:bitecope/screens/sign_up/pages/sign_up_one.dart';
 import 'package:bitecope/screens/splash_screen/splash_screen.dart';
@@ -18,7 +19,9 @@ class AppRouter {
         return MaterialPageRoute(
           builder: (_) {
             return BlocProvider<SignUpBloc>(
-              create: (context) => SignUpBloc(),
+              create: (context) => SignUpBloc(
+                accountRepository: AccountRepository(),
+              ),
               child: const SignUpOne(),
             );
           },

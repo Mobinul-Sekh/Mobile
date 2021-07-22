@@ -4,4 +4,7 @@ class AppConstants {
 
   /// URL to Privacy Policy
   static const String privacyURL = "https://google.com"; //TODO
+
+  // API URLs
+  static const String registerURL = "http://bitecope.co.in:8080/register/";
 }

@@ -31,6 +31,10 @@
     "@emailInvalid": {
       "description": "Error text for invalid email"
     },
+    "emailExists": "Email already exists",
+    "@emailExists": {
+      "description": "Error text for already existing email"
+    },
     "username": "Username",
     "@username": {
       "description": "Label text for username field"

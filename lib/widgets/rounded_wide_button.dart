@@ -6,6 +6,7 @@ class RoundedWideButton extends StatelessWidget {
     required this.child,
     this.onTap,
     this.width,
+    this.height,
     this.fillColor,
     this.border,
   }) : super(key: key);
@@ -13,6 +14,7 @@ class RoundedWideButton extends StatelessWidget {
   final Widget child;
   final GestureTapCallback? onTap;
   final double? width;
+  final double? height;
   final Color? fillColor;
   final Border? border;
 
@@ -26,13 +28,14 @@ class RoundedWideButton extends StatelessWidget {
           onTap: onTap,
           child: Ink(
             width: width ?? 220,
+            height: height ?? 60,
             padding: const EdgeInsets.all(12),
             decoration: BoxDecoration(
               color: fillColor ?? Theme.of(context).primaryColor,
               border: border,
               borderRadius: BorderRadius.circular(100),
             ),
-            child: child,
+            child: Center(child: child),
           ),
         ),
       ),
