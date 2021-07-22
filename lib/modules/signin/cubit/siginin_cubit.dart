@@ -5,4 +5,8 @@ part 'signin_state.dart';
 
 class SignInCubit extends Cubit<SignInState> {
   SignInCubit() : super(SignInInitial());
+
+  void test() {
+    emit(SignInLoading());
+  }
 }
