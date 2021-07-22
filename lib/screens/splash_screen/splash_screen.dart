@@ -5,9 +5,10 @@ import 'package:bitecope/widgets/rounded_wide_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class SplashScreen extends StatefulWidget {
-  SplashScreen({Key? key}) : super(key: key);
+  const SplashScreen({Key? key}) : super(key: key);
 
   @override
   _SplashScreenState createState() => _SplashScreenState();
@@ -20,14 +21,13 @@ class _SplashScreenState extends State<SplashScreen> {
       backgroundColor: AppColors.nearBlack,
       body: SingleChildScrollView(
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             ClipPath(
               clipper: WaveClipper(),
               child: Container(
                 width: double.infinity,
                 height: MediaQuery.of(context).size.height * 0.4,
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   gradient: AppGradients.primaryGradient,
                 ),
               ),
@@ -36,14 +36,14 @@ class _SplashScreenState extends State<SplashScreen> {
               children: [
                 SvgPicture.asset('assets/images/logo.svg'),
                 Text(
-                  "Bitecope",
+                  AppLocalizations.of(context)!.appName,
                   style: Theme.of(context).textTheme.headline5?.copyWith(
                         color: AppColors.white,
                         fontFamily: 'Righteous',
                       ),
                 ),
                 Text(
-                  "Connecting every bit",
+                  AppLocalizations.of(context)!.appSlogan,
                   style: Theme.of(context).textTheme.bodyText1?.copyWith(
                         color: AppColors.white,
                         fontFamily: 'Poppins',
@@ -64,12 +64,6 @@ class _SplashScreenState extends State<SplashScreen> {
                     return Column(
                       children: [
                         RoundedWideButton(
-                          child: Center(
-                            child: Text(
-                              "Sign IN",
-                              style: Theme.of(context).textTheme.headline6,
-                            ),
-                          ),
                           width: 310,
                           fillColor: AppColors.lightBlue1,
                           border: Border.all(
@@ -79,15 +73,15 @@ class _SplashScreenState extends State<SplashScreen> {
                           onTap: () {
                             //* Push Sign In Page
                           },
-                        ),
-                        const SizedBox(height: 24),
-                        RoundedWideButton(
                           child: Center(
                             child: Text(
-                              "Sign UP",
+                              AppLocalizations.of(context)!.signIn,
                               style: Theme.of(context).textTheme.headline6,
                             ),
                           ),
+                        ),
+                        const SizedBox(height: 24),
+                        RoundedWideButton(
                           width: 310,
                           border: Border.all(
                             color: AppColors.lightBlue1,
@@ -96,11 +90,17 @@ class _SplashScreenState extends State<SplashScreen> {
                           onTap: () {
                             //* Push Sign Up Page
                           },
+                          child: Center(
+                            child: Text(
+                              AppLocalizations.of(context)!.signUp,
+                              style: Theme.of(context).textTheme.headline6,
+                            ),
+                          ),
                         ),
                       ],
                     );
                   }
-                  return CircularProgressIndicator();
+                  return const CircularProgressIndicator();
                 },
               ),
             ),

@@ -9,19 +9,26 @@ environment:
   sdk: ">=2.12.0 <3.0.0"
 
 dependencies:
+  bloc_test: ^8.0.2
+  cupertino_icons: ^1.0.2
+  equatable: ^2.0.3
   flutter:
     sdk: flutter
-  cupertino_icons: ^1.0.2
   flutter_bloc: ^7.0.1
+  flutter_localizations:
+    sdk: flutter
   flutter_svg: ^0.22.0
+  intl: ^0.17.0
   shared_preferences: ^2.0.6
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  lint: ^1.0.0
 
 flutter:
   uses-material-design: true
+  generate: true
   fonts:
     - family: Righteous
       fonts:
