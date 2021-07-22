@@ -41,14 +41,14 @@ class AppTheme {
       backgroundColor: AppColors.lightGrey,
       errorColor: AppColors.red,
       shadowColor: AppColors.shadowBlack,
-      appBarTheme: AppBarTheme(
+      appBarTheme: const AppBarTheme(
         backgroundColor: AppColors.nearBlack,
         centerTitle: true,
         brightness: Brightness.dark,
-        textTheme: theme.appBarTheme.textTheme?.copyWith(
-          headline6: theme.appBarTheme.textTheme?.headline6?.copyWith(
+        textTheme: TextTheme(
+          headline6: TextStyle(
             fontSize: 28,
-            fontWeight: FontWeight.w400,
+            fontWeight: FontWeight.w600,
           ),
         ),
       ),
@@ -59,6 +59,16 @@ class AppTheme {
         ),
         bodyText1: theme.textTheme.bodyText1?.copyWith(
           fontSize: 17,
+        ),
+        bodyText2: theme.textTheme.bodyText2?.copyWith(
+          color: AppColors.shadowText,
+        ),
+        caption: theme.textTheme.caption?.copyWith(
+          color: AppColors.nearBlack,
+        ),
+        subtitle2: theme.textTheme.subtitle2?.copyWith(
+          fontSize: 13,
+          color: AppColors.nearBlack,
         ),
       ),
       floatingActionButtonTheme: theme.floatingActionButtonTheme.copyWith(

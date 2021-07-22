@@ -1,20 +1,15 @@
-import 'package:bitecope/config/theme.dart';
-import 'package:bitecope/logic/authentication/authentication_bloc.dart';
-import 'package:bitecope/screens/splash_screen/components/wave_clipper.dart';
+import 'package:bitecope/config/themes/theme.dart';
+import 'package:bitecope/core/authentication/bloc/authentication_bloc.dart';
+import 'package:bitecope/utils/ui_utils/wave_clipper.dart';
 import 'package:bitecope/widgets/rounded_wide_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class SplashScreen extends StatefulWidget {
+class SplashScreen extends StatelessWidget {
   const SplashScreen({Key? key}) : super(key: key);
 
-  @override
-  _SplashScreenState createState() => _SplashScreenState();
-}
-
-class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -88,7 +83,7 @@ class _SplashScreenState extends State<SplashScreen> {
                             width: 2,
                           ),
                           onTap: () {
-                            //* Push Sign Up Page
+                            Navigator.of(context).pushNamed('/signUp');
                           },
                           child: Center(
                             child: Text(
