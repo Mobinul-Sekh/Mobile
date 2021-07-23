@@ -82,6 +82,5 @@ enum SignUpStatus {
   pageTwo,
   pageTwoValidated,
   registering,
-
   done,
 }

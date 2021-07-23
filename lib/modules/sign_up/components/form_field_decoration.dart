@@ -12,6 +12,7 @@ InputDecoration formFieldDecoration(
 }) {
   return InputDecoration(
     errorText: errorText,
+    errorMaxLines: 2,
     floatingLabelBehavior: FloatingLabelBehavior.always,
     labelText: labelText,
     labelStyle: Theme.of(context).textTheme.bodyText1,
