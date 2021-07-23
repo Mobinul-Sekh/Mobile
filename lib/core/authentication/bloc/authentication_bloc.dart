@@ -1,6 +1,9 @@
-import 'package:bitecope/modules/sign_up/repositories/sign_up_repository.dart';
+// Package imports:
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+
+// Project imports:
+import 'package:bitecope/modules/sign_up/repositories/sign_up_repository.dart';
 
 part 'authentication_state.dart';
 

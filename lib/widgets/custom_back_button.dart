@@ -1,6 +1,9 @@
+// Flutter imports:
+import 'package:flutter/material.dart';
+
+// Project imports:
 import 'package:bitecope/config/themes/theme.dart';
 import 'package:bitecope/widgets/gradient_widget.dart';
-import 'package:flutter/material.dart';
 
 class CustomBackButton extends StatelessWidget {
   const CustomBackButton({

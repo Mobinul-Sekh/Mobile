@@ -1,10 +1,15 @@
-import 'package:bitecope/modules/splash_screen/screens/splash_screen.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+// Flutter imports:
 import 'package:flutter/material.dart';
+
+// Package imports:
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
+// Project imports:
 import 'package:bitecope/config/routes/router.dart';
 import 'package:bitecope/config/themes/theme.dart';
 import 'package:bitecope/core/authentication/bloc/authentication_bloc.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:bitecope/modules/splash_screen/screens/splash_screen.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
