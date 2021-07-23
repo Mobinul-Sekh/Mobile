@@ -1,6 +1,9 @@
+// Package imports:
+import 'package:dio/dio.dart';
+
+// Project imports:
 import 'package:bitecope/config/constants/app_urls.dart';
 import 'package:bitecope/modules/sign_up/models/sign_up_request.dart';
-import 'package:dio/dio.dart';
 
 class SignUpProvider {
   static Dio dio = Dio();

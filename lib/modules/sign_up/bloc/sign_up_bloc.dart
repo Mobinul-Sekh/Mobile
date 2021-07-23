@@ -1,13 +1,18 @@
+// Flutter imports:
+import 'package:flutter/material.dart';
+
+// Package imports:
+import 'package:bloc/bloc.dart';
+import 'package:email_validator/email_validator.dart';
+import 'package:equatable/equatable.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
+// Project imports:
 import 'package:bitecope/config/utils/typedefs.dart';
 import 'package:bitecope/core/authentication/models/user.dart';
 import 'package:bitecope/modules/sign_up/models/sign_up_response.dart';
 import 'package:bitecope/modules/sign_up/repositories/sign_up_repository.dart';
 import 'package:bitecope/utils/bloc_utils/bloc_form_field.dart';
-import 'package:bloc/bloc.dart';
-import 'package:email_validator/email_validator.dart';
-import 'package:equatable/equatable.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 part 'sign_up_state.dart';
 
@@ -63,13 +68,11 @@ class SignUpBloc extends Cubit<SignUpState> {
     String? recoveryQuestion,
     String? recoveryAnswer,
     UserType? userType,
-    String? ownerName,
   }) {
     final Map<String, LocaleString?> _errors = {
       "recoveryQuestion": _validateRecoveryQuestion(recoveryQuestion),
       "recoveryAnswer": _validateRecoveryAnswer(recoveryAnswer),
       "userType": _validateUserType(userType),
-      "ownerName": _validateOwnerName(userType, ownerName),
     };
 
     final bool _isValid = !_errors.values.any((_error) => _error != null);
@@ -86,10 +89,6 @@ class SignUpBloc extends Cubit<SignUpState> {
       userType: BlocFormField(
         userType,
         _errors["userType"],
-      ),
-      ownerName: BlocFormField(
-        ownerName,
-        _errors["ownerName"],
       ),
       signUpStatus:
           _isValid ? SignUpStatus.pageTwoValidated : SignUpStatus.pageTwo,
@@ -115,14 +114,9 @@ class SignUpBloc extends Cubit<SignUpState> {
     );
     if (response != null) {
       if (response.token != null) {
-        accountRepository.setToken(response.token!);
-        if (state.userType.value == UserType.owner) {
-          //TODO Add owner; generate activation code
-          emit(state.copyWith(signUpStatus: SignUpStatus.activation));
-        } else {
-          //TODO Add worker
-          emit(state.copyWith(signUpStatus: SignUpStatus.done));
-        }
+        // TODO Set token after home and post-sign-up/in modules are complete
+        // accountRepository.setToken(response.token!);
+        emit(state.copyWith(signUpStatus: SignUpStatus.done));
       } else {
         _setErrors(response);
       }
@@ -201,15 +195,6 @@ class SignUpBloc extends Cubit<SignUpState> {
     if (userType == null) {
       return (BuildContext context) =>
           AppLocalizations.of(context)!.userTypeEmpty;
-    }
-    return null;
-  }
-
-  LocaleString? _validateOwnerName(UserType? userType, String? ownerName) {
-    if (userType == UserType.worker &&
-        (ownerName == null || ownerName.trim() == "")) {
-      return (BuildContext context) =>
-          AppLocalizations.of(context)!.ownerNameEmpty;
     }
     return null;
   }

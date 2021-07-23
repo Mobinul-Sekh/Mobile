@@ -1,10 +1,15 @@
-import 'package:bitecope/modules/sign_up/repositories/sign_up_repository.dart';
+// Flutter imports:
+import 'package:flutter/material.dart';
+
+// Package imports:
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+// Project imports:
 import 'package:bitecope/modules/not_found/screens/not_found.dart';
 import 'package:bitecope/modules/sign_up/bloc/sign_up_bloc.dart';
 import 'package:bitecope/modules/sign_up/pages/sign_up_one.dart';
+import 'package:bitecope/modules/sign_up/repositories/sign_up_repository.dart';
 import 'package:bitecope/modules/splash_screen/screens/splash_screen.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 class AppRouter {
   // Declare blocs here

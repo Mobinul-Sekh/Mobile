@@ -1,3 +1,13 @@
+// Flutter imports:
+import 'package:flutter/gestures.dart';
+import 'package:flutter/material.dart';
+
+// Package imports:
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:url_launcher/url_launcher.dart';
+
+// Project imports:
 import 'package:bitecope/config/constants/app_urls.dart';
 import 'package:bitecope/config/themes/theme.dart';
 import 'package:bitecope/core/authentication/models/user.dart';
@@ -7,11 +17,6 @@ import 'package:bitecope/modules/sign_up/components/sign_up_wrapper.dart';
 import 'package:bitecope/modules/sign_up/pages/sign_up_complete.dart';
 import 'package:bitecope/widgets/gradient_widget.dart';
 import 'package:bitecope/widgets/rounded_wide_button.dart';
-import 'package:flutter/gestures.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class SignUpTwo extends StatefulWidget {
   const SignUpTwo({Key? key}) : super(key: key);
@@ -25,7 +30,6 @@ class _SignUpTwoState extends State<SignUpTwo> {
 
   final TextEditingController _recoveryAnswerController =
       TextEditingController();
-  final TextEditingController _ownerNameController = TextEditingController();
 
   String? _selectedQuestion;
   UserType? _userType;
@@ -39,7 +43,6 @@ class _SignUpTwoState extends State<SignUpTwo> {
     _selectedQuestion = state.recoveryQuestion.value;
     _recoveryAnswerController.text = state.recoveryAnswer.value ?? "";
     _userType = state.userType.value;
-    _ownerNameController.text = state.ownerName.value ?? "";
   }
 
   @override
@@ -61,15 +64,8 @@ class _SignUpTwoState extends State<SignUpTwo> {
         listener: (context, state) {
           if (state.signUpStatus == SignUpStatus.pageOne) {
             Navigator.of(context).maybePop();
-          } else if (state.signUpStatus == SignUpStatus.activation) {
-            //TODO Push to owner account activation; for now pushing to complete
-            Navigator.of(context).popUntil(ModalRoute.withName('/'));
-            Navigator.of(context).push(
-              MaterialPageRoute(
-                builder: (context) => const SignUpComplete(),
-              ),
-            );
           } else if (state.signUpStatus == SignUpStatus.done) {
+            // TODO Push to post-sign-up module when it is complete
             Navigator.of(context).popUntil(ModalRoute.withName('/'));
             Navigator.of(context).push(
               MaterialPageRoute(
@@ -221,22 +217,7 @@ class _SignUpTwoState extends State<SignUpTwo> {
                           ),
                         ],
                       ),
-                      if (_userType == UserType.worker) ...[
-                        const SizedBox(height: 18),
-                        TextField(
-                          controller: _ownerNameController,
-                          style: Theme.of(context).textTheme.bodyText2,
-                          decoration: formFieldDecoration(
-                            context,
-                            labelText: AppLocalizations.of(context)!.ownerName,
-                            errorText: state.ownerName.error != null
-                                ? state.ownerName.error!(context)
-                                : null,
-                            suffixIcon: Icons.person,
-                          ),
-                        ),
-                        const SizedBox(height: 18),
-                      ]
+                      const SizedBox(height: 18),
                     ],
                   ),
                 ),
@@ -311,7 +292,6 @@ class _SignUpTwoState extends State<SignUpTwo> {
                       recoveryQuestion: _selectedQuestion,
                       recoveryAnswer: _recoveryAnswerController.text,
                       userType: _userType,
-                      ownerName: _ownerNameController.text,
                     );
               }
             : null,
@@ -345,7 +325,6 @@ class _SignUpTwoState extends State<SignUpTwo> {
   @override
   void dispose() {
     _recoveryAnswerController.dispose();
-    _ownerNameController.dispose();
     super.dispose();
   }
 }
