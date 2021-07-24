@@ -5,7 +5,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 
 Dio _dio = Dio();
-Future<SignInResponseModel> getSignInToken(
+Future<Map<String, dynamic>?> getSignInToken(
     SignInRequestModel signInRequestModel) async {
   final Response response = await _dio.post(
     loginUrl,
@@ -13,7 +13,7 @@ Future<SignInResponseModel> getSignInToken(
   );
   if (response.statusCode == 200) {
     print(response.data);
-    return SignInResponseModel.fromJson(response.data as Map<String, dynamic>);
+    return response.data as Map<String, dynamic>;
   } else {
     throw Exception(response.data);
   }

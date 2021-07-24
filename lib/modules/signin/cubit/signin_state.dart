@@ -13,10 +13,10 @@ class SignInState {
     this.password = password ?? BlocFormField();
   }
 
-  SignInState copyWith({
-    BlocFormField<String>? username,
-    BlocFormField<String>? password,
-  }) {
+  SignInState copyWith(
+      {BlocFormField<String>? username,
+      BlocFormField<String>? password,
+      SignInStatus? signInStatus}) {
     return SignInState(
       username: username ?? this.username,
       password: password ?? this.password,

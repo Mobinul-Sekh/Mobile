@@ -1,7 +1,5 @@
 import 'package:bitecope/modules/signin/models/signin_reponse_model.dart';
 import 'package:bloc/bloc.dart';
-import 'package:equatable/equatable.dart';
-import 'package:flutter/animation.dart';
 import 'package:flutter/material.dart';
 import 'package:bitecope/config/utils/typedefs.dart';
 import 'package:bitecope/modules/signin/repositories/signin_repositiry.dart';
@@ -23,15 +21,30 @@ class SignInBloc extends Cubit<SignInState> {
     };
 
     emit(state.copyWith(
-      username: BlocFormField(
-        username,
-        _errors["username"],
-      ),
-      password: BlocFormField(
-        password,
-        _errors["password"],
-      ),
-    ));
+        username: BlocFormField(
+          username,
+          _errors["username"],
+        ),
+        password: BlocFormField(
+          password,
+          _errors["password"],
+        ),
+        signInStatus: SignInStatus.signInPage));
+    loginUser();
+  }
+
+  Future<void> loginUser() async {
+    final SignInResponseModel? response =
+        await signInRepository.SignInWithUserNameAndPassword(
+      username: state.username.value!,
+      password: state.password.value!,
+    );
+    if (response!.token != null) {
+      signInRepository.setToken(response.token!);
+      emit(state.copyWith(signInStatus: SignInStatus.SignedIn));
+    } else {
+      _setErrors(response);
+    }
   }
 
   LocaleString? _validateUsername(String? username) {
@@ -53,21 +66,16 @@ class SignInBloc extends Cubit<SignInState> {
   void _setErrors(SignInResponseModel response) {
     //TODO Need a list of possible API errors for each field to localize them; for now returning the errors as they are.
 
-    emit(state.copyWith(
-      username: state.username.copyWith(
-        error: response.usernameErr != null
-            ? () {
-                return (BuildContext context) => response.usernameErr;
-              }()
-            : null,
+    emit(
+      state.copyWith(
+        username: state.username.copyWith(
+          error: response.error != null
+              ? () {
+                  return (BuildContext context) => response.error;
+                }()
+              : null,
+        ),
       ),
-      password: state.password.copyWith(
-        error: response.passwordErr != null
-            ? () {
-                return (BuildContext context) => response.passwordErr;
-              }()
-            : null,
-      ),
-    ));
+    );
   }
 }
