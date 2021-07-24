@@ -1,26 +1,34 @@
 part of 'siginin_cubit.dart';
 
-abstract class SignInState extends Equatable {
-  SignInState(this.userName, this.password);
-  String? userName;
-  String? password;
-  @override
-  List<Object> get props => [];
+class SignInState {
+  late final BlocFormField<String> username;
+  late final BlocFormField<String> password;
+  late SignInStatus signInStatus;
+
+  SignInState(
+      {BlocFormField<String>? username,
+      BlocFormField<String>? password,
+      this.signInStatus = SignInStatus.signInPage}) {
+    this.username = username ?? BlocFormField();
+    this.password = password ?? BlocFormField();
+  }
+
+  SignInState copyWith({
+    BlocFormField<String>? username,
+    BlocFormField<String>? password,
+  }) {
+    return SignInState(
+      username: username ?? this.username,
+      password: password ?? this.password,
+      signInStatus: signInStatus ?? this.signInStatus,
+    );
+  }
 }
 
-class SignInInitial extends SignInState {
-  SignInInitial(String? userName, String? password) : super(userName, password);
-}
-
-class SignInLoading extends SignInState {
-  SignInLoading(String? userName, String? password) : super(userName, password);
-}
-
-class SignInSuccessful extends SignInState {
-  SignInSuccessful(String? userName, String? password)
-      : super(userName, password);
-}
-
-class SignInFailed extends SignInState {
-  SignInFailed(String? userName, String? password) : super(userName, password);
+enum SignInStatus {
+  signInPage,
+  inputValidated,
+  SigningIn,
+  SignedIn,
+  done,
 }

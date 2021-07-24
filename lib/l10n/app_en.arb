@@ -18,5 +18,21 @@
     "signUp": "Sign UP",
     "@signUP": {
       "description": "Text for sign up button"
+    },
+    "username": "Username",
+    "@username": {
+      "description": "Label text for username field"
+    },
+    "usernameEmpty": "Please enter a username",
+    "@usernameEmpty": {
+      "description": "Error text for empty username"
+    },
+    "password": "Password",
+    "@password": {
+      "description": "Label text for password field"
+    },
+     "passwordEmpty": "Please enter password",
+    "@passwordEmpty": {
+      "description": "Error text for empty password"
     }
 }
