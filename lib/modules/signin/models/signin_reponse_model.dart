@@ -1,25 +1,24 @@
+import 'dart:convert';
+
 class SignInResponseModel {
   String? expiresIn;
   String? token;
   String? error;
 
   SignInResponseModel({
-    required this.expiresIn,
-    required this.token,
-    required this.error,
+    this.expiresIn,
+    this.token,
+    this.error,
   });
 
-  SignInResponseModel.fromJson(Map<String, dynamic> json) {
-    expiresIn = json['Expires_in'] as String;
-    token = json['Token'] as String;
-    error = json['Error'] as String;
+  factory SignInResponseModel.fromMap(Map<String, dynamic> map) {
+    return SignInResponseModel(
+      token: map['Token'] != null ? map['Token'] as String : null,
+      expiresIn: map['Expires_in'] != null ? map['Expires_in'] as String : null,
+      error: map['Error'] != null ? map['Error'] as String : null,
+    );
   }
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['Expires_in'] = expiresIn;
-    data['Token'] = token;
-    data['Error'] = error;
-    return data;
-  }
+  factory SignInResponseModel.fromJson(String source) =>
+      SignInResponseModel.fromMap(json.decode(source) as Map<String, dynamic>);
 }
