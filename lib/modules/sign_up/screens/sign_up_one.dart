@@ -186,7 +186,7 @@ class _SignUpOneState extends State<SignUpOne> {
                 gradient: AppGradients.primaryGradient,
                 child: Text(
                   AppLocalizations.of(context)!.next,
-                  style: Theme.of(context).primaryTextTheme.headline6,
+                  style: Theme.of(context).textTheme.headline6,
                   textAlign: TextAlign.center,
                 ),
               ),

@@ -53,23 +53,95 @@ class AppTheme {
           ),
         ),
       ),
-      textTheme: TextTheme(
-        headline5: theme.textTheme.headline5?.copyWith(
-          fontSize: 36,
+      textTheme: const TextTheme(
+        headline1: TextStyle(
+          fontFamily: 'Poppins',
+          fontSize: 96,
+          fontWeight: FontWeight.w300,
+          letterSpacing: -1.5,
+          color: AppColors.black,
+        ),
+        headline2: TextStyle(
+          fontFamily: 'Poppins',
+          fontSize: 60,
+          fontWeight: FontWeight.w300,
+          letterSpacing: -0.5,
+          color: AppColors.black,
+        ),
+        headline3: TextStyle(
+          fontFamily: 'Poppins',
+          fontSize: 48,
           fontWeight: FontWeight.w400,
+          color: AppColors.black,
         ),
-        bodyText1: theme.textTheme.bodyText1?.copyWith(
-          fontSize: 17,
+        headline4: TextStyle(
+          fontFamily: 'Poppins',
+          fontSize: 34,
+          fontWeight: FontWeight.w400,
+          letterSpacing: 0.25,
+          color: AppColors.black,
         ),
-        bodyText2: theme.textTheme.bodyText2?.copyWith(
+        headline5: TextStyle(
+          fontFamily: 'Poppins',
+          fontSize: 24,
+          fontWeight: FontWeight.w400,
+          color: AppColors.black,
+        ),
+        headline6: TextStyle(
+          fontFamily: 'Poppins',
+          fontSize: 20,
+          fontWeight: FontWeight.w500,
+          letterSpacing: 0.15,
+          color: AppColors.black,
+        ),
+        subtitle1: TextStyle(
+          fontFamily: 'Poppins',
+          fontSize: 16,
+          fontWeight: FontWeight.w400,
+          letterSpacing: 0.15,
+          color: AppColors.black,
+        ),
+        subtitle2: TextStyle(
+          fontFamily: 'Poppins',
+          fontSize: 14,
+          fontWeight: FontWeight.w500,
+          letterSpacing: 0.1,
+          color: AppColors.black,
+        ),
+        bodyText1: TextStyle(
+          fontFamily: 'Poppins',
+          fontSize: 16,
+          fontWeight: FontWeight.w400,
+          letterSpacing: 0.5,
+          color: AppColors.black,
+        ),
+        bodyText2: TextStyle(
+          fontFamily: 'Poppins',
+          fontSize: 14,
+          fontWeight: FontWeight.w400,
+          letterSpacing: 0.25,
           color: AppColors.shadowText,
         ),
-        caption: theme.textTheme.caption?.copyWith(
-          color: AppColors.nearBlack,
+        button: TextStyle(
+          fontFamily: 'Poppins',
+          fontSize: 14,
+          fontWeight: FontWeight.w500,
+          letterSpacing: 1.25,
+          color: AppColors.white,
         ),
-        subtitle2: theme.textTheme.subtitle2?.copyWith(
-          fontSize: 13,
-          color: AppColors.nearBlack,
+        caption: TextStyle(
+          fontFamily: 'Poppins',
+          fontSize: 12,
+          fontWeight: FontWeight.w400,
+          letterSpacing: 0.4,
+          color: AppColors.black,
+        ),
+        overline: TextStyle(
+          fontFamily: 'Poppins',
+          fontSize: 10,
+          fontWeight: FontWeight.w400,
+          letterSpacing: 1.5,
+          color: AppColors.black,
         ),
       ),
       floatingActionButtonTheme: theme.floatingActionButtonTheme.copyWith(

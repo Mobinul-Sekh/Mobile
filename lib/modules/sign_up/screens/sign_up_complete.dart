@@ -43,9 +43,10 @@ class SignUpComplete extends StatelessWidget {
                         const SizedBox(height: 36),
                         Text(
                           "Account is successfully activated",
+                          textAlign: TextAlign.center,
                           style: Theme.of(context)
                               .textTheme
-                              .headline6
+                              .bodyText1
                               ?.copyWith(color: AppColors.shadowText),
                         ),
                         const SizedBox(height: 50),
@@ -76,6 +77,7 @@ class SignUpComplete extends StatelessWidget {
               ),
               const SizedBox(height: 20),
               RoundedWideButton(
+                width: 310,
                 onTap: () {
                   Navigator.of(context).popUntil(ModalRoute.withName('/'));
                 },
@@ -86,7 +88,7 @@ class SignUpComplete extends StatelessWidget {
                       "Go Back To Login",
                       style: Theme.of(context)
                           .textTheme
-                          .bodyText1
+                          .headline6
                           ?.copyWith(color: AppColors.white),
                     ),
                     Container(

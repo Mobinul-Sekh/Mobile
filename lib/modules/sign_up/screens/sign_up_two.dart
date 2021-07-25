@@ -84,7 +84,7 @@ class _SignUpTwoState extends State<SignUpTwo> {
                     children: [
                       Text(
                         AppLocalizations.of(context)!.recoveryQuestion,
-                        style: Theme.of(context).textTheme.subtitle2,
+                        style: Theme.of(context).textTheme.caption,
                       ),
                       DropdownButton<String>(
                         value: _selectedQuestion,
@@ -106,7 +106,7 @@ class _SignUpTwoState extends State<SignUpTwo> {
                         icon: GradientWidget(
                           gradient: AppGradients.primaryGradient,
                           child: Container(
-                            margin: const EdgeInsets.symmetric(vertical: 6),
+                            margin: const EdgeInsets.symmetric(vertical: 12),
                             child: const Icon(
                               Icons.keyboard_arrow_right_rounded,
                               size: 42,
@@ -152,7 +152,7 @@ class _SignUpTwoState extends State<SignUpTwo> {
                       const SizedBox(height: 36),
                       Text(
                         AppLocalizations.of(context)!.userType,
-                        style: Theme.of(context).textTheme.subtitle2,
+                        style: Theme.of(context).textTheme.caption,
                       ),
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -315,7 +315,10 @@ class _SignUpTwoState extends State<SignUpTwo> {
         fillColor: Theme.of(context).disabledColor,
         child: Text(
           AppLocalizations.of(context)!.signUp,
-          style: Theme.of(context).textTheme.headline6,
+          style: Theme.of(context)
+              .textTheme
+              .headline6
+              ?.copyWith(color: AppColors.white),
           textAlign: TextAlign.center,
         ),
       );

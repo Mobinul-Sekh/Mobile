@@ -9,6 +9,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 // Project imports:
 import 'package:bitecope/config/themes/theme.dart';
 import 'package:bitecope/core/authentication/bloc/authentication_bloc.dart';
+import 'package:bitecope/gen/assets.gen.dart';
+import 'package:bitecope/gen/fonts.gen.dart';
 import 'package:bitecope/utils/ui_utils/wave_clipper.dart';
 import 'package:bitecope/widgets/rounded_wide_button.dart';
 
@@ -34,19 +36,18 @@ class SplashScreen extends StatelessWidget {
             ),
             Column(
               children: [
-                SvgPicture.asset('assets/images/logo.svg'),
+                SvgPicture.asset(Assets.images.logo),
                 Text(
                   AppLocalizations.of(context)!.appName,
-                  style: Theme.of(context).textTheme.headline5?.copyWith(
+                  style: Theme.of(context).textTheme.headline4?.copyWith(
                         color: AppColors.white,
-                        fontFamily: 'Righteous',
+                        fontFamily: FontFamily.righteous,
                       ),
                 ),
                 Text(
                   AppLocalizations.of(context)!.appSlogan,
-                  style: Theme.of(context).textTheme.bodyText1?.copyWith(
+                  style: Theme.of(context).textTheme.subtitle2?.copyWith(
                         color: AppColors.white,
-                        fontFamily: 'Poppins',
                       ),
                 ),
               ],
@@ -76,7 +77,10 @@ class SplashScreen extends StatelessWidget {
                           child: Center(
                             child: Text(
                               AppLocalizations.of(context)!.signIn,
-                              style: Theme.of(context).textTheme.headline6,
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .headline6
+                                  ?.copyWith(color: AppColors.white),
                             ),
                           ),
                         ),
@@ -93,7 +97,10 @@ class SplashScreen extends StatelessWidget {
                           child: Center(
                             child: Text(
                               AppLocalizations.of(context)!.signUp,
-                              style: Theme.of(context).textTheme.headline6,
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .headline6
+                                  ?.copyWith(color: AppColors.white),
                             ),
                           ),
                         ),
