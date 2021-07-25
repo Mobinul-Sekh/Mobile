@@ -1,18 +1,18 @@
 // Flutter imports:
-import 'package:bitecope/modules/homepage/homepage.dart';
-import 'package:bitecope/modules/signin/cubit/siginin_cubit.dart';
-import 'package:bitecope/modules/signin/repositories/signin_repositiry.dart';
-import 'package:bitecope/modules/signin/screens/signinpage.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 // Project imports:
+import 'package:bitecope/modules/home/screens/home.dart';
 import 'package:bitecope/modules/not_found/screens/not_found.dart';
+import 'package:bitecope/modules/sign_in/cubit/siginin_cubit.dart';
+import 'package:bitecope/modules/sign_in/repositories/sign_in_repository.dart';
+import 'package:bitecope/modules/sign_in/screens/sign_in.dart';
 import 'package:bitecope/modules/sign_up/bloc/sign_up_bloc.dart';
-import 'package:bitecope/modules/sign_up/pages/sign_up_one.dart';
 import 'package:bitecope/modules/sign_up/repositories/sign_up_repository.dart';
+import 'package:bitecope/modules/sign_up/screens/sign_up_one.dart';
 import 'package:bitecope/modules/splash_screen/screens/splash_screen.dart';
 
 class AppRouter {
@@ -31,13 +31,13 @@ class AppRouter {
               create: (context) => SignInBloc(
                 signInRepository: SignInRepository(),
               ),
-              child: const SignInPage(),
+              child: const SignIn(),
             );
           },
         );
       case '/home':
         return MaterialPageRoute(
-          builder: (_) => const Homepage(),
+          builder: (_) => const Home(),
         );
       case '/signUp':
         return MaterialPageRoute(

@@ -56,7 +56,7 @@ class SplashScreen extends StatelessWidget {
               child: BlocConsumer<AuthenticationBloc, AuthenticationState>(
                 listener: (context, state) {
                   if (state.status == AuthenticationStatus.loggedIn) {
-                    //* Navigator.of(context).pushReplacementNamed("/home");
+                    Navigator.of(context).pushReplacementNamed("/home");
                   }
                 },
                 builder: (context, state) {
@@ -71,7 +71,7 @@ class SplashScreen extends StatelessWidget {
                             width: 2,
                           ),
                           onTap: () {
-                            //* Push Sign In Page
+                            Navigator.of(context).pushNamed("/signIn");
                           },
                           child: Center(
                             child: Text(

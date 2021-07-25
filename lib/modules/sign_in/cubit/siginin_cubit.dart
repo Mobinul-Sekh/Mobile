@@ -7,8 +7,8 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 // Project imports:
 import 'package:bitecope/config/utils/typedefs.dart';
-import 'package:bitecope/modules/signin/models/signin_reponse_model.dart';
-import 'package:bitecope/modules/signin/repositories/signin_repositiry.dart';
+import 'package:bitecope/modules/sign_in/models/signin_reponse_model.dart';
+import 'package:bitecope/modules/sign_in/repositories/sign_in_repository.dart';
 import 'package:bitecope/utils/bloc_utils/bloc_form_field.dart';
 
 part 'signin_state.dart';
@@ -26,17 +26,23 @@ class SignInBloc extends Cubit<SignInState> {
       "password": _validatePassword(password),
     };
 
+    final bool _isValid = !_errors.values.any((_error) => _error != null);
+
     emit(state.copyWith(
-        username: BlocFormField(
-          username,
-          _errors["username"],
-        ),
-        password: BlocFormField(
-          password,
-          _errors["password"],
-        ),
-        signInStatus: SignInStatus.inputValidated));
-    loginUser();
+      username: BlocFormField(
+        username,
+        _errors["username"],
+      ),
+      password: BlocFormField(
+        password,
+        _errors["password"],
+      ),
+      signInStatus: _isValid ? SignInStatus.signingIn : SignInStatus.signIn,
+    ));
+
+    if (_isValid) {
+      loginUser();
+    }
   }
 
   Future<void> loginUser() async {
@@ -74,24 +80,19 @@ class SignInBloc extends Cubit<SignInState> {
 
   void _setErrors(SignInResponseModel response) {
     //TODO Need a list of possible API errors for each field to localize them; for now returning the errors as they are.
-
     emit(
       state.copyWith(
         username: state.username.copyWith(
           error: response.error != null
-              ? () {
-                  return (BuildContext context) => response.error;
-                }()
+              ? (BuildContext context) => response.error
               : null,
         ),
         password: state.password.copyWith(
           error: response.error != null
-              ? () {
-                  return (BuildContext context) => response.error;
-                }()
+              ? (BuildContext context) => response.error
               : null,
         ),
-        signInStatus: SignInStatus.signingIn,
+        signInStatus: SignInStatus.signIn,
       ),
     );
   }

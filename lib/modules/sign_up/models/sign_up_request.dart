@@ -18,4 +18,17 @@ class SignUpRequest {
     required this.recoveryAnswer,
     required this.userType,
   });
+
+  Map<String, dynamic> toMap() {
+    return {
+      'email': email,
+      'username': username,
+      'phone_no': phoneNumber,
+      'password': password,
+      'confirm_password': confirmPassword,
+      'recovery_question': recoveryQuestion,
+      'recovery_answer': recoveryAnswer,
+      'user_type': userType,
+    };
+  }
 }
