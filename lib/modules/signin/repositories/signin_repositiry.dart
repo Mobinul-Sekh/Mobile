@@ -1,7 +1,10 @@
+// Package imports:
+import 'package:shared_preferences/shared_preferences.dart';
+
+// Project imports:
+import 'package:bitecope/data/signin_api_call.dart';
 import 'package:bitecope/modules/signin/models/signin_reponse_model.dart';
 import 'package:bitecope/modules/signin/models/signin_request_model.dart';
-import 'package:bitecope/data/signin_api_call.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class SignInRepository {
   Future<SignInResponseModel?> signInWithUserNameAndPassword({

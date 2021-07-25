@@ -70,7 +70,7 @@
     "forgotPassword": "Forget Password?",
     "@forgotPassword": {
       "description": "Forget Password text"
-    }.
+    },
     "passwordEmpty": "Please enter password",
     "@passwordEmpty": {
       "description": "Error text for empty password"

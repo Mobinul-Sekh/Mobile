@@ -1,10 +1,16 @@
-import 'package:bitecope/modules/signin/models/signin_reponse_model.dart';
-import 'package:bloc/bloc.dart';
+// Flutter imports:
 import 'package:flutter/material.dart';
+
+// Package imports:
+import 'package:bloc/bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
+// Project imports:
 import 'package:bitecope/config/utils/typedefs.dart';
+import 'package:bitecope/modules/signin/models/signin_reponse_model.dart';
 import 'package:bitecope/modules/signin/repositories/signin_repositiry.dart';
 import 'package:bitecope/utils/bloc_utils/bloc_form_field.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 part 'signin_state.dart';
 
 class SignInBloc extends Cubit<SignInState> {

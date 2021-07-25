@@ -1,6 +1,9 @@
+// Package imports:
+import 'package:dio/dio.dart';
+
+// Project imports:
 import 'package:bitecope/constants/api_path.dart';
 import 'package:bitecope/modules/signin/models/signin_request_model.dart';
-import 'package:dio/dio.dart';
 
 // BaseOptions options = BaseOptions(
 //   baseUrl: loginUrl,
