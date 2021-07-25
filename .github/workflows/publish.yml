@@ -3,11 +3,11 @@
 # separate terms of service, privacy policy, and support
 # documentation.
 
-name: APK Build
+name: Publish
 
 on:
   push:
-    branches: [ master ]
+    branches: [ deploy ]
 #  pull_request:
 #    branches: [ deploy ]
 

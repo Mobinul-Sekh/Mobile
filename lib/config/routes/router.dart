@@ -1,15 +1,18 @@
-import 'package:bitecope/core/authentication/authentication_bloc.dart';
-import 'package:bitecope/modules/homepage/homepage.dart';
-import 'package:bitecope/modules/signin/cubit/siginin_cubit.dart';
-import 'package:bitecope/modules/signin/repositories/signin_repositiry.dart';
-import 'package:bitecope/modules/signin/screens/signinpage.dart';
-import 'package:bitecope/modules/splash_screen/splash_screen.dart';
-import 'package:bitecope/modules/not_found/not_found.dart';
+// Flutter imports:
 import 'package:flutter/material.dart';
+
+// Package imports:
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+// Project imports:
+import 'package:bitecope/modules/not_found/screens/not_found.dart';
+import 'package:bitecope/modules/sign_up/bloc/sign_up_bloc.dart';
+import 'package:bitecope/modules/sign_up/pages/sign_up_one.dart';
+import 'package:bitecope/modules/sign_up/repositories/sign_up_repository.dart';
+import 'package:bitecope/modules/splash_screen/screens/splash_screen.dart';
+
 class AppRouter {
-  final AuthenticationBloc _authenticationBloc = AuthenticationBloc();
+  // Declare blocs here
 
   Route onGenerateRoute(RouteSettings routeSettings) {
     switch (routeSettings.name) {
@@ -32,6 +35,17 @@ class AppRouter {
         return MaterialPageRoute(
           builder: (_) => const Homepage(),
         );
+      case '/signUp':
+        return MaterialPageRoute(
+          builder: (_) {
+            return BlocProvider<SignUpBloc>(
+              create: (context) => SignUpBloc(
+                accountRepository: SignUpRepository(),
+              ),
+              child: const SignUpOne(),
+            );
+          },
+        );
       default:
         return MaterialPageRoute(
           builder: (_) => const NotFound(),
@@ -40,6 +54,6 @@ class AppRouter {
   }
 
   void dispose() {
-    _authenticationBloc.close();
+    // Dispose blocs here
   }
 }

@@ -1,5 +1,8 @@
+// Package imports:
 import 'package:flutter_test/flutter_test.dart';
-import 'package:bitecope/core/authentication/authentication_bloc.dart';
+
+// Project imports:
+import 'package:bitecope/core/authentication/bloc/authentication_bloc.dart';
 
 void main() {
   group('Authentication Bloc -> ', () {
