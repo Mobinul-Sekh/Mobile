@@ -2,6 +2,7 @@ import 'package:bitecope/modules/homepage/homepage.dart';
 import 'package:bitecope/modules/signin/cubit/siginin_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class SignInPage extends StatefulWidget {
   const SignInPage({Key? key}) : super(key: key);
@@ -15,7 +16,7 @@ class _SignInPageState extends State<SignInPage> {
   final TextEditingController _passwordController = TextEditingController();
   final FocusNode _usernameNode = FocusNode();
   final FocusNode _passwordNode = FocusNode();
-  final bool _hidePassword = true;
+  bool _hidePassword = false;
   final Shader linearGradient = const LinearGradient(
     colors: <Color>[
       Color(0xff2cceff),
@@ -47,7 +48,7 @@ class _SignInPageState extends State<SignInPage> {
   Widget build(BuildContext context) {
     return BlocConsumer<SignInBloc, SignInState>(
       listener: (context, state) {
-        if (state.signInStatus == SignInStatus.SignedIn) {
+        if (state.signInStatus == SignInStatus.signedIn) {
           Navigator.of(context).popUntil(ModalRoute.withName('/'));
           Navigator.of(context).push(
             MaterialPageRoute(
@@ -66,9 +67,9 @@ class _SignInPageState extends State<SignInPage> {
               color: Color(0xff32C5FF),
             ),
             centerTitle: false,
-            title: const Text(
-              "Sign In",
-              style: TextStyle(
+            title: Text(
+              AppLocalizations.of(context)!.signIn,
+              style: const TextStyle(
                 color: Color(0xff32C5FF),
                 fontSize: 26,
                 fontFamily: "Poppins",
@@ -112,30 +113,30 @@ class _SignInPageState extends State<SignInPage> {
                           controller: _usernameController,
                           focusNode: _usernameNode,
                           onEditingComplete: () => _passwordNode.requestFocus(),
-                          decoration: const InputDecoration(
+                          decoration: InputDecoration(
                             //helperText: 'dc',
-                            labelText: 'Username',
-                            labelStyle: TextStyle(
+                            labelText: AppLocalizations.of(context)!.username,
+                            labelStyle: const TextStyle(
                               color: Color(0xff252525),
                               fontSize: 15,
                               fontFamily: "Montserrat",
                               fontWeight: FontWeight.w600,
                               letterSpacing: 0.26,
                             ),
-                            suffixIcon: Icon(
+                            suffixIcon: const Icon(
                               Icons.person,
                               color: Colors.black,
                             ),
 
                             //hoverColor: Colors.red,
                             //fillColor: Colors.red,
-                            enabledBorder: UnderlineInputBorder(
+                            enabledBorder: const UnderlineInputBorder(
                               borderSide: BorderSide(
                                 width: 3,
                                 color: Color(0xff9a9a9a),
                               ),
                             ),
-                            focusedBorder: UnderlineInputBorder(
+                            focusedBorder: const UnderlineInputBorder(
                               borderSide: BorderSide(
                                 width: 3,
                                 color: Color(0xff32C5FF),
@@ -147,8 +148,9 @@ class _SignInPageState extends State<SignInPage> {
                             //   ),
                             // ),
                             //focusColor: Colors.red,
-                            hintText: 'test',
-                            hintStyle: TextStyle(
+                            hintText:
+                                AppLocalizations.of(context)!.sampleUsername,
+                            hintStyle: const TextStyle(
                               color: Color(0xff9a9a9a),
                               fontSize: 17,
                               fontFamily: "Poppins",
@@ -165,6 +167,11 @@ class _SignInPageState extends State<SignInPage> {
                         padding: const EdgeInsets.only(
                             left: 30, right: 30, top: 20, bottom: 20),
                         child: TextFormField(
+                          onTap: () {
+                            setState(() {
+                              _hidePassword = !_hidePassword;
+                            });
+                          },
                           style: const TextStyle(
                             color: Color(0xff9a9a9a),
                             fontSize: 17,
@@ -175,11 +182,11 @@ class _SignInPageState extends State<SignInPage> {
                           controller: _passwordController,
                           focusNode: _passwordNode,
                           obscureText: _hidePassword,
-                          decoration: const InputDecoration(
+                          decoration: InputDecoration(
                             //helperText: 'dc',
 
-                            labelText: 'Password',
-                            labelStyle: TextStyle(
+                            labelText: AppLocalizations.of(context)!.password,
+                            labelStyle: const TextStyle(
                               color: Color(0xff252525),
                               fontSize: 15,
                               fontFamily: "Montserrat",
@@ -187,19 +194,24 @@ class _SignInPageState extends State<SignInPage> {
                               letterSpacing: 0.26,
                             ),
 
-                            suffixIcon: Icon(
-                              Icons.visibility,
-                              color: Colors.black,
-                            ),
+                            suffixIcon: !_hidePassword
+                                ? const Icon(
+                                    Icons.visibility,
+                                    color: Colors.black,
+                                  )
+                                : const Icon(
+                                    Icons.visibility_off,
+                                    color: Colors.black,
+                                  ),
                             //hoverColor: Colors.red,
                             //fillColor: Colors.red,
-                            enabledBorder: UnderlineInputBorder(
+                            enabledBorder: const UnderlineInputBorder(
                               borderSide: BorderSide(
                                 width: 3,
                                 color: Color(0xff9a9a9a),
                               ),
                             ),
-                            focusedBorder: UnderlineInputBorder(
+                            focusedBorder: const UnderlineInputBorder(
                               borderSide: BorderSide(
                                 width: 3,
                                 color: Color(0xff32C5FF),
@@ -211,8 +223,9 @@ class _SignInPageState extends State<SignInPage> {
                             //   ),
                             // ),
                             //focusColor: Colors.red,
-                            hintText: '*************',
-                            hintStyle: TextStyle(
+                            hintText:
+                                AppLocalizations.of(context)!.samplePassword,
+                            hintStyle: const TextStyle(
                               color: Color(0xff9a9a9a),
                               fontSize: 17,
                               fontFamily: "Poppins",
@@ -231,7 +244,7 @@ class _SignInPageState extends State<SignInPage> {
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: <Widget>[
                             Text(
-                              "Forget Password?",
+                              AppLocalizations.of(context)!.forgotPassword,
                               style: TextStyle(
                                   fontSize: 17,
                                   fontFamily: "Poppins",
@@ -243,12 +256,14 @@ class _SignInPageState extends State<SignInPage> {
                       ),
                       const Spacer(),
                       GestureDetector(
-                        onTap: () {
-                          context.read<SignInBloc>().validateSignInPage(
-                                username: _usernameController.text,
-                                password: _passwordController.text,
-                              );
-                        },
+                        onTap: state.signInStatus == SignInStatus.signingIn
+                            ? () {
+                                context.read<SignInBloc>().validateSignInPage(
+                                      username: _usernameController.text,
+                                      password: _passwordController.text,
+                                    );
+                              }
+                            : null,
                         // Navigator.pushNamed(context, NewSignUpTwo.routeName,
                         //     arguments: controller);
 
@@ -271,16 +286,19 @@ class _SignInPageState extends State<SignInPage> {
                             top: 7,
                             bottom: 8,
                           ),
-                          child: const Text(
-                            "Sign In",
-                            style: TextStyle(
-                              color: Color(0xff32C5FF),
-                              fontSize: 27,
-                              fontFamily: "Poppins",
-                              fontWeight: FontWeight.w600,
-                              letterSpacing: 0.81,
-                            ),
-                          ),
+                          child:
+                              state.signInStatus != SignInStatus.inputValidated
+                                  ? Text(
+                                      AppLocalizations.of(context)!.signIn,
+                                      style: const TextStyle(
+                                        color: Color(0xff32C5FF),
+                                        fontSize: 27,
+                                        fontFamily: "Poppins",
+                                        fontWeight: FontWeight.w600,
+                                        letterSpacing: 0.81,
+                                      ),
+                                    )
+                                  : const CircularProgressIndicator(),
                         ),
                       ),
                       const SizedBox(

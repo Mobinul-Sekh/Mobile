@@ -23,6 +23,10 @@
     "@username": {
       "description": "Label text for username field"
     },
+  "sampleUsername": "test",
+  "@sampleUsername": {
+    "description": "username textfield hint text"
+  },
     "usernameEmpty": "Please enter a username",
     "@usernameEmpty": {
       "description": "Error text for empty username"
@@ -31,8 +35,16 @@
     "@password": {
       "description": "Label text for password field"
     },
+  "samplePassword": "**********",
+  "@samplePassword": {
+    "description": "Sample password for text filed hint text"
+  },
      "passwordEmpty": "Please enter password",
     "@passwordEmpty": {
       "description": "Error text for empty password"
-    }
+    },
+  "forgotPassword": "Forget Password?",
+  "@forgotPassword": {
+    "description": "Forget Password text"
+  }
 }

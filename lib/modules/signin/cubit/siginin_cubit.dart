@@ -29,7 +29,7 @@ class SignInBloc extends Cubit<SignInState> {
           password,
           _errors["password"],
         ),
-        signInStatus: SignInStatus.signInPage));
+        signInStatus: SignInStatus.inputValidated));
     loginUser();
   }
 
@@ -39,11 +39,13 @@ class SignInBloc extends Cubit<SignInState> {
       username: state.username.value!,
       password: state.password.value!,
     );
-    if (response!.token != null) {
-      signInRepository.setToken(response.token!);
-      emit(state.copyWith(signInStatus: SignInStatus.SignedIn));
-    } else {
-      _setErrors(response);
+    if (response != null) {
+      if (response.token != null) {
+        signInRepository.setToken(response.token!);
+        emit(state.copyWith(signInStatus: SignInStatus.signedIn));
+      } else {
+        _setErrors(response);
+      }
     }
   }
 

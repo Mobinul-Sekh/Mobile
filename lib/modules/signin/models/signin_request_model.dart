@@ -1,14 +1,12 @@
-import 'package:flutter/cupertino.dart';
-
 class SignInRequestModel {
-  late String _username;
-  late String _password;
+  String username;
+  String password;
 
-  SignInRequestModel({required String username, required String password}) {
-    _username = username;
-    _password = password;
-  }
+  SignInRequestModel({
+    required this.username,
+    required this.password,
+  });
 
   Map<String, dynamic> toDatabaseJson() =>
-      {"username": _username, "password": _password};
+      {"username": username, "password": password};
 }

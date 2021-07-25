@@ -8,7 +8,7 @@ class SignInState {
   SignInState(
       {BlocFormField<String>? username,
       BlocFormField<String>? password,
-      this.signInStatus = SignInStatus.signInPage}) {
+      this.signInStatus = SignInStatus.signingIn}) {
     this.username = username ?? BlocFormField();
     this.password = password ?? BlocFormField();
   }
@@ -26,9 +26,7 @@ class SignInState {
 }
 
 enum SignInStatus {
-  signInPage,
   inputValidated,
-  SigningIn,
-  SignedIn,
-  done,
+  signingIn,
+  signedIn,
 }
