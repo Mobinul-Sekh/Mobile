@@ -1,4 +1,8 @@
 // Flutter imports:
+import 'package:bitecope/modules/homepage/homepage.dart';
+import 'package:bitecope/modules/signin/cubit/siginin_cubit.dart';
+import 'package:bitecope/modules/signin/repositories/signin_repositiry.dart';
+import 'package:bitecope/modules/signin/screens/signinpage.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -19,6 +23,21 @@ class AppRouter {
       case '/':
         return MaterialPageRoute(
           builder: (_) => const SplashScreen(),
+        );
+      case '/signIn':
+        return MaterialPageRoute(
+          builder: (_) {
+            return BlocProvider<SignInBloc>(
+              create: (context) => SignInBloc(
+                signInRepository: SignInRepository(),
+              ),
+              child: const SignInPage(),
+            );
+          },
+        );
+      case '/home':
+        return MaterialPageRoute(
+          builder: (_) => const Homepage(),
         );
       case '/signUp':
         return MaterialPageRoute(
