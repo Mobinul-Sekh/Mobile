@@ -56,7 +56,7 @@ class _SplashScreenState extends State<SplashScreen> {
               child: BlocConsumer<AuthenticationBloc, AuthenticationState>(
                 listener: (context, state) {
                   if (state.status == AuthenticationStatus.loggedIn) {
-                    //* Navigator.of(context).pushReplacementNamed("/home");
+                    Navigator.of(context).pushReplacementNamed("/home");
                   }
                 },
                 builder: (context, state) {
@@ -71,7 +71,7 @@ class _SplashScreenState extends State<SplashScreen> {
                             width: 2,
                           ),
                           onTap: () {
-                            Navigator.of(context).pushNamed("/Signin");
+                            Navigator.of(context).pushNamed("/signIn");
                           },
                           child: Center(
                             child: Text(

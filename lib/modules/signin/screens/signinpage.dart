@@ -1,3 +1,4 @@
+import 'package:bitecope/config/themes/theme.dart';
 import 'package:bitecope/modules/homepage/homepage.dart';
 import 'package:bitecope/modules/signin/cubit/siginin_cubit.dart';
 import 'package:flutter/material.dart';
@@ -59,13 +60,11 @@ class _SignInPageState extends State<SignInPage> {
       },
       builder: (context, state) {
         return Scaffold(
+          backgroundColor: AppColors.nearBlack,
           appBar: AppBar(
             backgroundColor: const Color(0xff252525),
             elevation: 0,
-            leading: const Icon(
-              Icons.arrow_back_ios,
-              color: Color(0xff32C5FF),
-            ),
+            leading: const BackButton(),
             centerTitle: false,
             title: Text(
               AppLocalizations.of(context)!.signIn,
@@ -88,7 +87,7 @@ class _SignInPageState extends State<SignInPage> {
               enableDrag: false,
               onClosing: () {},
               builder: (context) => SizedBox(
-                height: 360,
+                height: 500,
                 child: Container(
                   decoration: const BoxDecoration(
                     color: Colors.white,
@@ -123,6 +122,9 @@ class _SignInPageState extends State<SignInPage> {
                               fontWeight: FontWeight.w600,
                               letterSpacing: 0.26,
                             ),
+                            errorText: state.username.error != null
+                                ? state.username.error!(context)
+                                : null,
                             suffixIcon: const Icon(
                               Icons.person,
                               color: Colors.black,
@@ -193,7 +195,9 @@ class _SignInPageState extends State<SignInPage> {
                               fontWeight: FontWeight.w600,
                               letterSpacing: 0.26,
                             ),
-
+                            errorText: state.password.error != null
+                                ? state.password.error!(context)
+                                : null,
                             suffixIcon: !_hidePassword
                                 ? const Icon(
                                     Icons.visibility,

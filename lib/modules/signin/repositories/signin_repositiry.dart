@@ -4,11 +4,11 @@ import 'package:bitecope/data/signin_api_call.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SignInRepository {
-  Future<SignInResponseModel?> SignInWithUserNameAndPassword({
+  Future<SignInResponseModel?> signInWithUserNameAndPassword({
     required String username,
     required String password,
   }) async {
-    SignInRequestModel signInRequestModel =
+    final SignInRequestModel signInRequestModel =
         SignInRequestModel(username: username, password: password);
     final Map<String, dynamic>? signInResponseModel =
         await getSignInToken(signInRequestModel);

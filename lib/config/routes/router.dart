@@ -1,4 +1,5 @@
 import 'package:bitecope/core/authentication/authentication_bloc.dart';
+import 'package:bitecope/modules/homepage/homepage.dart';
 import 'package:bitecope/modules/signin/cubit/siginin_cubit.dart';
 import 'package:bitecope/modules/signin/repositories/signin_repositiry.dart';
 import 'package:bitecope/modules/signin/screens/signinpage.dart';
@@ -16,7 +17,7 @@ class AppRouter {
         return MaterialPageRoute(
           builder: (_) => const SplashScreen(),
         );
-      case '/Signin':
+      case '/signIn':
         return MaterialPageRoute(
           builder: (_) {
             return BlocProvider<SignInBloc>(
@@ -27,7 +28,10 @@ class AppRouter {
             );
           },
         );
-
+      case '/home':
+        return MaterialPageRoute(
+          builder: (_) => const Homepage(),
+        );
       default:
         return MaterialPageRoute(
           builder: (_) => const NotFound(),

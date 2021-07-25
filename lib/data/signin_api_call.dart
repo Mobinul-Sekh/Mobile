@@ -14,15 +14,22 @@ import 'package:dio/dio.dart';
 Dio _dio = Dio();
 Future<Map<String, dynamic>?> getSignInToken(
     SignInRequestModel signInRequestModel) async {
-  final Response response =
-      await _dio.post(loginUrl, data: signInRequestModel.toDatabaseJson()
-          // data: {
-          //   'username': signInRequestModel.username,
-          //   'password': signInRequestModel.password,
-          // },
-          );
-  if (response.statusCode == 200) {
-    return response.data as Map<String, dynamic>;
+  try {
+    final Response response =
+        await _dio.post(loginUrl, data: signInRequestModel.toDatabaseJson()
+            // data: {
+            //   'username': signInRequestModel.username,
+            //   'password': signInRequestModel.password,
+            // },
+            );
+    if (response.statusCode == 200) {
+      return response.data as Map<String, dynamic>;
+    }
+    return null;
+  } catch (e) {
+    if (e is DioError && e.response!.statusCode! < 500) {
+      return e.response?.data as Map<String, dynamic>;
+    }
+    return null;
   }
-  return null;
 }

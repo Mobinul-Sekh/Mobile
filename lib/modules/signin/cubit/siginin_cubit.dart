@@ -35,13 +35,14 @@ class SignInBloc extends Cubit<SignInState> {
 
   Future<void> loginUser() async {
     final SignInResponseModel? response =
-        await signInRepository.SignInWithUserNameAndPassword(
+        await signInRepository.signInWithUserNameAndPassword(
       username: state.username.value!,
       password: state.password.value!,
     );
     if (response != null) {
       if (response.token != null) {
-        signInRepository.setToken(response.token!);
+        // TODO We'll set the token when we have logout ready
+        // signInRepository.setToken(response.token!);
         emit(state.copyWith(signInStatus: SignInStatus.signedIn));
       } else {
         _setErrors(response);
@@ -77,6 +78,14 @@ class SignInBloc extends Cubit<SignInState> {
                 }()
               : null,
         ),
+        password: state.password.copyWith(
+          error: response.error != null
+              ? () {
+                  return (BuildContext context) => response.error;
+                }()
+              : null,
+        ),
+        signInStatus: SignInStatus.signingIn,
       ),
     );
   }
