@@ -28,9 +28,7 @@ class AppRouter {
         return MaterialPageRoute(
           builder: (_) {
             return BlocProvider<SignInBloc>(
-              create: (context) => SignInBloc(
-                signInRepository: SignInRepository(),
-              ),
+              create: (context) => SignInBloc(SignInRepository()),
               child: const SignIn(),
             );
           },
@@ -43,9 +41,7 @@ class AppRouter {
         return MaterialPageRoute(
           builder: (_) {
             return BlocProvider<SignUpBloc>(
-              create: (context) => SignUpBloc(
-                accountRepository: SignUpRepository(),
-              ),
+              create: (context) => SignUpBloc(SignUpRepository()),
               child: const SignUpOne(),
             );
           },

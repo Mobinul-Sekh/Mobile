@@ -10,7 +10,7 @@ import 'package:url_launcher/url_launcher.dart';
 // Project imports:
 import 'package:bitecope/config/constants/app_urls.dart';
 import 'package:bitecope/config/themes/theme.dart';
-import 'package:bitecope/core/authentication/models/user.dart';
+import 'package:bitecope/core/common/models/user.dart';
 import 'package:bitecope/modules/sign_up/bloc/sign_up_bloc.dart';
 import 'package:bitecope/modules/sign_up/components/sign_up_wrapper.dart';
 import 'package:bitecope/modules/sign_up/screens/sign_up_complete.dart';

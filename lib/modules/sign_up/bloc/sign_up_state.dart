@@ -24,15 +24,15 @@ class SignUpState with EquatableMixin {
     BlocFormField<String>? ownerName,
     this.signUpStatus = SignUpStatus.pageOne,
   }) {
-    this.username = username ?? BlocFormField();
-    this.email = email ?? BlocFormField();
-    this.phoneNumber = phoneNumber ?? BlocFormField();
-    this.password = password ?? BlocFormField();
-    this.confirmPassword = confirmPassword ?? BlocFormField();
-    this.recoveryQuestion = recoveryQuestion ?? BlocFormField();
-    this.recoveryAnswer = recoveryAnswer ?? BlocFormField();
-    this.ownerName = ownerName ?? BlocFormField();
-    this.userType = userType ?? BlocFormField();
+    this.username = username ?? BlocFormField<String>();
+    this.email = email ?? BlocFormField<String>();
+    this.phoneNumber = phoneNumber ?? BlocFormField<String>();
+    this.password = password ?? BlocFormField<String>();
+    this.confirmPassword = confirmPassword ?? BlocFormField<String>();
+    this.recoveryQuestion = recoveryQuestion ?? BlocFormField<String>();
+    this.recoveryAnswer = recoveryAnswer ?? BlocFormField<String>();
+    this.ownerName = ownerName ?? BlocFormField<String>();
+    this.userType = userType ?? BlocFormField<UserType>();
   }
 
   @override
@@ -80,7 +80,6 @@ enum SignUpStatus {
   pageOne,
   pageOneValidated,
   pageTwo,
-  pageTwoValidated,
   registering,
   done,
 }

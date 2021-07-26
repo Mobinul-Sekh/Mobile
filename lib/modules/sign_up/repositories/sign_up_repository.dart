@@ -1,24 +1,12 @@
-// Package imports:
-import 'package:shared_preferences/shared_preferences.dart';
-
 // Project imports:
-import 'package:bitecope/core/authentication/models/user.dart';
+import 'package:bitecope/core/common/models/user.dart';
+import 'package:bitecope/core/common/repositories/common_repository.dart';
 import 'package:bitecope/modules/sign_up/models/sign_up_request.dart';
 import 'package:bitecope/modules/sign_up/models/sign_up_response.dart';
 import 'package:bitecope/modules/sign_up/providers/sign_up_provider.dart';
 
-class SignUpRepository {
-  final SignUpProvider _accountProvider = SignUpProvider();
-
-  Future<String?> getToken() async {
-    final prefs = await SharedPreferences.getInstance();
-    return prefs.getString('token');
-  }
-
-  Future<void> setToken(String token) async {
-    final pref = await SharedPreferences.getInstance();
-    pref.setString('token', token);
-  }
+class SignUpRepository extends CommonRepository {
+  final SignUpProvider _signUpProvider = SignUpProvider();
 
   Future<SignUpResponse?> registerUser({
     required String username,
@@ -38,10 +26,10 @@ class SignUpRepository {
       confirmPassword: confirmPassword,
       recoveryQuestion: recoveryQuestion,
       recoveryAnswer: recoveryAnswer,
-      userType: userTypeID[userType].toString(),
+      userType: userType.id.toString(),
     );
     final Map<String, dynamic>? responseMap =
-        await _accountProvider.register(request);
+        await _signUpProvider.register(request);
 
     // If request failed
     if (responseMap == null) return null;
