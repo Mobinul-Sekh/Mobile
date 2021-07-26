@@ -1,4 +1,7 @@
 // Flutter imports:
+import 'package:bitecope/modules/verify_email/bloc/verify_email_bloc.dart';
+import 'package:bitecope/modules/verify_email/repositories/verify_email_repository.dart';
+import 'package:bitecope/modules/verify_email/screens/verify_email.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -24,6 +27,22 @@ class AppRouter {
         return MaterialPageRoute(
           builder: (_) => const SplashScreen(),
         );
+      case '/signUp':
+        return MaterialPageRoute(
+          builder: (_) {
+            return BlocProvider<SignUpBloc>(
+              create: (context) => SignUpBloc(SignUpRepository()),
+              child: const SignUpOne(),
+            );
+          },
+        );
+      case '/verifyEmail':
+        return MaterialPageRoute(builder: (_) {
+          return BlocProvider<VerifyEmailBloc>(
+            create: (context) => VerifyEmailBloc(VerifyEmailRepository()),
+            child: const VerifyEmail(),
+          );
+        });
       case '/signIn':
         return MaterialPageRoute(
           builder: (_) {
@@ -36,15 +55,6 @@ class AppRouter {
       case '/home':
         return MaterialPageRoute(
           builder: (_) => const Home(),
-        );
-      case '/signUp':
-        return MaterialPageRoute(
-          builder: (_) {
-            return BlocProvider<SignUpBloc>(
-              create: (context) => SignUpBloc(SignUpRepository()),
-              child: const SignUpOne(),
-            );
-          },
         );
       default:
         return MaterialPageRoute(

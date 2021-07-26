@@ -9,8 +9,7 @@ import 'package:bitecope/utils/bloc_utils/bloc_form_field.dart';
 part 'verify_email_state.dart';
 
 class VerifyEmailBloc extends Cubit<VerifyEmailState> {
-  VerifyEmailRepository verifyEmailRepository;
+  final VerifyEmailRepository _verifyEmailRepository;
 
-  VerifyEmailBloc({required this.verifyEmailRepository})
-      : super(VerifyEmailState());
+  VerifyEmailBloc(this._verifyEmailRepository) : super(VerifyEmailState());
 }

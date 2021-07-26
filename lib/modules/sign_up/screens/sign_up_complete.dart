@@ -8,6 +8,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:bitecope/config/themes/theme.dart';
 import 'package:bitecope/widgets/rounded_wide_button.dart';
 
+// TODO String Literals => AppLoalization
 class SignUpComplete extends StatelessWidget {
   const SignUpComplete({Key? key}) : super(key: key);
 

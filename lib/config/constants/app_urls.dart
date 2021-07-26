@@ -10,4 +10,5 @@ class AppURLs {
   static const String register = "$baseAPI/signup/";
   static const String login = "$baseAPI/login/";
   static const String accountStatus = "$baseAPI/account_status/";
+  static const String verifyEmail = "$baseAPI/signupVerify_Mobile/";
 }
