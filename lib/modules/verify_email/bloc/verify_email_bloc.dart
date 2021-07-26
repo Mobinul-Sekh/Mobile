@@ -10,6 +10,31 @@ part 'verify_email_state.dart';
 
 class VerifyEmailBloc extends Cubit<VerifyEmailState> {
   final VerifyEmailRepository _verifyEmailRepository;
+  final int _timeoutDuration = 30;
 
   VerifyEmailBloc(this._verifyEmailRepository) : super(VerifyEmailState());
+
+  void resendOTP() {
+    //TODO Resend OTP
+    if (state.timeout == null) {
+      emit(state.copyWith(
+        timeout: _timeoutDuration,
+      ));
+      _timerTick();
+    }
+  }
+
+  void _timerTick() {
+    Future.delayed(
+      const Duration(seconds: 1),
+      () {
+        emit(
+          state.copyWith(timeout: state.timeout! - 1),
+        );
+        if (state.timeout != null) {
+          _timerTick();
+        }
+      },
+    );
+  }
 }

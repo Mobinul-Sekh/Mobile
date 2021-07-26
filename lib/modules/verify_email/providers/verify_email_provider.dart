@@ -1,7 +1,10 @@
+// Package imports:
+import 'package:dio/dio.dart';
+
+// Project imports:
 import 'package:bitecope/config/constants/app_urls.dart';
 import 'package:bitecope/core/common/providers/common_provider.dart';
 import 'package:bitecope/modules/verify_email/models/verify_email_request.dart';
-import 'package:dio/dio.dart';
 
 class VerifyEmailProvider extends CommonProvider {
   Future<Map<String, dynamic>?> verifyEmail(VerifyEmailRequest request) async {

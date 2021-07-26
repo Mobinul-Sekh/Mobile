@@ -27,7 +27,7 @@ class VerifyEmailState with EquatableMixin {
     return VerifyEmailState(
       email: email ?? this.email,
       otp: otp ?? this.otp,
-      timeout: timeout ?? this.timeout,
+      timeout: timeout == null ? this.timeout : (timeout <= 0 ? null : timeout),
       verifyEmailStatus: verifyEmailStatus ?? this.verifyEmailStatus,
     );
   }

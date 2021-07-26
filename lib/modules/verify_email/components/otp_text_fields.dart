@@ -1,12 +1,17 @@
+// Flutter imports:
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 class OTPTextFields extends StatefulWidget {
   final int digitCount;
+  final GlobalKey<FormState>? formKey;
+  final String? error;
 
   const OTPTextFields({
     Key? key,
     required this.digitCount,
+    this.formKey,
+    this.error,
   }) : super(key: key);
 
   @override
@@ -15,6 +20,7 @@ class OTPTextFields extends StatefulWidget {
 
 class _OTPTextFieldsState extends State<OTPTextFields> {
   final List<TextEditingController> _digitControllers = [];
+  String? error;
   final List<FocusNode> _digitNodes = [];
   final List<FocusNode> _listenerNodes = [];
   final List<bool> _deleteFlags = [];
@@ -28,13 +34,33 @@ class _OTPTextFieldsState extends State<OTPTextFields> {
       _listenerNodes.add(FocusNode());
       _deleteFlags.add(false);
     }
+    error = widget.error;
   }
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: _digitFields(),
+    return Column(
+      children: [
+        Form(
+          key: widget.formKey ?? GlobalKey<FormState>(),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: _digitFields(),
+          ),
+        ),
+        if (error != null)
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 9),
+            child: Text(
+              error!,
+              textAlign: TextAlign.center,
+              style: Theme.of(context)
+                  .textTheme
+                  .caption
+                  ?.copyWith(color: Theme.of(context).errorColor),
+            ),
+          ),
+      ],
     );
   }
 
@@ -60,7 +86,7 @@ class _OTPTextFieldsState extends State<OTPTextFields> {
                 }
               }
             },
-            child: TextField(
+            child: TextFormField(
               controller: _digitControllers[i],
               focusNode: _digitNodes[i],
               maxLength: 1,
@@ -79,6 +105,19 @@ class _OTPTextFieldsState extends State<OTPTextFields> {
                 counterText: "",
                 contentPadding: EdgeInsets.all(0),
               ),
+              validator: (value) {
+                if (i == 0) {
+                  setState(() {
+                    error = null;
+                  });
+                }
+                if (value == null || value == "") {
+                  setState(() {
+                    error = "Please enter a valid OTP";
+                  });
+                }
+                return null;
+              },
             ),
           ),
         ),

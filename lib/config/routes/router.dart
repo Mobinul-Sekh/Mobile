@@ -1,7 +1,4 @@
 // Flutter imports:
-import 'package:bitecope/modules/verify_email/bloc/verify_email_bloc.dart';
-import 'package:bitecope/modules/verify_email/repositories/verify_email_repository.dart';
-import 'package:bitecope/modules/verify_email/screens/verify_email.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -17,6 +14,9 @@ import 'package:bitecope/modules/sign_up/bloc/sign_up_bloc.dart';
 import 'package:bitecope/modules/sign_up/repositories/sign_up_repository.dart';
 import 'package:bitecope/modules/sign_up/screens/sign_up_one.dart';
 import 'package:bitecope/modules/splash_screen/screens/splash_screen.dart';
+import 'package:bitecope/modules/verify_email/bloc/verify_email_bloc.dart';
+import 'package:bitecope/modules/verify_email/repositories/verify_email_repository.dart';
+import 'package:bitecope/modules/verify_email/screens/verify_email.dart';
 
 class AppRouter {
   // Declare blocs here
@@ -40,7 +40,7 @@ class AppRouter {
         return MaterialPageRoute(builder: (_) {
           return BlocProvider<VerifyEmailBloc>(
             create: (context) => VerifyEmailBloc(VerifyEmailRepository()),
-            child: const VerifyEmail(),
+            child: VerifyEmail(),
           );
         });
       case '/signIn':
