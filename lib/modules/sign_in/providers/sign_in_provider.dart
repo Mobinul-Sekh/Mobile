@@ -3,10 +3,9 @@ import 'package:dio/dio.dart';
 
 // Project imports:
 import 'package:bitecope/config/constants/app_urls.dart';
+import 'package:bitecope/config/utils/extensions/response_extension.dart';
 import 'package:bitecope/core/common/providers/common_provider.dart';
 import 'package:bitecope/modules/sign_in/models/signin_request_model.dart';
-
-// Project imports:
 
 class SignInProvider extends CommonProvider {
   Future<Map<String, dynamic>?> getSignInToken(
@@ -16,13 +15,10 @@ class SignInProvider extends CommonProvider {
         AppURLs.login,
         data: signInRequestModel.toDatabaseJson(),
       );
-      if (response.statusCode == 200) {
-        return response.data as Map<String, dynamic>;
-      }
-      return null;
+      return response.asMap();
     } catch (e) {
       if (e is DioError && e.response!.statusCode! < 500) {
-        return e.response?.data as Map<String, dynamic>;
+        return e.response.asMap();
       }
       return null;
     }

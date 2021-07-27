@@ -6,6 +6,7 @@ class AppColors {
   static const lightBlue2 = Color(0xFF33CFFF);
   static const orange1 = Color(0xFFF15A24);
   static const orange2 = Color(0xFFF68F1F);
+  static const green = Color(0xFF4BB543);
   static const red = Color(0xFFB50000);
 
   static const white = Color(0xFFFFFFFF);
@@ -127,7 +128,6 @@ class AppTheme {
           fontSize: 14,
           fontWeight: FontWeight.w500,
           letterSpacing: 1.25,
-          color: AppColors.white,
         ),
         caption: TextStyle(
           fontFamily: 'Poppins',
@@ -148,13 +148,26 @@ class AppTheme {
         backgroundColor: AppColors.nearBlack,
         elevation: 3,
       ),
+      textButtonTheme: TextButtonThemeData(
+        style: ButtonStyle(
+          padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
+            const EdgeInsets.symmetric(
+              vertical: 6,
+              horizontal: 12,
+            ),
+          ),
+        ),
+      ),
       elevatedButtonTheme: ElevatedButtonThemeData(
-        style: theme.elevatedButtonTheme.style?.copyWith(
+        style: ButtonStyle(
           backgroundColor:
               MaterialStateProperty.all<Color>(AppColors.nearBlack),
           elevation: MaterialStateProperty.all<double>(2),
           padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
-            const EdgeInsets.all(6),
+            const EdgeInsets.symmetric(
+              vertical: 6,
+              horizontal: 12,
+            ),
           ),
         ),
       ),

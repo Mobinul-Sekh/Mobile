@@ -37,9 +37,15 @@ class AppRouter {
           },
         );
       case '/verifyEmail':
+        //! Requires VerifyEmailArguments
         return MaterialPageRoute(builder: (_) {
+          final VerifyEmailArguments _verifyEmailArguments =
+              routeSettings.arguments! as VerifyEmailArguments;
           return BlocProvider<VerifyEmailBloc>(
-            create: (context) => VerifyEmailBloc(VerifyEmailRepository()),
+            create: (context) => VerifyEmailBloc(
+              VerifyEmailRepository(),
+              email: _verifyEmailArguments.email,
+            ),
             child: VerifyEmail(),
           );
         });

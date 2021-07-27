@@ -5,12 +5,14 @@ import 'package:flutter/services.dart';
 class OTPTextFields extends StatefulWidget {
   final int digitCount;
   final GlobalKey<FormState>? formKey;
+  final TextEditingController? controller;
   final String? error;
 
   const OTPTextFields({
     Key? key,
     required this.digitCount,
     this.formKey,
+    this.controller,
     this.error,
   }) : super(key: key);
 
@@ -34,7 +36,6 @@ class _OTPTextFieldsState extends State<OTPTextFields> {
       _listenerNodes.add(FocusNode());
       _deleteFlags.add(false);
     }
-    error = widget.error;
   }
 
   @override
@@ -48,11 +49,11 @@ class _OTPTextFieldsState extends State<OTPTextFields> {
             children: _digitFields(),
           ),
         ),
-        if (error != null)
+        if (error != null || widget.error != null)
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 9),
             child: Text(
-              error!,
+              error ?? widget.error ?? "",
               textAlign: TextAlign.center,
               style: Theme.of(context)
                   .textTheme
@@ -100,10 +101,12 @@ class _OTPTextFieldsState extends State<OTPTextFields> {
                     FocusScope.of(context).unfocus();
                   }
                 }
+                _setControllerValue();
               },
               decoration: const InputDecoration(
                 counterText: "",
                 contentPadding: EdgeInsets.all(0),
+                errorStyle: TextStyle(height: 0),
               ),
               validator: (value) {
                 if (i == 0) {
@@ -115,6 +118,7 @@ class _OTPTextFieldsState extends State<OTPTextFields> {
                   setState(() {
                     error = "Please enter a valid OTP";
                   });
+                  return "";
                 }
                 return null;
               },
@@ -131,11 +135,22 @@ class _OTPTextFieldsState extends State<OTPTextFields> {
     return _fields;
   }
 
+  void _setControllerValue() {
+    if (widget.controller != null) {
+      final buffer = StringBuffer();
+      for (int i = 0; i < widget.digitCount; i++) {
+        buffer.write(_digitControllers[i].text);
+      }
+      widget.controller!.text = buffer.toString();
+    }
+  }
+
   @override
   void dispose() {
     for (int i = 0; i < widget.digitCount; i++) {
       _digitControllers[i].dispose();
       _digitNodes[i].dispose();
+      _listenerNodes[i].dispose();
     }
     super.dispose();
   }

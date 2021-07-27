@@ -13,7 +13,7 @@ import 'package:bitecope/config/themes/theme.dart';
 import 'package:bitecope/core/common/models/user.dart';
 import 'package:bitecope/modules/sign_up/bloc/sign_up_bloc.dart';
 import 'package:bitecope/modules/sign_up/components/sign_up_wrapper.dart';
-import 'package:bitecope/modules/sign_up/screens/sign_up_complete.dart';
+import 'package:bitecope/modules/verify_email/screens/verify_email.dart';
 import 'package:bitecope/widgets/form_field_decoration.dart';
 import 'package:bitecope/widgets/gradient_widget.dart';
 import 'package:bitecope/widgets/rounded_wide_button.dart';
@@ -65,11 +65,11 @@ class _SignUpTwoState extends State<SignUpTwo> {
           if (state.signUpStatus == SignUpStatus.pageOne) {
             Navigator.of(context).maybePop();
           } else if (state.signUpStatus == SignUpStatus.done) {
-            // TODO Push to post-sign-up module when it is complete
             Navigator.of(context).popUntil(ModalRoute.withName('/'));
-            Navigator.of(context).push(
-              MaterialPageRoute(
-                builder: (context) => const SignUpComplete(),
+            Navigator.of(context).pushNamed(
+              '/verifyEmail',
+              arguments: VerifyEmailArguments(
+                email: state.email.value!,
               ),
             );
           }

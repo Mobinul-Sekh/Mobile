@@ -1,17 +1,17 @@
 // Project imports:
 import 'package:bitecope/config/utils/extensions/map_extension.dart';
 
-class VerifyEmailResponse {
+class ResendOTPResponse {
   bool status;
   String? message;
 
-  VerifyEmailResponse({
+  ResendOTPResponse({
     this.status = false,
     this.message,
   });
 
-  factory VerifyEmailResponse.fromMap(Map<String, dynamic> map) {
-    return VerifyEmailResponse(
+  factory ResendOTPResponse.fromMap(Map<String, dynamic> map) {
+    return ResendOTPResponse(
       status: map['statusCode'] as int < 300,
       message: map.getMessage(),
     );
