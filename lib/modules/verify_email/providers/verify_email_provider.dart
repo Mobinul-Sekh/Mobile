@@ -16,10 +16,7 @@ class VerifyEmailProvider extends CommonProvider {
       );
       return response.asMap();
     } catch (e) {
-      if (e is DioError && e.response!.statusCode! < 500) {
-        return e.response.asMap();
-      }
-      return null;
+      return errorResponse(e);
     }
   }
 
@@ -31,10 +28,7 @@ class VerifyEmailProvider extends CommonProvider {
       );
       return response.asMap();
     } catch (e) {
-      if (e is DioError && e.response!.statusCode! < 500) {
-        return e.response.asMap();
-      }
-      return null;
+      return errorResponse(e);
     }
   }
 }

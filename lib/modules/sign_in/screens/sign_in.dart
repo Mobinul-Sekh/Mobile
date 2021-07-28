@@ -8,6 +8,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 // Project imports:
 import 'package:bitecope/config/themes/theme.dart';
 import 'package:bitecope/modules/sign_in/cubit/siginin_cubit.dart';
+import 'package:bitecope/modules/sign_in/screens/email_not_verified.dart';
 import 'package:bitecope/widgets/custom_back_button.dart';
 import 'package:bitecope/widgets/form_field_decoration.dart';
 import 'package:bitecope/widgets/gradient_widget.dart';
@@ -69,14 +70,21 @@ class _SignInState extends State<SignIn> {
             ),
             child: BlocConsumer<SignInBloc, SignInState>(
               listener: (context, state) {
-                if (state.signInStatus == SignInStatus.signedIn) {
-                  Navigator.of(context).pushNamedAndRemoveUntil(
-                      '/home', ModalRoute.withName('/'));
-                }
+                _handleListen(context, state.signInStatus);
               },
               builder: (context, state) {
                 return Column(
                   children: [
+                    if (state.error != null) ...[
+                      Text(
+                        state.error!(context)!,
+                        style: Theme.of(context)
+                            .textTheme
+                            .caption
+                            ?.copyWith(color: Theme.of(context).errorColor),
+                      ),
+                      const SizedBox(height: 18),
+                    ],
                     Expanded(
                       child: SingleChildScrollView(
                         child: Column(
@@ -95,6 +103,7 @@ class _SignInState extends State<SignIn> {
                                 errorText: state.username.error != null
                                     ? state.username.error!(context)
                                     : null,
+                                suppressError: true,
                                 suffixIcon: Icons.person,
                               ),
                             ),
@@ -112,6 +121,7 @@ class _SignInState extends State<SignIn> {
                                 errorText: state.password.error != null
                                     ? state.password.error!(context)
                                     : null,
+                                suppressError: true,
                                 suffixIcon: _hidePassword
                                     ? Icons.visibility_off
                                     : Icons.visibility,
@@ -156,6 +166,32 @@ class _SignInState extends State<SignIn> {
         ),
       ),
     );
+  }
+
+  void _handleListen(BuildContext context, SignInStatus status) {
+    switch (status) {
+      case SignInStatus.signIn:
+      case SignInStatus.signingIn:
+        break;
+      case SignInStatus.verify:
+        Navigator.of(context).push(MaterialPageRoute(
+          builder: (context) => const EmailNotVerified(),
+        ));
+        break;
+      case SignInStatus.activate:
+        //TODO Push to owner subscription
+        break;
+      case SignInStatus.ownerInitialize:
+        //TODO Push to owner initialize
+        break;
+      case SignInStatus.workerInitialize:
+        //TODO Push to worker initialize
+        break;
+      case SignInStatus.signedIn:
+        Navigator.of(context)
+            .pushNamedAndRemoveUntil('/home', ModalRoute.withName('/'));
+        break;
+    }
   }
 
   Widget signInButton(SignInStatus status) {

@@ -7,6 +7,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 // Project imports:
 import 'package:bitecope/config/utils/typedefs.dart';
+import 'package:bitecope/core/common/models/account_status_response.dart';
 import 'package:bitecope/modules/sign_in/models/signin_reponse_model.dart';
 import 'package:bitecope/modules/sign_in/repositories/sign_in_repository.dart';
 import 'package:bitecope/utils/bloc_utils/bloc_form_field.dart';
@@ -17,10 +18,10 @@ class SignInBloc extends Cubit<SignInState> {
   final SignInRepository _signInRepository;
   SignInBloc(this._signInRepository) : super(SignInState());
 
-  void validateSignInPage({
+  Future<void> validateSignInPage({
     String? username,
     String? password,
-  }) {
+  }) async {
     final Map<String, LocaleString?> _errors = {
       "username": _validateUsername(username),
       "password": _validatePassword(password),
@@ -30,22 +31,45 @@ class SignInBloc extends Cubit<SignInState> {
 
     emit(state.copyWith(
       username: BlocFormField(
-        username,
+        username?.trim(),
         _errors["username"],
       ),
       password: BlocFormField(
         password,
         _errors["password"],
       ),
+      error: _isValid
+          ? null
+          : (BuildContext context) =>
+              AppLocalizations.of(context)!.signInFieldEmpty,
       signInStatus: _isValid ? SignInStatus.signingIn : SignInStatus.signIn,
     ));
 
     if (_isValid) {
-      loginUser();
+      final AccountStatusResponse? response =
+          await _signInRepository.accountStatus(
+        username: state.username.value!,
+      );
+      final bool _status = await _isEmailVerified(response);
+      if (_status) {
+        _loginUser(response!);
+      }
     }
   }
 
-  Future<void> loginUser() async {
+  Future<bool> _isEmailVerified(AccountStatusResponse? accountStatus) async {
+    if (accountStatus != null && accountStatus.status) {
+      if (!accountStatus.mailStatus!) {
+        emit(state.copyWith(signInStatus: SignInStatus.verify));
+        return false;
+      }
+    } else {
+      return false;
+    }
+    return true;
+  }
+
+  Future<void> _loginUser(AccountStatusResponse accountStatus) async {
     final SignInResponseModel? response =
         await _signInRepository.signInWithUserNameAndPassword(
       username: state.username.value!,
@@ -53,6 +77,29 @@ class SignInBloc extends Cubit<SignInState> {
     );
     if (response != null) {
       if (response.token != null) {
+        if (accountStatus.userType == 0) {
+          if (!accountStatus.activeStatus!) {
+            emit(state.copyWith(signInStatus: SignInStatus.activate));
+            return;
+          }
+          if (accountStatus.ownerStatus == null) {
+            emit(state.copyWith(signInStatus: SignInStatus.ownerInitialize));
+            return;
+          }
+        } else if (accountStatus.userType == 1) {
+          if (accountStatus.workerStatus == null) {
+            emit(state.copyWith(signInStatus: SignInStatus.workerInitialize));
+            return;
+          }
+          if (!accountStatus.activeStatus!) {
+            emit(state.copyWith(
+              error: (BuildContext context) =>
+                  AppLocalizations.of(context)!.inactiveOwner,
+              signInStatus: SignInStatus.signIn,
+            ));
+            return;
+          }
+        }
         // TODO We'll set the token when we have logout ready
         // signInRepository.setToken(response.token!);
         emit(state.copyWith(signInStatus: SignInStatus.signedIn));
@@ -83,15 +130,12 @@ class SignInBloc extends Cubit<SignInState> {
     emit(
       state.copyWith(
         username: state.username.copyWith(
-          error: response.error != null
-              ? (BuildContext context) => response.error
-              : null,
+          error: (BuildContext context) => response.error,
         ),
         password: state.password.copyWith(
-          error: response.error != null
-              ? (BuildContext context) => response.error
-              : null,
+          error: (BuildContext context) => response.error,
         ),
+        error: (BuildContext context) => response.error,
         signInStatus: SignInStatus.signIn,
       ),
     );
