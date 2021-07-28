@@ -10,10 +10,10 @@ import 'package:url_launcher/url_launcher.dart';
 // Project imports:
 import 'package:bitecope/config/constants/app_urls.dart';
 import 'package:bitecope/config/themes/theme.dart';
-import 'package:bitecope/core/authentication/models/user.dart';
+import 'package:bitecope/core/common/models/user.dart';
 import 'package:bitecope/modules/sign_up/bloc/sign_up_bloc.dart';
 import 'package:bitecope/modules/sign_up/components/sign_up_wrapper.dart';
-import 'package:bitecope/modules/sign_up/screens/sign_up_complete.dart';
+import 'package:bitecope/modules/verify_email/screens/verify_email.dart';
 import 'package:bitecope/widgets/form_field_decoration.dart';
 import 'package:bitecope/widgets/gradient_widget.dart';
 import 'package:bitecope/widgets/rounded_wide_button.dart';
@@ -65,11 +65,11 @@ class _SignUpTwoState extends State<SignUpTwo> {
           if (state.signUpStatus == SignUpStatus.pageOne) {
             Navigator.of(context).maybePop();
           } else if (state.signUpStatus == SignUpStatus.done) {
-            // TODO Push to post-sign-up module when it is complete
             Navigator.of(context).popUntil(ModalRoute.withName('/'));
-            Navigator.of(context).push(
-              MaterialPageRoute(
-                builder: (context) => const SignUpComplete(),
+            Navigator.of(context).pushNamed(
+              '/verifyEmail',
+              arguments: VerifyEmailArguments(
+                email: state.email.value!,
               ),
             );
           }
@@ -84,7 +84,7 @@ class _SignUpTwoState extends State<SignUpTwo> {
                     children: [
                       Text(
                         AppLocalizations.of(context)!.recoveryQuestion,
-                        style: Theme.of(context).textTheme.subtitle2,
+                        style: Theme.of(context).textTheme.caption,
                       ),
                       DropdownButton<String>(
                         value: _selectedQuestion,
@@ -106,7 +106,7 @@ class _SignUpTwoState extends State<SignUpTwo> {
                         icon: GradientWidget(
                           gradient: AppGradients.primaryGradient,
                           child: Container(
-                            margin: const EdgeInsets.symmetric(vertical: 6),
+                            margin: const EdgeInsets.symmetric(vertical: 12),
                             child: const Icon(
                               Icons.keyboard_arrow_right_rounded,
                               size: 42,
@@ -152,7 +152,7 @@ class _SignUpTwoState extends State<SignUpTwo> {
                       const SizedBox(height: 36),
                       Text(
                         AppLocalizations.of(context)!.userType,
-                        style: Theme.of(context).textTheme.subtitle2,
+                        style: Theme.of(context).textTheme.caption,
                       ),
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -315,7 +315,10 @@ class _SignUpTwoState extends State<SignUpTwo> {
         fillColor: Theme.of(context).disabledColor,
         child: Text(
           AppLocalizations.of(context)!.signUp,
-          style: Theme.of(context).textTheme.headline6,
+          style: Theme.of(context)
+              .textTheme
+              .headline6
+              ?.copyWith(color: AppColors.white),
           textAlign: TextAlign.center,
         ),
       );

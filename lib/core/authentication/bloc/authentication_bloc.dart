@@ -3,17 +3,21 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 
 // Project imports:
-import 'package:bitecope/modules/sign_up/repositories/sign_up_repository.dart';
+import 'package:bitecope/core/common/repositories/common_repository.dart';
+
+// Project imports:
 
 part 'authentication_state.dart';
 
 class AuthenticationBloc extends Cubit<AuthenticationState> {
-  AuthenticationBloc() : super(AuthenticationState()) {
+  final CommonRepository _commonRepository;
+
+  AuthenticationBloc(this._commonRepository) : super(AuthenticationState()) {
     checkStatus();
   }
 
   Future<void> checkStatus() async {
-    setStatus(await SignUpRepository().getToken());
+    setStatus(await _commonRepository.getToken());
   }
 
   void setStatus([String? token]) {

@@ -9,7 +9,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 // Project imports:
 import 'package:bitecope/config/utils/typedefs.dart';
-import 'package:bitecope/core/authentication/models/user.dart';
+import 'package:bitecope/core/common/models/user.dart';
 import 'package:bitecope/modules/sign_up/models/sign_up_response.dart';
 import 'package:bitecope/modules/sign_up/repositories/sign_up_repository.dart';
 import 'package:bitecope/utils/bloc_utils/bloc_form_field.dart';
@@ -17,9 +17,9 @@ import 'package:bitecope/utils/bloc_utils/bloc_form_field.dart';
 part 'sign_up_state.dart';
 
 class SignUpBloc extends Cubit<SignUpState> {
-  SignUpRepository accountRepository;
+  final SignUpRepository _signUpRepository;
 
-  SignUpBloc({required this.accountRepository}) : super(SignUpState());
+  SignUpBloc(this._signUpRepository) : super(SignUpState());
 
   void validatePageOne({
     String? email,
@@ -62,6 +62,9 @@ class SignUpBloc extends Cubit<SignUpState> {
       signUpStatus:
           _isValid ? SignUpStatus.pageOneValidated : SignUpStatus.pageOne,
     ));
+    if (_isValid) {
+      emit(state.copyWith(signUpStatus: SignUpStatus.pageTwo));
+    }
   }
 
   void validatePageTwo({
@@ -90,8 +93,7 @@ class SignUpBloc extends Cubit<SignUpState> {
         userType,
         _errors["userType"],
       ),
-      signUpStatus:
-          _isValid ? SignUpStatus.pageTwoValidated : SignUpStatus.pageTwo,
+      signUpStatus: _isValid ? SignUpStatus.registering : SignUpStatus.pageTwo,
     ));
 
     if (_isValid) {
@@ -100,9 +102,7 @@ class SignUpBloc extends Cubit<SignUpState> {
   }
 
   Future<void> registerUser() async {
-    emit(state.copyWith(signUpStatus: SignUpStatus.registering));
-
-    final SignUpResponse? response = await accountRepository.registerUser(
+    final SignUpResponse? response = await _signUpRepository.registerUser(
       username: state.username.value!,
       email: state.email.value!,
       phoneNumber: state.phoneNumber.value!,

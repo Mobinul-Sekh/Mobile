@@ -14,6 +14,9 @@ import 'package:bitecope/modules/sign_up/bloc/sign_up_bloc.dart';
 import 'package:bitecope/modules/sign_up/repositories/sign_up_repository.dart';
 import 'package:bitecope/modules/sign_up/screens/sign_up_one.dart';
 import 'package:bitecope/modules/splash_screen/screens/splash_screen.dart';
+import 'package:bitecope/modules/verify_email/bloc/verify_email_bloc.dart';
+import 'package:bitecope/modules/verify_email/repositories/verify_email_repository.dart';
+import 'package:bitecope/modules/verify_email/screens/verify_email.dart';
 
 class AppRouter {
   // Declare blocs here
@@ -24,13 +27,33 @@ class AppRouter {
         return MaterialPageRoute(
           builder: (_) => const SplashScreen(),
         );
+      case '/signUp':
+        return MaterialPageRoute(
+          builder: (_) {
+            return BlocProvider<SignUpBloc>(
+              create: (context) => SignUpBloc(SignUpRepository()),
+              child: const SignUpOne(),
+            );
+          },
+        );
+      case '/verifyEmail':
+        //! Requires VerifyEmailArguments
+        return MaterialPageRoute(builder: (_) {
+          final VerifyEmailArguments _verifyEmailArguments =
+              routeSettings.arguments! as VerifyEmailArguments;
+          return BlocProvider<VerifyEmailBloc>(
+            create: (context) => VerifyEmailBloc(
+              VerifyEmailRepository(),
+              email: _verifyEmailArguments.email,
+            ),
+            child: VerifyEmail(),
+          );
+        });
       case '/signIn':
         return MaterialPageRoute(
           builder: (_) {
             return BlocProvider<SignInBloc>(
-              create: (context) => SignInBloc(
-                signInRepository: SignInRepository(),
-              ),
+              create: (context) => SignInBloc(SignInRepository()),
               child: const SignIn(),
             );
           },
@@ -38,17 +61,6 @@ class AppRouter {
       case '/home':
         return MaterialPageRoute(
           builder: (_) => const Home(),
-        );
-      case '/signUp':
-        return MaterialPageRoute(
-          builder: (_) {
-            return BlocProvider<SignUpBloc>(
-              create: (context) => SignUpBloc(
-                accountRepository: SignUpRepository(),
-              ),
-              child: const SignUpOne(),
-            );
-          },
         );
       default:
         return MaterialPageRoute(

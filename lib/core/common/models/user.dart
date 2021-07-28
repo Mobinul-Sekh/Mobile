@@ -50,8 +50,7 @@ class User with EquatableMixin {
       email: map['email'] as String,
       phoneNumber: map['phoneNumber'] as String,
       address: map['address'] as String,
-      userType: userTypeID.keys
-          .firstWhere((key) => userTypeID[key] == map['userType']),
+      userType: _parseUserType[map['userType'] as String]!,
     );
   }
 
@@ -69,7 +68,18 @@ enum UserType {
   worker,
 }
 
-Map<UserType, int> userTypeID = {
-  UserType.owner: 0,
-  UserType.worker: 1,
+extension UserTypeExtension on UserType {
+  int get id {
+    switch (this) {
+      case UserType.owner:
+        return 0;
+      case UserType.worker:
+        return 1;
+    }
+  }
+}
+
+Map<String, UserType> _parseUserType = {
+  '0': UserType.owner,
+  '1': UserType.worker,
 };

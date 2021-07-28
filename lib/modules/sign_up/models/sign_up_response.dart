@@ -1,7 +1,5 @@
-// Dart imports:
-import 'dart:convert';
-
 class SignUpResponse {
+  bool status;
   String? token;
   String? emailErr;
   String? usernameErr;
@@ -13,6 +11,7 @@ class SignUpResponse {
   String? userTypeErr;
 
   SignUpResponse({
+    this.status = false,
     this.token,
     this.emailErr,
     this.usernameErr,
@@ -26,6 +25,7 @@ class SignUpResponse {
 
   factory SignUpResponse.fromMap(Map<String, dynamic> map) {
     return SignUpResponse(
+      status: map['statusCode'] as int < 300,
       token: map['token'] != null ? map['token'][0] as String : null,
       emailErr: map['email'] != null ? map['email'][0] as String : null,
       usernameErr:
@@ -47,7 +47,4 @@ class SignUpResponse {
           map['user_type'] != null ? map['user_type'][0] as String : null,
     );
   }
-
-  factory SignUpResponse.fromJson(String source) =>
-      SignUpResponse.fromMap(json.decode(source) as Map<String, dynamic>);
 }

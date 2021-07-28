@@ -42,9 +42,12 @@ class _SignUpOneState extends State<SignUpOne> {
   void initState() {
     super.initState();
     final state = context.read<SignUpBloc>().state;
-    _emailController.text = state.email.value ?? "";
-    _usernameController.text = state.username.value ?? "";
-    _phoneNumberController.text = state.phoneNumber.value ?? "";
+    _emailController.text = state.email.value ?? "arun@fluttertest.com";
+    _usernameController.text = state.username.value ?? "arun";
+    _phoneNumberController.text = state.phoneNumber.value ?? "1234567890";
+    _passwordController.text = state.password.value ?? "Flutter123";
+    _confirmPasswordController.text =
+        state.confirmPassword.value ?? "Flutter123";
   }
 
   @override
@@ -186,7 +189,7 @@ class _SignUpOneState extends State<SignUpOne> {
                 gradient: AppGradients.primaryGradient,
                 child: Text(
                   AppLocalizations.of(context)!.next,
-                  style: Theme.of(context).primaryTextTheme.headline6,
+                  style: Theme.of(context).textTheme.headline6,
                   textAlign: TextAlign.center,
                 ),
               ),

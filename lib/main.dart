@@ -9,6 +9,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:bitecope/config/routes/router.dart';
 import 'package:bitecope/config/themes/theme.dart';
 import 'package:bitecope/core/authentication/bloc/authentication_bloc.dart';
+import 'package:bitecope/core/common/repositories/common_repository.dart';
 import 'package:bitecope/modules/splash_screen/screens/splash_screen.dart';
 
 void main() {
@@ -22,18 +23,18 @@ class BiteCope extends StatefulWidget {
 }
 
 class _BiteCopeState extends State<BiteCope> {
-  final AppRouter appRouter = AppRouter();
+  final AppRouter _appRouter = AppRouter();
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider<AuthenticationBloc>(
-      create: (context) => AuthenticationBloc(),
+      create: (context) => AuthenticationBloc(CommonRepository()),
       child: MaterialApp(
         localizationsDelegates: AppLocalizations.localizationsDelegates,
         supportedLocales: AppLocalizations.supportedLocales,
         onGenerateTitle: (context) => AppLocalizations.of(context)!.appName,
         theme: AppTheme.of(context),
-        onGenerateRoute: appRouter.onGenerateRoute,
+        onGenerateRoute: _appRouter.onGenerateRoute,
         home: const SplashScreen(),
       ),
     );
@@ -41,7 +42,7 @@ class _BiteCopeState extends State<BiteCope> {
 
   @override
   void dispose() {
-    appRouter.dispose();
+    _appRouter.dispose();
     super.dispose();
   }
 }

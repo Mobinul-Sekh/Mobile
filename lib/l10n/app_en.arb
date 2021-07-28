@@ -170,5 +170,77 @@
     "ownerNameEmpty": "Please enter owner name",
     "@ownerNameEmpty": {
       "description": "Error text for empty owner name"
+    },
+    "verifyEmail": "Verify Email",
+    "@verifyEmail": {
+      "description": "Title text for email verification page"
+    },
+    "checkInbox": "Please check your email inbox",
+    "@checkInbox": {
+      "description": "Text prompt for check inbox"
+    },
+    "enterOTP": "Please enter the OTP",
+    "@enterOTP": {
+      "description": "Text prompt for enter OTP"
+    },
+    "noOTP": "Did not get the OTP? ",
+    "@noOTP": {
+      "description": "Text prompt for no OTP"
+    },
+    "resendOTP": "Resend OTP",
+    "@resendOTP": {
+      "description": "Text prompt for resend OTP"
+    },
+    "confirmResendOTP": "It might take a few minutes for you to receive the OTP. Please check your spam/junk folder as well.",
+    "@confirmResendOTP": {
+      "description": "Text prompt to confirm resend OTP"
+    },
+    "resend": "Resend",
+    "@resend": {
+      "description": "Button text for resend"
+    },
+    "resendOTPFailed": "Resend OTP failed",
+    "@resendOTPFailed": {
+      "description": "Text prompt for resend OTP failed"
+    },
+    "resendOTPTimer": "Resend option will be available in ",
+    "@resendOTPTimer": {
+      "description": "Text prompt for resend OTP timer"
+    },
+    "resentOTP": "OTP Resent",
+    "@resentOTP": {
+      "description": "Confirmation text when OTP is resent"
+    },
+    "confirm": "Confirm",
+    "@confirm": {
+      "description": "Button text for confirm"
+    },
+    "contactSupport": "If you need any help, please reach out to us at ",
+    "@contactSupport": {
+      "description": "Text prompt for contact support"
+    },
+    "cancel": "Cancel",
+    "@cancel": {
+      "description": "Button text for cancel"
+    },
+    "congratulations": "Congratulations",
+    "@congratulations": {
+      "description": "Congratulatory text in success page"
+    },
+    "emailVerified": "Your email is now verified",
+    "@emailVerified": {
+      "description": "Text prompt for successful email verification"
+    },
+    "choosingBitecope": "Thank you for choosing Bitecope. ",
+    "@choosingBitecope": {
+      "description": "Thank you text in success page"
+    },
+    "continueServices": "Now you can continue using the services without any interruption",
+    "@continueServices": {
+      "description": "Continue text in success page"
+    },
+    "backToLogin": "Go Back to Login",
+    "@backToLogin": {
+      "description": "Button text for back to login"
     }
 }

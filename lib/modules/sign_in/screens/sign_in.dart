@@ -47,7 +47,7 @@ class _SignInState extends State<SignIn> {
             gradient: AppGradients.primaryGradient,
             child: Text(
               AppLocalizations.of(context)!.signIn,
-              style: Theme.of(context).appBarTheme.textTheme?.headline6,
+              style: Theme.of(context).appBarTheme.textTheme?.headline4,
             ),
           ),
         ),
@@ -136,7 +136,7 @@ class _SignInState extends State<SignIn> {
                                       AppLocalizations.of(context)!
                                           .forgotPassword,
                                       style:
-                                          Theme.of(context).textTheme.bodyText2,
+                                          Theme.of(context).textTheme.caption,
                                     ),
                                   ),
                                 )

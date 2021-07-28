@@ -14,8 +14,8 @@ import 'package:bitecope/utils/bloc_utils/bloc_form_field.dart';
 part 'signin_state.dart';
 
 class SignInBloc extends Cubit<SignInState> {
-  SignInRepository signInRepository;
-  SignInBloc({required this.signInRepository}) : super(SignInState());
+  final SignInRepository _signInRepository;
+  SignInBloc(this._signInRepository) : super(SignInState());
 
   void validateSignInPage({
     String? username,
@@ -47,7 +47,7 @@ class SignInBloc extends Cubit<SignInState> {
 
   Future<void> loginUser() async {
     final SignInResponseModel? response =
-        await signInRepository.signInWithUserNameAndPassword(
+        await _signInRepository.signInWithUserNameAndPassword(
       username: state.username.value!,
       password: state.password.value!,
     );
