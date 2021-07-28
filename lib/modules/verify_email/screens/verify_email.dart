@@ -130,12 +130,11 @@ class VerifyEmail extends StatelessWidget {
       );
     }
     if (state.verifyEmailStatus == VerifyEmailStatus.done) {
-      Navigator.of(context).popUntil(ModalRoute.withName('/'));
-      Navigator.of(context).push(
-        MaterialPageRoute(
-          builder: (context) => const VerificationComplete(),
-        ),
-      );
+      Navigator.of(context).pushAndRemoveUntil(
+          MaterialPageRoute(
+            builder: (context) => const VerificationComplete(),
+          ),
+          ModalRoute.withName('/'));
     }
   }
 
@@ -193,18 +192,28 @@ class VerifyEmail extends StatelessWidget {
     VerifyEmailState state,
   ) {
     return RoundedWideButton(
-      onTap: () {
-        if (_otpFormKey.currentState!.validate()) {
-          context.read<VerifyEmailBloc>().validateOTP(_otpController.text);
-        }
-      },
-      child: Text(
-        AppLocalizations.of(context)!.confirm,
-        style: Theme.of(context)
-            .textTheme
-            .headline6
-            ?.copyWith(color: AppColors.white),
-      ),
+      onTap: state.verifyEmailStatus == VerifyEmailStatus.verifying
+          ? null
+          : () {
+              if (_otpFormKey.currentState!.validate()) {
+                context
+                    .read<VerifyEmailBloc>()
+                    .validateOTP(_otpController.text);
+              }
+            },
+      child: state.verifyEmailStatus == VerifyEmailStatus.verifying
+          ? const SizedBox(
+              height: 15,
+              width: 15,
+              child: CircularProgressIndicator(),
+            )
+          : Text(
+              AppLocalizations.of(context)!.confirm,
+              style: Theme.of(context)
+                  .textTheme
+                  .headline6
+                  ?.copyWith(color: AppColors.white),
+            ),
     );
   }
 
