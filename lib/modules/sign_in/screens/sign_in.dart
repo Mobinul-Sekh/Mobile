@@ -70,8 +70,8 @@ class _SignInState extends State<SignIn> {
             child: BlocConsumer<SignInBloc, SignInState>(
               listener: (context, state) {
                 if (state.signInStatus == SignInStatus.signedIn) {
-                  Navigator.of(context).popUntil(ModalRoute.withName('/'));
-                  Navigator.of(context).pushReplacementNamed('/home');
+                  Navigator.of(context).pushNamedAndRemoveUntil(
+                      '/home', ModalRoute.withName('/'));
                 }
               },
               builder: (context, state) {

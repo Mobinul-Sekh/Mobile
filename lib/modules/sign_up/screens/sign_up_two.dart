@@ -65,13 +65,11 @@ class _SignUpTwoState extends State<SignUpTwo> {
           if (state.signUpStatus == SignUpStatus.pageOne) {
             Navigator.of(context).maybePop();
           } else if (state.signUpStatus == SignUpStatus.done) {
-            Navigator.of(context).popUntil(ModalRoute.withName('/'));
-            Navigator.of(context).pushNamed(
-              '/verifyEmail',
-              arguments: VerifyEmailArguments(
-                email: state.email.value!,
-              ),
-            );
+            Navigator.of(context).pushNamedAndRemoveUntil(
+                '/verifyEmail', ModalRoute.withName('/'),
+                arguments: VerifyEmailArguments(
+                  email: state.email.value!,
+                ));
           }
         },
         builder: (context, state) {

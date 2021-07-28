@@ -130,12 +130,11 @@ class VerifyEmail extends StatelessWidget {
       );
     }
     if (state.verifyEmailStatus == VerifyEmailStatus.done) {
-      Navigator.of(context).popUntil(ModalRoute.withName('/'));
-      Navigator.of(context).push(
-        MaterialPageRoute(
-          builder: (context) => const VerificationComplete(),
-        ),
-      );
+      Navigator.of(context).pushAndRemoveUntil(
+          MaterialPageRoute(
+            builder: (context) => const VerificationComplete(),
+          ),
+          ModalRoute.withName('/'));
     }
   }
 

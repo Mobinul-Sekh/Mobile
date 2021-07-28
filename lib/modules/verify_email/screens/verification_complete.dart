@@ -82,8 +82,8 @@ class VerificationComplete extends StatelessWidget {
               RoundedWideButton(
                 width: 310,
                 onTap: () {
-                  Navigator.of(context).popUntil(ModalRoute.withName('/'));
-                  Navigator.of(context).pushNamed('/signIn');
+                  Navigator.of(context).pushNamedAndRemoveUntil(
+                      '/signIn', ModalRoute.withName('/'));
                 },
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
