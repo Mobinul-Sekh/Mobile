@@ -116,9 +116,11 @@ packages:
   dio:
     dependency: "direct main"
     description:
-      name: dio
-      url: "https://pub.dartlang.org"
-    source: hosted
+      path: dio
+      ref: HEAD
+      resolved-ref: "614c8797ee6a483f02bea65fda47290ff5c8a075"
+      url: "https://github.com/arun-muralidharan/dio.git"
+    source: git
     version: "4.0.0"
   email_validator:
     dependency: "direct main"
