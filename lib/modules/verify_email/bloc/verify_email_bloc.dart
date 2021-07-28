@@ -26,6 +26,7 @@ class VerifyEmailBloc extends Cubit<VerifyEmailState> {
         await _verifyEmailRepository.resendOTP(email: state.email);
     if (_response == null || !_response.status) {
       emit(state.copyWith(resendOTPStatus: ResendOTPStatus.fail));
+      emit(state.copyWith(resendOTPStatus: ResendOTPStatus.idle));
       return;
     }
     if (_response.status) {

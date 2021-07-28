@@ -40,15 +40,15 @@ class SignUpBloc extends Cubit<SignUpState> {
 
     emit(state.copyWith(
       email: BlocFormField(
-        email,
+        email?.trim(),
         _errors["email"],
       ),
       username: BlocFormField(
-        username,
+        username?.trim(),
         _errors["username"],
       ),
       phoneNumber: BlocFormField(
-        phoneNumber,
+        phoneNumber?.trim(),
         _errors["phoneNumber"],
       ),
       password: BlocFormField(
@@ -103,9 +103,9 @@ class SignUpBloc extends Cubit<SignUpState> {
 
   Future<void> registerUser() async {
     final SignUpResponse? response = await _signUpRepository.registerUser(
-      username: state.username.value!,
-      email: state.email.value!,
-      phoneNumber: state.phoneNumber.value!,
+      username: state.username.value!.trim(),
+      email: state.email.value!.trim(),
+      phoneNumber: state.phoneNumber.value!.trim(),
       password: state.password.value!,
       confirmPassword: state.confirmPassword.value!,
       recoveryQuestion: state.recoveryQuestion.value!,
