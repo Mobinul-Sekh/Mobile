@@ -1,4 +1,5 @@
 // Flutter imports:
+import 'package:bitecope/modules/worker_insert/screens/worker_initialize.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -57,6 +58,10 @@ class AppRouter {
               child: const SignIn(),
             );
           },
+        );
+      case '/workerInitialize':
+        return MaterialPageRoute(
+          builder: (_) => WorkerInitialize(),
         );
       case '/home':
         return MaterialPageRoute(

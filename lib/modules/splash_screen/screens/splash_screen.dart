@@ -36,7 +36,13 @@ class SplashScreen extends StatelessWidget {
             ),
             Column(
               children: [
-                SvgPicture.asset(Assets.images.logo),
+                //TODO This is for testing; should be removed before pushing
+                GestureDetector(
+                  onTap: () {
+                    Navigator.of(context).pushNamed('/workerInitialize');
+                  },
+                  child: SvgPicture.asset(Assets.images.logo),
+                ),
                 Text(
                   AppLocalizations.of(context)!.appName,
                   style: Theme.of(context).textTheme.headline4?.copyWith(
