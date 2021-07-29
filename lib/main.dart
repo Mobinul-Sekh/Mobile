@@ -11,6 +11,8 @@ import 'package:bitecope/config/themes/theme.dart';
 import 'package:bitecope/core/authentication/bloc/authentication_bloc.dart';
 import 'package:bitecope/modules/splash_screen/screens/splash_screen.dart';
 
+import 'modules/post_signin_owner/screens/post_owner.dart';
+
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   runApp(BiteCope());

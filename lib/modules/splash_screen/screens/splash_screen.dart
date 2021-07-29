@@ -71,7 +71,8 @@ class SplashScreen extends StatelessWidget {
                             width: 2,
                           ),
                           onTap: () {
-                            Navigator.of(context).pushNamed("/signIn");
+                            Navigator.of(context).pushNamed("/postOwner");
+                            // Navigator.of(context).pushNamed("/signIn");
                           },
                           child: Center(
                             child: Text(

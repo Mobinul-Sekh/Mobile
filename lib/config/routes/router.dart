@@ -1,4 +1,7 @@
 // Flutter imports:
+import 'package:bitecope/modules/post_signin_owner/cubit/post_owner_cubit.dart';
+import 'package:bitecope/modules/post_signin_owner/repositories/post_owner_repository.dart';
+import 'package:bitecope/modules/post_signin_owner/screens/post_owner.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -32,6 +35,17 @@ class AppRouter {
                 signInRepository: SignInRepository(),
               ),
               child: const SignIn(),
+            );
+          },
+        );
+      case '/postOwner':
+        return MaterialPageRoute(
+          builder: (_) {
+            return BlocProvider<PostOwnerCubit>(
+              create: (context) => PostOwnerCubit(
+                postOwnerRepository: PostOwnerRepository(),
+              ),
+              child: const OwnerDetails(),
             );
           },
         );

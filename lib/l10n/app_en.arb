@@ -63,10 +63,6 @@
     "@samplePassword": {
       "description": "Sample password for text filed hint text"
     },
-    "passwordEmpty": "Please enter password",
-    "@passwordEmpty": {
-      "description": "Error text for empty password"
-    },
     "forgotPassword": "Forget Password?",
     "@forgotPassword": {
       "description": "Forget Password text"
@@ -170,5 +166,26 @@
     "ownerNameEmpty": "Please enter owner name",
     "@ownerNameEmpty": {
       "description": "Error text for empty owner name"
-    }
+    },
+ "companyName": "Company Name",
+  "@companyName": {
+    "description": "Field is mandatory"
+  },
+  "companyAddress": "Company Address",
+  "@companyAddress": {
+    "description": ""
+  },
+  "confirm": "Confirm",
+  "@confirm": {
+    "description": "Confirm button"
+  },
+  "mandatoryStar": "*",
+  "@mandatoryStar": {
+    "description": "*"
+  },
+  "ownerDetails": "Owner Details",
+  "@ownerDetails": {
+    "description": ""
+  }
+
 }

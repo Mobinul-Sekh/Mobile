@@ -9,4 +9,5 @@ class AppURLs {
   static const String baseAPI = "http://bitecope.co.in:8080";
   static const String register = "$baseAPI/signup/";
   static const String login = "$baseAPI/login/";
+  static const String ownerInsertDetails = "$baseAPI/owner_ins_details/";
 }
