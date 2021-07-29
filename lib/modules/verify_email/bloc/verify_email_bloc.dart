@@ -1,4 +1,5 @@
 // Flutter imports:
+import 'package:bitecope/core/common/models/account_status_response.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -16,14 +17,15 @@ part 'verify_email_state.dart';
 class VerifyEmailBloc extends Cubit<VerifyEmailState> {
   final VerifyEmailRepository _verifyEmailRepository;
   final int _timeoutDuration = 30;
+  bool _isRunning = false;
 
-  VerifyEmailBloc(this._verifyEmailRepository, {required String email})
-      : super(VerifyEmailState(email: email));
+  VerifyEmailBloc(this._verifyEmailRepository, {required String username})
+      : super(VerifyEmailState(username: username));
 
   Future<void> resendOTP() async {
     emit(state.copyWith(resendOTPStatus: ResendOTPStatus.resending));
     final ResendOTPResponse? _response =
-        await _verifyEmailRepository.resendOTP(email: state.email);
+        await _verifyEmailRepository.resendOTP(username: state.username);
     if (_response == null || !_response.status) {
       emit(state.copyWith(resendOTPStatus: ResendOTPStatus.fail));
       emit(state.copyWith(resendOTPStatus: ResendOTPStatus.idle));
@@ -37,7 +39,7 @@ class VerifyEmailBloc extends Cubit<VerifyEmailState> {
       emit(state.copyWith(
         timeout: _timeoutDuration,
       ));
-      _timerTick();
+      _resendTimerTick();
     }
   }
 
@@ -70,7 +72,32 @@ class VerifyEmailBloc extends Cubit<VerifyEmailState> {
     }
   }
 
-  void _timerTick() {
+  Future<void> checkStatus({required bool run}) async {
+    if (run && !_isRunning) {
+      _isRunning = true;
+      await _runStatusCheck();
+    } else if (!run && _isRunning) {
+      _isRunning = false;
+    }
+  }
+
+  Future<void> _runStatusCheck() async {
+    AccountStatusResponse? _response;
+    while (_isRunning) {
+      _response =
+          await _verifyEmailRepository.accountStatus(username: state.username);
+      if (_response == null || !_response.status) {
+        return;
+      }
+      if (_response.mailStatus!) {
+        emit(state.copyWith(verifyEmailStatus: VerifyEmailStatus.done));
+        return;
+      }
+      await Future.delayed(const Duration(seconds: 5));
+    }
+  }
+
+  void _resendTimerTick() {
     Future.delayed(
       const Duration(seconds: 1),
       () {
@@ -78,7 +105,7 @@ class VerifyEmailBloc extends Cubit<VerifyEmailState> {
           state.copyWith(timeout: state.timeout! - 1),
         );
         if (state.timeout != null) {
-          _timerTick();
+          _resendTimerTick();
         }
       },
     );

@@ -50,20 +50,33 @@ class SignInBloc extends Cubit<SignInState> {
           await _signInRepository.accountStatus(
         username: state.username.value!,
       );
+      if (response == null) {
+        return;
+      }
+      if (!response.status) {
+        String? _error(BuildContext context) {
+          return response.error;
+        }
+
+        emit(state.copyWith(
+          username: state.username.copyWith(error: _error),
+          password: state.password.copyWith(error: _error),
+          error: _error,
+          signInStatus: SignInStatus.signIn,
+        ));
+        return;
+      }
+
       final bool _status = await _isEmailVerified(response);
       if (_status) {
-        _loginUser(response!);
+        _loginUser(response);
       }
     }
   }
 
-  Future<bool> _isEmailVerified(AccountStatusResponse? accountStatus) async {
-    if (accountStatus != null && accountStatus.status) {
-      if (!accountStatus.mailStatus!) {
-        emit(state.copyWith(signInStatus: SignInStatus.verify));
-        return false;
-      }
-    } else {
+  Future<bool> _isEmailVerified(AccountStatusResponse accountStatus) async {
+    if (!accountStatus.mailStatus!) {
+      emit(state.copyWith(signInStatus: SignInStatus.verify));
       return false;
     }
     return true;
@@ -127,15 +140,19 @@ class SignInBloc extends Cubit<SignInState> {
 
   void _setErrors(SignInResponseModel response) {
     //TODO Need a list of possible API errors for each field to localize them; for now returning the errors as they are.
+    String? _error(BuildContext context) {
+      return response.error;
+    }
+
     emit(
       state.copyWith(
         username: state.username.copyWith(
-          error: (BuildContext context) => response.error,
+          error: _error,
         ),
         password: state.password.copyWith(
-          error: (BuildContext context) => response.error,
+          error: _error,
         ),
-        error: (BuildContext context) => response.error,
+        error: _error,
         signInStatus: SignInStatus.signIn,
       ),
     );

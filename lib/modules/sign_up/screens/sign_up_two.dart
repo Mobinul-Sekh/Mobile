@@ -68,7 +68,7 @@ class _SignUpTwoState extends State<SignUpTwo> {
             Navigator.of(context).pushNamedAndRemoveUntil(
                 '/verifyEmail', ModalRoute.withName('/'),
                 arguments: VerifyEmailArguments(
-                  email: state.email.value!,
+                  username: state.username.value!,
                 ));
           }
         },

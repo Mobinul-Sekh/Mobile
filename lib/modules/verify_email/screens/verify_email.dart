@@ -21,16 +21,46 @@ import 'package:bitecope/widgets/snackbar_message.dart';
 import 'package:bitecope/widgets/underlined_title.dart';
 
 class VerifyEmailArguments {
-  String email;
+  String username;
 
-  VerifyEmailArguments({required this.email});
+  VerifyEmailArguments({required this.username});
 }
 
-class VerifyEmail extends StatelessWidget {
+class VerifyEmail extends StatefulWidget {
+  const VerifyEmail({Key? key}) : super(key: key);
+
+  @override
+  _VerifyEmailState createState() => _VerifyEmailState();
+}
+
+class _VerifyEmailState extends State<VerifyEmail> with WidgetsBindingObserver {
   final GlobalKey<FormState> _otpFormKey = GlobalKey<FormState>();
   final TextEditingController _otpController = TextEditingController();
+  bool _runStatusCheck = true;
 
-  VerifyEmail({Key? key}) : super(key: key);
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance?.addObserver(this);
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    switch (state) {
+      case AppLifecycleState.resumed:
+        setState(() {
+          _runStatusCheck = true;
+        });
+        break;
+      case AppLifecycleState.detached:
+      case AppLifecycleState.inactive:
+      case AppLifecycleState.paused:
+        setState(() {
+          _runStatusCheck = false;
+        });
+        break;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -52,6 +82,9 @@ class VerifyEmail extends StatelessWidget {
                         _handleListen(context, state);
                       },
                       builder: (context, state) {
+                        context
+                            .read<VerifyEmailBloc>()
+                            .checkStatus(run: _runStatusCheck);
                         return Column(
                           mainAxisSize: MainAxisSize.min,
                           children: [
@@ -269,5 +302,11 @@ class VerifyEmail extends StatelessWidget {
         );
       },
     );
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance?.removeObserver(this);
+    super.dispose();
   }
 }

@@ -70,7 +70,7 @@ class _SignInState extends State<SignIn> {
             ),
             child: BlocConsumer<SignInBloc, SignInState>(
               listener: (context, state) {
-                _handleListen(context, state.signInStatus);
+                _handleListen(context, state);
               },
               builder: (context, state) {
                 return Column(
@@ -168,25 +168,23 @@ class _SignInState extends State<SignIn> {
     );
   }
 
-  void _handleListen(BuildContext context, SignInStatus status) {
-    switch (status) {
+  void _handleListen(BuildContext context, SignInState state) {
+    switch (state.signInStatus) {
       case SignInStatus.signIn:
       case SignInStatus.signingIn:
         break;
       case SignInStatus.verify:
         Navigator.of(context).push(MaterialPageRoute(
-          builder: (context) => const EmailNotVerified(),
+          builder: (context) =>
+              EmailNotVerified(username: state.username.value!),
         ));
         break;
       case SignInStatus.activate:
-        //TODO Push to owner subscription
-        break;
+      //TODO Push to owner activation and break
       case SignInStatus.ownerInitialize:
-        //TODO Push to owner initialize
-        break;
+      //TODO Push to owner initialize and break
       case SignInStatus.workerInitialize:
-        //TODO Push to worker initialize
-        break;
+      //TODO Push to worker initialize and break
       case SignInStatus.signedIn:
         Navigator.of(context)
             .pushNamedAndRemoveUntil('/home', ModalRoute.withName('/'));
