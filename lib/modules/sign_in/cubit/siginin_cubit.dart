@@ -22,8 +22,10 @@ class SignInBloc extends Cubit<SignInState> {
     String? username,
     String? password,
   }) async {
+    final String? _username = username?.trim();
+
     final Map<String, LocaleString?> _errors = {
-      "username": _validateUsername(username),
+      "username": _validateUsername(_username),
       "password": _validatePassword(password),
     };
 
@@ -31,7 +33,7 @@ class SignInBloc extends Cubit<SignInState> {
 
     emit(state.copyWith(
       username: BlocFormField(
-        username?.trim(),
+        _username,
         _errors["username"],
       ),
       password: BlocFormField(
@@ -48,15 +50,13 @@ class SignInBloc extends Cubit<SignInState> {
     if (_isValid) {
       final AccountStatusResponse? response =
           await _signInRepository.accountStatus(
-        username: state.username.value!,
+        username: _username!,
       );
       if (response == null) {
         return;
       }
       if (!response.status) {
-        String? _error(BuildContext context) {
-          return response.error;
-        }
+        String? _error(BuildContext context) => response.error;
 
         emit(state.copyWith(
           username: state.username.copyWith(error: _error),
@@ -67,14 +67,14 @@ class SignInBloc extends Cubit<SignInState> {
         return;
       }
 
-      final bool _status = await _isEmailVerified(response);
+      final bool _status = _isEmailVerified(response);
       if (_status) {
         _loginUser(response);
       }
     }
   }
 
-  Future<bool> _isEmailVerified(AccountStatusResponse accountStatus) async {
+  bool _isEmailVerified(AccountStatusResponse accountStatus) {
     if (!accountStatus.mailStatus!) {
       emit(state.copyWith(signInStatus: SignInStatus.verify));
       return false;
