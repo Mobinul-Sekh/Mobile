@@ -15,6 +15,7 @@ class WorkerInitialize extends StatelessWidget {
       TextEditingController();
   final TextEditingController _workerDescriptionController =
       TextEditingController();
+
   final FocusNode _ownerNameNode = FocusNode();
   final FocusNode _workerNameNode = FocusNode();
   final FocusNode _workerAddressNode = FocusNode();
@@ -55,6 +56,7 @@ class WorkerInitialize extends StatelessWidget {
                       TextField(
                         controller: _ownerNameController,
                         focusNode: _ownerNameNode,
+                        textAlignVertical: TextAlignVertical.center,
                         textInputAction: TextInputAction.next,
                         onEditingComplete: () => _workerNameNode.requestFocus(),
                         style: Theme.of(context).textTheme.bodyText2,
@@ -85,6 +87,7 @@ class WorkerInitialize extends StatelessWidget {
                       TextField(
                         controller: _workerNameController,
                         focusNode: _workerNameNode,
+                        textAlignVertical: TextAlignVertical.center,
                         textInputAction: TextInputAction.next,
                         onEditingComplete: () =>
                             _workerAddressNode.requestFocus(),
@@ -96,9 +99,14 @@ class WorkerInitialize extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(height: 54),
+                      Text(
+                        AppLocalizations.of(context)!.workerAddress,
+                        style: Theme.of(context).textTheme.caption,
+                      ),
                       TextField(
                         controller: _workerAddressController,
                         focusNode: _workerAddressNode,
+                        textAlignVertical: TextAlignVertical.center,
                         textInputAction: TextInputAction.next,
                         onEditingComplete: () =>
                             _workerDescriptionNode.requestFocus(),
@@ -107,25 +115,28 @@ class WorkerInitialize extends StatelessWidget {
                         maxLines: 3,
                         decoration: formFieldDecoration(
                           context,
-                          labelText:
-                              AppLocalizations.of(context)!.workerAddress,
+                          isDense: true,
                           suffixIcon: Icons.location_on_outlined,
                         ),
                       ),
                       const SizedBox(height: 54),
+                      Text(
+                        AppLocalizations.of(context)!.userDescription,
+                        style: Theme.of(context).textTheme.caption,
+                      ),
                       TextField(
                         controller: _workerDescriptionController,
                         focusNode: _workerDescriptionNode,
-                        textInputAction: TextInputAction.done,
+                        textAlignVertical: TextAlignVertical.center,
+                        textInputAction: TextInputAction.newline,
                         onEditingComplete: () =>
                             FocusScope.of(context).unfocus(),
                         style: Theme.of(context).textTheme.bodyText2,
-                        minLines: 1,
+                        minLines: 2,
                         maxLines: 6,
                         decoration: formFieldDecoration(
                           context,
-                          labelText:
-                              AppLocalizations.of(context)!.userDescription,
+                          isDense: true,
                         ),
                       ),
                       const SizedBox(height: 18),

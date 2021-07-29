@@ -1,5 +1,5 @@
 // Flutter imports:
-import 'package:bitecope/modules/worker_insert/screens/worker_initialize.dart';
+import 'package:bitecope/modules/worker_initialize/screens/worker_initialize.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
