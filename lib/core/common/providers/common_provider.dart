@@ -3,6 +3,7 @@ import 'package:dio/dio.dart';
 
 // Project imports:
 import 'package:bitecope/config/constants/app_urls.dart';
+import 'package:bitecope/config/utils/extensions/response_extension.dart';
 import 'package:bitecope/core/common/models/account_status_request.dart';
 
 class CommonProvider {
@@ -10,12 +11,20 @@ class CommonProvider {
 
   Future<Map<String, dynamic>?> accountStatus(
       AccountStatusRequest request) async {
-    final Response response = await dio.post(
-      AppURLs.accountStatus,
-      data: request.toMap(),
-    );
-    if (response.statusCode == 200) {
-      return response.data as Map<String, dynamic>;
+    try {
+      final Response response = await dio.get(
+        AppURLs.accountStatus,
+        data: request.toMap(),
+      );
+      return response.asMap();
+    } catch (e) {
+      return errorResponse(e);
+    }
+  }
+
+  Map<String, dynamic>? errorResponse(Object e) {
+    if (e is DioError && e.response!.statusCode! < 500) {
+      return e.response.asMap();
     }
     return null;
   }

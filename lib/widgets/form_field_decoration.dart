@@ -8,14 +8,20 @@ InputDecoration formFieldDecoration(
   Color? iconColor,
   double? iconSize,
   String? errorText,
+  bool suppressError = false,
   VoidCallback? onTap,
 }) {
   return InputDecoration(
-    errorText: errorText,
+    errorText: errorText == null
+        ? errorText
+        : suppressError
+            ? ""
+            : errorText,
     errorMaxLines: 2,
     floatingLabelBehavior: FloatingLabelBehavior.always,
     labelText: labelText,
     labelStyle: Theme.of(context).textTheme.bodyText1,
+    contentPadding: const EdgeInsets.only(top: 6),
     suffixIcon: suffixIcon != null
         ? IconButton(
             onPressed: onTap,

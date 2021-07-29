@@ -19,6 +19,14 @@
     "@signUP": {
       "description": "Text for sign up button"
     },
+    "signInFieldEmpty": "Please enter username & password",
+    "@signInFieldEmpty": {
+      "description": "Error text for empty sign in field"
+    },
+    "inactiveOwner": "Owner Account is Inactive",
+    "@inactiveOwner": {
+      "description": "Error text for worker sign in when corresponding owner account is inactive"
+    },
     "email": "Email",
     "@email": {
       "description": "Label text for email field"
@@ -39,10 +47,6 @@
     "@username": {
       "description": "Label text for username field"
     },
-    "sampleUsername": "test",
-    "@sampleUsername": {
-      "description": "username textfield hint text"
-    },
     "usernameEmpty": "Please enter a username",
     "@usernameEmpty": {
       "description": "Error text for empty username"
@@ -59,10 +63,6 @@
     "@password": {
       "description": "Label text for password field"
     },
-    "samplePassword": "**********",
-    "@samplePassword": {
-      "description": "Sample password for text filed hint text"
-    },
     "passwordEmpty": "Please enter password",
     "@passwordEmpty": {
       "description": "Error text for empty password"
@@ -70,10 +70,6 @@
     "forgotPassword": "Forget Password?",
     "@forgotPassword": {
       "description": "Forget Password text"
-    },
-    "passwordEmpty": "Please enter password",
-    "@passwordEmpty": {
-      "description": "Error text for empty password"
     },
     "passwordWeak": "Password too short; must be at least 6 characters",
     "@passwordWeak": {
@@ -242,5 +238,17 @@
     "backToLogin": "Go Back to Login",
     "@backToLogin": {
       "description": "Button text for back to login"
+    },
+    "emailNotVerified": "Your email is not verified",
+    "@emailNotVerified": {
+      "description": "Text prompt for email not verified"
+    },
+    "verifyToSignIn": "Please verify your email to sign-in",
+    "@verifyToSignIn": {
+      "description": "Text prompt verify email to sign-in"
+    },
+    "verify": "Verify",
+    "@verify": {
+      "description": "Button text for verify"
     }
 }

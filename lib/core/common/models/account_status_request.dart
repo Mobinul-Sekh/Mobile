@@ -5,7 +5,7 @@ class AccountStatusRequest {
 
   Map<String, dynamic> toMap() {
     return {
-      'username': username,
+      'user_name': username,
     };
   }
 }

@@ -1,4 +1,5 @@
 class AccountStatusResponse {
+  bool status;
   int? userType;
   bool? mailStatus;
   bool? activeStatus;
@@ -7,6 +8,7 @@ class AccountStatusResponse {
   String? error;
 
   AccountStatusResponse({
+    this.status = false,
     this.userType,
     this.mailStatus,
     this.activeStatus,
@@ -17,6 +19,7 @@ class AccountStatusResponse {
 
   factory AccountStatusResponse.fromMap(Map<String, dynamic> map) {
     return AccountStatusResponse(
+      status: map['statusCode'] as int < 300,
       userType: map['User_Type'] as int?,
       mailStatus: map['Mail_Status'] as bool?,
       activeStatus: map['Active_Status'] as bool?,
@@ -30,6 +33,6 @@ class AccountStatusResponse {
     if (status is bool) {
       return null;
     }
-    return status as int;
+    return status as int?;
   }
 }
