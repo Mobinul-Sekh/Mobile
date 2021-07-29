@@ -1,14 +1,14 @@
 part of 'verify_email_bloc.dart';
 
 class VerifyEmailState with EquatableMixin {
-  String email;
+  String username;
   late final BlocFormField<String> otp;
   int? timeout;
   VerifyEmailStatus verifyEmailStatus;
   ResendOTPStatus resendOTPStatus;
 
   VerifyEmailState({
-    required this.email,
+    required this.username,
     BlocFormField<String>? otp,
     this.timeout,
     this.verifyEmailStatus = VerifyEmailStatus.verify,
@@ -19,7 +19,7 @@ class VerifyEmailState with EquatableMixin {
 
   @override
   List<Object?> get props => [
-        email,
+        username,
         otp,
         timeout,
         verifyEmailStatus,
@@ -27,14 +27,14 @@ class VerifyEmailState with EquatableMixin {
       ];
 
   VerifyEmailState copyWith({
-    String? email,
+    String? username,
     BlocFormField<String>? otp,
     int? timeout,
     VerifyEmailStatus? verifyEmailStatus,
     ResendOTPStatus? resendOTPStatus,
   }) {
     return VerifyEmailState(
-      email: email ?? this.email,
+      username: username ?? this.username,
       otp: otp ?? this.otp,
       timeout: timeout == null ? this.timeout : (timeout <= 0 ? null : timeout),
       verifyEmailStatus: verifyEmailStatus ?? this.verifyEmailStatus,

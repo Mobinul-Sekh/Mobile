@@ -44,9 +44,9 @@ class AppRouter {
           return BlocProvider<VerifyEmailBloc>(
             create: (context) => VerifyEmailBloc(
               VerifyEmailRepository(),
-              email: _verifyEmailArguments.email,
+              username: _verifyEmailArguments.username,
             ),
-            child: VerifyEmail(),
+            child: const VerifyEmail(),
           );
         });
       case '/signIn':

@@ -1,6 +1,8 @@
 // Dart imports:
 import 'dart:convert';
 
+import 'package:bitecope/config/utils/extensions/map_extension.dart';
+
 class SignInResponseModel {
   bool status;
   String? expiresIn;
@@ -19,7 +21,7 @@ class SignInResponseModel {
       status: map['statusCode'] as int < 300,
       token: map['Token'] != null ? map['Token'] as String : null,
       expiresIn: map['Expires_in'] != null ? map['Expires_in'] as String : null,
-      error: map['Error'] != null ? map['Error'] as String : null,
+      error: map['statusCode'] as int >= 400 ? map.getMessage() : null,
     );
   }
 

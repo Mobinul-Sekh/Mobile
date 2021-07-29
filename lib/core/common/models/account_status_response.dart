@@ -1,3 +1,5 @@
+import 'package:bitecope/config/utils/extensions/map_extension.dart';
+
 class AccountStatusResponse {
   bool status;
   int? userType;
@@ -25,7 +27,7 @@ class AccountStatusResponse {
       activeStatus: map['Active_Status'] as bool?,
       ownerStatus: _parseTypeStatus(map['Owner_Status']),
       workerStatus: _parseTypeStatus(map['Worker_Status']),
-      error: map['Error'] as String?,
+      error: map['statusCode'] as int >= 400 ? map.getMessage() : null,
     );
   }
 

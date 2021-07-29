@@ -1,4 +1,5 @@
 // Flutter imports:
+import 'package:bitecope/modules/verify_email/screens/verify_email.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -8,10 +9,11 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:bitecope/config/themes/theme.dart';
 import 'package:bitecope/widgets/gradient_widget.dart';
 import 'package:bitecope/widgets/rounded_wide_button.dart';
-import 'package:bitecope/widgets/snackbar_message.dart';
 
 class EmailNotVerified extends StatelessWidget {
-  const EmailNotVerified({Key? key}) : super(key: key);
+  final String username;
+
+  const EmailNotVerified({Key? key, required this.username}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -58,12 +60,11 @@ class EmailNotVerified extends StatelessWidget {
                 child: Center(
                   child: RoundedWideButton(
                     onTap: () {
-                      //TODO push to verifyEmail
-                      snackbarMessage(
-                        context,
-                        "Not Implemented Yet",
-                        MessageType.warning,
-                      );
+                      Navigator.of(context).pushNamedAndRemoveUntil(
+                          '/verifyEmail', ModalRoute.withName('/'),
+                          arguments: VerifyEmailArguments(
+                            username: username,
+                          ));
                     },
                     child: GradientWidget(
                       gradient: AppGradients.primaryGradient,

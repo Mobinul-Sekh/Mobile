@@ -26,9 +26,9 @@ class VerifyEmailRepository extends CommonRepository {
   }
 
   Future<ResendOTPResponse?> resendOTP({
-    required String email,
+    required String username,
   }) async {
-    final ResendOTPRequest request = ResendOTPRequest(email: email);
+    final ResendOTPRequest request = ResendOTPRequest(username: username);
     final Map<String, dynamic>? responseMap =
         await _verifyEmailProvider.resendOTP(request);
 

@@ -1,13 +1,13 @@
 class ResendOTPRequest {
-  String email;
+  String username;
 
   ResendOTPRequest({
-    required this.email,
+    required this.username,
   });
 
   Map<String, dynamic> toMap() {
     return {
-      'email_id': email,
+      'user_name': username,
     };
   }
 }

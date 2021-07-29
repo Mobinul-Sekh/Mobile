@@ -13,5 +13,5 @@ class AppURLs {
   static const String login = "$baseAPI/login/";
   static const String accountStatus = "$baseAPI/account_status/";
   static const String verifyEmail = "$baseAPI/signup_verify_mobile/";
-  static const String resendOTP = "$baseAPI/regenerate_otp/";
+  static const String resendOTP = "$baseAPI/regenerate_email_otp/";
 }
