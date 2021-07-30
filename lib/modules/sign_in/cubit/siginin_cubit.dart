@@ -1,3 +1,6 @@
+// Dart imports:
+import 'dart:async';
+
 // Flutter imports:
 import 'package:flutter/material.dart';
 
@@ -16,6 +19,7 @@ part 'signin_state.dart';
 
 class SignInBloc extends Cubit<SignInState> {
   final SignInRepository _signInRepository;
+
   SignInBloc(this._signInRepository) : super(SignInState());
 
   Future<void> validateSignInPage({
@@ -67,9 +71,10 @@ class SignInBloc extends Cubit<SignInState> {
         return;
       }
 
-      final bool _status = _isEmailVerified(response);
-      if (_status) {
-        _loginUser(response);
+      final bool _emailStatus = _isEmailVerified(response);
+      final bool _activeStatus = _isActive(response);
+      if (_emailStatus && _activeStatus) {
+        _loginUser();
       }
     }
   }
@@ -82,7 +87,27 @@ class SignInBloc extends Cubit<SignInState> {
     return true;
   }
 
-  Future<void> _loginUser(AccountStatusResponse accountStatus) async {
+  bool _isActive(AccountStatusResponse accountStatus) {
+    if (!accountStatus.activeStatus!) {
+      if (accountStatus.userType == 0) {
+        emit(state.copyWith(
+          error: (BuildContext context) =>
+              AppLocalizations.of(context)!.inactiveOwner,
+          signInStatus: SignInStatus.ownerActivate,
+        ));
+      } else {
+        emit(state.copyWith(
+          error: (BuildContext context) =>
+              AppLocalizations.of(context)!.inactiveOwner,
+          signInStatus: SignInStatus.ownerInactive,
+        ));
+      }
+      return false;
+    }
+    return true;
+  }
+
+  Future<void> _loginUser() async {
     final SignInResponseModel? response =
         await _signInRepository.signInWithUserNameAndPassword(
       username: state.username.value!,
@@ -90,32 +115,11 @@ class SignInBloc extends Cubit<SignInState> {
     );
     if (response != null) {
       if (response.token != null) {
-        if (accountStatus.userType == 0) {
-          if (!accountStatus.activeStatus!) {
-            emit(state.copyWith(signInStatus: SignInStatus.activate));
-            return;
-          }
-          if (accountStatus.ownerStatus == null) {
-            emit(state.copyWith(signInStatus: SignInStatus.ownerInitialize));
-            return;
-          }
-        } else if (accountStatus.userType == 1) {
-          if (accountStatus.workerStatus == null) {
-            emit(state.copyWith(signInStatus: SignInStatus.workerInitialize));
-            return;
-          }
-          if (!accountStatus.activeStatus!) {
-            emit(state.copyWith(
-              error: (BuildContext context) =>
-                  AppLocalizations.of(context)!.inactiveOwner,
-              signInStatus: SignInStatus.signIn,
-            ));
-            return;
-          }
-        }
-        // TODO We'll set the token when we have logout ready
-        // signInRepository.setToken(response.token!);
-        emit(state.copyWith(signInStatus: SignInStatus.signedIn));
+        emit(state.copyWith(
+          signInStatus: SignInStatus.signedIn,
+          token: response.token,
+          expiresIn: response.expiresIn,
+        ));
       } else {
         _setErrors(response);
       }

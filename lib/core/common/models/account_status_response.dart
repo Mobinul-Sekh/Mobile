@@ -1,3 +1,4 @@
+// Project imports:
 import 'package:bitecope/config/utils/extensions/map_extension.dart';
 
 class AccountStatusResponse {

@@ -1,5 +1,7 @@
 // Flutter imports:
 import 'package:flutter/material.dart';
+
+// Package imports:
 import 'package:flutter_svg/flutter_svg.dart';
 
 InputDecoration formFieldDecoration(
@@ -35,6 +37,7 @@ InputDecoration formFieldDecoration(
                 suffixSvgPath,
                 width: iconSize ?? 24,
                 height: iconSize ?? 24,
+                fit: BoxFit.scaleDown,
               ),
             ),
           )

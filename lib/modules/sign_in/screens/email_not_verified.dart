@@ -1,5 +1,4 @@
 // Flutter imports:
-import 'package:bitecope/modules/verify_email/screens/verify_email.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -7,6 +6,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 // Project imports:
 import 'package:bitecope/config/themes/theme.dart';
+import 'package:bitecope/modules/verify_email/screens/verify_email.dart';
 import 'package:bitecope/widgets/gradient_widget.dart';
 import 'package:bitecope/widgets/rounded_wide_button.dart';
 

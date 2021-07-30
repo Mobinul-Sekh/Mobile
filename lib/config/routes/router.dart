@@ -1,5 +1,4 @@
 // Flutter imports:
-import 'package:bitecope/modules/worker_initialize/screens/worker_initialize.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -18,6 +17,9 @@ import 'package:bitecope/modules/splash_screen/screens/splash_screen.dart';
 import 'package:bitecope/modules/verify_email/bloc/verify_email_bloc.dart';
 import 'package:bitecope/modules/verify_email/repositories/verify_email_repository.dart';
 import 'package:bitecope/modules/verify_email/screens/verify_email.dart';
+import 'package:bitecope/modules/worker_initialize/bloc/worker_initialize_bloc.dart';
+import 'package:bitecope/modules/worker_initialize/repositories/worker_initialize_repository.dart';
+import 'package:bitecope/modules/worker_initialize/screens/worker_initialize.dart';
 
 class AppRouter {
   // Declare blocs here
@@ -61,7 +63,11 @@ class AppRouter {
         );
       case '/workerInitialize':
         return MaterialPageRoute(
-          builder: (_) => WorkerInitialize(),
+          builder: (_) => BlocProvider<WorkerInitializeBloc>(
+            create: (context) =>
+                WorkerInitializeBloc(WorkerInitializeRepository()),
+            child: WorkerInitialize(),
+          ),
         );
       case '/home':
         return MaterialPageRoute(

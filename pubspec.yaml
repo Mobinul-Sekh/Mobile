@@ -21,7 +21,7 @@ dependencies:
       path: dio
   email_validator: ^2.0.1
   equatable: ^2.0.3
-  flutter_bloc: ^7.0.1
+  flutter_bloc: ^7.1.0
   flutter_svg: ^0.22.0
   http: ^0.13.3
   intl: ^0.17.0

@@ -251,6 +251,10 @@
     "@ownerName": {
       "description": "Label text for owner name field"
     },
+    "workerDetails": "Worker Details",
+    "@workerDetails": {
+      "description": "Title text for worker initialize page"
+    },
     "ownerUsername": "Owner Username",
     "@ownerUsername": {
       "description": "Label text for owner username field"
@@ -266,5 +270,17 @@
     "userDescription": "About Yourself",
     "@userDescription": {
       "description": "Label text for user description field"
+    },
+    "ownerUsernameEmpty": "Please enter owner username",
+    "@ownerUsernameEmpty": {
+      "description": "Error text for empty owner username field"
+    },
+    "workerNameEmpty": "Please enter worker name",
+    "@workerNameEmpty": {
+      "description": "Error text for empty worker name field"
+    },
+    "workerAddressEmpty": "Please enter worker address",
+    "@workerAddressEmpty": {
+      "description": "Error text for empty worker address field"
     }
 }

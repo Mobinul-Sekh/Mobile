@@ -36,13 +36,7 @@ class SplashScreen extends StatelessWidget {
             ),
             Column(
               children: [
-                //TODO This is for testing; should be removed before pushing
-                GestureDetector(
-                  onTap: () {
-                    Navigator.of(context).pushNamed('/workerInitialize');
-                  },
-                  child: SvgPicture.asset(Assets.images.logo),
-                ),
+                SvgPicture.asset(Assets.images.logo),
                 Text(
                   AppLocalizations.of(context)!.appName,
                   style: Theme.of(context).textTheme.headline4?.copyWith(
@@ -62,12 +56,10 @@ class SplashScreen extends StatelessWidget {
               margin: const EdgeInsets.fromLTRB(20, 60, 20, 20),
               child: BlocConsumer<AuthenticationBloc, AuthenticationState>(
                 listener: (context, state) {
-                  if (state.status == AuthenticationStatus.loggedIn) {
-                    Navigator.of(context).pushReplacementNamed("/home");
-                  }
+                  _handleListen(context, state);
                 },
                 builder: (context, state) {
-                  if (state.status == AuthenticationStatus.loggedOut) {
+                  if (state.status != AuthenticationStatus.loading) {
                     return Column(
                       children: [
                         RoundedWideButton(
@@ -121,5 +113,31 @@ class SplashScreen extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  void _handleListen(
+    BuildContext context,
+    AuthenticationState state,
+  ) {
+    switch (state.status) {
+      case AuthenticationStatus.loading:
+      case AuthenticationStatus.loggedOut:
+        break;
+      case AuthenticationStatus.loggedIn:
+        Navigator.of(context).pushReplacementNamed('/home');
+        break;
+      case AuthenticationStatus.ownerActivate:
+        //TODO Push to owner subscription
+        break;
+      case AuthenticationStatus.ownerInitialize:
+        //TODO Push to owner initialize
+        break;
+      case AuthenticationStatus.ownerInactive:
+        //TODO Push to owner inactive error page for woker sign-in
+        break;
+      case AuthenticationStatus.workerInitialize:
+        Navigator.of(context).pushNamed('/workerInitialize');
+        break;
+    }
   }
 }
