@@ -164,13 +164,11 @@ class _VerifyEmailState extends State<VerifyEmail> with WidgetsBindingObserver {
     }
     if (state.verifyEmailStatus == VerifyEmailStatus.done) {
       Navigator.of(context).pushAndRemoveUntil(
-        MaterialPageRoute(builder: (_) {
+        MaterialPageRoute(builder: (context) {
           return SuccessfullyCompleted(
             successTitle: AppLocalizations.of(context)!.emailVerified,
             nextText: AppLocalizations.of(context)!.backToLogin,
-            nextCallback: () {
-              Navigator.of(context).pushNamed('/signIn');
-            },
+            nextCallback: () => Navigator.of(context).pushNamed('/signIn'),
           );
         }),
         ModalRoute.withName('/'),

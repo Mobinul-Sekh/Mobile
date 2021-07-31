@@ -91,8 +91,6 @@ class SignInBloc extends Cubit<SignInState> {
     if (!accountStatus.activeStatus!) {
       if (accountStatus.userType == 0) {
         emit(state.copyWith(
-          error: (BuildContext context) =>
-              AppLocalizations.of(context)!.inactiveOwner,
           signInStatus: SignInStatus.ownerActivate,
         ));
       } else {

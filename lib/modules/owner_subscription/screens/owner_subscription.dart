@@ -118,7 +118,7 @@ class OwnerSubscription extends StatelessWidget {
   void _handleListen(BuildContext context, OwnerSubscriptionState state) {
     if (state.ownerSubscriptionStatus == OwnerSubscriptionStatus.done) {
       Navigator.of(context).pushAndRemoveUntil(
-        MaterialPageRoute(builder: (_) {
+        MaterialPageRoute(builder: (context) {
           return SuccessfullyCompleted(
             successTitle: AppLocalizations.of(context)!.accountActivated,
             nextText: AppLocalizations.of(context)!.backToLogin,
