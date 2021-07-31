@@ -10,6 +10,7 @@ import 'package:bitecope/config/themes/theme.dart';
 import 'package:bitecope/core/authentication/bloc/authentication_bloc.dart';
 import 'package:bitecope/modules/sign_in/cubit/siginin_cubit.dart';
 import 'package:bitecope/modules/sign_in/screens/email_not_verified.dart';
+import 'package:bitecope/modules/sign_in/screens/owner_not_subscribed.dart';
 import 'package:bitecope/widgets/custom_back_button.dart';
 import 'package:bitecope/widgets/form_field_decoration.dart';
 import 'package:bitecope/widgets/gradient_widget.dart';
@@ -49,7 +50,7 @@ class _SignInState extends State<SignIn> {
             gradient: AppGradients.primaryGradient,
             child: Text(
               AppLocalizations.of(context)!.signIn,
-              style: Theme.of(context).appBarTheme.textTheme?.headline4,
+              style: Theme.of(context).appBarTheme.textTheme?.headline6,
             ),
           ),
         ),
@@ -180,9 +181,11 @@ class _SignInState extends State<SignIn> {
               EmailNotVerified(username: state.username.value!),
         ));
         break;
-      case SignInStatus.ownerActivate: //This is for owner accounts
-        //TODO Push to owner subscription screen
-        //  (or maybe we should just let the authbloc handle this)
+      case SignInStatus.ownerActivate:
+        Navigator.of(context).push(MaterialPageRoute(
+          builder: (context) =>
+              OwnerNotSubscribed(username: state.username.value!),
+        ));
         break;
       case SignInStatus.ownerInactive: //This is for worker accounts
         //TODO Push to owner inactive screen
