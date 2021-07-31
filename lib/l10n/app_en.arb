@@ -131,10 +131,6 @@
     "@worker": {
       "description": "Label text for worker radio button"
     },
-    "ownerName": "Owner Name",
-    "@ownerName": {
-      "description": "Label text for owner name field"
-    },
     "agreeTerms": "I agree to the ",
     "@agreeTerms": {
       "description": "Label text (partial) for terms and condition agreement"
@@ -250,5 +246,41 @@
     "verify": "Verify",
     "@verify": {
       "description": "Button text for verify"
+    },
+    "ownerName": "Owner Name",
+    "@ownerName": {
+      "description": "Label text for owner name field"
+    },
+    "workerDetails": "Worker Details",
+    "@workerDetails": {
+      "description": "Title text for worker initialize page"
+    },
+    "ownerUsername": "Owner Username",
+    "@ownerUsername": {
+      "description": "Label text for owner username field"
+    },
+    "workerName": "Worker Name",
+    "@workerName": {
+      "description": "Label text for worker name field"
+    },
+    "workerAddress": "Worker Address",
+    "@workerAddress": {
+      "description": "Label text for worker address field"
+    },
+    "userDescription": "About Yourself",
+    "@userDescription": {
+      "description": "Label text for user description field"
+    },
+    "ownerUsernameEmpty": "Please enter owner username",
+    "@ownerUsernameEmpty": {
+      "description": "Error text for empty owner username field"
+    },
+    "workerNameEmpty": "Please enter worker name",
+    "@workerNameEmpty": {
+      "description": "Error text for empty worker name field"
+    },
+    "workerAddressEmpty": "Please enter worker address",
+    "@workerAddressEmpty": {
+      "description": "Error text for empty worker address field"
     }
 }

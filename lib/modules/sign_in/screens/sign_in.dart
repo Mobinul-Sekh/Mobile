@@ -7,6 +7,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 // Project imports:
 import 'package:bitecope/config/themes/theme.dart';
+import 'package:bitecope/core/authentication/bloc/authentication_bloc.dart';
 import 'package:bitecope/modules/sign_in/cubit/siginin_cubit.dart';
 import 'package:bitecope/modules/sign_in/screens/email_not_verified.dart';
 import 'package:bitecope/widgets/custom_back_button.dart';
@@ -179,22 +180,28 @@ class _SignInState extends State<SignIn> {
               EmailNotVerified(username: state.username.value!),
         ));
         break;
-      case SignInStatus.activate:
-      //TODO Push to owner activation and break
-      case SignInStatus.ownerInitialize:
-      //TODO Push to owner initialize and break
-      case SignInStatus.workerInitialize:
-      //TODO Push to worker initialize and break
+      case SignInStatus.ownerActivate: //This is for owner accounts
+        //TODO Push to owner subscription screen
+        //  (or maybe we should just let the authbloc handle this)
+        break;
+      case SignInStatus.ownerInactive: //This is for worker accounts
+        //TODO Push to owner inactive screen
+        //  (or maybe we should just let the authbloc handle this)
+        break;
       case SignInStatus.signedIn:
-        Navigator.of(context)
-            .pushNamedAndRemoveUntil('/home', ModalRoute.withName('/'));
+        context.read<AuthenticationBloc>().signedIn(
+              state.username.value!,
+              state.token!,
+              state.expiresIn!,
+            );
+        Navigator.of(context).popUntil(ModalRoute.withName('/'));
         break;
     }
   }
 
   Widget signInButton(SignInStatus status) {
     return RoundedWideButton(
-      onTap: status == SignInStatus.signIn
+      onTap: status != SignInStatus.signingIn
           ? () {
               context.read<SignInBloc>().validateSignInPage(
                     username: _usernameController.text,
@@ -202,7 +209,7 @@ class _SignInState extends State<SignIn> {
                   );
             }
           : null,
-      child: status == SignInStatus.signIn
+      child: status != SignInStatus.signingIn
           ? GradientWidget(
               gradient: AppGradients.primaryGradient,
               child: Text(

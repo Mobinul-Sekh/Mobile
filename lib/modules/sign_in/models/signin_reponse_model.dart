@@ -1,6 +1,7 @@
 // Dart imports:
 import 'dart:convert';
 
+// Project imports:
 import 'package:bitecope/config/utils/extensions/map_extension.dart';
 
 class SignInResponseModel {

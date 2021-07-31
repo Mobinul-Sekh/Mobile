@@ -14,27 +14,10 @@ void main() {
     tearDown(() {
       authenticationBloc.close();
     });
-    test('Start |  Status: Loading', () {
+    test('Start | Status: Loading', () {
       expect(
         authenticationBloc.state,
         AuthenticationState(),
-      );
-    });
-    test('Null Token | Status: Logged Out', () {
-      authenticationBloc.setStatus();
-      expect(
-        authenticationBloc.state,
-        AuthenticationState(status: AuthenticationStatus.loggedOut),
-      );
-    });
-    test('Valid Token | Status: Logged In', () {
-      authenticationBloc.setStatus('dummyToken');
-      expect(
-        authenticationBloc.state,
-        AuthenticationState(
-          status: AuthenticationStatus.loggedIn,
-          token: 'dummyToken',
-        ),
       );
     });
   });

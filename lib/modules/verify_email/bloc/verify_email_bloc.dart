@@ -1,5 +1,4 @@
 // Flutter imports:
-import 'package:bitecope/core/common/models/account_status_response.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -7,6 +6,7 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 
 // Project imports:
+import 'package:bitecope/core/common/models/account_status_response.dart';
 import 'package:bitecope/modules/verify_email/models/resend_otp_response.dart';
 import 'package:bitecope/modules/verify_email/models/verify_email_response.dart';
 import 'package:bitecope/modules/verify_email/repositories/verify_email_repository.dart';
