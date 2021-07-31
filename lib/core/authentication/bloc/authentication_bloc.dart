@@ -2,11 +2,11 @@
 import 'dart:async';
 
 // Package imports:
-import 'package:bitecope/core/common/models/logout_response.dart';
 import 'package:bloc/bloc.dart';
 
 // Project imports:
 import 'package:bitecope/core/common/models/account_status_response.dart';
+import 'package:bitecope/core/common/models/logout_response.dart';
 import 'package:bitecope/core/common/repositories/common_repository.dart';
 
 // Project imports:

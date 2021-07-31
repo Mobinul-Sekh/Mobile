@@ -1,10 +1,14 @@
 // Flutter imports:
-import 'package:bitecope/config/themes/theme.dart';
-import 'package:bitecope/widgets/gradient_widget.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:bitecope/core/authentication/bloc/authentication_bloc.dart';
-import 'package:bitecope/widgets/rounded_wide_button.dart';
 import 'package:flutter/material.dart';
+
+// Package imports:
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+// Project imports:
+import 'package:bitecope/config/themes/theme.dart';
+import 'package:bitecope/core/authentication/bloc/authentication_bloc.dart';
+import 'package:bitecope/widgets/gradient_widget.dart';
+import 'package:bitecope/widgets/rounded_wide_button.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);

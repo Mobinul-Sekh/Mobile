@@ -130,10 +130,12 @@ class SplashScreen extends StatelessWidget {
         //TODO Push to owner subscription
         break;
       case AuthenticationStatus.ownerInitialize:
-        //TODO Push to owner initialize
+        //TODO Push to owner initialize; pushing to home for now
+        Navigator.of(context).pushReplacementNamed('/home');
         break;
       case AuthenticationStatus.ownerInactive:
-        //TODO Push to owner inactive error page for woker sign-in
+        //TODO Push to owner inactive error page for woker sign-in; pushing to home for now
+        Navigator.of(context).pushReplacementNamed('/home');
         break;
       case AuthenticationStatus.workerInitialize:
         Navigator.of(context).pushNamed('/workerInitialize');

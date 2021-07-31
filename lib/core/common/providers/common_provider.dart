@@ -1,11 +1,11 @@
 // Package imports:
-import 'package:bitecope/core/common/models/logout_request.dart';
 import 'package:dio/dio.dart';
 
 // Project imports:
 import 'package:bitecope/config/constants/app_urls.dart';
 import 'package:bitecope/config/utils/extensions/response_extension.dart';
 import 'package:bitecope/core/common/models/account_status_request.dart';
+import 'package:bitecope/core/common/models/logout_request.dart';
 
 class CommonProvider {
   static final Dio dio = Dio();

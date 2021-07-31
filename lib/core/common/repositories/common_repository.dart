@@ -1,11 +1,11 @@
 // Package imports:
-import 'package:bitecope/core/common/models/logout_request.dart';
-import 'package:bitecope/core/common/models/logout_response.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 // Project imports:
 import 'package:bitecope/core/common/models/account_status_request.dart';
 import 'package:bitecope/core/common/models/account_status_response.dart';
+import 'package:bitecope/core/common/models/logout_request.dart';
+import 'package:bitecope/core/common/models/logout_response.dart';
 import 'package:bitecope/core/common/providers/common_provider.dart';
 
 class CommonRepository {
