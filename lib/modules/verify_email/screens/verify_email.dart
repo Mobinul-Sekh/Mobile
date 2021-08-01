@@ -14,10 +14,10 @@ import 'package:bitecope/config/themes/theme.dart';
 import 'package:bitecope/config/utils/extensions/int_extension.dart';
 import 'package:bitecope/modules/verify_email/bloc/verify_email_bloc.dart';
 import 'package:bitecope/modules/verify_email/components/otp_text_fields.dart';
-import 'package:bitecope/modules/verify_email/screens/verification_complete.dart';
 import 'package:bitecope/widgets/gradient_widget.dart';
 import 'package:bitecope/widgets/rounded_wide_button.dart';
 import 'package:bitecope/widgets/snackbar_message.dart';
+import 'package:bitecope/widgets/successfully_completed.dart';
 import 'package:bitecope/widgets/underlined_title.dart';
 
 class VerifyEmailArguments {
@@ -164,10 +164,15 @@ class _VerifyEmailState extends State<VerifyEmail> with WidgetsBindingObserver {
     }
     if (state.verifyEmailStatus == VerifyEmailStatus.done) {
       Navigator.of(context).pushAndRemoveUntil(
-          MaterialPageRoute(
-            builder: (context) => const VerificationComplete(),
-          ),
-          ModalRoute.withName('/'));
+        MaterialPageRoute(builder: (context) {
+          return SuccessfullyCompleted(
+            successTitle: AppLocalizations.of(context)!.emailVerified,
+            nextText: AppLocalizations.of(context)!.backToLogin,
+            nextCallback: () => Navigator.of(context).pushNamed('/signIn'),
+          );
+        }),
+        ModalRoute.withName('/'),
+      );
     }
   }
 

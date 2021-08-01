@@ -11,6 +11,7 @@ import 'package:bitecope/config/themes/theme.dart';
 import 'package:bitecope/core/authentication/bloc/authentication_bloc.dart';
 import 'package:bitecope/gen/assets.gen.dart';
 import 'package:bitecope/gen/fonts.gen.dart';
+import 'package:bitecope/modules/owner_subscription/screens/owner_subscription.dart';
 import 'package:bitecope/utils/ui_utils/wave_clipper.dart';
 import 'package:bitecope/widgets/rounded_wide_button.dart';
 
@@ -127,7 +128,10 @@ class SplashScreen extends StatelessWidget {
         Navigator.of(context).pushReplacementNamed('/home');
         break;
       case AuthenticationStatus.ownerActivate:
-        //TODO Push to owner subscription
+        Navigator.of(context).pushNamed(
+          '/ownerSubscription',
+          arguments: OwnerSubscriptionArguments(username: state.username!),
+        );
         break;
       case AuthenticationStatus.ownerInitialize:
         //TODO Push to owner initialize; pushing to home for now

@@ -9,9 +9,17 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:bitecope/config/themes/theme.dart';
 import 'package:bitecope/widgets/rounded_wide_button.dart';
 
-// TODO String Literals => AppLoalization
-class VerificationComplete extends StatelessWidget {
-  const VerificationComplete({Key? key}) : super(key: key);
+class SuccessfullyCompleted extends StatelessWidget {
+  final String successTitle;
+  final String nextText;
+  final GestureTapCallback nextCallback;
+
+  const SuccessfullyCompleted({
+    Key? key,
+    required this.successTitle,
+    required this.nextText,
+    required this.nextCallback,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +52,7 @@ class VerificationComplete extends StatelessWidget {
                         ),
                         const SizedBox(height: 36),
                         Text(
-                          AppLocalizations.of(context)!.emailVerified,
+                          successTitle,
                           textAlign: TextAlign.center,
                           style: Theme.of(context)
                               .textTheme
@@ -81,15 +89,12 @@ class VerificationComplete extends StatelessWidget {
               const SizedBox(height: 20),
               RoundedWideButton(
                 width: 310,
-                onTap: () {
-                  Navigator.of(context).pushNamedAndRemoveUntil(
-                      '/signIn', ModalRoute.withName('/'));
-                },
+                onTap: nextCallback,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      AppLocalizations.of(context)!.backToLogin,
+                      nextText,
                       style: Theme.of(context)
                           .textTheme
                           .headline6

@@ -282,5 +282,37 @@
     "workerAddressEmpty": "Please enter worker address",
     "@workerAddressEmpty": {
       "description": "Error text for empty worker address field"
+    },
+    "subscription": "Subscription",
+    "@subscription": {
+      "description": "Title text for owner subscription page"
+    },
+    "activationKey": "Activation Key",
+    "@activationKey": {
+      "description": "Label text for activation key field"
+    },
+    "activate": "Activate",
+    "@activate": {
+      "description": "Button text for activate"
+    },
+    "keyEmpty": "Please enter a key",
+    "@keyEmpty": {
+      "description": "Error text for empty key field"
+    },
+    "notSubscribed": "Your account is not subscribed",
+    "@notSubscribed": {
+      "description": "Error text for not subscribed page"
+    },
+    "subscribeToUse": "Please subscribe to use the services",
+    "@subscribeToUse": {
+      "description": "Text prompt to subscribe in the not subscribed page"
+    },
+    "subscribe": "Subscribe",
+    "@subscribe": {
+      "description": "Button text for subscribe"
+    },
+    "accountActivated": "Account is successfully activated",
+    "@accountActivated": {
+      "description": "Text prompt for successful subscription"
     }
 }

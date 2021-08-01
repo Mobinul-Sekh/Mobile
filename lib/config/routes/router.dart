@@ -7,6 +7,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 // Project imports:
 import 'package:bitecope/modules/home/screens/home.dart';
 import 'package:bitecope/modules/not_found/screens/not_found.dart';
+import 'package:bitecope/modules/owner_subscription/bloc/owner_subscription_bloc.dart';
+import 'package:bitecope/modules/owner_subscription/repositories/owner_subscription_repository.dart';
+import 'package:bitecope/modules/owner_subscription/screens/owner_subscription.dart';
 import 'package:bitecope/modules/sign_in/cubit/siginin_cubit.dart';
 import 'package:bitecope/modules/sign_in/repositories/sign_in_repository.dart';
 import 'package:bitecope/modules/sign_in/screens/sign_in.dart';
@@ -50,6 +53,18 @@ class AppRouter {
               username: _verifyEmailArguments.username,
             ),
             child: const VerifyEmail(),
+          );
+        });
+      case '/ownerSubscription':
+        return MaterialPageRoute(builder: (_) {
+          final OwnerSubscriptionArguments _ownerSubscriptionArguments =
+              routeSettings.arguments! as OwnerSubscriptionArguments;
+          return BlocProvider<OwnerSubscriptionBloc>(
+            create: (context) => OwnerSubscriptionBloc(
+              OwnerSubscriptionRepository(),
+              username: _ownerSubscriptionArguments.username,
+            ),
+            child: OwnerSubscription(),
           );
         });
       case '/signIn':

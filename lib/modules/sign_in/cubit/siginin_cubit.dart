@@ -72,10 +72,10 @@ class SignInBloc extends Cubit<SignInState> {
       }
 
       final bool _emailStatus = _isEmailVerified(response);
+      if (!_emailStatus) return;
       final bool _activeStatus = _isActive(response);
-      if (_emailStatus && _activeStatus) {
-        _loginUser();
-      }
+      if (!_activeStatus) return;
+      _loginUser();
     }
   }
 
@@ -91,8 +91,6 @@ class SignInBloc extends Cubit<SignInState> {
     if (!accountStatus.activeStatus!) {
       if (accountStatus.userType == 0) {
         emit(state.copyWith(
-          error: (BuildContext context) =>
-              AppLocalizations.of(context)!.inactiveOwner,
           signInStatus: SignInStatus.ownerActivate,
         ));
       } else {
