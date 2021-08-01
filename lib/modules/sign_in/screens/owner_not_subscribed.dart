@@ -34,9 +34,10 @@ class OwnerNotSubscribed extends StatelessWidget {
                       children: [
                         Text(
                           AppLocalizations.of(context)!.notSubscribed,
+                          textAlign: TextAlign.center,
                           style: Theme.of(context)
                               .textTheme
-                              .headline6
+                              .bodyText1
                               ?.copyWith(color: Theme.of(context).errorColor),
                         ),
                         const SizedBox(height: 18),
