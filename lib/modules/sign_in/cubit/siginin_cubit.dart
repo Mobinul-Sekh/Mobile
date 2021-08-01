@@ -72,10 +72,10 @@ class SignInBloc extends Cubit<SignInState> {
       }
 
       final bool _emailStatus = _isEmailVerified(response);
+      if (!_emailStatus) return;
       final bool _activeStatus = _isActive(response);
-      if (_emailStatus && _activeStatus) {
-        _loginUser();
-      }
+      if (!_activeStatus) return;
+      _loginUser();
     }
   }
 
