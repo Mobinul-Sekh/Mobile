@@ -7,12 +7,14 @@ import 'package:bitecope/widgets/gradient_widget.dart';
 
 class UnderlinedTitle extends StatefulWidget {
   final String title;
+  final TextStyle? style;
   final Gradient gradient;
   final double underlineOvershoot;
 
   const UnderlinedTitle({
     Key? key,
     required this.title,
+    this.style,
     this.gradient = AppGradients.primaryGradient,
     this.underlineOvershoot = 60,
   }) : super(key: key);
@@ -46,7 +48,7 @@ class _UnderlinedTitleState extends State<UnderlinedTitle> {
             gradient: widget.gradient,
             child: Text(
               widget.title,
-              style: Theme.of(context).textTheme.headline5,
+              style: widget.style ?? Theme.of(context).textTheme.headline5,
             ),
           ),
           const SizedBox(height: 3),

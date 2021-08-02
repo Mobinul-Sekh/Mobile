@@ -41,16 +41,24 @@ class AppTheme {
       primaryColor: AppColors.nearBlack,
       accentColor: AppColors.orange1,
       backgroundColor: AppColors.lightGrey,
+      scaffoldBackgroundColor: AppColors.lightGrey,
       errorColor: AppColors.red,
       shadowColor: AppColors.shadowBlack,
       appBarTheme: const AppBarTheme(
         backgroundColor: AppColors.nearBlack,
         centerTitle: true,
         brightness: Brightness.dark,
+        elevation: 0,
         textTheme: TextTheme(
+          headline5: TextStyle(
+            fontFamily: 'Poppins',
+            fontSize: 24,
+            fontWeight: FontWeight.w300,
+          ),
           headline6: TextStyle(
-            fontSize: 28,
-            fontWeight: FontWeight.w600,
+            fontFamily: 'Poppins',
+            fontSize: 20,
+            fontWeight: FontWeight.w300,
           ),
         ),
       ),
