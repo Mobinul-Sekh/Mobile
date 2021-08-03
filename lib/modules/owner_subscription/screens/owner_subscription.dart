@@ -123,7 +123,7 @@ class OwnerSubscription extends StatelessWidget {
             successTitle: AppLocalizations.of(context)!.accountActivated,
             nextText: AppLocalizations.of(context)!.backToLogin,
             nextCallback: () {
-              Navigator.of(context).pushNamed('/signIn');
+              Navigator.of(context).pushReplacementNamed('/signIn');
             },
           );
         }),

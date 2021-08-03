@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 
 class AppColors {
-  static const lightBlue1 = Color(0xFF2CCEFF);
+  static const lightBlue1 = Color(0xFF30AAFF);
   static const lightBlue2 = Color(0xFF33CFFF);
   static const orange1 = Color(0xFFF15A24);
   static const orange2 = Color(0xFFF68F1F);
@@ -41,16 +41,24 @@ class AppTheme {
       primaryColor: AppColors.nearBlack,
       accentColor: AppColors.orange1,
       backgroundColor: AppColors.lightGrey,
+      scaffoldBackgroundColor: AppColors.lightGrey,
       errorColor: AppColors.red,
       shadowColor: AppColors.shadowBlack,
       appBarTheme: const AppBarTheme(
         backgroundColor: AppColors.nearBlack,
         centerTitle: true,
         brightness: Brightness.dark,
+        elevation: 0,
         textTheme: TextTheme(
+          headline5: TextStyle(
+            fontFamily: 'Poppins',
+            fontSize: 24,
+            fontWeight: FontWeight.w300,
+          ),
           headline6: TextStyle(
-            fontSize: 28,
-            fontWeight: FontWeight.w600,
+            fontFamily: 'Poppins',
+            fontSize: 20,
+            fontWeight: FontWeight.w300,
           ),
         ),
       ),
@@ -128,6 +136,7 @@ class AppTheme {
           fontSize: 14,
           fontWeight: FontWeight.w500,
           letterSpacing: 1.25,
+          color: AppColors.white,
         ),
         caption: TextStyle(
           fontFamily: 'Poppins',
@@ -147,29 +156,6 @@ class AppTheme {
       floatingActionButtonTheme: theme.floatingActionButtonTheme.copyWith(
         backgroundColor: AppColors.nearBlack,
         elevation: 3,
-      ),
-      textButtonTheme: TextButtonThemeData(
-        style: ButtonStyle(
-          padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
-            const EdgeInsets.symmetric(
-              vertical: 6,
-              horizontal: 12,
-            ),
-          ),
-        ),
-      ),
-      elevatedButtonTheme: ElevatedButtonThemeData(
-        style: ButtonStyle(
-          backgroundColor:
-              MaterialStateProperty.all<Color>(AppColors.nearBlack),
-          elevation: MaterialStateProperty.all<double>(2),
-          padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
-            const EdgeInsets.symmetric(
-              vertical: 6,
-              horizontal: 12,
-            ),
-          ),
-        ),
       ),
     );
   }

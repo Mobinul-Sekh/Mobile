@@ -14,6 +14,7 @@ import 'package:bitecope/config/themes/theme.dart';
 import 'package:bitecope/config/utils/extensions/int_extension.dart';
 import 'package:bitecope/modules/verify_email/bloc/verify_email_bloc.dart';
 import 'package:bitecope/modules/verify_email/components/otp_text_fields.dart';
+import 'package:bitecope/widgets/gradient_button.dart';
 import 'package:bitecope/widgets/gradient_widget.dart';
 import 'package:bitecope/widgets/rounded_wide_button.dart';
 import 'package:bitecope/widgets/snackbar_message.dart';
@@ -168,7 +169,8 @@ class _VerifyEmailState extends State<VerifyEmail> with WidgetsBindingObserver {
           return SuccessfullyCompleted(
             successTitle: AppLocalizations.of(context)!.emailVerified,
             nextText: AppLocalizations.of(context)!.backToLogin,
-            nextCallback: () => Navigator.of(context).pushNamed('/signIn'),
+            nextCallback: () =>
+                Navigator.of(context).pushReplacementNamed('/signIn'),
           );
         }),
         ModalRoute.withName('/'),
@@ -275,32 +277,32 @@ class _VerifyEmailState extends State<VerifyEmail> with WidgetsBindingObserver {
             style: Theme.of(context).textTheme.caption,
           ),
           actions: [
-            TextButton(
-              onPressed: () => Navigator.of(context).maybePop(),
+            GradientButton(
+              onTap: () => Navigator.of(context).maybePop(),
               child: Text(
                 AppLocalizations.of(context)!.cancel,
                 style: Theme.of(context)
                     .textTheme
                     .button
-                    ?.copyWith(color: AppColors.black),
+                    ?.copyWith(color: AppColors.red),
               ),
             ),
-            ElevatedButton(
-              onPressed: state.resendOTPStatus != ResendOTPStatus.resending
+            GradientButton(
+              onTap: state.resendOTPStatus != ResendOTPStatus.resending
                   ? () => context.read<VerifyEmailBloc>().resendOTP()
                   : null,
+              backgroundGradient: AppGradients.primaryGradient,
               child: state.resendOTPStatus != ResendOTPStatus.resending
-                  ? GradientWidget(
-                      gradient: AppGradients.primaryGradient,
-                      child: Text(
-                        AppLocalizations.of(context)!.resend,
-                        style: Theme.of(context).textTheme.button,
-                      ),
+                  ? Text(
+                      AppLocalizations.of(context)!.resend,
+                      style: Theme.of(context).textTheme.button,
                     )
                   : const SizedBox(
                       height: 15,
                       width: 15,
-                      child: CircularProgressIndicator(),
+                      child: CircularProgressIndicator(
+                        color: AppColors.white,
+                      ),
                     ),
             ),
           ],

@@ -11,6 +11,7 @@ import 'package:bitecope/core/authentication/bloc/authentication_bloc.dart';
 import 'package:bitecope/modules/worker_initialize/bloc/worker_initialize_bloc.dart';
 import 'package:bitecope/widgets/form_field_decoration.dart';
 import 'package:bitecope/widgets/gradient_widget.dart';
+import 'package:bitecope/widgets/required_field_label.dart';
 import 'package:bitecope/widgets/rounded_wide_button.dart';
 import 'package:bitecope/widgets/underlined_title.dart';
 
@@ -66,23 +67,10 @@ class WorkerInitialize extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: [
                           const SizedBox(height: 36),
-                          RichText(
-                            text: TextSpan(
-                              style: Theme.of(context).textTheme.caption,
-                              children: [
-                                TextSpan(
-                                  text: AppLocalizations.of(context)!
-                                      .ownerUsername,
-                                ),
-                                TextSpan(
-                                  text: " *",
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .caption
-                                      ?.copyWith(color: AppColors.orange1),
-                                ),
-                              ],
-                            ),
+                          requiredFieldLabel(
+                            context,
+                            labelText:
+                                AppLocalizations.of(context)!.ownerUsername,
                           ),
                           TextField(
                             controller: _ownerNameController,
@@ -102,23 +90,9 @@ class WorkerInitialize extends StatelessWidget {
                             ),
                           ),
                           const SizedBox(height: 54),
-                          RichText(
-                            text: TextSpan(
-                              style: Theme.of(context).textTheme.caption,
-                              children: [
-                                TextSpan(
-                                  text:
-                                      AppLocalizations.of(context)!.workerName,
-                                ),
-                                TextSpan(
-                                  text: " *",
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .caption
-                                      ?.copyWith(color: AppColors.orange1),
-                                ),
-                              ],
-                            ),
+                          requiredFieldLabel(
+                            context,
+                            labelText: AppLocalizations.of(context)!.workerName,
                           ),
                           TextField(
                             controller: _workerNameController,
@@ -138,23 +112,10 @@ class WorkerInitialize extends StatelessWidget {
                             ),
                           ),
                           const SizedBox(height: 54),
-                          RichText(
-                            text: TextSpan(
-                              style: Theme.of(context).textTheme.caption,
-                              children: [
-                                TextSpan(
-                                  text: AppLocalizations.of(context)!
-                                      .workerAddress,
-                                ),
-                                TextSpan(
-                                  text: " *",
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .caption
-                                      ?.copyWith(color: AppColors.orange1),
-                                ),
-                              ],
-                            ),
+                          requiredFieldLabel(
+                            context,
+                            labelText:
+                                AppLocalizations.of(context)!.workerAddress,
                           ),
                           TextField(
                             controller: _workerAddressController,
