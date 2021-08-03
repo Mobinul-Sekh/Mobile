@@ -3,22 +3,25 @@ import 'package:flutter/material.dart';
 
 // Project imports:
 import 'package:bitecope/config/themes/theme.dart';
-import 'package:bitecope/core/common/components/listing_tile_data.dart';
 import 'package:bitecope/widgets/custom_back_button.dart';
 import 'package:bitecope/widgets/gradient_widget.dart';
 import 'package:bitecope/widgets/snackbar_message.dart';
 import 'package:bitecope/widgets/underlined_title.dart';
 
-class Listing extends StatelessWidget {
+class Listing<T> extends StatelessWidget {
   final String title;
-  final List<ListingTile>? tiles;
+  final List<T>? data;
+  final String Function(T) getText;
+  final void Function(BuildContext, T)? onTap;
   final Widget? onEmpty;
   final Widget? onLoading;
 
   const Listing({
     Key? key,
     required this.title,
-    this.tiles,
+    this.data,
+    required this.getText,
+    this.onTap,
     this.onEmpty,
     this.onLoading,
   }) : super(key: key);
@@ -39,9 +42,9 @@ class Listing extends StatelessWidget {
             underlineOvershoot: 0,
           ),
         ),
-        body: tiles == null
+        body: data == null
             ? onLoading ?? const Center(child: CircularProgressIndicator())
-            : tiles!.isEmpty
+            : data!.isEmpty
                 ? onEmpty ?? const Center(child: Text("Empty"))
                 : GridView.builder(
                     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -57,8 +60,8 @@ class Listing extends StatelessWidget {
                     itemBuilder: (context, index) {
                       return InkWell(
                         onTap: () {
-                          if (tiles![index].route != null) {
-                            Navigator.of(context).push(tiles![index].route!);
+                          if (onTap != null) {
+                            onTap!(context, data![index]);
                           }
                         },
                         borderRadius: BorderRadius.circular(12),
@@ -77,7 +80,7 @@ class Listing extends StatelessWidget {
                           padding: const EdgeInsets.all(6),
                           child: Center(
                             child: Text(
-                              tiles![index].text,
+                              getText(data![index]),
                               textAlign: TextAlign.center,
                               overflow: TextOverflow.ellipsis,
                               softWrap: false,
@@ -90,7 +93,7 @@ class Listing extends StatelessWidget {
                         ),
                       );
                     },
-                    itemCount: tiles!.length,
+                    itemCount: data!.length,
                   ),
         floatingActionButton: FloatingActionButton(
           onPressed: () {

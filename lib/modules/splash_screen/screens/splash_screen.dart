@@ -37,7 +37,7 @@ class SplashScreen extends StatelessWidget {
             ),
             Column(
               children: [
-                SvgPicture.asset(Assets.images.logo),
+                SvgPicture.asset(Assets.images.logo, width: 125, height: 125),
                 Text(
                   AppLocalizations.of(context)!.appName,
                   style: Theme.of(context).textTheme.headline4?.copyWith(

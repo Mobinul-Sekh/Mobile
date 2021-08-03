@@ -1,24 +1,9 @@
-// Flutter imports:
-import 'package:flutter/material.dart';
-
-// Project imports:
-import 'package:bitecope/core/common/components/listing_tile_data.dart';
-import 'package:bitecope/modules/suppliers/screens/view_supplier.dart';
-
-class Supplier implements ListingTile {
+class Supplier {
   String id;
   String name;
   String phoneNumber;
   String address;
   String? description;
-
-  @override
-  String get text => name;
-
-  @override
-  Route? get route => MaterialPageRoute(
-        builder: (context) => ViewSupplier(supplier: this),
-      );
 
   Supplier({
     required this.id,

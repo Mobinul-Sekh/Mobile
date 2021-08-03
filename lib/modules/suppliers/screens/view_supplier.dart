@@ -1,11 +1,16 @@
 // Flutter imports:
 import 'package:flutter/material.dart';
 
+// Package imports:
+import 'package:flutter_svg/flutter_svg.dart';
+
 // Project imports:
 import 'package:bitecope/config/themes/theme.dart';
 import 'package:bitecope/modules/suppliers/models/supplier.dart';
+import 'package:bitecope/widgets/block_button.dart';
 import 'package:bitecope/widgets/custom_back_button.dart';
 import 'package:bitecope/widgets/form_field_decoration.dart';
+import 'package:bitecope/widgets/gradient_widget.dart';
 import 'package:bitecope/widgets/required_field_label.dart';
 import 'package:bitecope/widgets/snackbar_message.dart';
 import 'package:bitecope/widgets/underlined_title.dart';
@@ -135,7 +140,7 @@ class ViewSupplier extends StatelessWidget {
         floatingActionButton: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
-            InkWell(
+            BlockButton(
               onTap: () {
                 //TODO
                 snackbarMessage(
@@ -144,29 +149,10 @@ class ViewSupplier extends StatelessWidget {
                   MessageType.warning,
                 );
               },
-              borderRadius: const BorderRadius.only(
-                topLeft: Radius.circular(12),
-                bottomLeft: Radius.circular(12),
-              ),
-              child: Ink(
-                width: 100,
-                height: 60,
-                decoration: const BoxDecoration(
-                  color: AppColors.lightGrey,
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(12),
-                    bottomLeft: Radius.circular(12),
-                  ),
-                  boxShadow: [
-                    BoxShadow(
-                      color: AppColors.shadowBlack,
-                      blurRadius: 12,
-                      spreadRadius: 1,
-                      offset: Offset(-3, 0),
-                    ),
-                  ],
-                ),
-                child: const Center(
+              position: BlockPosition.left,
+              child: const Center(
+                child: GradientWidget(
+                  gradient: AppGradients.primaryGradient,
                   child: Icon(
                     Icons.edit,
                     size: 36,
@@ -174,8 +160,7 @@ class ViewSupplier extends StatelessWidget {
                 ),
               ),
             ),
-            const SizedBox(width: 2),
-            InkWell(
+            BlockButton(
               onTap: () {
                 //TODO
                 snackbarMessage(
@@ -184,33 +169,12 @@ class ViewSupplier extends StatelessWidget {
                   MessageType.warning,
                 );
               },
-              borderRadius: const BorderRadius.only(
-                topRight: Radius.circular(12),
-                bottomRight: Radius.circular(12),
-              ),
-              child: Ink(
-                width: 100,
-                height: 60,
-                decoration: const BoxDecoration(
-                  color: AppColors.lightGrey,
-                  borderRadius: BorderRadius.only(
-                    topRight: Radius.circular(12),
-                    bottomRight: Radius.circular(12),
-                  ),
-                  boxShadow: [
-                    BoxShadow(
-                      color: AppColors.shadowBlack,
-                      blurRadius: 12,
-                      spreadRadius: 1,
-                      offset: Offset(3, 0),
-                    ),
-                  ],
-                ),
-                child: const Center(
-                  child: Icon(
-                    Icons.delete_forever_outlined,
-                    size: 36,
-                  ),
+              position: BlockPosition.right,
+              child: Center(
+                child: SvgPicture.asset(
+                  'assets/images/delete.svg',
+                  width: 36,
+                  height: 36,
                 ),
               ),
             ),

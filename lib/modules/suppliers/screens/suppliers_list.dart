@@ -6,6 +6,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 // Project imports:
 import 'package:bitecope/modules/suppliers/bloc/supplier_bloc.dart';
+import 'package:bitecope/modules/suppliers/models/supplier.dart';
+import 'package:bitecope/modules/suppliers/screens/view_supplier.dart';
 import 'package:bitecope/widgets/listing.dart';
 
 class SuppliersList extends StatefulWidget {
@@ -20,11 +22,17 @@ class _SuppliersListState extends State<SuppliersList> {
   Widget build(BuildContext context) {
     return BlocBuilder<SupplierBloc, SupplierState>(
       builder: (context, state) {
-        return Listing(
+        return Listing<Supplier>(
           title: "Suppliers",
-          tiles: state.supplierStatus == SupplierStatus.loading
+          data: state.supplierStatus == SupplierStatus.loading
               ? null
               : state.suppliers,
+          getText: (supplier) => supplier.name,
+          onTap: (context, supplier) => Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (_) => ViewSupplier(supplier: supplier),
+            ),
+          ),
         );
       },
     );
