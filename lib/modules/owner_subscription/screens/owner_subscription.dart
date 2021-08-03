@@ -53,7 +53,7 @@ class OwnerSubscription extends StatelessWidget {
                           mainAxisSize: MainAxisSize.min,
                           children: [
                             GradientWidget(
-                              gradient: AppGradients.primaryGradient,
+                              gradient: AppGradients.primaryLinear,
                               child: Text(
                                 AppLocalizations.of(context)!
                                     .checkInbox

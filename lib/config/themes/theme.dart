@@ -13,19 +13,20 @@ class AppColors {
   static const lightGrey = Color(0xFFE5E5E5);
   static const shadowText = Color(0xFF9A9A9A);
   static const nearBlack = Color(0xFF252525);
-  static const shadowBlack = Color(0x19000000);
+  static const shadowBlack = Color(0x19000000); // Opacity 25/255
+  static const darkShadowBlack = Color(0x32000000); // Opacity 50/255
   static const black = Color(0xFF000000);
   static const transparent = Color(0x00000000);
 }
 
 class AppGradients {
-  static const primaryGradient = LinearGradient(
+  static const primaryLinear = LinearGradient(
     colors: <Color>[
       AppColors.lightBlue1,
       AppColors.lightBlue2,
     ],
   );
-  static const accentGradient = LinearGradient(
+  static const accentLinear = LinearGradient(
     colors: <Color>[
       AppColors.orange1,
       AppColors.orange2,
@@ -45,7 +46,7 @@ class AppTheme {
       errorColor: AppColors.red,
       shadowColor: AppColors.shadowBlack,
       appBarTheme: const AppBarTheme(
-        backgroundColor: AppColors.nearBlack,
+        backgroundColor: AppColors.lightGrey,
         centerTitle: true,
         brightness: Brightness.dark,
         elevation: 0,
@@ -152,10 +153,6 @@ class AppTheme {
           letterSpacing: 1.5,
           color: AppColors.black,
         ),
-      ),
-      floatingActionButtonTheme: theme.floatingActionButtonTheme.copyWith(
-        backgroundColor: AppColors.nearBlack,
-        elevation: 3,
       ),
     );
   }

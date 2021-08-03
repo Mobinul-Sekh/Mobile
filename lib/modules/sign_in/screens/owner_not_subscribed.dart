@@ -58,7 +58,7 @@ class OwnerNotSubscribed extends StatelessWidget {
                         ));
                   },
                   child: GradientWidget(
-                    gradient: AppGradients.primaryGradient,
+                    gradient: AppGradients.primaryLinear,
                     child: Text(
                       AppLocalizations.of(context)!.subscribe,
                       style: Theme.of(context).textTheme.headline6,

@@ -21,10 +21,11 @@ class SignUpWrapper extends StatelessWidget {
         backgroundColor: AppColors.nearBlack,
         appBar: AppBar(
           elevation: 0.0,
+          backgroundColor: AppColors.nearBlack,
           centerTitle: false,
           leading: const CustomBackButton(),
           title: GradientWidget(
-            gradient: AppGradients.primaryGradient,
+            gradient: AppGradients.primaryLinear,
             child: Text(
               AppLocalizations.of(context)!.signUp,
               style: Theme.of(context).appBarTheme.textTheme?.headline5,

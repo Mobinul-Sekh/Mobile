@@ -105,7 +105,7 @@ class SuccessfullyCompleted extends StatelessWidget {
                       height: 30,
                       decoration: const BoxDecoration(
                         shape: BoxShape.circle,
-                        gradient: AppGradients.primaryGradient,
+                        gradient: AppGradients.primaryLinear,
                       ),
                       child: const Icon(Icons.arrow_forward_rounded),
                     ),

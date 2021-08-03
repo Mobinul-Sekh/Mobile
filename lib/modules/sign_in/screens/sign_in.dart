@@ -43,11 +43,12 @@ class _SignInState extends State<SignIn> {
       child: Scaffold(
         backgroundColor: AppColors.nearBlack,
         appBar: AppBar(
+          backgroundColor: AppColors.nearBlack,
           elevation: 0,
           leading: const CustomBackButton(),
           centerTitle: false,
           title: GradientWidget(
-            gradient: AppGradients.primaryGradient,
+            gradient: AppGradients.primaryLinear,
             child: Text(
               AppLocalizations.of(context)!.signIn,
               style: Theme.of(context).appBarTheme.textTheme?.headline5,
@@ -143,7 +144,7 @@ class _SignInState extends State<SignIn> {
                                     // TODO Push to forgot password page
                                   },
                                   child: GradientWidget(
-                                    gradient: AppGradients.primaryGradient,
+                                    gradient: AppGradients.primaryLinear,
                                     child: Text(
                                       AppLocalizations.of(context)!
                                           .forgotPassword,
@@ -214,7 +215,7 @@ class _SignInState extends State<SignIn> {
           : null,
       child: status != SignInStatus.signingIn
           ? GradientWidget(
-              gradient: AppGradients.primaryGradient,
+              gradient: AppGradients.primaryLinear,
               child: Text(
                 AppLocalizations.of(context)!.signIn,
                 style: Theme.of(context).textTheme.headline6,

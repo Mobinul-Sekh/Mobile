@@ -31,7 +31,7 @@ class SplashScreen extends StatelessWidget {
                 width: double.infinity,
                 height: MediaQuery.of(context).size.height * 0.4,
                 decoration: const BoxDecoration(
-                  gradient: AppGradients.primaryGradient,
+                  gradient: AppGradients.primaryLinear,
                 ),
               ),
             ),

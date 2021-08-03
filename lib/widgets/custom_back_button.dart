@@ -10,7 +10,7 @@ class CustomBackButton extends StatelessWidget {
     Key? key,
     this.icon = Icons.keyboard_arrow_left_rounded,
     this.size = 42,
-    this.gradient = AppGradients.primaryGradient,
+    this.gradient = AppGradients.primaryLinear,
   }) : super(key: key);
 
   final IconData icon;

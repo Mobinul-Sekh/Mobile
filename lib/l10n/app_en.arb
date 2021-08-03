@@ -314,5 +314,13 @@
     "accountActivated": "Account is successfully activated",
     "@accountActivated": {
       "description": "Text prompt for successful subscription"
+    },
+    "supplierNameEmpty": "Please enter supplier name",
+    "@supplierNameEmpty": {
+      "description": "Error text for empty supplier name field"
+    },
+    "supplierAddressEmpty": "Please enter supplier address",
+    "@supplierAddressEmpty": {
+      "description": "Error text for empty supplier address field"
     }
 }

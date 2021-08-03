@@ -102,7 +102,7 @@ class _SignUpTwoState extends State<SignUpTwo> {
                           });
                         },
                         icon: GradientWidget(
-                          gradient: AppGradients.primaryGradient,
+                          gradient: AppGradients.primaryLinear,
                           child: Container(
                             margin: const EdgeInsets.symmetric(vertical: 12),
                             child: const Icon(
@@ -295,7 +295,7 @@ class _SignUpTwoState extends State<SignUpTwo> {
             : null,
         child: status != SignUpStatus.registering
             ? GradientWidget(
-                gradient: AppGradients.primaryGradient,
+                gradient: AppGradients.primaryLinear,
                 child: Text(
                   AppLocalizations.of(context)!.signUp,
                   style: Theme.of(context).textTheme.headline6,

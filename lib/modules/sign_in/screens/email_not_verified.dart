@@ -31,7 +31,7 @@ class EmailNotVerified extends StatelessWidget {
                 top: MediaQuery.of(context).size.height * 0.2,
                 child: Center(
                   child: GradientWidget(
-                    gradient: AppGradients.primaryGradient,
+                    gradient: AppGradients.primaryLinear,
                     child: Text(
                       AppLocalizations.of(context)!.checkInbox.toUpperCase(),
                       style: Theme.of(context).textTheme.bodyText1,
@@ -68,7 +68,7 @@ class EmailNotVerified extends StatelessWidget {
                           ));
                     },
                     child: GradientWidget(
-                      gradient: AppGradients.primaryGradient,
+                      gradient: AppGradients.primaryLinear,
                       child: Text(
                         AppLocalizations.of(context)!.verify,
                         style: Theme.of(context).textTheme.headline6,

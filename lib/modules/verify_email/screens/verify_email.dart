@@ -90,7 +90,7 @@ class _VerifyEmailState extends State<VerifyEmail> with WidgetsBindingObserver {
                           mainAxisSize: MainAxisSize.min,
                           children: [
                             GradientWidget(
-                              gradient: AppGradients.primaryGradient,
+                              gradient: AppGradients.primaryLinear,
                               child: Text(
                                 AppLocalizations.of(context)!
                                     .checkInbox
@@ -291,7 +291,7 @@ class _VerifyEmailState extends State<VerifyEmail> with WidgetsBindingObserver {
               onTap: state.resendOTPStatus != ResendOTPStatus.resending
                   ? () => context.read<VerifyEmailBloc>().resendOTP()
                   : null,
-              backgroundGradient: AppGradients.primaryGradient,
+              backgroundGradient: AppGradients.primaryLinear,
               child: state.resendOTPStatus != ResendOTPStatus.resending
                   ? Text(
                       AppLocalizations.of(context)!.resend,

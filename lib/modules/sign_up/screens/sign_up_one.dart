@@ -183,7 +183,7 @@ class _SignUpOneState extends State<SignUpOne> {
                     );
               },
               child: GradientWidget(
-                gradient: AppGradients.primaryGradient,
+                gradient: AppGradients.primaryLinear,
                 child: Text(
                   AppLocalizations.of(context)!.next,
                   style: Theme.of(context).textTheme.headline6,

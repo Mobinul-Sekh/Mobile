@@ -15,7 +15,7 @@ class UnderlinedTitle extends StatefulWidget {
     Key? key,
     required this.title,
     this.style,
-    this.gradient = AppGradients.primaryGradient,
+    this.gradient = AppGradients.primaryLinear,
     this.underlineOvershoot = 60,
   }) : super(key: key);
 

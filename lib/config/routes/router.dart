@@ -17,7 +17,7 @@ import 'package:bitecope/modules/sign_up/bloc/sign_up_bloc.dart';
 import 'package:bitecope/modules/sign_up/repositories/sign_up_repository.dart';
 import 'package:bitecope/modules/sign_up/screens/sign_up_one.dart';
 import 'package:bitecope/modules/splash_screen/screens/splash_screen.dart';
-import 'package:bitecope/modules/suppliers/bloc/supplier_bloc.dart';
+import 'package:bitecope/modules/suppliers/bloc/supplier_list_bloc.dart';
 import 'package:bitecope/modules/suppliers/repositories/supplier_repository.dart';
 import 'package:bitecope/modules/suppliers/screens/suppliers_list.dart';
 import 'package:bitecope/modules/verify_email/bloc/verify_email_bloc.dart';
@@ -93,8 +93,8 @@ class AppRouter {
         );
       case '/suppliers':
         return MaterialPageRoute(
-          builder: (_) => BlocProvider<SupplierBloc>(
-            create: (context) => SupplierBloc(SupplierRepository()),
+          builder: (_) => BlocProvider<SupplierListBloc>(
+            create: (context) => SupplierListBloc(SupplierRepository()),
             child: const SuppliersList(),
           ),
         );

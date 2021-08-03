@@ -4,8 +4,6 @@ import 'package:flutter/material.dart';
 // Project imports:
 import 'package:bitecope/config/themes/theme.dart';
 import 'package:bitecope/widgets/custom_back_button.dart';
-import 'package:bitecope/widgets/gradient_widget.dart';
-import 'package:bitecope/widgets/snackbar_message.dart';
 import 'package:bitecope/widgets/underlined_title.dart';
 
 class Listing<T> extends StatelessWidget {
@@ -15,6 +13,7 @@ class Listing<T> extends StatelessWidget {
   final void Function(BuildContext, T)? onTap;
   final Widget? onEmpty;
   final Widget? onLoading;
+  final Widget? actionButton;
 
   const Listing({
     Key? key,
@@ -24,6 +23,7 @@ class Listing<T> extends StatelessWidget {
     this.onTap,
     this.onEmpty,
     this.onLoading,
+    this.actionButton,
   }) : super(key: key);
 
   @override
@@ -95,20 +95,7 @@ class Listing<T> extends StatelessWidget {
                     },
                     itemCount: data!.length,
                   ),
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            snackbarMessage(
-              context,
-              "Not Implemented",
-              MessageType.warning,
-            );
-          },
-          backgroundColor: AppColors.nearBlack,
-          child: const GradientWidget(
-            gradient: AppGradients.primaryGradient,
-            child: Icon(Icons.add, size: 40),
-          ),
-        ),
+        floatingActionButton: data == null ? null : actionButton,
       ),
     );
   }

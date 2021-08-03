@@ -194,7 +194,7 @@ class WorkerInitialize extends StatelessWidget {
               child: CircularProgressIndicator(),
             )
           : GradientWidget(
-              gradient: AppGradients.primaryGradient,
+              gradient: AppGradients.primaryLinear,
               child: Text(
                 AppLocalizations.of(context)!.confirm,
                 style: Theme.of(context).textTheme.headline6,
