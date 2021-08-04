@@ -8,13 +8,13 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 // Project imports:
 import 'package:bitecope/config/themes/theme.dart';
 import 'package:bitecope/core/authentication/bloc/authentication_bloc.dart';
+import 'package:bitecope/core/common/components/custom_back_button.dart';
+import 'package:bitecope/core/common/components/form_field_decoration.dart';
+import 'package:bitecope/core/common/components/gradient_widget.dart';
+import 'package:bitecope/core/common/components/rounded_wide_button.dart';
 import 'package:bitecope/modules/sign_in/cubit/siginin_cubit.dart';
 import 'package:bitecope/modules/sign_in/screens/email_not_verified.dart';
 import 'package:bitecope/modules/sign_in/screens/owner_not_subscribed.dart';
-import 'package:bitecope/widgets/custom_back_button.dart';
-import 'package:bitecope/widgets/form_field_decoration.dart';
-import 'package:bitecope/widgets/gradient_widget.dart';
-import 'package:bitecope/widgets/rounded_wide_button.dart';
 
 class SignIn extends StatefulWidget {
   const SignIn({Key? key}) : super(key: key);

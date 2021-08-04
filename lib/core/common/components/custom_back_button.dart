@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 // Project imports:
 import 'package:bitecope/config/themes/theme.dart';
-import 'package:bitecope/widgets/gradient_widget.dart';
+import 'package:bitecope/core/common/components/gradient_widget.dart';
 
 class CustomBackButton extends StatelessWidget {
   const CustomBackButton({

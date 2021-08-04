@@ -3,14 +3,17 @@ import 'package:flutter/material.dart';
 
 // Package imports:
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 // Project imports:
 import 'package:bitecope/config/themes/theme.dart';
+import 'package:bitecope/core/common/components/custom_back_button.dart';
+import 'package:bitecope/core/common/components/gradient_button.dart';
+import 'package:bitecope/core/common/components/underlined_title.dart';
+import 'package:bitecope/core/common/screens/confirm_operation.dart';
+import 'package:bitecope/core/common/screens/operation_notification.dart';
 import 'package:bitecope/modules/suppliers/bloc/supplier_bloc.dart';
 import 'package:bitecope/modules/suppliers/components/supplier_form.dart';
-import 'package:bitecope/widgets/custom_back_button.dart';
-import 'package:bitecope/widgets/gradient_button.dart';
-import 'package:bitecope/widgets/underlined_title.dart';
 
 class AddSupplier extends StatelessWidget {
   final TextEditingController _nameController = TextEditingController();
@@ -30,7 +33,7 @@ class AddSupplier extends StatelessWidget {
             size: 28,
           ),
           title: UnderlinedTitle(
-            title: "Add Supplier",
+            title: AppLocalizations.of(context)!.addSupplier,
             style: Theme.of(context).appBarTheme.textTheme?.headline6,
             underlineOvershoot: 0,
           ),
@@ -39,9 +42,7 @@ class AddSupplier extends StatelessWidget {
           padding: const EdgeInsets.all(30),
           child: BlocConsumer<SupplierBloc, SupplierState>(
             listener: (context, state) {
-              if (state.supplierStatus == SupplierStatus.done) {
-                Navigator.of(context).popUntil((route) => route.isFirst);
-              }
+              _handleListen(context, state);
             },
             builder: (context, state) {
               return Column(
@@ -80,29 +81,21 @@ class AddSupplier extends StatelessWidget {
                               description: _descriptionController.text,
                             );
                       },
-                      backgroundGradient: AppGradients.primaryLinear,
-                      child: state.supplierStatus == SupplierStatus.loading
-                          ? const SizedBox(
-                              height: 15,
-                              width: 15,
-                              child: CircularProgressIndicator(
-                                color: AppColors.white,
-                              ),
-                            )
-                          : Row(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                const Icon(
-                                  Icons.check_circle,
-                                  color: AppColors.white,
-                                ),
-                                const SizedBox(width: 12),
-                                Text(
-                                  "Confirm",
-                                  style: Theme.of(context).textTheme.button,
-                                ),
-                              ],
-                            ),
+                      gradient: AppGradients.primaryLinear,
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          const Icon(
+                            Icons.check_circle,
+                            color: AppColors.white,
+                          ),
+                          const SizedBox(width: 12),
+                          Text(
+                            AppLocalizations.of(context)!.confirm,
+                            style: Theme.of(context).textTheme.button,
+                          ),
+                        ],
+                      ),
                     ),
                   )
                 ],
@@ -111,6 +104,80 @@ class AddSupplier extends StatelessWidget {
           ),
         ),
       ),
+    );
+  }
+
+  void _handleListen(BuildContext context, SupplierState state) {
+    if (state.supplierStatus == SupplierStatus.validated) {
+      FocusScope.of(context).unfocus();
+      Navigator.of(context).push(
+        MaterialPageRoute(
+          builder: (_) {
+            return BlocProvider.value(
+              value: context.read<SupplierBloc>(),
+              child: Builder(
+                builder: (_context) =>
+                    ConfirmOperation<SupplierBloc, SupplierState>(
+                  confirmationPrompt: _confirmationPrompt(context),
+                  onConfirm: () => _context.read<SupplierBloc>().addSupplier(),
+                  listener: (context, state) {
+                    if (state.supplierStatus == SupplierStatus.ready) {
+                      Navigator.of(context).maybePop();
+                    } else if (state.supplierStatus == SupplierStatus.done) {
+                      Navigator.of(context).pushAndRemoveUntil(
+                        _successPage(),
+                        (route) => route.isFirst,
+                      );
+                    }
+                  },
+                  isLoading: (state) =>
+                      state.supplierStatus == SupplierStatus.loading,
+                ),
+              ),
+            );
+          },
+        ),
+      );
+    }
+  }
+
+  RichText _confirmationPrompt(BuildContext context) {
+    return RichText(
+      text: TextSpan(
+        style: Theme.of(context)
+            .textTheme
+            .bodyText1
+            ?.copyWith(color: AppColors.shadowText),
+        children: [
+          TextSpan(
+            text: AppLocalizations.of(context)!.tryingTo,
+          ),
+          TextSpan(
+            text: AppLocalizations.of(context)!.addNewSupplier,
+            style: Theme.of(context).textTheme.bodyText1,
+          ),
+          TextSpan(
+            text: AppLocalizations.of(context)!.confirmOperation,
+          ),
+        ],
+      ),
+    );
+  }
+
+  Route _successPage() {
+    return MaterialPageRoute(
+      builder: (context) {
+        return OperationNotification(
+          iconPath: "assets/images/cloud_check.svg",
+          title: AppLocalizations.of(context)!.saved,
+          message: AppLocalizations.of(context)!.detailAdded,
+          splashImagePath: "assets/images/astronaut_flag.svg",
+          nextText: AppLocalizations.of(context)!.backToSuppliers,
+          nextCallback: () {
+            Navigator.of(context).pushReplacementNamed('/suppliers');
+          },
+        );
+      },
     );
   }
 }

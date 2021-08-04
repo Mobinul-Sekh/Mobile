@@ -6,9 +6,9 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 // Project imports:
 import 'package:bitecope/config/themes/theme.dart';
+import 'package:bitecope/core/common/components/gradient_widget.dart';
+import 'package:bitecope/core/common/components/rounded_wide_button.dart';
 import 'package:bitecope/modules/verify_email/screens/verify_email.dart';
-import 'package:bitecope/widgets/gradient_widget.dart';
-import 'package:bitecope/widgets/rounded_wide_button.dart';
 
 class EmailNotVerified extends StatelessWidget {
   final String username;

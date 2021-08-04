@@ -9,11 +9,11 @@ import 'package:flutter_svg/flutter_svg.dart';
 // Project imports:
 import 'package:bitecope/config/themes/theme.dart';
 import 'package:bitecope/core/authentication/bloc/authentication_bloc.dart';
+import 'package:bitecope/core/common/components/rounded_wide_button.dart';
 import 'package:bitecope/gen/assets.gen.dart';
 import 'package:bitecope/gen/fonts.gen.dart';
 import 'package:bitecope/modules/owner_subscription/screens/owner_subscription.dart';
 import 'package:bitecope/utils/ui_utils/wave_clipper.dart';
-import 'package:bitecope/widgets/rounded_wide_button.dart';
 
 class SplashScreen extends StatelessWidget {
   const SplashScreen({Key? key}) : super(key: key);

@@ -11,12 +11,12 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:bitecope/config/constants/app_texts.dart';
 import 'package:bitecope/config/constants/app_urls.dart';
 import 'package:bitecope/config/themes/theme.dart';
+import 'package:bitecope/core/common/components/form_field_decoration.dart';
+import 'package:bitecope/core/common/components/gradient_widget.dart';
+import 'package:bitecope/core/common/components/rounded_wide_button.dart';
+import 'package:bitecope/core/common/components/underlined_title.dart';
+import 'package:bitecope/core/common/screens/operation_notification.dart';
 import 'package:bitecope/modules/owner_subscription/bloc/owner_subscription_bloc.dart';
-import 'package:bitecope/widgets/form_field_decoration.dart';
-import 'package:bitecope/widgets/gradient_widget.dart';
-import 'package:bitecope/widgets/rounded_wide_button.dart';
-import 'package:bitecope/widgets/successfully_completed.dart';
-import 'package:bitecope/widgets/underlined_title.dart';
 
 class OwnerSubscriptionArguments {
   String username;
@@ -119,8 +119,12 @@ class OwnerSubscription extends StatelessWidget {
     if (state.ownerSubscriptionStatus == OwnerSubscriptionStatus.done) {
       Navigator.of(context).pushAndRemoveUntil(
         MaterialPageRoute(builder: (context) {
-          return SuccessfullyCompleted(
-            successTitle: AppLocalizations.of(context)!.accountActivated,
+          return OperationNotification(
+            iconPath: 'assets/images/party_hat.svg',
+            title: "Congratulations",
+            message: AppLocalizations.of(context)!.accountActivated,
+            splashImagePath: 'assets/images/celebration.svg',
+            postText: _successPagePostText(context),
             nextText: AppLocalizations.of(context)!.backToLogin,
             nextCallback: () {
               Navigator.of(context).pushReplacementNamed('/signIn');
@@ -157,6 +161,26 @@ class OwnerSubscription extends StatelessWidget {
                   .headline6
                   ?.copyWith(color: AppColors.white),
             ),
+    );
+  }
+
+  RichText _successPagePostText(BuildContext context) {
+    return RichText(
+      text: TextSpan(
+        style: Theme.of(context).textTheme.bodyText2,
+        children: [
+          TextSpan(
+            text: AppLocalizations.of(context)!.choosingBitecope,
+            style: Theme.of(context)
+                .textTheme
+                .bodyText2
+                ?.copyWith(fontWeight: FontWeight.bold),
+          ),
+          TextSpan(
+            text: AppLocalizations.of(context)!.continueServices,
+          ),
+        ],
+      ),
     );
   }
 }

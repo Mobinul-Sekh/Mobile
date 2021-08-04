@@ -7,8 +7,8 @@ class GradientButton extends StatelessWidget {
   final EdgeInsets? margin;
   final EdgeInsets? padding;
   final double? borderRadius;
-  final Color? backgroundColor;
-  final Gradient? backgroundGradient;
+  final Color? color;
+  final Gradient? gradient;
 
   const GradientButton({
     Key? key,
@@ -17,18 +17,22 @@ class GradientButton extends StatelessWidget {
     this.margin,
     this.padding,
     this.borderRadius,
-    this.backgroundColor,
-    this.backgroundGradient,
+    this.color,
+    this.gradient,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
       margin: margin ?? EdgeInsets.zero,
+      constraints: const BoxConstraints(
+        minWidth: 100,
+        minHeight: 33,
+      ),
       child: InkWell(
         onTap: onTap,
         borderRadius: BorderRadius.circular(borderRadius ?? 6),
-        child: Ink(
+        child: Container(
           padding: padding ??
               const EdgeInsets.symmetric(
                 vertical: 6,
@@ -36,8 +40,8 @@ class GradientButton extends StatelessWidget {
               ),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(borderRadius ?? 6),
-            color: backgroundColor,
-            gradient: backgroundGradient,
+            color: color,
+            gradient: gradient,
           ),
           child: child,
         ),

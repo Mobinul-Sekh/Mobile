@@ -1,10 +1,13 @@
 // Flutter imports:
 import 'package:flutter/material.dart';
 
+// Package imports:
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 // Project imports:
 import 'package:bitecope/config/utils/typedefs.dart';
-import 'package:bitecope/widgets/form_field_decoration.dart';
-import 'package:bitecope/widgets/required_field_label.dart';
+import 'package:bitecope/core/common/components/form_field_decoration.dart';
+import 'package:bitecope/core/common/components/required_field_label.dart';
 
 class SupplierForm extends StatelessWidget {
   final TextEditingController nameController;
@@ -38,7 +41,7 @@ class SupplierForm extends StatelessWidget {
         const SizedBox(height: 36),
         requiredFieldLabel(
           context,
-          labelText: "Supplier Name",
+          labelText: AppLocalizations.of(context)!.supplierName,
         ),
         TextFormField(
           controller: nameController,
@@ -56,7 +59,7 @@ class SupplierForm extends StatelessWidget {
         const SizedBox(height: 36),
         requiredFieldLabel(
           context,
-          labelText: "Phone Number",
+          labelText: AppLocalizations.of(context)!.phoneNumber,
         ),
         TextFormField(
           controller: phoneNumberController,
@@ -74,7 +77,7 @@ class SupplierForm extends StatelessWidget {
         const SizedBox(height: 36),
         requiredFieldLabel(
           context,
-          labelText: "Address",
+          labelText: AppLocalizations.of(context)!.address,
         ),
         TextFormField(
           controller: addressController,
@@ -93,7 +96,7 @@ class SupplierForm extends StatelessWidget {
         const SizedBox(height: 36),
         requiredFieldLabel(
           context,
-          labelText: "Description",
+          labelText: AppLocalizations.of(context)!.description,
           isRequired: false,
         ),
         TextFormField(

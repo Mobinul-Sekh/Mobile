@@ -3,16 +3,17 @@ import 'package:flutter/material.dart';
 
 // Package imports:
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 // Project imports:
 import 'package:bitecope/config/themes/theme.dart';
+import 'package:bitecope/core/common/components/action_button.dart';
+import 'package:bitecope/core/common/screens/listing.dart';
 import 'package:bitecope/modules/suppliers/bloc/supplier_bloc.dart';
 import 'package:bitecope/modules/suppliers/bloc/supplier_list_bloc.dart';
 import 'package:bitecope/modules/suppliers/models/supplier.dart';
 import 'package:bitecope/modules/suppliers/screens/add_supplier.dart';
 import 'package:bitecope/modules/suppliers/screens/view_supplier.dart';
-import 'package:bitecope/widgets/action_button.dart';
-import 'package:bitecope/widgets/listing.dart';
 
 class SuppliersList extends StatefulWidget {
   const SuppliersList({Key? key}) : super(key: key);
@@ -27,7 +28,7 @@ class _SuppliersListState extends State<SuppliersList> {
     return BlocBuilder<SupplierListBloc, SupplierListState>(
       builder: (context, state) {
         return Listing<Supplier>(
-          title: "Suppliers",
+          title: AppLocalizations.of(context)!.suppliers,
           data: state.supplierListStatus == SupplierListStatus.loading
               ? null
               : state.suppliers,

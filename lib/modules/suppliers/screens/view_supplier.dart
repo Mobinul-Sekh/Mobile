@@ -2,17 +2,18 @@
 import 'package:flutter/material.dart';
 
 // Package imports:
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 // Project imports:
 import 'package:bitecope/config/themes/theme.dart';
+import 'package:bitecope/core/common/components/block_button.dart';
+import 'package:bitecope/core/common/components/custom_back_button.dart';
+import 'package:bitecope/core/common/components/gradient_widget.dart';
+import 'package:bitecope/core/common/components/snackbar_message.dart';
+import 'package:bitecope/core/common/components/underlined_title.dart';
 import 'package:bitecope/modules/suppliers/components/supplier_form.dart';
 import 'package:bitecope/modules/suppliers/models/supplier.dart';
-import 'package:bitecope/widgets/block_button.dart';
-import 'package:bitecope/widgets/custom_back_button.dart';
-import 'package:bitecope/widgets/gradient_widget.dart';
-import 'package:bitecope/widgets/snackbar_message.dart';
-import 'package:bitecope/widgets/underlined_title.dart';
 
 class ViewSupplier extends StatefulWidget {
   final Supplier supplier;
@@ -53,7 +54,7 @@ class _ViewSupplierState extends State<ViewSupplier> {
             size: 28,
           ),
           title: UnderlinedTitle(
-            title: "Supplier Details",
+            title: AppLocalizations.of(context)!.supplierDetails,
             style: Theme.of(context).appBarTheme.textTheme?.headline6,
             underlineOvershoot: 0,
           ),
@@ -73,7 +74,7 @@ class _ViewSupplierState extends State<ViewSupplier> {
                   children: [
                     _gridTile(
                       context,
-                      text: "Supplier ID:",
+                      text: AppLocalizations.of(context)!.supplierID,
                       style: Theme.of(context)
                           .textTheme
                           .bodyText2

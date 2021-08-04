@@ -53,6 +53,8 @@ class SupplierState with EquatableMixin {
 
 enum SupplierStatus {
   ready,
+  validated,
+  confirm,
   loading,
   done,
 }

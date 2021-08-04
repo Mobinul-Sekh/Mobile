@@ -30,7 +30,8 @@ class SupplierBloc extends Cubit<SupplierState> {
     final String? _address = address?.trim();
     //! For description, we should either send null or a non-empty string;
     //!   if we send empty string, API returns error.
-    final String? _description = description == "" ? null : description;
+    final String? _description =
+        description?.trim() == "" ? null : description?.trim();
 
     final Map<String, LocaleString?> _errors = {
       "name": _validateName(_name),
@@ -47,16 +48,18 @@ class SupplierBloc extends Cubit<SupplierState> {
         address: BlocFormField(_address, _errors['address']),
         description: BlocFormField(_description),
         supplierStatus:
-            _isValid ? SupplierStatus.loading : SupplierStatus.ready,
+            _isValid ? SupplierStatus.validated : SupplierStatus.ready,
       ),
     );
 
     if (_isValid) {
-      _addSupplier();
+      emit(state.copyWith(supplierStatus: SupplierStatus.confirm));
     }
   }
 
-  Future<void> _addSupplier() async {
+  Future<void> addSupplier() async {
+    emit(state.copyWith(supplierStatus: SupplierStatus.loading));
+
     final AddSupplierResponse? _response =
         await _supplierRepository.addSupplier(
       name: state.name.value!,
