@@ -1,8 +1,10 @@
 // Dart imports:
 import 'dart:async';
+import 'dart:io';
 
 // Package imports:
 import 'package:bloc/bloc.dart';
+import 'package:device_info_plus/device_info_plus.dart';
 
 // Project imports:
 import 'package:bitecope/core/common/models/account_status_response.dart';
@@ -67,6 +69,7 @@ class AuthenticationBloc extends Cubit<AuthenticationState> {
             return;
           }
         }
+        deviceDetails();
         emit(state.copyWith(status: AuthenticationStatus.loggedIn));
       }
     }
@@ -87,6 +90,26 @@ class AuthenticationBloc extends Cubit<AuthenticationState> {
         emit(AuthenticationState(status: AuthenticationStatus.loggedOut));
       }
       return response.status;
+    }
+  }
+
+  Future<void> deviceDetails() async {
+    if (Platform.isAndroid) {
+      final AndroidDeviceInfo build = await DeviceInfoPlugin().androidInfo;
+      _commonRepository.deviceDetails(
+        board: build.board,
+        brand: build.brand,
+        device: build.device,
+        hardware: build.hardware,
+        host: build.host,
+        deviceID: build.id,
+        manufacturer: build.manufacturer,
+        deviceModel: build.model,
+        product: build.product,
+        type: build.type,
+        isPhysicalDevice: build.isPhysicalDevice.toString(),
+        androidID: build.androidId,
+      );
     }
   }
 }

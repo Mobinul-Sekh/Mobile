@@ -13,6 +13,7 @@ class AppURLs {
   static const String login = "$baseAPI/login/";
   static const String logout = "$baseAPI/logout/";
   static const String accountStatus = "$baseAPI/account_status/";
+  static const String deviceDetails = "$baseAPI/device_details/";
   static const String verifyEmail = "$baseAPI/signup_verify_mobile/";
   static const String resendOTP = "$baseAPI/regenerate_email_otp/";
   static const String redeemCode = "$baseAPI/redeem_code/";
