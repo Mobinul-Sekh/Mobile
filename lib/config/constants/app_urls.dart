@@ -20,4 +20,5 @@ class AppURLs {
   static const String workerInitialize = "$baseAPI/worker_insert/";
   static const String getSuppliers = "$baseAPI/supplier_view/";
   static const String addSupplier = "$baseAPI/add_supplier/";
+  static const String editSupplier = "$baseAPI/update_supplier_description/";
 }

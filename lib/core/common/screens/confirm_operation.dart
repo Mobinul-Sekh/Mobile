@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 // Package imports:
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 // Project imports:
 import 'package:bitecope/config/themes/theme.dart';
@@ -59,7 +60,8 @@ class ConfirmOperation<B extends BlocBase<S>, S> extends StatelessWidget {
                     return Column(
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
-                        Text(dialogText ?? "Save up the details?"),
+                        Text(
+                            dialogText ?? AppLocalizations.of(context)!.saveUp),
                         const SizedBox(height: 12),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.end,
@@ -69,7 +71,7 @@ class ConfirmOperation<B extends BlocBase<S>, S> extends StatelessWidget {
                                 Navigator.of(context).maybePop();
                               },
                               child: Text(
-                                "Cancel",
+                                AppLocalizations.of(context)!.cancel,
                                 textAlign: TextAlign.center,
                                 style: Theme.of(context)
                                     .textTheme
@@ -97,7 +99,7 @@ class ConfirmOperation<B extends BlocBase<S>, S> extends StatelessWidget {
                                       ],
                                     )
                                   : Text(
-                                      "Save",
+                                      AppLocalizations.of(context)!.save,
                                       textAlign: TextAlign.center,
                                       style: Theme.of(context).textTheme.button,
                                     ),

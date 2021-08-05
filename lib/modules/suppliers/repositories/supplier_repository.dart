@@ -2,6 +2,8 @@
 import 'package:bitecope/core/common/repositories/common_repository.dart';
 import 'package:bitecope/modules/suppliers/models/add_supplier_request.dart';
 import 'package:bitecope/modules/suppliers/models/add_supplier_response.dart';
+import 'package:bitecope/modules/suppliers/models/edit_supplier_request.dart';
+import 'package:bitecope/modules/suppliers/models/edit_supplier_response.dart';
 import 'package:bitecope/modules/suppliers/models/get_suppliers_response.dart';
 import 'package:bitecope/modules/suppliers/providers/supplier_provider.dart';
 
@@ -46,6 +48,28 @@ class SupplierRepository extends CommonRepository {
     // If request okay
     final AddSupplierResponse _response =
         AddSupplierResponse.fromMap(_responseMap);
+    return _response;
+  }
+
+  Future<EditSupplierResponse?> editSupplier({
+    required String supplierID,
+    String? description,
+  }) async {
+    final String? _authToken = await getToken();
+    if (_authToken == null) return null;
+    final EditSupplierRequest request = EditSupplierRequest(
+      supplierID: supplierID,
+      description: description,
+    );
+    final Map<String, dynamic>? _responseMap =
+        await _supplierProvider.editSuplier(request, _authToken);
+
+    // If request failed
+    if (_responseMap == null) return null;
+
+    // If request okay
+    final EditSupplierResponse _response =
+        EditSupplierResponse.fromMap(_responseMap);
     return _response;
   }
 }
