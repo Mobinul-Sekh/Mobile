@@ -7,9 +7,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 // Project imports:
 import 'package:bitecope/config/themes/theme.dart';
 import 'package:bitecope/core/authentication/bloc/authentication_bloc.dart';
-import 'package:bitecope/widgets/gradient_button.dart';
-import 'package:bitecope/widgets/gradient_widget.dart';
-import 'package:bitecope/widgets/rounded_wide_button.dart';
+import 'package:bitecope/core/common/components/gradient_button.dart';
+import 'package:bitecope/core/common/components/gradient_widget.dart';
+import 'package:bitecope/core/common/components/rounded_wide_button.dart';
+import 'package:bitecope/core/common/components/underlined_title.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -23,7 +24,10 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Homepage'),
+        title: const UnderlinedTitle(
+          title: "Home",
+          underlineOvershoot: 0,
+        ),
       ),
       body: Center(
         child: Column(
@@ -38,7 +42,7 @@ class _HomeState extends State<Home> {
                     onTap: () {
                       Navigator.of(context).pushNamed('/suppliers');
                     },
-                    backgroundGradient: AppGradients.primaryGradient,
+                    gradient: AppGradients.primaryLinear,
                     child: Text(
                       "Suppliers",
                       style: Theme.of(context).textTheme.button,
@@ -57,7 +61,7 @@ class _HomeState extends State<Home> {
                 }
               },
               child: GradientWidget(
-                gradient: AppGradients.primaryGradient,
+                gradient: AppGradients.primaryLinear,
                 child: Text(
                   "Logout",
                   style: Theme.of(context).textTheme.headline6,

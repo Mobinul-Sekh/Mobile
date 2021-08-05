@@ -8,13 +8,13 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 // Project imports:
 import 'package:bitecope/config/themes/theme.dart';
 import 'package:bitecope/core/authentication/bloc/authentication_bloc.dart';
+import 'package:bitecope/core/common/components/custom_back_button.dart';
+import 'package:bitecope/core/common/components/form_field_decoration.dart';
+import 'package:bitecope/core/common/components/gradient_widget.dart';
+import 'package:bitecope/core/common/components/rounded_wide_button.dart';
 import 'package:bitecope/modules/sign_in/cubit/siginin_cubit.dart';
 import 'package:bitecope/modules/sign_in/screens/email_not_verified.dart';
 import 'package:bitecope/modules/sign_in/screens/owner_not_subscribed.dart';
-import 'package:bitecope/widgets/custom_back_button.dart';
-import 'package:bitecope/widgets/form_field_decoration.dart';
-import 'package:bitecope/widgets/gradient_widget.dart';
-import 'package:bitecope/widgets/rounded_wide_button.dart';
 
 class SignIn extends StatefulWidget {
   const SignIn({Key? key}) : super(key: key);
@@ -43,11 +43,12 @@ class _SignInState extends State<SignIn> {
       child: Scaffold(
         backgroundColor: AppColors.nearBlack,
         appBar: AppBar(
+          backgroundColor: AppColors.nearBlack,
           elevation: 0,
           leading: const CustomBackButton(),
           centerTitle: false,
           title: GradientWidget(
-            gradient: AppGradients.primaryGradient,
+            gradient: AppGradients.primaryLinear,
             child: Text(
               AppLocalizations.of(context)!.signIn,
               style: Theme.of(context).appBarTheme.textTheme?.headline5,
@@ -143,7 +144,7 @@ class _SignInState extends State<SignIn> {
                                     // TODO Push to forgot password page
                                   },
                                   child: GradientWidget(
-                                    gradient: AppGradients.primaryGradient,
+                                    gradient: AppGradients.primaryLinear,
                                     child: Text(
                                       AppLocalizations.of(context)!
                                           .forgotPassword,
@@ -214,7 +215,7 @@ class _SignInState extends State<SignIn> {
           : null,
       child: status != SignInStatus.signingIn
           ? GradientWidget(
-              gradient: AppGradients.primaryGradient,
+              gradient: AppGradients.primaryLinear,
               child: Text(
                 AppLocalizations.of(context)!.signIn,
                 style: Theme.of(context).textTheme.headline6,

@@ -8,12 +8,12 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 // Project imports:
 import 'package:bitecope/config/themes/theme.dart';
 import 'package:bitecope/core/authentication/bloc/authentication_bloc.dart';
+import 'package:bitecope/core/common/components/form_field_decoration.dart';
+import 'package:bitecope/core/common/components/gradient_widget.dart';
+import 'package:bitecope/core/common/components/required_field_label.dart';
+import 'package:bitecope/core/common/components/rounded_wide_button.dart';
+import 'package:bitecope/core/common/components/underlined_title.dart';
 import 'package:bitecope/modules/worker_initialize/bloc/worker_initialize_bloc.dart';
-import 'package:bitecope/widgets/form_field_decoration.dart';
-import 'package:bitecope/widgets/gradient_widget.dart';
-import 'package:bitecope/widgets/required_field_label.dart';
-import 'package:bitecope/widgets/rounded_wide_button.dart';
-import 'package:bitecope/widgets/underlined_title.dart';
 
 class WorkerInitialize extends StatelessWidget {
   WorkerInitialize({Key? key}) : super(key: key);
@@ -194,7 +194,7 @@ class WorkerInitialize extends StatelessWidget {
               child: CircularProgressIndicator(),
             )
           : GradientWidget(
-              gradient: AppGradients.primaryGradient,
+              gradient: AppGradients.primaryLinear,
               child: Text(
                 AppLocalizations.of(context)!.confirm,
                 style: Theme.of(context).textTheme.headline6,

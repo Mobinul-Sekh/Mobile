@@ -6,9 +6,9 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 // Project imports:
 import 'package:bitecope/config/themes/theme.dart';
+import 'package:bitecope/core/common/components/gradient_widget.dart';
+import 'package:bitecope/core/common/components/rounded_wide_button.dart';
 import 'package:bitecope/modules/owner_subscription/screens/owner_subscription.dart';
-import 'package:bitecope/widgets/gradient_widget.dart';
-import 'package:bitecope/widgets/rounded_wide_button.dart';
 
 class OwnerNotSubscribed extends StatelessWidget {
   final String username;
@@ -58,7 +58,7 @@ class OwnerNotSubscribed extends StatelessWidget {
                         ));
                   },
                   child: GradientWidget(
-                    gradient: AppGradients.primaryGradient,
+                    gradient: AppGradients.primaryLinear,
                     child: Text(
                       AppLocalizations.of(context)!.subscribe,
                       style: Theme.of(context).textTheme.headline6,

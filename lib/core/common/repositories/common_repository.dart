@@ -4,6 +4,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 // Project imports:
 import 'package:bitecope/core/common/models/account_status_request.dart';
 import 'package:bitecope/core/common/models/account_status_response.dart';
+import 'package:bitecope/core/common/models/device_details_request.dart';
+import 'package:bitecope/core/common/models/device_details_response.dart';
 import 'package:bitecope/core/common/models/logout_request.dart';
 import 'package:bitecope/core/common/models/logout_response.dart';
 import 'package:bitecope/core/common/providers/common_provider.dart';
@@ -79,6 +81,48 @@ class CommonRepository {
     // If request okay
     final AccountStatusResponse response =
         AccountStatusResponse.fromMap(responseMap);
+    return response;
+  }
+
+  Future<DeviceDetailsResponse?> deviceDetails({
+    String? board,
+    String? brand,
+    String? device,
+    String? hardware,
+    String? host,
+    String? deviceID,
+    String? manufacturer,
+    String? deviceModel,
+    String? product,
+    String? type,
+    String? isPhysicalDevice,
+    String? androidID,
+  }) async {
+    final DeviceDetailsRequest request = DeviceDetailsRequest(
+      board: board,
+      brand: brand,
+      device: device,
+      hardware: hardware,
+      host: host,
+      deviceID: deviceID,
+      manufacturer: manufacturer,
+      deviceModel: deviceModel,
+      product: product,
+      type: type,
+      isPhysicalDevice: isPhysicalDevice,
+      androidID: androidID,
+    );
+    final _authToken = await getToken();
+    if (_authToken == null) return null;
+    final Map<String, dynamic>? responseMap =
+        await _commonProvider.deviceDetails(request, _authToken);
+
+    // If request failed
+    if (responseMap == null) return null;
+
+    // If request okay
+    final DeviceDetailsResponse response =
+        DeviceDetailsResponse.fromMap(responseMap);
     return response;
   }
 

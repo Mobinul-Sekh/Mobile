@@ -6,9 +6,9 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 // Project imports:
 import 'package:bitecope/config/themes/theme.dart';
+import 'package:bitecope/core/common/components/gradient_widget.dart';
+import 'package:bitecope/core/common/components/rounded_wide_button.dart';
 import 'package:bitecope/modules/verify_email/screens/verify_email.dart';
-import 'package:bitecope/widgets/gradient_widget.dart';
-import 'package:bitecope/widgets/rounded_wide_button.dart';
 
 class EmailNotVerified extends StatelessWidget {
   final String username;
@@ -31,7 +31,7 @@ class EmailNotVerified extends StatelessWidget {
                 top: MediaQuery.of(context).size.height * 0.2,
                 child: Center(
                   child: GradientWidget(
-                    gradient: AppGradients.primaryGradient,
+                    gradient: AppGradients.primaryLinear,
                     child: Text(
                       AppLocalizations.of(context)!.checkInbox.toUpperCase(),
                       style: Theme.of(context).textTheme.bodyText1,
@@ -68,7 +68,7 @@ class EmailNotVerified extends StatelessWidget {
                           ));
                     },
                     child: GradientWidget(
-                      gradient: AppGradients.primaryGradient,
+                      gradient: AppGradients.primaryLinear,
                       child: Text(
                         AppLocalizations.of(context)!.verify,
                         style: Theme.of(context).textTheme.headline6,

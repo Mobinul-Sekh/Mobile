@@ -10,13 +10,13 @@ import 'package:url_launcher/url_launcher.dart';
 // Project imports:
 import 'package:bitecope/config/constants/app_urls.dart';
 import 'package:bitecope/config/themes/theme.dart';
+import 'package:bitecope/core/common/components/form_field_decoration.dart';
+import 'package:bitecope/core/common/components/gradient_widget.dart';
+import 'package:bitecope/core/common/components/rounded_wide_button.dart';
 import 'package:bitecope/core/common/models/user.dart';
 import 'package:bitecope/modules/sign_up/bloc/sign_up_bloc.dart';
 import 'package:bitecope/modules/sign_up/components/sign_up_wrapper.dart';
 import 'package:bitecope/modules/verify_email/screens/verify_email.dart';
-import 'package:bitecope/widgets/form_field_decoration.dart';
-import 'package:bitecope/widgets/gradient_widget.dart';
-import 'package:bitecope/widgets/rounded_wide_button.dart';
 
 class SignUpTwo extends StatefulWidget {
   const SignUpTwo({Key? key}) : super(key: key);
@@ -102,7 +102,7 @@ class _SignUpTwoState extends State<SignUpTwo> {
                           });
                         },
                         icon: GradientWidget(
-                          gradient: AppGradients.primaryGradient,
+                          gradient: AppGradients.primaryLinear,
                           child: Container(
                             margin: const EdgeInsets.symmetric(vertical: 12),
                             child: const Icon(
@@ -295,7 +295,7 @@ class _SignUpTwoState extends State<SignUpTwo> {
             : null,
         child: status != SignUpStatus.registering
             ? GradientWidget(
-                gradient: AppGradients.primaryGradient,
+                gradient: AppGradients.primaryLinear,
                 child: Text(
                   AppLocalizations.of(context)!.signUp,
                   style: Theme.of(context).textTheme.headline6,

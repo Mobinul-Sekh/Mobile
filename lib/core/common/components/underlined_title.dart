@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 // Project imports:
 import 'package:bitecope/config/themes/theme.dart';
-import 'package:bitecope/widgets/gradient_widget.dart';
+import 'package:bitecope/core/common/components/gradient_widget.dart';
 
 class UnderlinedTitle extends StatefulWidget {
   final String title;
@@ -15,7 +15,7 @@ class UnderlinedTitle extends StatefulWidget {
     Key? key,
     required this.title,
     this.style,
-    this.gradient = AppGradients.primaryGradient,
+    this.gradient = AppGradients.primaryLinear,
     this.underlineOvershoot = 60,
   }) : super(key: key);
 

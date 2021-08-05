@@ -314,5 +314,65 @@
     "accountActivated": "Account is successfully activated",
     "@accountActivated": {
       "description": "Text prompt for successful subscription"
+    },
+    "suppliers": "Suppliers",
+    "@suppliers": {
+      "description": "Title text for suppliers"
+    },
+    "supplierDetails": "Supplier Details",
+    "@supplierDetails": {
+      "description": "Title text for supplier details"
+    },
+    "supplierID": "Supplier ID",
+    "@supplierID": {
+      "description": "Label text for supplier ID field"
+    },
+    "supplierName": "Supplier Name",
+    "@supplierName": {
+      "description": "Label text for supplier name field"
+    },
+    "supplierNameEmpty": "Please enter supplier name",
+    "@supplierNameEmpty": {
+      "description": "Error text for empty supplier name field"
+    },
+    "address": "Address",
+    "@address": {
+      "description": "Label text for address field"
+    },
+    "supplierAddressEmpty": "Please enter supplier address",
+    "@supplierAddressEmpty": {
+      "description": "Error text for empty supplier address field"
+    },
+    "description": "Description",
+    "@description": {
+      "description": "Label text for description field"
+    },
+    "addSupplier": "Add Supplier",
+    "@addSupplier": {
+      "description": "Title text for add supplier"
+    },
+    "tryingTo": "You are trying to ",
+    "@tryingTo": {
+      "description": "Prompt text (partial) for operation confirmation"
+    },
+    "addNewSupplier": "add new supplier. ",
+    "@addNewSupplier": {
+      "description": "Prompt text (partial) for confirming adding new supplier"
+    },
+    "confirmOperation": "Please do confirm if it is what you want to do?",
+    "@confirmOperation": {
+      "description": "Prompt text (partial) for operation confirmation"
+    },
+    "saved": "Saved",
+    "@saved": {
+      "description": "Prompt text for successful save"
+    },
+    "detailAdded": "New detail is successfully added",
+    "@detailAdded": {
+      "description": "Detailed prompt text for successful save"
+    },
+    "backToSuppliers": "Back To Suppliers",
+    "@backToSuppliers": {
+      "description": "Button text for back to suppliers"
     }
 }

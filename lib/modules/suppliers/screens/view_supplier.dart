@@ -2,20 +2,20 @@
 import 'package:flutter/material.dart';
 
 // Package imports:
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 // Project imports:
 import 'package:bitecope/config/themes/theme.dart';
+import 'package:bitecope/core/common/components/block_button.dart';
+import 'package:bitecope/core/common/components/custom_back_button.dart';
+import 'package:bitecope/core/common/components/gradient_widget.dart';
+import 'package:bitecope/core/common/components/snackbar_message.dart';
+import 'package:bitecope/core/common/components/underlined_title.dart';
+import 'package:bitecope/modules/suppliers/components/supplier_form.dart';
 import 'package:bitecope/modules/suppliers/models/supplier.dart';
-import 'package:bitecope/widgets/block_button.dart';
-import 'package:bitecope/widgets/custom_back_button.dart';
-import 'package:bitecope/widgets/form_field_decoration.dart';
-import 'package:bitecope/widgets/gradient_widget.dart';
-import 'package:bitecope/widgets/required_field_label.dart';
-import 'package:bitecope/widgets/snackbar_message.dart';
-import 'package:bitecope/widgets/underlined_title.dart';
 
-class ViewSupplier extends StatelessWidget {
+class ViewSupplier extends StatefulWidget {
   final Supplier supplier;
 
   const ViewSupplier({
@@ -24,17 +24,37 @@ class ViewSupplier extends StatelessWidget {
   }) : super(key: key);
 
   @override
+  _ViewSupplierState createState() => _ViewSupplierState();
+}
+
+class _ViewSupplierState extends State<ViewSupplier> {
+  late final TextEditingController _nameController;
+  late final TextEditingController _phoneNumberController;
+  late final TextEditingController _addressController;
+  late final TextEditingController _descriptionController;
+
+  @override
+  void initState() {
+    super.initState();
+    _nameController = TextEditingController(text: widget.supplier.name);
+    _phoneNumberController =
+        TextEditingController(text: widget.supplier.phoneNumber);
+    _addressController = TextEditingController(text: widget.supplier.address);
+    _descriptionController =
+        TextEditingController(text: widget.supplier.description);
+  }
+
+  @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          backgroundColor: AppColors.lightGrey,
           leading: const CustomBackButton(
             icon: Icons.arrow_back_rounded,
             size: 28,
           ),
           title: UnderlinedTitle(
-            title: "Supplier Details",
+            title: AppLocalizations.of(context)!.supplierDetails,
             style: Theme.of(context).appBarTheme.textTheme?.headline6,
             underlineOvershoot: 0,
           ),
@@ -54,7 +74,7 @@ class ViewSupplier extends StatelessWidget {
                   children: [
                     _gridTile(
                       context,
-                      text: "Supplier ID:",
+                      text: AppLocalizations.of(context)!.supplierID,
                       style: Theme.of(context)
                           .textTheme
                           .bodyText2
@@ -62,76 +82,16 @@ class ViewSupplier extends StatelessWidget {
                     ),
                     _gridTile(
                       context,
-                      text: supplier.id,
+                      text: widget.supplier.id,
                     ),
                   ],
                 ),
-                const SizedBox(height: 36),
-                requiredFieldLabel(
-                  context,
-                  labelText: "Supplier Name",
+                SupplierForm(
+                  nameController: _nameController,
+                  phoneNumberController: _phoneNumberController,
+                  addressController: _addressController,
+                  descriptionController: _descriptionController,
                 ),
-                TextFormField(
-                  textAlignVertical: TextAlignVertical.center,
-                  style: Theme.of(context).textTheme.bodyText2,
-                  initialValue: supplier.name,
-                  readOnly: true,
-                  decoration: formFieldDecoration(
-                    context,
-                    isDense: true,
-                  ),
-                ),
-                const SizedBox(height: 36),
-                requiredFieldLabel(
-                  context,
-                  labelText: "Phone Number",
-                ),
-                TextFormField(
-                  textAlignVertical: TextAlignVertical.center,
-                  style: Theme.of(context).textTheme.bodyText2,
-                  initialValue: supplier.phoneNumber,
-                  readOnly: true,
-                  decoration: formFieldDecoration(
-                    context,
-                    isDense: true,
-                  ),
-                ),
-                const SizedBox(height: 36),
-                requiredFieldLabel(
-                  context,
-                  labelText: "Address",
-                ),
-                TextFormField(
-                  textAlignVertical: TextAlignVertical.center,
-                  style: Theme.of(context).textTheme.bodyText2,
-                  initialValue: supplier.address,
-                  readOnly: true,
-                  minLines: 1,
-                  maxLines: 3,
-                  decoration: formFieldDecoration(
-                    context,
-                    isDense: true,
-                  ),
-                ),
-                const SizedBox(height: 36),
-                requiredFieldLabel(
-                  context,
-                  labelText: "Description",
-                  isRequired: false,
-                ),
-                TextFormField(
-                  textAlignVertical: TextAlignVertical.center,
-                  style: Theme.of(context).textTheme.bodyText2,
-                  initialValue: supplier.description,
-                  readOnly: true,
-                  minLines: 1,
-                  maxLines: 6,
-                  decoration: formFieldDecoration(
-                    context,
-                    isDense: true,
-                  ),
-                ),
-                const SizedBox(height: 36),
               ],
             ),
           ),
@@ -152,7 +112,7 @@ class ViewSupplier extends StatelessWidget {
               position: BlockPosition.left,
               child: const Center(
                 child: GradientWidget(
-                  gradient: AppGradients.primaryGradient,
+                  gradient: AppGradients.primaryLinear,
                   child: Icon(
                     Icons.edit,
                     size: 36,

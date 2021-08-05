@@ -12,14 +12,14 @@ import 'package:bitecope/config/constants/app_texts.dart';
 import 'package:bitecope/config/constants/app_urls.dart';
 import 'package:bitecope/config/themes/theme.dart';
 import 'package:bitecope/config/utils/extensions/int_extension.dart';
+import 'package:bitecope/core/common/components/gradient_button.dart';
+import 'package:bitecope/core/common/components/gradient_widget.dart';
+import 'package:bitecope/core/common/components/rounded_wide_button.dart';
+import 'package:bitecope/core/common/components/snackbar_message.dart';
+import 'package:bitecope/core/common/components/underlined_title.dart';
+import 'package:bitecope/core/common/screens/operation_notification.dart';
 import 'package:bitecope/modules/verify_email/bloc/verify_email_bloc.dart';
 import 'package:bitecope/modules/verify_email/components/otp_text_fields.dart';
-import 'package:bitecope/widgets/gradient_button.dart';
-import 'package:bitecope/widgets/gradient_widget.dart';
-import 'package:bitecope/widgets/rounded_wide_button.dart';
-import 'package:bitecope/widgets/snackbar_message.dart';
-import 'package:bitecope/widgets/successfully_completed.dart';
-import 'package:bitecope/widgets/underlined_title.dart';
 
 class VerifyEmailArguments {
   String username;
@@ -90,7 +90,7 @@ class _VerifyEmailState extends State<VerifyEmail> with WidgetsBindingObserver {
                           mainAxisSize: MainAxisSize.min,
                           children: [
                             GradientWidget(
-                              gradient: AppGradients.primaryGradient,
+                              gradient: AppGradients.primaryLinear,
                               child: Text(
                                 AppLocalizations.of(context)!
                                     .checkInbox
@@ -166,8 +166,12 @@ class _VerifyEmailState extends State<VerifyEmail> with WidgetsBindingObserver {
     if (state.verifyEmailStatus == VerifyEmailStatus.done) {
       Navigator.of(context).pushAndRemoveUntil(
         MaterialPageRoute(builder: (context) {
-          return SuccessfullyCompleted(
-            successTitle: AppLocalizations.of(context)!.emailVerified,
+          return OperationNotification(
+            iconPath: 'assets/images/party_hat.svg',
+            title: "Congratulations",
+            message: AppLocalizations.of(context)!.emailVerified,
+            splashImagePath: 'assets/images/celebration.svg',
+            postText: _successPagePostText(),
             nextText: AppLocalizations.of(context)!.backToLogin,
             nextCallback: () =>
                 Navigator.of(context).pushReplacementNamed('/signIn'),
@@ -291,7 +295,7 @@ class _VerifyEmailState extends State<VerifyEmail> with WidgetsBindingObserver {
               onTap: state.resendOTPStatus != ResendOTPStatus.resending
                   ? () => context.read<VerifyEmailBloc>().resendOTP()
                   : null,
-              backgroundGradient: AppGradients.primaryGradient,
+              gradient: AppGradients.primaryLinear,
               child: state.resendOTPStatus != ResendOTPStatus.resending
                   ? Text(
                       AppLocalizations.of(context)!.resend,
@@ -308,6 +312,26 @@ class _VerifyEmailState extends State<VerifyEmail> with WidgetsBindingObserver {
           ],
         );
       },
+    );
+  }
+
+  RichText _successPagePostText() {
+    return RichText(
+      text: TextSpan(
+        style: Theme.of(context).textTheme.bodyText2,
+        children: [
+          TextSpan(
+            text: AppLocalizations.of(context)!.choosingBitecope,
+            style: Theme.of(context)
+                .textTheme
+                .bodyText2
+                ?.copyWith(fontWeight: FontWeight.bold),
+          ),
+          TextSpan(
+            text: AppLocalizations.of(context)!.continueServices,
+          ),
+        ],
+      ),
     );
   }
 
