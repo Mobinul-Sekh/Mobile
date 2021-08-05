@@ -130,7 +130,8 @@ class SplashScreen extends StatelessWidget {
       case AuthenticationStatus.ownerActivate:
         Navigator.of(context).pushNamed(
           '/ownerSubscription',
-          arguments: OwnerSubscriptionArguments(username: state.username!),
+          arguments:
+              OwnerSubscriptionArguments(username: state.authData!.username),
         );
         break;
       case AuthenticationStatus.ownerInitialize:

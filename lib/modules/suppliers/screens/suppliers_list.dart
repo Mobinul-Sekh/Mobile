@@ -7,7 +7,9 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 // Project imports:
 import 'package:bitecope/config/themes/theme.dart';
+import 'package:bitecope/core/authentication/bloc/authentication_bloc.dart';
 import 'package:bitecope/core/common/components/action_button.dart';
+import 'package:bitecope/core/common/models/user.dart';
 import 'package:bitecope/core/common/screens/listing.dart';
 import 'package:bitecope/modules/suppliers/bloc/supplier_bloc.dart';
 import 'package:bitecope/modules/suppliers/bloc/supplier_list_bloc.dart';
@@ -38,24 +40,31 @@ class SuppliersList extends StatelessWidget {
               ),
             ),
           ),
-          actionButton: ActionButton(
-            onTap: () {
-              Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (_) => BlocProvider<SupplierBloc>(
-                    create: (_) => SupplierBloc(
-                      context.read<SupplierListBloc>().repository,
-                    ),
-                    child: AddSupplier(),
+          actionButton: BlocBuilder<AuthenticationBloc, AuthenticationState>(
+            builder: (context, state) {
+              if (state.authData!.userType == UserType.owner) {
+                return ActionButton(
+                  onTap: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (_) => BlocProvider<SupplierBloc>(
+                          create: (_) => SupplierBloc(
+                            context.read<SupplierListBloc>().repository,
+                          ),
+                          child: AddSupplier(),
+                        ),
+                      ),
+                    );
+                  },
+                  child: const Icon(
+                    Icons.add,
+                    size: 40,
+                    color: AppColors.lightGrey,
                   ),
-                ),
-              );
+                );
+              }
+              return Container();
             },
-            child: const Icon(
-              Icons.add,
-              size: 40,
-              color: AppColors.lightGrey,
-            ),
           ),
         );
       },

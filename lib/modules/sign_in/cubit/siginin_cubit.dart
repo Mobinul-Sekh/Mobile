@@ -11,6 +11,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 // Project imports:
 import 'package:bitecope/config/utils/typedefs.dart';
 import 'package:bitecope/core/common/models/account_status_response.dart';
+import 'package:bitecope/core/common/models/user.dart';
 import 'package:bitecope/modules/sign_in/models/signin_reponse_model.dart';
 import 'package:bitecope/modules/sign_in/repositories/sign_in_repository.dart';
 import 'package:bitecope/utils/bloc_utils/bloc_form_field.dart';
@@ -70,6 +71,10 @@ class SignInBloc extends Cubit<SignInState> {
         ));
         return;
       }
+
+      emit(state.copyWith(
+        userType: parseUserType[response.userType.toString()],
+      ));
 
       final bool _emailStatus = _isEmailVerified(response);
       if (!_emailStatus) return;

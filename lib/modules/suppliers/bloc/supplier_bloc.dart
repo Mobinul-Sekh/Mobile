@@ -9,6 +9,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 // Project imports:
 import 'package:bitecope/config/utils/typedefs.dart';
 import 'package:bitecope/modules/suppliers/models/add_supplier_response.dart';
+import 'package:bitecope/modules/suppliers/models/delete_supplier_response.dart';
 import 'package:bitecope/modules/suppliers/models/edit_supplier_response.dart';
 import 'package:bitecope/modules/suppliers/repositories/supplier_repository.dart';
 import 'package:bitecope/utils/bloc_utils/bloc_form_field.dart';
@@ -27,7 +28,7 @@ class SupplierBloc extends Cubit<SupplierState> {
     String? description,
   }) {
     final String? _name = name?.trim();
-    final String? _phoneNumber = phoneNumber?.trim();
+    final String? _phoneNumber = phoneNumber?.trim().replaceAll(' ', '');
     final String? _address = address?.trim();
     //! For description, we should either send null or a non-empty string;
     //!   if we send empty string, API returns error.
@@ -144,6 +145,40 @@ class SupplierBloc extends Cubit<SupplierState> {
     }
   }
 
+  void confirmDelete({
+    required String supplierID,
+  }) {
+    emit(state.copyWith(
+      id: supplierID,
+      supplierStatus: SupplierStatus.deleteValidated,
+    ));
+    emit(state.copyWith(
+      supplierStatus: SupplierStatus.confirmDelete,
+    ));
+  }
+
+  Future<void> deleteSupplier() async {
+    emit(state.copyWith(supplierStatus: SupplierStatus.loading));
+
+    final DeleteSupplierResponse? _response =
+        await _supplierRepository.deleteSupplier(
+      supplierID: state.id!,
+    );
+
+    if (_response != null) {
+      if (_response.status) {
+        emit(state.copyWith(
+          supplierStatus: SupplierStatus.done,
+        ));
+      } else {
+        emit(state.copyWith(
+          error: (BuildContext context) => _response.message,
+          supplierStatus: SupplierStatus.ready,
+        ));
+      }
+    }
+  }
+
   LocaleString? _validateName(String? name) {
     if (name == null || name == "") {
       return (BuildContext context) =>
@@ -156,6 +191,11 @@ class SupplierBloc extends Cubit<SupplierState> {
     if (phoneNumber == null || phoneNumber == "") {
       return (BuildContext context) =>
           AppLocalizations.of(context)!.phoneNumberEmpty;
+    }
+    final String _phoneNumber = phoneNumber.trim().replaceAll(' ', '');
+    if (_phoneNumber.length != 10) {
+      return (BuildContext context) =>
+          AppLocalizations.of(context)!.phoneNumberInvalid;
     }
     return null;
   }

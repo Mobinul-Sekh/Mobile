@@ -16,12 +16,12 @@ import 'package:bitecope/modules/suppliers/bloc/supplier_bloc.dart';
 import 'package:bitecope/modules/suppliers/components/supplier_form.dart';
 
 class AddSupplier extends StatelessWidget {
+  AddSupplier({Key? key}) : super(key: key);
+
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _phoneNumberController = TextEditingController();
   final TextEditingController _addressController = TextEditingController();
   final TextEditingController _descriptionController = TextEditingController();
-
-  AddSupplier({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -74,6 +74,7 @@ class AddSupplier extends StatelessWidget {
                     padding: const EdgeInsets.all(18),
                     child: GradientButton(
                       onTap: () {
+                        FocusScope.of(context).unfocus();
                         context.read<SupplierBloc>().validateSupplier(
                               name: _nameController.text,
                               phoneNumber: _phoneNumberController.text,
@@ -109,7 +110,6 @@ class AddSupplier extends StatelessWidget {
 
   void _handleListen(BuildContext context, SupplierState state) {
     if (state.supplierStatus == SupplierStatus.createValidated) {
-      FocusScope.of(context).unfocus();
       Navigator.of(context).push(
         MaterialPageRoute(
           builder: (_) {

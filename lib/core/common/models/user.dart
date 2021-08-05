@@ -50,7 +50,7 @@ class User with EquatableMixin {
       email: map['email'] as String,
       phoneNumber: map['phoneNumber'] as String,
       address: map['address'] as String,
-      userType: _parseUserType[map['userType'] as String]!,
+      userType: parseUserType[map['userType'] as String]!,
     );
   }
 
@@ -79,7 +79,7 @@ extension UserTypeExtension on UserType {
   }
 }
 
-Map<String, UserType> _parseUserType = {
+Map<String, UserType> parseUserType = {
   '0': UserType.owner,
   '1': UserType.worker,
 };

@@ -12,6 +12,9 @@ import 'package:bitecope/core/common/components/gradient_button.dart';
 class ConfirmOperation<B extends BlocBase<S>, S> extends StatelessWidget {
   final Widget confirmationPrompt;
   final String? dialogText;
+  final String? flatButtonText;
+  final String? elevatedButtonText;
+  final bool flipCallback;
   final GestureTapCallback? onConfirm;
   final void Function(BuildContext, S)? listener;
   final bool Function(S)? isLoading;
@@ -20,6 +23,9 @@ class ConfirmOperation<B extends BlocBase<S>, S> extends StatelessWidget {
     Key? key,
     required this.confirmationPrompt,
     this.dialogText,
+    this.flatButtonText,
+    this.elevatedButtonText,
+    this.flipCallback = false,
     this.onConfirm,
     this.listener,
     this.isLoading,
@@ -68,41 +74,30 @@ class ConfirmOperation<B extends BlocBase<S>, S> extends StatelessWidget {
                           children: [
                             GradientButton(
                               onTap: () {
-                                Navigator.of(context).maybePop();
+                                _setCallback(
+                                  context,
+                                  _ButtonType.flatButton,
+                                );
                               },
-                              child: Text(
-                                AppLocalizations.of(context)!.cancel,
-                                textAlign: TextAlign.center,
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .button
-                                    ?.copyWith(
-                                        color: Theme.of(context).errorColor),
+                              child: _setButtonChild(
+                                context,
+                                state,
+                                _ButtonType.flatButton,
                               ),
                             ),
                             GradientButton(
-                              onTap: onConfirm,
+                              onTap: () {
+                                _setCallback(
+                                  context,
+                                  _ButtonType.elevatedButton,
+                                );
+                              },
                               gradient: AppGradients.primaryLinear,
-                              child: _checkIsLoading(state)
-                                  ? Row(
-                                      mainAxisSize: MainAxisSize.min,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: const [
-                                        SizedBox(
-                                          height: 15,
-                                          width: 15,
-                                          child: CircularProgressIndicator(
-                                            color: AppColors.white,
-                                          ),
-                                        ),
-                                      ],
-                                    )
-                                  : Text(
-                                      AppLocalizations.of(context)!.save,
-                                      textAlign: TextAlign.center,
-                                      style: Theme.of(context).textTheme.button,
-                                    ),
+                              child: _setButtonChild(
+                                context,
+                                state,
+                                _ButtonType.elevatedButton,
+                              ),
                             ),
                           ],
                         )
@@ -118,6 +113,91 @@ class ConfirmOperation<B extends BlocBase<S>, S> extends StatelessWidget {
     );
   }
 
+  void _setCallback(
+    BuildContext context,
+    _ButtonType type,
+  ) {
+    switch (type) {
+      case _ButtonType.flatButton:
+        if (flipCallback) {
+          return onConfirm != null ? onConfirm!() : null;
+        } else {
+          return _cancelCallback(context);
+        }
+      case _ButtonType.elevatedButton:
+        if (flipCallback) {
+          return _cancelCallback(context);
+        } else {
+          return onConfirm != null ? onConfirm!() : null;
+        }
+    }
+  }
+
+  Widget _setButtonChild(
+    BuildContext context,
+    S state,
+    _ButtonType type,
+  ) {
+    final Widget _progressIndicator = Row(
+      mainAxisSize: MainAxisSize.min,
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: const [
+        SizedBox(
+          height: 15,
+          width: 15,
+          child: CircularProgressIndicator(
+            color: AppColors.white,
+          ),
+        ),
+      ],
+    );
+    final Widget _flatButtonText = Text(
+      flatButtonText ??
+          (flipCallback
+              ? AppLocalizations.of(context)!.save
+              : AppLocalizations.of(context)!.cancel),
+      textAlign: TextAlign.center,
+      style: Theme.of(context)
+          .textTheme
+          .button
+          ?.copyWith(color: Theme.of(context).errorColor),
+    );
+    final Widget _elevatedButtonText = Text(
+      elevatedButtonText ??
+          (flipCallback
+              ? AppLocalizations.of(context)!.cancel
+              : AppLocalizations.of(context)!.save),
+      textAlign: TextAlign.center,
+      style: Theme.of(context).textTheme.button,
+    );
+    switch (type) {
+      case _ButtonType.flatButton:
+        if (flipCallback) {
+          if (_checkIsLoading(state)) {
+            return _progressIndicator;
+          } else {
+            return _flatButtonText;
+          }
+        } else {
+          return _flatButtonText;
+        }
+      case _ButtonType.elevatedButton:
+        if (flipCallback) {
+          return _elevatedButtonText;
+        } else {
+          if (_checkIsLoading(state)) {
+            return _progressIndicator;
+          } else {
+            return _elevatedButtonText;
+          }
+        }
+    }
+  }
+
+  void _cancelCallback(BuildContext context) {
+    Navigator.of(context).maybePop();
+  }
+
   bool _checkIsLoading(S state) {
     if (isLoading == null) {
       return false;
@@ -125,4 +205,9 @@ class ConfirmOperation<B extends BlocBase<S>, S> extends StatelessWidget {
       return isLoading!(state);
     }
   }
+}
+
+enum _ButtonType {
+  flatButton,
+  elevatedButton,
 }

@@ -195,6 +195,7 @@ class _SignInState extends State<SignIn> {
       case SignInStatus.signedIn:
         context.read<AuthenticationBloc>().signedIn(
               state.username.value!,
+              state.userType!,
               state.token!,
               state.expiresIn!,
             );

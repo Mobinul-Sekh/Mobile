@@ -3,6 +3,7 @@ part of 'siginin_cubit.dart';
 class SignInState {
   late final BlocFormField<String> username;
   late final BlocFormField<String> password;
+  late final UserType? userType;
   late final String? token;
   late final String? expiresIn;
   LocaleString? error;
@@ -11,6 +12,7 @@ class SignInState {
   SignInState(
       {BlocFormField<String>? username,
       BlocFormField<String>? password,
+      this.userType,
       this.token,
       this.expiresIn,
       this.error,
@@ -22,6 +24,7 @@ class SignInState {
   SignInState copyWith(
       {BlocFormField<String>? username,
       BlocFormField<String>? password,
+      UserType? userType,
       String? token,
       String? expiresIn,
       LocaleString? error,
@@ -29,6 +32,7 @@ class SignInState {
     return SignInState(
       username: username ?? this.username,
       password: password ?? this.password,
+      userType: userType ?? this.userType,
       token: token ?? this.token,
       expiresIn: expiresIn ?? this.expiresIn,
       error: error ?? this.error,
