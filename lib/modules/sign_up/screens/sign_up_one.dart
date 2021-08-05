@@ -104,6 +104,7 @@ class _SignUpOneState extends State<SignUpOne> {
                       controller: _phoneNumberController,
                       focusNode: _phoneNumberNode,
                       textInputAction: TextInputAction.next,
+                      keyboardType: TextInputType.number,
                       onEditingComplete: () => _passwordNode.requestFocus(),
                       style: Theme.of(context).textTheme.bodyText2,
                       decoration: formFieldDecoration(

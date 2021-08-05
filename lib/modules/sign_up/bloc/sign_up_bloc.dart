@@ -147,6 +147,11 @@ class SignUpBloc extends Cubit<SignUpState> {
       return (BuildContext context) =>
           AppLocalizations.of(context)!.phoneNumberEmpty;
     }
+    final String _phoneNumber = phoneNumber.trim().replaceAll(' ', '');
+    if (_phoneNumber.length != 10) {
+      return (BuildContext context) =>
+          AppLocalizations.of(context)!.phoneNumberInvalid;
+    }
     return null;
   }
 

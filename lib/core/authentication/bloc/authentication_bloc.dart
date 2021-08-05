@@ -9,6 +9,7 @@ import 'package:device_info_plus/device_info_plus.dart';
 // Project imports:
 import 'package:bitecope/core/common/models/account_status_response.dart';
 import 'package:bitecope/core/common/models/logout_response.dart';
+import 'package:bitecope/core/common/models/user.dart';
 import 'package:bitecope/core/common/repositories/common_repository.dart';
 
 // Project imports:
@@ -26,16 +27,27 @@ class AuthenticationBloc extends Cubit<AuthenticationState> {
     _AuthenticationData? _authData;
     if (_authenticationData == null) {
       final String? _username = await _commonRepository.getUsername();
+      final UserType? _userType =
+          parseUserType[await _commonRepository.getUserType()];
       final String? _token = await _commonRepository.getToken();
       final DateTime? _expiry =
           DateTime.tryParse(await _commonRepository.getExpiry() ?? "");
-      if (_username != null && _token != null && _expiry != null) {
-        _authData = _AuthenticationData(_username, _token, _expiry);
+      if (_username != null &&
+          _userType != null &&
+          _token != null &&
+          _expiry != null) {
+        _authData = _AuthenticationData(
+          username: _username,
+          userType: _userType,
+          token: _token,
+          expiry: _expiry,
+        );
       }
     } else {
       _authData = _authenticationData;
       await _commonRepository.setToken(_authData.token);
       await _commonRepository.setUsername(_authData.username);
+      await _commonRepository.setUserType(_authData.userType.id.toString());
       await _commonRepository.setExpiry(_authData.expiry.toString());
     }
     if (_authData == null) {
@@ -45,6 +57,7 @@ class AuthenticationBloc extends Cubit<AuthenticationState> {
         ),
       );
     } else {
+      emit(state.copyWith(authData: _authData));
       final AccountStatusResponse? response =
           await _commonRepository.accountStatus(username: _authData.username);
       if (response == null || !response.status) {
@@ -75,11 +88,16 @@ class AuthenticationBloc extends Cubit<AuthenticationState> {
     }
   }
 
-  void signedIn(String username, String token, String expiresIn) {
+  void signedIn(
+      String username, UserType userType, String token, String expiresIn) {
     final int _duration = double.parse(expiresIn).toInt();
     final DateTime _expiry = DateTime.now().add(Duration(seconds: _duration));
-    final _AuthenticationData _authenticationData =
-        _AuthenticationData(username, token, _expiry);
+    final _AuthenticationData _authenticationData = _AuthenticationData(
+      username: username,
+      userType: userType,
+      token: token,
+      expiry: _expiry,
+    );
     setStatus(_authenticationData);
   }
 
@@ -116,8 +134,14 @@ class AuthenticationBloc extends Cubit<AuthenticationState> {
 
 class _AuthenticationData {
   String username;
+  UserType userType;
   String token;
   DateTime expiry;
 
-  _AuthenticationData(this.username, this.token, this.expiry);
+  _AuthenticationData({
+    required this.username,
+    required this.userType,
+    required this.token,
+    required this.expiry,
+  });
 }

@@ -8,12 +8,13 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 // Project imports:
 import 'package:bitecope/config/themes/theme.dart';
+import 'package:bitecope/core/authentication/bloc/authentication_bloc.dart';
 import 'package:bitecope/core/common/components/block_button.dart';
 import 'package:bitecope/core/common/components/custom_back_button.dart';
 import 'package:bitecope/core/common/components/gradient_button.dart';
 import 'package:bitecope/core/common/components/gradient_widget.dart';
-import 'package:bitecope/core/common/components/snackbar_message.dart';
 import 'package:bitecope/core/common/components/underlined_title.dart';
+import 'package:bitecope/core/common/models/user.dart';
 import 'package:bitecope/core/common/screens/confirm_operation.dart';
 import 'package:bitecope/core/common/screens/operation_notification.dart';
 import 'package:bitecope/modules/suppliers/bloc/supplier_bloc.dart';
@@ -117,9 +118,16 @@ class _ViewSupplierState extends State<ViewSupplier> {
                       ),
                     ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.all(18),
-                    child: _getButtons(),
+                  BlocBuilder<AuthenticationBloc, AuthenticationState>(
+                    builder: (context, state) {
+                      if (state.authData!.userType == UserType.owner) {
+                        return Padding(
+                          padding: const EdgeInsets.all(18),
+                          child: _getButtons(),
+                        );
+                      }
+                      return Container();
+                    },
                   ),
                 ],
               );
@@ -160,6 +168,40 @@ class _ViewSupplierState extends State<ViewSupplier> {
           },
         ),
       );
+    } else if (state.supplierStatus == SupplierStatus.deleteValidated) {
+      Navigator.of(context).push(
+        MaterialPageRoute(
+          builder: (_) {
+            return BlocProvider.value(
+              value: context.read<SupplierBloc>(),
+              child: Builder(
+                builder: (_context) =>
+                    ConfirmOperation<SupplierBloc, SupplierState>(
+                  confirmationPrompt: _deleteConfirmationPrompt(context),
+                  onConfirm: () =>
+                      _context.read<SupplierBloc>().deleteSupplier(),
+                  dialogText: AppLocalizations.of(context)!.removeSupplier,
+                  flatButtonText: AppLocalizations.of(context)!.remove,
+                  elevatedButtonText: AppLocalizations.of(context)!.no,
+                  flipCallback: true,
+                  listener: (context, state) {
+                    if (state.supplierStatus == SupplierStatus.ready) {
+                      Navigator.of(context).maybePop();
+                    } else if (state.supplierStatus == SupplierStatus.done) {
+                      Navigator.of(context).pushAndRemoveUntil(
+                        _deleteSuccessPage(),
+                        (route) => route.isFirst,
+                      );
+                    }
+                  },
+                  isLoading: (state) =>
+                      state.supplierStatus == SupplierStatus.loading,
+                ),
+              ),
+            );
+          },
+        ),
+      );
     }
   }
 
@@ -176,6 +218,29 @@ class _ViewSupplierState extends State<ViewSupplier> {
           ),
           TextSpan(
             text: AppLocalizations.of(context)!.editSupplier,
+            style: Theme.of(context).textTheme.bodyText1,
+          ),
+          TextSpan(
+            text: AppLocalizations.of(context)!.confirmOperation,
+          ),
+        ],
+      ),
+    );
+  }
+
+  RichText _deleteConfirmationPrompt(BuildContext context) {
+    return RichText(
+      text: TextSpan(
+        style: Theme.of(context)
+            .textTheme
+            .bodyText1
+            ?.copyWith(color: AppColors.shadowText),
+        children: [
+          TextSpan(
+            text: AppLocalizations.of(context)!.tryingTo,
+          ),
+          TextSpan(
+            text: AppLocalizations.of(context)!.deleteSupplier,
             style: Theme.of(context).textTheme.bodyText1,
           ),
           TextSpan(
@@ -203,6 +268,23 @@ class _ViewSupplierState extends State<ViewSupplier> {
     );
   }
 
+  Route _deleteSuccessPage() {
+    return MaterialPageRoute(
+      builder: (context) {
+        return OperationNotification(
+          iconPath: "assets/images/circle_delete.svg",
+          title: AppLocalizations.of(context)!.deleted,
+          message: AppLocalizations.of(context)!.detailEdited,
+          splashImagePath: "assets/images/change_confirmation.svg",
+          nextText: AppLocalizations.of(context)!.backToSuppliers,
+          nextCallback: () {
+            Navigator.of(context).pushReplacementNamed('/suppliers');
+          },
+        );
+      },
+    );
+  }
+
   Widget _getButtons() {
     if (_isEditing) {
       return GradientButton(
@@ -212,6 +294,7 @@ class _ViewSupplierState extends State<ViewSupplier> {
                 supplierID: widget.supplier.id,
                 description: _descriptionController.text,
               );
+          _descriptionController.text = widget.supplier.description ?? "";
         },
         gradient: AppGradients.primaryLinear,
         child: Row(
@@ -254,12 +337,9 @@ class _ViewSupplierState extends State<ViewSupplier> {
         ),
         BlockButton(
           onTap: () {
-            //TODO
-            snackbarMessage(
-              context,
-              "Not Implemented",
-              MessageType.warning,
-            );
+            context
+                .read<SupplierBloc>()
+                .confirmDelete(supplierID: widget.supplier.id);
           },
           position: BlockPosition.right,
           child: Center(

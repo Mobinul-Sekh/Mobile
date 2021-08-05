@@ -394,5 +394,29 @@
     "saveUp": "Save up the details?",
     "@saveUp": {
       "description": "Default prompt text for change request confirmation dialog"
+    },
+    "phoneNumberInvalid": "Please enter a valid phone number",
+    "@phoneNumberInvalid": {
+      "description": "Error text for invalid phone number"
+    },
+    "deleteSupplier": "remove the supplier. ",
+    "@deleteSupplier": {
+      "description": "Prompt text (partial) for confirming delete supplier"
+    },
+    "deleted": "Deleted",
+    "@deleted": {
+      "description": "Prompt text for delete success"
+    },
+    "removeSupplier": "Remove this supplier?",
+    "@removeSupplier": {
+      "description": "Dialog prompt text to confirm removing supplier"
+    },
+    "remove": "Remove",
+    "@remove": {
+      "description": "Button text for remove"
+    },
+    "no": "No",
+    "@remove": {
+      "description": "Button text for no"
     }
 }

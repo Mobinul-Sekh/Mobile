@@ -2,24 +2,20 @@ part of 'authentication_bloc.dart';
 
 class AuthenticationState {
   AuthenticationStatus status;
-  String? username;
-  String? token;
+  _AuthenticationData? authData;
 
   AuthenticationState({
     this.status = AuthenticationStatus.loading,
-    this.username,
-    this.token,
+    this.authData,
   });
 
   AuthenticationState copyWith({
     AuthenticationStatus? status,
-    String? username,
-    String? token,
+    _AuthenticationData? authData,
   }) {
     return AuthenticationState(
       status: status ?? this.status,
-      username: username ?? this.username,
-      token: token ?? this.token,
+      authData: authData ?? this.authData,
     );
   }
 }

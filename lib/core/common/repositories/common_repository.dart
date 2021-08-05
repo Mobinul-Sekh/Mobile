@@ -43,6 +43,18 @@ class CommonRepository {
     _preferences.setString('username', username);
   }
 
+  Future<String?> getUserType() async {
+    final SharedPreferences _preferences =
+        await SharedPreferences.getInstance();
+    return _preferences.getString('userType');
+  }
+
+  Future<void> setUserType(String userType) async {
+    final SharedPreferences _preferences =
+        await SharedPreferences.getInstance();
+    _preferences.setString('userType', userType);
+  }
+
   Future<void> removeUsername() async {
     final SharedPreferences _preferences =
         await SharedPreferences.getInstance();
