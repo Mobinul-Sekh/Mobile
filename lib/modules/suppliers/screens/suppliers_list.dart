@@ -15,14 +15,9 @@ import 'package:bitecope/modules/suppliers/models/supplier.dart';
 import 'package:bitecope/modules/suppliers/screens/add_supplier.dart';
 import 'package:bitecope/modules/suppliers/screens/view_supplier.dart';
 
-class SuppliersList extends StatefulWidget {
+class SuppliersList extends StatelessWidget {
   const SuppliersList({Key? key}) : super(key: key);
 
-  @override
-  _SuppliersListState createState() => _SuppliersListState();
-}
-
-class _SuppliersListState extends State<SuppliersList> {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<SupplierListBloc, SupplierListState>(
@@ -35,7 +30,12 @@ class _SuppliersListState extends State<SuppliersList> {
           getText: (supplier) => supplier.name,
           onTap: (context, supplier) => Navigator.of(context).push(
             MaterialPageRoute(
-              builder: (_) => ViewSupplier(supplier: supplier),
+              builder: (_) => BlocProvider<SupplierBloc>(
+                create: (_) => SupplierBloc(
+                  context.read<SupplierListBloc>().repository,
+                ),
+                child: ViewSupplier(supplier: supplier),
+              ),
             ),
           ),
           actionButton: ActionButton(

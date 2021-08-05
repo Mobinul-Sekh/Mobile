@@ -1,6 +1,7 @@
 part of 'supplier_bloc.dart';
 
 class SupplierState with EquatableMixin {
+  late final String? id;
   late final BlocFormField<String> name;
   late final BlocFormField<String> phoneNumber;
   late final BlocFormField<String> address;
@@ -9,6 +10,7 @@ class SupplierState with EquatableMixin {
   SupplierStatus supplierStatus;
 
   SupplierState({
+    this.id,
     BlocFormField<String>? name,
     BlocFormField<String>? phoneNumber,
     BlocFormField<String>? address,
@@ -24,6 +26,7 @@ class SupplierState with EquatableMixin {
 
   @override
   List<Object?> get props => [
+        id,
         name,
         phoneNumber,
         address,
@@ -33,6 +36,7 @@ class SupplierState with EquatableMixin {
       ];
 
   SupplierState copyWith({
+    String? id,
     BlocFormField<String>? name,
     BlocFormField<String>? phoneNumber,
     BlocFormField<String>? address,
@@ -41,6 +45,7 @@ class SupplierState with EquatableMixin {
     SupplierStatus? supplierStatus,
   }) {
     return SupplierState(
+      id: id ?? this.id,
       name: name ?? this.name,
       phoneNumber: phoneNumber ?? this.phoneNumber,
       address: address ?? this.address,
@@ -53,8 +58,12 @@ class SupplierState with EquatableMixin {
 
 enum SupplierStatus {
   ready,
-  validated,
-  confirm,
+  createValidated,
+  editValidated,
+  deleteValidated,
+  confirmCreate,
+  confirmEdit,
+  confirmDelete,
   loading,
   done,
 }

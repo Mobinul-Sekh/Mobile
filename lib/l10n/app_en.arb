@@ -374,5 +374,25 @@
     "backToSuppliers": "Back To Suppliers",
     "@backToSuppliers": {
       "description": "Button text for back to suppliers"
+    },
+    "editSupplier": "change details of the supplier. ",
+    "@editSupplier": {
+      "description": "Prompt text (partial) for confirming editing supplier"
+    },
+    "success": "Success",
+    "@success": {
+      "description": "Prompt text for request success"
+    },
+    "detailEdited": "Change request is accepted",
+    "@detailEdited": {
+      "description": "Detailed prompt text for successful change"
+    },
+    "save": "Save",
+    "@save": {
+      "description": "Button text for save"
+    },
+    "saveUp": "Save up the details?",
+    "@saveUp": {
+      "description": "Default prompt text for change request confirmation dialog"
     }
 }

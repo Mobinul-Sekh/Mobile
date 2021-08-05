@@ -108,7 +108,7 @@ class AddSupplier extends StatelessWidget {
   }
 
   void _handleListen(BuildContext context, SupplierState state) {
-    if (state.supplierStatus == SupplierStatus.validated) {
+    if (state.supplierStatus == SupplierStatus.createValidated) {
       FocusScope.of(context).unfocus();
       Navigator.of(context).push(
         MaterialPageRoute(

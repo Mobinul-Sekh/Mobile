@@ -9,6 +9,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 // Project imports:
 import 'package:bitecope/config/utils/typedefs.dart';
 import 'package:bitecope/modules/suppliers/models/add_supplier_response.dart';
+import 'package:bitecope/modules/suppliers/models/edit_supplier_response.dart';
 import 'package:bitecope/modules/suppliers/repositories/supplier_repository.dart';
 import 'package:bitecope/utils/bloc_utils/bloc_form_field.dart';
 
@@ -48,12 +49,12 @@ class SupplierBloc extends Cubit<SupplierState> {
         address: BlocFormField(_address, _errors['address']),
         description: BlocFormField(_description),
         supplierStatus:
-            _isValid ? SupplierStatus.validated : SupplierStatus.ready,
+            _isValid ? SupplierStatus.createValidated : SupplierStatus.ready,
       ),
     );
 
     if (_isValid) {
-      emit(state.copyWith(supplierStatus: SupplierStatus.confirm));
+      emit(state.copyWith(supplierStatus: SupplierStatus.confirmCreate));
     }
   }
 
@@ -98,6 +99,45 @@ class SupplierBloc extends Cubit<SupplierState> {
           error: _response.otherError != null
               ? (BuildContext context) => _response.otherError
               : null,
+          supplierStatus: SupplierStatus.ready,
+        ));
+      }
+    }
+  }
+
+  void confirmEdit({
+    required String supplierID,
+    String? description,
+  }) {
+    final String? _description =
+        description?.trim() == "" ? null : description?.trim();
+    emit(state.copyWith(
+      id: supplierID,
+      description: BlocFormField(_description),
+      supplierStatus: SupplierStatus.editValidated,
+    ));
+    emit(state.copyWith(
+      supplierStatus: SupplierStatus.confirmEdit,
+    ));
+  }
+
+  Future<void> editSupplier() async {
+    emit(state.copyWith(supplierStatus: SupplierStatus.loading));
+
+    final EditSupplierResponse? _response =
+        await _supplierRepository.editSupplier(
+      supplierID: state.id!,
+      description: state.description.value,
+    );
+
+    if (_response != null) {
+      if (_response.status) {
+        emit(state.copyWith(
+          supplierStatus: SupplierStatus.done,
+        ));
+      } else {
+        emit(state.copyWith(
+          error: (BuildContext context) => _response.message,
           supplierStatus: SupplierStatus.ready,
         ));
       }

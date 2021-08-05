@@ -14,24 +14,37 @@ class SupplierForm extends StatelessWidget {
   final TextEditingController phoneNumberController;
   final TextEditingController addressController;
   final TextEditingController descriptionController;
+  late final FocusNode nameNode;
+  late final FocusNode phoneNumberNode;
+  late final FocusNode addressNode;
+  late final FocusNode descriptionNode;
   final LocaleString? nameError;
   final LocaleString? phoneNumberError;
   final LocaleString? addressError;
   final LocaleString? descriptionError;
   final SupplierFormMode formMode;
 
-  const SupplierForm({
+  SupplierForm({
     Key? key,
     required this.nameController,
     required this.phoneNumberController,
     required this.addressController,
     required this.descriptionController,
+    FocusNode? nameNode,
+    FocusNode? phoneNumberNode,
+    FocusNode? addressNode,
+    FocusNode? descriptionNode,
     this.nameError,
     this.phoneNumberError,
     this.addressError,
     this.descriptionError,
     this.formMode = SupplierFormMode.display,
-  }) : super(key: key);
+  }) : super(key: key) {
+    this.nameNode = nameNode ?? FocusNode();
+    this.phoneNumberNode = phoneNumberNode ?? FocusNode();
+    this.addressNode = addressNode ?? FocusNode();
+    this.descriptionNode = descriptionNode ?? FocusNode();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -45,6 +58,7 @@ class SupplierForm extends StatelessWidget {
         ),
         TextFormField(
           controller: nameController,
+          focusNode: nameNode,
           textAlignVertical: TextAlignVertical.center,
           style: Theme.of(context).textTheme.bodyText2,
           enabled: formMode == SupplierFormMode.create,
@@ -63,6 +77,7 @@ class SupplierForm extends StatelessWidget {
         ),
         TextFormField(
           controller: phoneNumberController,
+          focusNode: phoneNumberNode,
           textAlignVertical: TextAlignVertical.center,
           style: Theme.of(context).textTheme.bodyText2,
           enabled: formMode == SupplierFormMode.create,
@@ -81,6 +96,7 @@ class SupplierForm extends StatelessWidget {
         ),
         TextFormField(
           controller: addressController,
+          focusNode: addressNode,
           textAlignVertical: TextAlignVertical.center,
           style: Theme.of(context).textTheme.bodyText2,
           enabled: formMode == SupplierFormMode.create,
@@ -101,6 +117,7 @@ class SupplierForm extends StatelessWidget {
         ),
         TextFormField(
           controller: descriptionController,
+          focusNode: descriptionNode,
           textAlignVertical: TextAlignVertical.center,
           style: Theme.of(context).textTheme.bodyText2,
           textInputAction: TextInputAction.done,
