@@ -140,14 +140,14 @@ class _ViewSupplierState extends State<ViewSupplier> {
               child: Builder(
                 builder: (_context) =>
                     ConfirmOperation<SupplierBloc, SupplierState>(
-                  confirmationPrompt: _confirmationPrompt(context),
+                  confirmationPrompt: _editConfirmationPrompt(context),
                   onConfirm: () => _context.read<SupplierBloc>().editSupplier(),
                   listener: (context, state) {
                     if (state.supplierStatus == SupplierStatus.ready) {
                       Navigator.of(context).maybePop();
                     } else if (state.supplierStatus == SupplierStatus.done) {
                       Navigator.of(context).pushAndRemoveUntil(
-                        _successPage(),
+                        _editSuccessPage(),
                         (route) => route.isFirst,
                       );
                     }
@@ -163,7 +163,7 @@ class _ViewSupplierState extends State<ViewSupplier> {
     }
   }
 
-  RichText _confirmationPrompt(BuildContext context) {
+  RichText _editConfirmationPrompt(BuildContext context) {
     return RichText(
       text: TextSpan(
         style: Theme.of(context)
@@ -186,14 +186,14 @@ class _ViewSupplierState extends State<ViewSupplier> {
     );
   }
 
-  Route _successPage() {
+  Route _editSuccessPage() {
     return MaterialPageRoute(
       builder: (context) {
         return OperationNotification(
-          iconPath: "assets/images/cloud_check.svg",
+          iconPath: "assets/images/circle_check.svg",
           title: AppLocalizations.of(context)!.success,
           message: AppLocalizations.of(context)!.detailEdited,
-          splashImagePath: "assets/images/astronaut_flag.svg",
+          splashImagePath: "assets/images/change_confirmation.svg",
           nextText: AppLocalizations.of(context)!.backToSuppliers,
           nextCallback: () {
             Navigator.of(context).pushReplacementNamed('/suppliers');
