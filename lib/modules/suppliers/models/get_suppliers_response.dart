@@ -8,7 +8,9 @@ class GetSuppliersResponse {
   GetSuppliersResponse({
     this.status = false,
     this.suppliers,
-  });
+  }) {
+    suppliers?.sort((a, b) => a.name.compareTo(b.name));
+  }
 
   factory GetSuppliersResponse.fromMap(Map<String, dynamic> map) {
     return GetSuppliersResponse(

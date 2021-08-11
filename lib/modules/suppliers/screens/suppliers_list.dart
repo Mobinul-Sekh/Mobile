@@ -34,7 +34,7 @@ class SuppliersList extends StatelessWidget {
             MaterialPageRoute(
               builder: (_) => BlocProvider<SupplierBloc>(
                 create: (_) => SupplierBloc(
-                  context.read<SupplierListBloc>().repository,
+                  context.read<SupplierListBloc>(),
                 ),
                 child: ViewSupplier(supplier: supplier),
               ),
@@ -49,7 +49,7 @@ class SuppliersList extends StatelessWidget {
                       MaterialPageRoute(
                         builder: (_) => BlocProvider<SupplierBloc>(
                           create: (_) => SupplierBloc(
-                            context.read<SupplierListBloc>().repository,
+                            context.read<SupplierListBloc>(),
                           ),
                           child: AddSupplier(),
                         ),

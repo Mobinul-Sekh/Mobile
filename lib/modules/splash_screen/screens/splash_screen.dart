@@ -1,4 +1,5 @@
 // Flutter imports:
+import 'package:bitecope/config/routes/route_names.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -71,7 +72,7 @@ class SplashScreen extends StatelessWidget {
                             width: 2,
                           ),
                           onTap: () {
-                            Navigator.of(context).pushNamed("/signIn");
+                            Navigator.of(context).pushNamed(RouteName.signIn);
                           },
                           child: Center(
                             child: Text(
@@ -91,7 +92,7 @@ class SplashScreen extends StatelessWidget {
                             width: 2,
                           ),
                           onTap: () {
-                            Navigator.of(context).pushNamed('/signUp');
+                            Navigator.of(context).pushNamed(RouteName.signUp);
                           },
                           child: Center(
                             child: Text(
@@ -125,25 +126,25 @@ class SplashScreen extends StatelessWidget {
       case AuthenticationStatus.loggedOut:
         break;
       case AuthenticationStatus.loggedIn:
-        Navigator.of(context).pushReplacementNamed('/home');
+        Navigator.of(context).pushReplacementNamed(RouteName.home);
         break;
       case AuthenticationStatus.ownerActivate:
         Navigator.of(context).pushNamed(
-          '/ownerSubscription',
+          RouteName.ownerSubscription,
           arguments:
               OwnerSubscriptionArguments(username: state.authData!.username),
         );
         break;
       case AuthenticationStatus.ownerInitialize:
         //TODO Push to owner initialize; pushing to home for now
-        Navigator.of(context).pushReplacementNamed('/home');
+        Navigator.of(context).pushReplacementNamed(RouteName.home);
         break;
       case AuthenticationStatus.ownerInactive:
         //TODO Push to owner inactive error page for woker sign-in; pushing to home for now
-        Navigator.of(context).pushReplacementNamed('/home');
+        Navigator.of(context).pushReplacementNamed(RouteName.home);
         break;
       case AuthenticationStatus.workerInitialize:
-        Navigator.of(context).pushNamed('/workerInitialize');
+        Navigator.of(context).pushNamed(RouteName.workerInitialize);
         break;
     }
   }

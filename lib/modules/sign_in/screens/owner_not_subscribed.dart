@@ -1,4 +1,5 @@
 // Flutter imports:
+import 'package:bitecope/config/routes/route_names.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -52,10 +53,12 @@ class OwnerNotSubscribed extends StatelessWidget {
                 child: RoundedWideButton(
                   onTap: () {
                     Navigator.of(context).pushNamedAndRemoveUntil(
-                        '/ownerSubscription', ModalRoute.withName('/'),
-                        arguments: OwnerSubscriptionArguments(
-                          username: username,
-                        ));
+                      RouteName.ownerSubscription,
+                      ModalRoute.withName(RouteName.splashScreen),
+                      arguments: OwnerSubscriptionArguments(
+                        username: username,
+                      ),
+                    );
                   },
                   child: GradientWidget(
                     gradient: AppGradients.primaryLinear,

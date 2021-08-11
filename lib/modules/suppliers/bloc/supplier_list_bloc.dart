@@ -32,4 +32,37 @@ class SupplierListBloc extends Cubit<SupplierListState> {
       supplierListStatus: SupplierListStatus.ready,
     ));
   }
+
+  void editSupplier({
+    required String supplierID,
+    String? description,
+  }) {
+    emit(state.copyWith(supplierListStatus: SupplierListStatus.loading));
+    final int? _supplierIndex =
+        state.suppliers?.indexWhere((_supplier) => _supplier.id == supplierID);
+    if (_supplierIndex != null) {
+      final List<Supplier> _updatedSuppliers = state.suppliers!;
+      _updatedSuppliers[_supplierIndex].description = description;
+      emit(state.copyWith(
+        suppliers: _updatedSuppliers,
+      ));
+    }
+    emit(state.copyWith(supplierListStatus: SupplierListStatus.ready));
+  }
+
+  void deleteSupplier({
+    required String supplierID,
+  }) {
+    emit(state.copyWith(supplierListStatus: SupplierListStatus.loading));
+    final int? _supplierIndex =
+        state.suppliers?.indexWhere((_supplier) => _supplier.id == supplierID);
+    if (_supplierIndex != null) {
+      final List<Supplier> _updatedSuppliers = state.suppliers!;
+      _updatedSuppliers.removeAt(_supplierIndex);
+      emit(state.copyWith(
+        suppliers: _updatedSuppliers,
+      ));
+    }
+    emit(state.copyWith(supplierListStatus: SupplierListStatus.ready));
+  }
 }

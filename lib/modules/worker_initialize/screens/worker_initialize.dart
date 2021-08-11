@@ -1,4 +1,5 @@
 // Flutter imports:
+import 'package:bitecope/config/routes/route_names.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -41,7 +42,8 @@ class WorkerInitialize extends StatelessWidget {
               if (state.workerInitializeStatus ==
                   WorkerInitializeStatus.initialized) {
                 context.read<AuthenticationBloc>().setStatus();
-                Navigator.of(context).popUntil(ModalRoute.withName('/'));
+                Navigator.of(context)
+                    .popUntil(ModalRoute.withName(RouteName.splashScreen));
               }
             },
             builder: (context, state) {

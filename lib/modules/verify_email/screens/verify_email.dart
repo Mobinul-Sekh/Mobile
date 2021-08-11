@@ -1,4 +1,5 @@
 // Flutter imports:
+import 'package:bitecope/config/routes/route_names.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
@@ -174,10 +175,10 @@ class _VerifyEmailState extends State<VerifyEmail> with WidgetsBindingObserver {
             postText: _successPagePostText(),
             nextText: AppLocalizations.of(context)!.backToLogin,
             nextCallback: () =>
-                Navigator.of(context).pushReplacementNamed('/signIn'),
+                Navigator.of(context).pushReplacementNamed(RouteName.signIn),
           );
         }),
-        ModalRoute.withName('/'),
+        ModalRoute.withName(RouteName.splashScreen),
       );
     }
   }
