@@ -1,4 +1,5 @@
 // Flutter imports:
+import 'package:bitecope/modules/suppliers/bloc/supplier_list_bloc.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -17,9 +18,12 @@ import 'package:bitecope/utils/bloc_utils/bloc_form_field.dart';
 part 'supplier_state.dart';
 
 class SupplierBloc extends Cubit<SupplierState> {
-  final SupplierRepository _supplierRepository;
+  final SupplierListBloc _supplierListBloc;
+  late final SupplierRepository _supplierRepository;
 
-  SupplierBloc(this._supplierRepository) : super(SupplierState());
+  SupplierBloc(this._supplierListBloc) : super(SupplierState()) {
+    _supplierRepository = _supplierListBloc.repository;
+  }
 
   void validateSupplier({
     String? name,
@@ -133,6 +137,10 @@ class SupplierBloc extends Cubit<SupplierState> {
 
     if (_response != null) {
       if (_response.status) {
+        _supplierListBloc.editSupplier(
+          supplierID: state.id!,
+          description: state.description.value,
+        );
         emit(state.copyWith(
           supplierStatus: SupplierStatus.done,
         ));
@@ -167,6 +175,9 @@ class SupplierBloc extends Cubit<SupplierState> {
 
     if (_response != null) {
       if (_response.status) {
+        _supplierListBloc.deleteSupplier(
+          supplierID: state.id!,
+        );
         emit(state.copyWith(
           supplierStatus: SupplierStatus.done,
         ));

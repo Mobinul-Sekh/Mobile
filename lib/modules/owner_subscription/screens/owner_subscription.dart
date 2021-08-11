@@ -1,4 +1,5 @@
 // Flutter imports:
+import 'package:bitecope/config/routes/route_names.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
@@ -127,11 +128,11 @@ class OwnerSubscription extends StatelessWidget {
             postText: _successPagePostText(context),
             nextText: AppLocalizations.of(context)!.backToLogin,
             nextCallback: () {
-              Navigator.of(context).pushReplacementNamed('/signIn');
+              Navigator.of(context).pushReplacementNamed(RouteName.signIn);
             },
           );
         }),
-        ModalRoute.withName('/'),
+        ModalRoute.withName(RouteName.splashScreen),
       );
     }
   }

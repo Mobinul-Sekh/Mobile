@@ -1,4 +1,5 @@
 // Flutter imports:
+import 'package:bitecope/config/routes/route_names.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
@@ -66,10 +67,12 @@ class _SignUpTwoState extends State<SignUpTwo> {
             Navigator.of(context).maybePop();
           } else if (state.signUpStatus == SignUpStatus.done) {
             Navigator.of(context).pushNamedAndRemoveUntil(
-                '/verifyEmail', ModalRoute.withName('/'),
-                arguments: VerifyEmailArguments(
-                  username: state.username.value!,
-                ));
+              RouteName.verifyEmail,
+              ModalRoute.withName(RouteName.splashScreen),
+              arguments: VerifyEmailArguments(
+                username: state.username.value!,
+              ),
+            );
           }
         },
         builder: (context, state) {

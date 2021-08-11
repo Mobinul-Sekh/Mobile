@@ -1,4 +1,5 @@
 // Flutter imports:
+import 'package:bitecope/config/routes/route_names.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -32,12 +33,14 @@ class AppRouter {
 
   Route onGenerateRoute(RouteSettings routeSettings) {
     switch (routeSettings.name) {
-      case '/':
+      case RouteName.splashScreen:
         return MaterialPageRoute(
+          settings: routeSettings,
           builder: (_) => const SplashScreen(),
         );
-      case '/signUp':
+      case RouteName.signUp:
         return MaterialPageRoute(
+          settings: routeSettings,
           builder: (_) {
             return BlocProvider<SignUpBloc>(
               create: (context) => SignUpBloc(SignUpRepository()),
@@ -45,33 +48,40 @@ class AppRouter {
             );
           },
         );
-      case '/verifyEmail':
+      case RouteName.verifyEmail:
         //! Requires VerifyEmailArguments
-        return MaterialPageRoute(builder: (_) {
-          final VerifyEmailArguments _verifyEmailArguments =
-              routeSettings.arguments! as VerifyEmailArguments;
-          return BlocProvider<VerifyEmailBloc>(
-            create: (context) => VerifyEmailBloc(
-              VerifyEmailRepository(),
-              username: _verifyEmailArguments.username,
-            ),
-            child: const VerifyEmail(),
-          );
-        });
-      case '/ownerSubscription':
-        return MaterialPageRoute(builder: (_) {
-          final OwnerSubscriptionArguments _ownerSubscriptionArguments =
-              routeSettings.arguments! as OwnerSubscriptionArguments;
-          return BlocProvider<OwnerSubscriptionBloc>(
-            create: (context) => OwnerSubscriptionBloc(
-              OwnerSubscriptionRepository(),
-              username: _ownerSubscriptionArguments.username,
-            ),
-            child: OwnerSubscription(),
-          );
-        });
-      case '/signIn':
         return MaterialPageRoute(
+          settings: routeSettings,
+          builder: (_) {
+            final VerifyEmailArguments _verifyEmailArguments =
+                routeSettings.arguments! as VerifyEmailArguments;
+            return BlocProvider<VerifyEmailBloc>(
+              create: (context) => VerifyEmailBloc(
+                VerifyEmailRepository(),
+                username: _verifyEmailArguments.username,
+              ),
+              child: const VerifyEmail(),
+            );
+          },
+        );
+      case RouteName.ownerSubscription:
+        return MaterialPageRoute(
+          settings: routeSettings,
+          builder: (_) {
+            final OwnerSubscriptionArguments _ownerSubscriptionArguments =
+                routeSettings.arguments! as OwnerSubscriptionArguments;
+            return BlocProvider<OwnerSubscriptionBloc>(
+              create: (context) => OwnerSubscriptionBloc(
+                OwnerSubscriptionRepository(),
+                username: _ownerSubscriptionArguments.username,
+              ),
+              child: OwnerSubscription(),
+            );
+          },
+        );
+      case RouteName.signIn:
+        return MaterialPageRoute(
+          settings: routeSettings,
           builder: (_) {
             return BlocProvider<SignInBloc>(
               create: (context) => SignInBloc(SignInRepository()),
@@ -79,20 +89,23 @@ class AppRouter {
             );
           },
         );
-      case '/workerInitialize':
+      case RouteName.workerInitialize:
         return MaterialPageRoute(
+          settings: routeSettings,
           builder: (_) => BlocProvider<WorkerInitializeBloc>(
             create: (context) =>
                 WorkerInitializeBloc(WorkerInitializeRepository()),
             child: WorkerInitialize(),
           ),
         );
-      case '/home':
+      case RouteName.home:
         return MaterialPageRoute(
+          settings: routeSettings,
           builder: (_) => const Home(),
         );
-      case '/suppliers':
+      case RouteName.suppliers:
         return MaterialPageRoute(
+          settings: routeSettings,
           builder: (_) => BlocProvider<SupplierListBloc>(
             create: (context) => SupplierListBloc(SupplierRepository()),
             child: const SuppliersList(),
@@ -100,6 +113,7 @@ class AppRouter {
         );
       default:
         return MaterialPageRoute(
+          settings: routeSettings,
           builder: (_) => const NotFound(),
         );
     }

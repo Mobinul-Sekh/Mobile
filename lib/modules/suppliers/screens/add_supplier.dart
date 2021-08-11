@@ -1,4 +1,5 @@
 // Flutter imports:
+import 'package:bitecope/config/routes/route_names.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -174,7 +175,7 @@ class AddSupplier extends StatelessWidget {
           splashImagePath: "assets/images/astronaut_flag.svg",
           nextText: AppLocalizations.of(context)!.backToSuppliers,
           nextCallback: () {
-            Navigator.of(context).pushReplacementNamed('/suppliers');
+            Navigator.of(context).pushReplacementNamed(RouteName.suppliers);
           },
         );
       },

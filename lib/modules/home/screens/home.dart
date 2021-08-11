@@ -1,4 +1,5 @@
 // Flutter imports:
+import 'package:bitecope/config/routes/route_names.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -40,7 +41,7 @@ class _HomeState extends State<Home> {
                 children: [
                   GradientButton(
                     onTap: () {
-                      Navigator.of(context).pushNamed('/suppliers');
+                      Navigator.of(context).pushNamed(RouteName.suppliers);
                     },
                     gradient: AppGradients.primaryLinear,
                     child: Text(
@@ -57,7 +58,8 @@ class _HomeState extends State<Home> {
                 final bool? _isLoggedOut =
                     await context.read<AuthenticationBloc>().logout();
                 if (_isLoggedOut != null && _isLoggedOut) {
-                  Navigator.of(context).pushReplacementNamed('/');
+                  Navigator.of(context)
+                      .pushReplacementNamed(RouteName.splashScreen);
                 }
               },
               child: GradientWidget(

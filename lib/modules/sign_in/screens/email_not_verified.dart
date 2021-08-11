@@ -1,4 +1,5 @@
 // Flutter imports:
+import 'package:bitecope/config/routes/route_names.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -62,10 +63,12 @@ class EmailNotVerified extends StatelessWidget {
                   child: RoundedWideButton(
                     onTap: () {
                       Navigator.of(context).pushNamedAndRemoveUntil(
-                          '/verifyEmail', ModalRoute.withName('/'),
-                          arguments: VerifyEmailArguments(
-                            username: username,
-                          ));
+                        RouteName.verifyEmail,
+                        ModalRoute.withName(RouteName.splashScreen),
+                        arguments: VerifyEmailArguments(
+                          username: username,
+                        ),
+                      );
                     },
                     child: GradientWidget(
                       gradient: AppGradients.primaryLinear,

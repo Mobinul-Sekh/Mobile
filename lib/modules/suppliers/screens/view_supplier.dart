@@ -1,4 +1,5 @@
 // Flutter imports:
+import 'package:bitecope/config/routes/route_names.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -156,7 +157,7 @@ class _ViewSupplierState extends State<ViewSupplier> {
                     } else if (state.supplierStatus == SupplierStatus.done) {
                       Navigator.of(context).pushAndRemoveUntil(
                         _editSuccessPage(),
-                        (route) => route.isFirst,
+                        ModalRoute.withName(RouteName.suppliers),
                       );
                     }
                   },
@@ -190,7 +191,7 @@ class _ViewSupplierState extends State<ViewSupplier> {
                     } else if (state.supplierStatus == SupplierStatus.done) {
                       Navigator.of(context).pushAndRemoveUntil(
                         _deleteSuccessPage(),
-                        (route) => route.isFirst,
+                        ModalRoute.withName(RouteName.suppliers),
                       );
                     }
                   },
@@ -261,7 +262,7 @@ class _ViewSupplierState extends State<ViewSupplier> {
           splashImagePath: "assets/images/change_confirmation.svg",
           nextText: AppLocalizations.of(context)!.backToSuppliers,
           nextCallback: () {
-            Navigator.of(context).pushReplacementNamed('/suppliers');
+            Navigator.of(context).maybePop();
           },
         );
       },
@@ -278,7 +279,7 @@ class _ViewSupplierState extends State<ViewSupplier> {
           splashImagePath: "assets/images/change_confirmation.svg",
           nextText: AppLocalizations.of(context)!.backToSuppliers,
           nextCallback: () {
-            Navigator.of(context).pushReplacementNamed('/suppliers');
+            Navigator.of(context).maybePop();
           },
         );
       },
