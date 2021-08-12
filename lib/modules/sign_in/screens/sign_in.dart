@@ -1,5 +1,4 @@
 // Flutter imports:
-import 'package:bitecope/config/routes/route_names.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -7,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 // Project imports:
+import 'package:bitecope/config/routes/route_names.dart';
 import 'package:bitecope/config/themes/theme.dart';
 import 'package:bitecope/core/authentication/bloc/authentication_bloc.dart';
 import 'package:bitecope/core/common/components/custom_back_button.dart';

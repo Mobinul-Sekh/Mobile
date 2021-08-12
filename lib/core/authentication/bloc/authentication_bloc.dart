@@ -102,10 +102,13 @@ class AuthenticationBloc extends Cubit<AuthenticationState> {
   }
 
   Future<bool?> logout() async {
+    emit(state.copyWith(status: AuthenticationStatus.loading));
     final LogoutResponse? response = await _commonRepository.logout();
     if (response != null) {
       if (response.status) {
         emit(AuthenticationState(status: AuthenticationStatus.loggedOut));
+      } else {
+        emit(state.copyWith(status: AuthenticationStatus.loggedIn));
       }
       return response.status;
     }

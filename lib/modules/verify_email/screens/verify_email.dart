@@ -1,5 +1,4 @@
 // Flutter imports:
-import 'package:bitecope/config/routes/route_names.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
@@ -11,6 +10,7 @@ import 'package:url_launcher/url_launcher.dart';
 // Project imports:
 import 'package:bitecope/config/constants/app_texts.dart';
 import 'package:bitecope/config/constants/app_urls.dart';
+import 'package:bitecope/config/routes/route_names.dart';
 import 'package:bitecope/config/themes/theme.dart';
 import 'package:bitecope/config/utils/extensions/int_extension.dart';
 import 'package:bitecope/core/common/components/gradient_button.dart';
