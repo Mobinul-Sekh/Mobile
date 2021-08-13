@@ -2,6 +2,7 @@
 import 'package:bitecope/config/constants/app_texts.dart';
 import 'package:bitecope/config/constants/app_urls.dart';
 import 'package:bitecope/config/routes/route_names.dart';
+import 'package:bitecope/core/common/components/sized_cpi.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
@@ -125,19 +126,7 @@ class _HomeMenuState extends State<HomeMenu> {
                               context.read<AuthenticationBloc>().logout();
                             },
                       child: state.status == AuthenticationStatus.loading
-                          ? Row(
-                              mainAxisSize: MainAxisSize.min,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: const [
-                                SizedBox(
-                                  height: 15,
-                                  width: 15,
-                                  child: CircularProgressIndicator(
-                                    color: AppColors.white,
-                                  ),
-                                ),
-                              ],
-                            )
+                          ? const SizedCPI(color: AppColors.lightBlue1)
                           : Text(
                               AppLocalizations.of(context)!.logout,
                               textAlign: TextAlign.center,

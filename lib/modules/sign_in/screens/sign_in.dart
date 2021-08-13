@@ -1,4 +1,5 @@
 // Flutter imports:
+import 'package:bitecope/core/common/components/sized_cpi.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -225,11 +226,7 @@ class _SignInState extends State<SignIn> {
                 textAlign: TextAlign.center,
               ),
             )
-          : const SizedBox(
-              height: 15,
-              width: 15,
-              child: CircularProgressIndicator(),
-            ),
+          : const SizedCPI(),
     );
   }
 

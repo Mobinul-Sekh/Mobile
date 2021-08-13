@@ -1,4 +1,5 @@
 // Flutter imports:
+import 'package:bitecope/core/common/components/sized_cpi.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
@@ -305,11 +306,7 @@ class _SignUpTwoState extends State<SignUpTwo> {
                   textAlign: TextAlign.center,
                 ),
               )
-            : const SizedBox(
-                height: 15,
-                width: 15,
-                child: CircularProgressIndicator(),
-              ),
+            : const SizedCPI(),
       );
     } else {
       return RoundedWideButton(
