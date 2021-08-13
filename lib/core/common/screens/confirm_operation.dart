@@ -162,7 +162,7 @@ class ConfirmOperation<B extends BlocBase<S>, S> extends StatelessWidget {
       case _ButtonType.flatButton:
         if (flipCallback) {
           if (_checkIsLoading(state)) {
-            return const SizedCPI();
+            return const SizedCPI(color: AppColors.lightBlue1);
           } else {
             return _flatButtonText;
           }

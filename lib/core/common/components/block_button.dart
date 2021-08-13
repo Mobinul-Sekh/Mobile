@@ -8,12 +8,14 @@ class BlockButton extends StatelessWidget {
   final BlockPosition position;
   final Widget child;
   final GestureTapCallback? onTap;
+  final bool singleButton;
 
   const BlockButton({
     Key? key,
     this.position = BlockPosition.center,
     required this.child,
     this.onTap,
+    this.singleButton = false,
   }) : super(key: key);
 
   @override
@@ -45,6 +47,9 @@ class BlockButton extends StatelessWidget {
   }
 
   BorderRadius? _setBorderRadius() {
+    if (singleButton) {
+      return BorderRadius.circular(12);
+    }
     switch (position) {
       case BlockPosition.center:
         return null;
@@ -64,6 +69,9 @@ class BlockButton extends StatelessWidget {
   }
 
   Offset _setShadowOffset() {
+    if (singleButton) {
+      return const Offset(0, 0);
+    }
     switch (position) {
       case BlockPosition.center:
         return const Offset(0, 0);
@@ -77,6 +85,9 @@ class BlockButton extends StatelessWidget {
   }
 
   EdgeInsets _setMargin() {
+    if (singleButton) {
+      return const EdgeInsets.symmetric(horizontal: 1.5);
+    }
     switch (position) {
       case BlockPosition.center:
         return const EdgeInsets.symmetric(horizontal: 1.5);

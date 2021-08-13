@@ -200,6 +200,7 @@ class _ViewWorkerState extends State<ViewWorker> {
                             .read<WorkerBloc>()
                             .confirmDelete(workerName: widget.worker.name);
                       },
+                      singleButton: true,
                       child: Center(
                         child: SvgPicture.asset(
                           'assets/images/delete.svg',
