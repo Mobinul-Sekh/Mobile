@@ -1,5 +1,4 @@
 // Flutter imports:
-import 'package:bitecope/core/common/components/sized_cpi.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -14,6 +13,7 @@ import 'package:bitecope/core/common/components/custom_back_button.dart';
 import 'package:bitecope/core/common/components/form_field_decoration.dart';
 import 'package:bitecope/core/common/components/gradient_widget.dart';
 import 'package:bitecope/core/common/components/rounded_wide_button.dart';
+import 'package:bitecope/core/common/components/sized_cpi.dart';
 import 'package:bitecope/modules/sign_in/cubit/siginin_cubit.dart';
 import 'package:bitecope/modules/sign_in/screens/email_not_verified.dart';
 import 'package:bitecope/modules/sign_in/screens/owner_not_subscribed.dart';
