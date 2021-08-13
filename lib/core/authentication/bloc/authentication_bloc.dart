@@ -57,7 +57,12 @@ class AuthenticationBloc extends Cubit<AuthenticationState> {
         ),
       );
     } else {
-      emit(state.copyWith(authData: _authData));
+      emit(
+        state.copyWith(
+          authData: _authData,
+          status: AuthenticationStatus.loading,
+        ),
+      );
       final AccountStatusResponse? response =
           await _commonRepository.accountStatus(username: _authData.username);
       if (response == null || !response.status) {
@@ -82,7 +87,6 @@ class AuthenticationBloc extends Cubit<AuthenticationState> {
             return;
           }
         }
-        deviceDetails();
         emit(state.copyWith(status: AuthenticationStatus.loggedIn));
       }
     }
@@ -99,13 +103,17 @@ class AuthenticationBloc extends Cubit<AuthenticationState> {
       expiry: _expiry,
     );
     setStatus(_authenticationData);
+    deviceDetails();
   }
 
   Future<bool?> logout() async {
+    emit(state.copyWith(status: AuthenticationStatus.loading));
     final LogoutResponse? response = await _commonRepository.logout();
     if (response != null) {
       if (response.status) {
         emit(AuthenticationState(status: AuthenticationStatus.loggedOut));
+      } else {
+        emit(state.copyWith(status: AuthenticationStatus.loggedIn));
       }
       return response.status;
     }

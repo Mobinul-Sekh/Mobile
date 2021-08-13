@@ -4,6 +4,7 @@ import 'dart:math';
 String randomSentence({
   int sentenceLength = 30,
   int avgWordLength = 5,
+  bool addPeriod = true,
 }) {
   final Random rng = Random();
   final int stringLength = rng.nextInt(sentenceLength) + 1;
@@ -20,6 +21,8 @@ String randomSentence({
       charCodes.add(32);
     }
   }
-  charCodes.add(46);
+  if (addPeriod) {
+    charCodes.add(46);
+  }
   return String.fromCharCodes(charCodes);
 }

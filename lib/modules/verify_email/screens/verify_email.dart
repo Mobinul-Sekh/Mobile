@@ -1,5 +1,5 @@
 // Flutter imports:
-import 'package:bitecope/config/routes/route_names.dart';
+import 'package:bitecope/core/common/components/sized_cpi.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
@@ -11,6 +11,7 @@ import 'package:url_launcher/url_launcher.dart';
 // Project imports:
 import 'package:bitecope/config/constants/app_texts.dart';
 import 'package:bitecope/config/constants/app_urls.dart';
+import 'package:bitecope/config/routes/route_names.dart';
 import 'package:bitecope/config/themes/theme.dart';
 import 'package:bitecope/config/utils/extensions/int_extension.dart';
 import 'package:bitecope/core/common/components/gradient_button.dart';
@@ -247,11 +248,7 @@ class _VerifyEmailState extends State<VerifyEmail> with WidgetsBindingObserver {
               }
             },
       child: state.verifyEmailStatus == VerifyEmailStatus.verifying
-          ? const SizedBox(
-              height: 15,
-              width: 15,
-              child: CircularProgressIndicator(),
-            )
+          ? const SizedCPI()
           : Text(
               AppLocalizations.of(context)!.confirm,
               style: Theme.of(context)
@@ -286,6 +283,7 @@ class _VerifyEmailState extends State<VerifyEmail> with WidgetsBindingObserver {
               onTap: () => Navigator.of(context).maybePop(),
               child: Text(
                 AppLocalizations.of(context)!.cancel,
+                textAlign: TextAlign.center,
                 style: Theme.of(context)
                     .textTheme
                     .button
@@ -300,15 +298,10 @@ class _VerifyEmailState extends State<VerifyEmail> with WidgetsBindingObserver {
               child: state.resendOTPStatus != ResendOTPStatus.resending
                   ? Text(
                       AppLocalizations.of(context)!.resend,
+                      textAlign: TextAlign.center,
                       style: Theme.of(context).textTheme.button,
                     )
-                  : const SizedBox(
-                      height: 15,
-                      width: 15,
-                      child: CircularProgressIndicator(
-                        color: AppColors.white,
-                      ),
-                    ),
+                  : const SizedCPI(),
             ),
           ],
         );

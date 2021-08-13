@@ -418,5 +418,17 @@
     "no": "No",
     "@remove": {
       "description": "Button text for no"
+    },
+    "logout": "Logout",
+    "@logout": {
+      "description": "Button text for logout"
+    },
+    "confirmLogout": "You want to logout?",
+    "@confirmLogout": {
+      "description": "Dialog prompt text to confirm logout"
+    },
+    "support": "Support",
+    "@support": {
+      "description": "Prompt text for support"
     }
 }

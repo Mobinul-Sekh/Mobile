@@ -1,5 +1,4 @@
 // Flutter imports:
-import 'package:bitecope/modules/suppliers/bloc/supplier_list_bloc.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -9,6 +8,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 // Project imports:
 import 'package:bitecope/config/utils/typedefs.dart';
+import 'package:bitecope/modules/suppliers/bloc/supplier_list_bloc.dart';
 import 'package:bitecope/modules/suppliers/models/add_supplier_response.dart';
 import 'package:bitecope/modules/suppliers/models/delete_supplier_response.dart';
 import 'package:bitecope/modules/suppliers/models/edit_supplier_response.dart';

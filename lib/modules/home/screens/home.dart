@@ -1,17 +1,17 @@
 // Flutter imports:
 import 'package:bitecope/config/routes/route_names.dart';
+import 'package:bitecope/modules/home/screens/home_menu.dart';
+import 'package:bitecope/modules/home/screens/page_selector.dart';
+import 'package:bitecope/utils/dev_utils/random_quantity.dart';
+import 'package:bitecope/utils/dev_utils/random_string.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 // Project imports:
 import 'package:bitecope/config/themes/theme.dart';
-import 'package:bitecope/core/authentication/bloc/authentication_bloc.dart';
-import 'package:bitecope/core/common/components/gradient_button.dart';
 import 'package:bitecope/core/common/components/gradient_widget.dart';
-import 'package:bitecope/core/common/components/rounded_wide_button.dart';
-import 'package:bitecope/core/common/components/underlined_title.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -20,60 +20,218 @@ class Home extends StatefulWidget {
   _HomeState createState() => _HomeState();
 }
 
-class _HomeState extends State<Home> {
+class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
+  late final TabController _tabController;
+
+  @override
+  void initState() {
+    super.initState();
+    _tabController = TabController(
+      length: 2,
+      vsync: this,
+    );
+  }
+
+  List<PageSelectorOption> _shipmentPages(BuildContext context) {
+    return [
+      PageSelectorOption(name: "Purchase"),
+      PageSelectorOption(name: "Shipment"),
+    ];
+  }
+
+  List<PageSelectorOption> _factoryPages(BuildContext context) {
+    return [
+      PageSelectorOption(name: "Production"),
+      PageSelectorOption(name: "Printing"),
+    ];
+  }
+
+  List<PageSelectorOption> _listingPages(BuildContext context) {
+    return [
+      PageSelectorOption(name: "Buyer"),
+      PageSelectorOption(name: "Goods"),
+      PageSelectorOption(name: "Items"),
+      PageSelectorOption(name: "Machine"),
+      PageSelectorOption(
+        name: "Supplier",
+        onTap: () {
+          Navigator.of(context).pushReplacementNamed(RouteName.suppliers);
+        },
+      ),
+      PageSelectorOption(name: "Warehouse"),
+      PageSelectorOption(name: "Worker"),
+    ];
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const UnderlinedTitle(
-          title: "Home",
-          underlineOvershoot: 0,
+        automaticallyImplyLeading: false,
+        leadingWidth: 30,
+        centerTitle: false,
+        title: TextButton(
+          onPressed: () {
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (_) => const HomeMenu(),
+              ),
+            );
+          },
+          child: SvgPicture.asset('assets/images/menu.svg'),
         ),
       ),
-      body: Center(
+      body: Padding(
+        padding: const EdgeInsets.fromLTRB(30, 15, 30, 75),
         child: Column(
           children: [
-            const SizedBox(height: 18),
-            Expanded(
-              child: Wrap(
-                runSpacing: 20,
-                spacing: 20,
-                children: [
-                  GradientButton(
-                    onTap: () {
-                      Navigator.of(context).pushNamed(RouteName.suppliers);
-                    },
-                    gradient: AppGradients.primaryLinear,
-                    child: Text(
-                      "Suppliers",
-                      style: Theme.of(context).textTheme.button,
-                    ),
-                  ),
+            Container(
+              decoration: BoxDecoration(
+                color: AppColors.grey,
+                borderRadius: BorderRadius.circular(10.0),
+              ),
+              child: TabBar(
+                controller: _tabController,
+                labelColor: AppColors.lightBlue1,
+                unselectedLabelColor: Theme.of(context).disabledColor,
+                labelStyle: Theme.of(context).textTheme.bodyText1,
+                labelPadding: const EdgeInsets.all(6.0),
+                indicator: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10.0),
+                  color: AppColors.lightGrey,
+                  boxShadow: const [
+                    BoxShadow(
+                      color: AppColors.shadowBlack,
+                      blurRadius: 12,
+                      spreadRadius: 1,
+                    )
+                  ],
+                ),
+                tabs: const [
+                  Tab(text: "Goods"),
+                  Tab(text: "Items"),
                 ],
               ),
             ),
-            const SizedBox(height: 18),
-            RoundedWideButton(
-              onTap: () async {
-                final bool? _isLoggedOut =
-                    await context.read<AuthenticationBloc>().logout();
-                if (_isLoggedOut != null && _isLoggedOut) {
-                  Navigator.of(context)
-                      .pushReplacementNamed(RouteName.splashScreen);
-                }
-              },
-              child: GradientWidget(
-                gradient: AppGradients.primaryLinear,
-                child: Text(
-                  "Logout",
-                  style: Theme.of(context).textTheme.headline6,
-                ),
+            const SizedBox(height: 30),
+            Expanded(
+              child: TabBarView(
+                controller: _tabController,
+                children: [
+                  _listView(),
+                  _listView(),
+                ],
               ),
             ),
-            const SizedBox(height: 18),
+          ],
+        ),
+      ),
+      bottomSheet: Container(
+        color: AppColors.lightGrey,
+        padding: const EdgeInsets.symmetric(vertical: 12),
+        height: 75,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            TextButton(
+              onPressed: null,
+              child: GradientWidget(
+                gradient: AppGradients.primaryLinear,
+                child: SvgPicture.asset('assets/images/home.svg'),
+              ),
+            ),
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (_) => PageSelector(
+                      icon: SvgPicture.asset('assets/images/shipment.svg'),
+                      pages: _shipmentPages(context),
+                    ),
+                  ),
+                );
+              },
+              child: SvgPicture.asset('assets/images/shipment.svg'),
+            ),
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (_) => PageSelector(
+                      icon: SvgPicture.asset('assets/images/factory.svg'),
+                      pages: _factoryPages(context),
+                    ),
+                  ),
+                );
+              },
+              child: SvgPicture.asset('assets/images/factory.svg'),
+            ),
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (_) => PageSelector(
+                      icon: SvgPicture.asset('assets/images/addToList.svg'),
+                      pages: _listingPages(context),
+                    ),
+                  ),
+                );
+              },
+              child: SvgPicture.asset('assets/images/addToList.svg'),
+            ),
           ],
         ),
       ),
     );
+  }
+
+  Widget _listView() {
+    return ListView.builder(
+      itemBuilder: (context, index) {
+        return Container(
+          padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 21.0),
+          decoration: BoxDecoration(
+            color: index % 2 == 0 ? AppColors.grey : null,
+            borderRadius: BorderRadius.circular(12),
+          ),
+          child: Row(
+            children: [
+              Expanded(
+                flex: 2,
+                child: Text(
+                  randomSentence(sentenceLength: 20, addPeriod: false),
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: Theme.of(context)
+                      .textTheme
+                      .bodyText2
+                      ?.copyWith(color: AppColors.black),
+                ),
+              ),
+              Expanded(
+                child: Container(),
+              ),
+              Expanded(
+                child: GradientWidget(
+                  gradient: AppGradients.primaryLinear,
+                  child: Text(
+                    randomQuantity(),
+                    style: Theme.of(context).textTheme.bodyText2,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        );
+      },
+      itemCount: 30,
+      shrinkWrap: true,
+    );
+  }
+
+  @override
+  void dispose() {
+    _tabController.dispose();
+    super.dispose();
   }
 }

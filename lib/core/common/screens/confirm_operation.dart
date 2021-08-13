@@ -1,4 +1,5 @@
 // Flutter imports:
+import 'package:bitecope/core/common/components/sized_cpi.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -138,19 +139,6 @@ class ConfirmOperation<B extends BlocBase<S>, S> extends StatelessWidget {
     S state,
     _ButtonType type,
   ) {
-    final Widget _progressIndicator = Row(
-      mainAxisSize: MainAxisSize.min,
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: const [
-        SizedBox(
-          height: 15,
-          width: 15,
-          child: CircularProgressIndicator(
-            color: AppColors.white,
-          ),
-        ),
-      ],
-    );
     final Widget _flatButtonText = Text(
       flatButtonText ??
           (flipCallback
@@ -174,7 +162,7 @@ class ConfirmOperation<B extends BlocBase<S>, S> extends StatelessWidget {
       case _ButtonType.flatButton:
         if (flipCallback) {
           if (_checkIsLoading(state)) {
-            return _progressIndicator;
+            return const SizedCPI();
           } else {
             return _flatButtonText;
           }
@@ -186,7 +174,7 @@ class ConfirmOperation<B extends BlocBase<S>, S> extends StatelessWidget {
           return _elevatedButtonText;
         } else {
           if (_checkIsLoading(state)) {
-            return _progressIndicator;
+            return const SizedCPI();
           } else {
             return _elevatedButtonText;
           }

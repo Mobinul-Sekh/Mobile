@@ -1,11 +1,11 @@
 // Flutter imports:
-import 'package:bitecope/config/routes/route_names.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 // Project imports:
+import 'package:bitecope/config/routes/route_names.dart';
 import 'package:bitecope/modules/home/screens/home.dart';
 import 'package:bitecope/modules/not_found/screens/not_found.dart';
 import 'package:bitecope/modules/owner_subscription/bloc/owner_subscription_bloc.dart';

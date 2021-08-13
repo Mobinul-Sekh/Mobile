@@ -1,5 +1,6 @@
 // Flutter imports:
 import 'package:bitecope/config/routes/route_names.dart';
+import 'package:bitecope/core/common/components/sized_cpi.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -41,9 +42,9 @@ class WorkerInitialize extends StatelessWidget {
             listener: (context, state) {
               if (state.workerInitializeStatus ==
                   WorkerInitializeStatus.initialized) {
-                context.read<AuthenticationBloc>().setStatus();
                 Navigator.of(context)
                     .popUntil(ModalRoute.withName(RouteName.splashScreen));
+                context.read<AuthenticationBloc>().setStatus();
               }
             },
             builder: (context, state) {
@@ -190,11 +191,7 @@ class WorkerInitialize extends StatelessWidget {
                   );
             },
       child: state.workerInitializeStatus == WorkerInitializeStatus.initializing
-          ? const SizedBox(
-              height: 15,
-              width: 15,
-              child: CircularProgressIndicator(),
-            )
+          ? const SizedCPI()
           : GradientWidget(
               gradient: AppGradients.primaryLinear,
               child: Text(
