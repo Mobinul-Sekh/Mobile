@@ -1,21 +1,21 @@
 // Flutter imports:
-import 'package:bitecope/config/routes/route_names.dart';
-import 'package:bitecope/core/common/components/block_button.dart';
-import 'package:bitecope/core/common/components/underlined_title.dart';
-import 'package:bitecope/core/common/screens/confirm_operation.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 // Project imports:
+import 'package:bitecope/config/routes/route_names.dart';
 import 'package:bitecope/config/themes/theme.dart';
+import 'package:bitecope/core/common/components/block_button.dart';
 import 'package:bitecope/core/common/components/custom_back_button.dart';
+import 'package:bitecope/core/common/components/underlined_title.dart';
+import 'package:bitecope/core/common/screens/confirm_operation.dart';
 import 'package:bitecope/core/common/screens/operation_notification.dart';
 import 'package:bitecope/modules/workers/bloc/worker_bloc.dart';
 import 'package:bitecope/modules/workers/models/worker.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 class ViewWorker extends StatefulWidget {
   final Worker worker;

@@ -1,11 +1,15 @@
+// Flutter imports:
+import 'package:flutter/material.dart';
+
 // Package imports:
+import 'package:bloc/bloc.dart';
+import 'package:equatable/equatable.dart';
+
+// Project imports:
 import 'package:bitecope/config/utils/typedefs.dart';
 import 'package:bitecope/modules/workers/bloc/worker_list_bloc.dart';
 import 'package:bitecope/modules/workers/models/delete_worker_response.dart';
 import 'package:bitecope/modules/workers/repositories/worker_repository.dart';
-import 'package:bloc/bloc.dart';
-import 'package:equatable/equatable.dart';
-import 'package:flutter/material.dart';
 
 part 'worker_state.dart';
 

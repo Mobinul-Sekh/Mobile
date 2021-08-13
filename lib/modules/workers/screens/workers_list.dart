@@ -1,6 +1,4 @@
 // Flutter imports:
-import 'package:bitecope/modules/workers/bloc/worker_bloc.dart';
-import 'package:bitecope/modules/workers/screens/view_worker.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -9,8 +7,10 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 // Project imports:
 import 'package:bitecope/core/common/screens/listing.dart';
+import 'package:bitecope/modules/workers/bloc/worker_bloc.dart';
 import 'package:bitecope/modules/workers/bloc/worker_list_bloc.dart';
 import 'package:bitecope/modules/workers/models/worker.dart';
+import 'package:bitecope/modules/workers/screens/view_worker.dart';
 
 class WorkersList extends StatelessWidget {
   const WorkersList({Key? key}) : super(key: key);
