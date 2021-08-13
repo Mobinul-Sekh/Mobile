@@ -22,4 +22,6 @@ class AppURLs {
   static const String addSupplier = "$baseAPI/add_supplier/";
   static const String editSupplier = "$baseAPI/update_supplier_description/";
   static const String deleteSupplier = "$baseAPI/remove_supplier/";
+  static const String getWorkers = "$baseAPI/worker_view/";
+  static const String deleteWorker = "$baseAPI/worker_remove/";
 }

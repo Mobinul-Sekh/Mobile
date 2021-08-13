@@ -2,13 +2,16 @@
 import 'package:flutter/material.dart';
 
 // Package imports:
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 // Project imports:
 import 'package:bitecope/config/routes/route_names.dart';
 import 'package:bitecope/config/themes/theme.dart';
+import 'package:bitecope/core/authentication/bloc/authentication_bloc.dart';
 import 'package:bitecope/core/common/components/gradient_widget.dart';
+import 'package:bitecope/core/common/models/user.dart';
 import 'package:bitecope/modules/home/screens/home_menu.dart';
 import 'package:bitecope/modules/home/screens/page_selector.dart';
 import 'package:bitecope/utils/dev_utils/random_quantity.dart';
@@ -55,8 +58,8 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
     ];
   }
 
-  List<PageSelectorOption> _listingPages(BuildContext context) {
-    return [
+  List<PageSelectorOption> _listingPages(BuildContext context, bool isOwner) {
+    final List<PageSelectorOption> listingPages = [
       PageSelectorOption(
         name: AppLocalizations.of(context)!.buyer,
       ),
@@ -78,10 +81,20 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
       PageSelectorOption(
         name: AppLocalizations.of(context)!.warehouse,
       ),
-      PageSelectorOption(
-        name: AppLocalizations.of(context)!.worker,
-      ),
     ];
+
+    if (isOwner) {
+      listingPages.add(
+        PageSelectorOption(
+          name: AppLocalizations.of(context)!.worker,
+          onTap: () {
+            Navigator.of(context).pushReplacementNamed(RouteName.workers);
+          },
+        ),
+      );
+    }
+
+    return listingPages;
   }
 
   @override
@@ -187,18 +200,24 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
               },
               child: SvgPicture.asset('assets/images/factory.svg'),
             ),
-            TextButton(
-              onPressed: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (_) => PageSelector(
-                      icon: SvgPicture.asset('assets/images/addToList.svg'),
-                      pages: _listingPages(context),
-                    ),
-                  ),
+            BlocBuilder<AuthenticationBloc, AuthenticationState>(
+              builder: (context, state) {
+                final bool _isOwner =
+                    state.authData?.userType == UserType.owner;
+                return TextButton(
+                  onPressed: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (_) => PageSelector(
+                          icon: SvgPicture.asset('assets/images/addToList.svg'),
+                          pages: _listingPages(context, _isOwner),
+                        ),
+                      ),
+                    );
+                  },
+                  child: SvgPicture.asset('assets/images/addToList.svg'),
                 );
               },
-              child: SvgPicture.asset('assets/images/addToList.svg'),
             ),
           ],
         ),

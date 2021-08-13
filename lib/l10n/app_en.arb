@@ -478,5 +478,33 @@
     "selectOne": "Please select one option",
     "@selectOne": {
       "description": "Prompt text to radio buttons"
+    },
+    "workers": "Workers",
+    "@workers": {
+      "description": "Title text for workers list page"
+    },
+    "workerID": "Worker ID",
+    "@workerID": {
+      "description": "Label text for worker ID field"
+    },
+    "removeWorker": "Remove this Worker?",
+    "@removeWorker": {
+      "description": "Dialog prompt text for worker delete"
+    },
+    "deleteWorker": "remove the worker ",
+    "@deleteWorker": {
+      "description": "Prompt text (partial) to confirm worker delete"
+    },
+    "backToWorkers": "Back To Workers",
+    "@backToWorkers": {
+      "description": "Button text for back to workers"
+    },
+    "details": "Details",
+    "@details": {
+      "description": "Title text for details"
+    },
+    "name": "Name",
+    "@name": {
+      "description": "Label text for name field"
     }
 }

@@ -27,6 +27,9 @@ import 'package:bitecope/modules/verify_email/screens/verify_email.dart';
 import 'package:bitecope/modules/worker_initialize/bloc/worker_initialize_bloc.dart';
 import 'package:bitecope/modules/worker_initialize/repositories/worker_initialize_repository.dart';
 import 'package:bitecope/modules/worker_initialize/screens/worker_initialize.dart';
+import 'package:bitecope/modules/workers/bloc/worker_list_bloc.dart';
+import 'package:bitecope/modules/workers/repositories/worker_repository.dart';
+import 'package:bitecope/modules/workers/screens/workers_list.dart';
 
 class AppRouter {
   // Declare blocs here
@@ -109,6 +112,14 @@ class AppRouter {
           builder: (_) => BlocProvider<SupplierListBloc>(
             create: (context) => SupplierListBloc(SupplierRepository()),
             child: const SuppliersList(),
+          ),
+        );
+      case RouteName.workers:
+        return MaterialPageRoute(
+          settings: routeSettings,
+          builder: (_) => BlocProvider<WorkerListBloc>(
+            create: (context) => WorkerListBloc(WorkerRepository()),
+            child: const WorkersList(),
           ),
         );
       default:
