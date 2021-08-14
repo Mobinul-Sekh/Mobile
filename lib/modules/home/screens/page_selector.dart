@@ -1,8 +1,14 @@
+// Flutter imports:
+import 'package:flutter/material.dart';
+
+// Package imports:
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
+// Project imports:
 import 'package:bitecope/config/themes/theme.dart';
 import 'package:bitecope/core/common/components/custom_back_button.dart';
 import 'package:bitecope/core/common/components/gradient_widget.dart';
 import 'package:bitecope/core/common/components/snackbar_message.dart';
-import 'package:flutter/material.dart';
 
 class PageSelectorOption {
   String name;
@@ -37,7 +43,7 @@ class PageSelector extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
               Text(
-                "Please select one option",
+                AppLocalizations.of(context)!.selectOne,
                 style: Theme.of(context)
                     .textTheme
                     .bodyText1

@@ -1,22 +1,22 @@
 // Flutter imports:
-import 'package:bitecope/config/constants/app_texts.dart';
-import 'package:bitecope/config/constants/app_urls.dart';
-import 'package:bitecope/config/routes/route_names.dart';
-import 'package:bitecope/core/common/components/sized_cpi.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 // Project imports:
+import 'package:bitecope/config/constants/app_texts.dart';
+import 'package:bitecope/config/constants/app_urls.dart';
+import 'package:bitecope/config/routes/route_names.dart';
 import 'package:bitecope/config/themes/theme.dart';
 import 'package:bitecope/core/authentication/bloc/authentication_bloc.dart';
 import 'package:bitecope/core/common/components/custom_back_button.dart';
 import 'package:bitecope/core/common/components/gradient_button.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'package:bitecope/core/common/components/sized_cpi.dart';
 
 class HomeMenu extends StatefulWidget {
   const HomeMenu({Key? key}) : super(key: key);

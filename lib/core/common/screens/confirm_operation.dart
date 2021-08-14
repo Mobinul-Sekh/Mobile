@@ -1,5 +1,4 @@
 // Flutter imports:
-import 'package:bitecope/core/common/components/sized_cpi.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -9,6 +8,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 // Project imports:
 import 'package:bitecope/config/themes/theme.dart';
 import 'package:bitecope/core/common/components/gradient_button.dart';
+import 'package:bitecope/core/common/components/sized_cpi.dart';
 
 class ConfirmOperation<B extends BlocBase<S>, S> extends StatelessWidget {
   final Widget confirmationPrompt;
@@ -162,7 +162,7 @@ class ConfirmOperation<B extends BlocBase<S>, S> extends StatelessWidget {
       case _ButtonType.flatButton:
         if (flipCallback) {
           if (_checkIsLoading(state)) {
-            return const SizedCPI();
+            return const SizedCPI(color: AppColors.lightBlue1);
           } else {
             return _flatButtonText;
           }

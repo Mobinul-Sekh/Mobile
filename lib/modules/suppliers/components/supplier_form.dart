@@ -56,7 +56,7 @@ class SupplierForm extends StatelessWidget {
           focusNode: nameNode,
           textAlignVertical: TextAlignVertical.center,
           style: Theme.of(context).textTheme.bodyText2,
-          enabled: formMode == SupplierFormMode.create,
+          readOnly: formMode != SupplierFormMode.create,
           autofocus: formMode == SupplierFormMode.create,
           textInputAction: TextInputAction.next,
           decoration: formFieldDecoration(
@@ -75,7 +75,7 @@ class SupplierForm extends StatelessWidget {
           focusNode: phoneNumberNode,
           textAlignVertical: TextAlignVertical.center,
           style: Theme.of(context).textTheme.bodyText2,
-          enabled: formMode == SupplierFormMode.create,
+          readOnly: formMode != SupplierFormMode.create,
           textInputAction: TextInputAction.next,
           keyboardType: TextInputType.number,
           decoration: formFieldDecoration(
@@ -95,7 +95,7 @@ class SupplierForm extends StatelessWidget {
           focusNode: addressNode,
           textAlignVertical: TextAlignVertical.center,
           style: Theme.of(context).textTheme.bodyText2,
-          enabled: formMode == SupplierFormMode.create,
+          readOnly: formMode != SupplierFormMode.create,
           textInputAction: TextInputAction.next,
           minLines: 1,
           maxLines: 3,
@@ -117,8 +117,7 @@ class SupplierForm extends StatelessWidget {
           textAlignVertical: TextAlignVertical.center,
           style: Theme.of(context).textTheme.bodyText2,
           textInputAction: TextInputAction.done,
-          enabled: formMode == SupplierFormMode.create ||
-              formMode == SupplierFormMode.edit,
+          readOnly: formMode == SupplierFormMode.display,
           autofocus: formMode == SupplierFormMode.edit,
           minLines: 1,
           maxLines: 6,

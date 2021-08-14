@@ -1,5 +1,8 @@
-import 'package:bitecope/config/themes/theme.dart';
+// Flutter imports:
 import 'package:flutter/material.dart';
+
+// Project imports:
+import 'package:bitecope/config/themes/theme.dart';
 
 class SizedCPI extends StatelessWidget {
   final Color? color;

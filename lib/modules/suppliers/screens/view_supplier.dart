@@ -70,7 +70,7 @@ class _ViewSupplierState extends State<ViewSupplier> {
           ),
         ),
         body: Padding(
-          padding: const EdgeInsets.all(30),
+          padding: const EdgeInsets.symmetric(vertical: 30.0),
           child: BlocConsumer<SupplierBloc, SupplierState>(
             listener: (context, state) {
               _handleListen(context, state);
@@ -79,7 +79,7 @@ class _ViewSupplierState extends State<ViewSupplier> {
               return Column(
                 children: [
                   Padding(
-                    padding: const EdgeInsets.all(18.0),
+                    padding: const EdgeInsets.symmetric(horizontal: 30.0),
                     child: Table(
                       columnWidths: const {
                         0: FlexColumnWidth(),
@@ -107,6 +107,7 @@ class _ViewSupplierState extends State<ViewSupplier> {
                   ),
                   Expanded(
                     child: SingleChildScrollView(
+                      padding: const EdgeInsets.symmetric(horizontal: 30.0),
                       child: SupplierForm(
                         nameController: _nameController,
                         phoneNumberController: _phoneNumberController,

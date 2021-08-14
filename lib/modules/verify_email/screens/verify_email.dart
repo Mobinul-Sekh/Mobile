@@ -1,5 +1,4 @@
 // Flutter imports:
-import 'package:bitecope/core/common/components/sized_cpi.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
@@ -17,6 +16,7 @@ import 'package:bitecope/config/utils/extensions/int_extension.dart';
 import 'package:bitecope/core/common/components/gradient_button.dart';
 import 'package:bitecope/core/common/components/gradient_widget.dart';
 import 'package:bitecope/core/common/components/rounded_wide_button.dart';
+import 'package:bitecope/core/common/components/sized_cpi.dart';
 import 'package:bitecope/core/common/components/snackbar_message.dart';
 import 'package:bitecope/core/common/components/underlined_title.dart';
 import 'package:bitecope/core/common/screens/operation_notification.dart';

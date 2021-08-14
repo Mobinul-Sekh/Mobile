@@ -1,6 +1,4 @@
 // Flutter imports:
-import 'package:bitecope/config/routes/route_names.dart';
-import 'package:bitecope/core/common/components/sized_cpi.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -8,12 +6,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 // Project imports:
+import 'package:bitecope/config/routes/route_names.dart';
 import 'package:bitecope/config/themes/theme.dart';
 import 'package:bitecope/core/authentication/bloc/authentication_bloc.dart';
 import 'package:bitecope/core/common/components/form_field_decoration.dart';
 import 'package:bitecope/core/common/components/gradient_widget.dart';
 import 'package:bitecope/core/common/components/required_field_label.dart';
 import 'package:bitecope/core/common/components/rounded_wide_button.dart';
+import 'package:bitecope/core/common/components/sized_cpi.dart';
 import 'package:bitecope/core/common/components/underlined_title.dart';
 import 'package:bitecope/modules/worker_initialize/bloc/worker_initialize_bloc.dart';
 
