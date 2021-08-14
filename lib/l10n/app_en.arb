@@ -506,5 +506,13 @@
     "name": "Name",
     "@name": {
       "description": "Label text for name field"
+    },
+    "noNetwork": "Unable to connect to the internet",
+    "@noNetwork": {
+      "description": "Error text for no network page"
+    },
+    "tryAgain": "Try Again",
+    "@tryAgain": {
+      "description": "Button text for try again"
     }
 }

@@ -1,5 +1,6 @@
 class RouteName {
   static const splashScreen = "/";
+  static const noNetwork = "/noNetwork";
   static const signUp = "/signUp";
   static const signIn = "/signIn";
   static const verifyEmail = "/verifyEmail";

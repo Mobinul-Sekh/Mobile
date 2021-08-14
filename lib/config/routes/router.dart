@@ -6,6 +6,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 // Project imports:
 import 'package:bitecope/config/routes/route_names.dart';
+import 'package:bitecope/core/common/screens/no_network.dart';
+import 'package:bitecope/core/network/bloc/network_bloc.dart';
 import 'package:bitecope/modules/home/screens/home.dart';
 import 'package:bitecope/modules/not_found/screens/not_found.dart';
 import 'package:bitecope/modules/owner_subscription/bloc/owner_subscription_bloc.dart';
@@ -34,12 +36,25 @@ import 'package:bitecope/modules/workers/screens/workers_list.dart';
 class AppRouter {
   // Declare blocs here
 
+  Widget _networkWrapper(Widget child) {
+    return BlocListener<NetworkBloc, NetworkState>(
+      listener: (context, state) {
+        if (state.status == NetworkStatus.disconnected) {
+          Navigator.of(context).pushNamed(RouteName.noNetwork);
+        } else if (state.status == NetworkStatus.reconnected) {
+          Navigator.of(context).maybePop();
+        }
+      },
+      child: child,
+    );
+  }
+
   Route onGenerateRoute(RouteSettings routeSettings) {
     switch (routeSettings.name) {
       case RouteName.splashScreen:
         return MaterialPageRoute(
           settings: routeSettings,
-          builder: (_) => const SplashScreen(),
+          builder: (_) => _networkWrapper(const SplashScreen()),
         );
       case RouteName.signUp:
         return MaterialPageRoute(
@@ -104,7 +119,7 @@ class AppRouter {
       case RouteName.home:
         return MaterialPageRoute(
           settings: routeSettings,
-          builder: (_) => const Home(),
+          builder: (_) => _networkWrapper(const Home()),
         );
       case RouteName.suppliers:
         return MaterialPageRoute(
@@ -121,6 +136,11 @@ class AppRouter {
             create: (context) => WorkerListBloc(WorkerRepository()),
             child: const WorkersList(),
           ),
+        );
+      case RouteName.noNetwork:
+        return MaterialPageRoute(
+          settings: routeSettings,
+          builder: (_) => const NoNetwork(),
         );
       default:
         return MaterialPageRoute(
