@@ -1,4 +1,7 @@
 // Flutter imports:
+import 'package:bitecope/modules/buyers/bloc/buyer_list_bloc.dart';
+import 'package:bitecope/modules/buyers/repositories/buyer_repository.dart';
+import 'package:bitecope/modules/buyers/screens/buyers_list.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -127,6 +130,14 @@ class AppRouter {
           builder: (_) => BlocProvider<SupplierListBloc>(
             create: (context) => SupplierListBloc(SupplierRepository()),
             child: const SuppliersList(),
+          ),
+        );
+      case RouteName.buyers:
+        return MaterialPageRoute(
+          settings: routeSettings,
+          builder: (_) => BlocProvider<BuyerListBloc>(
+            create: (context) => BuyerListBloc(BuyerRepository()),
+            child: const BuyersList(),
           ),
         );
       case RouteName.workers:

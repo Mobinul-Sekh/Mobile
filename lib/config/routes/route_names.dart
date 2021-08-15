@@ -9,5 +9,6 @@ class RouteName {
   static const ownerInitialize = "/ownerInitialize";
   static const home = "/home";
   static const suppliers = "/suppliers";
+  static const buyers = "/buyers";
   static const workers = "/workers";
 }

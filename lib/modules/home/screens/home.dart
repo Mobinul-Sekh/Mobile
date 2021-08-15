@@ -62,6 +62,9 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
     final List<PageSelectorOption> listingPages = [
       PageSelectorOption(
         name: AppLocalizations.of(context)!.buyer,
+        onTap: () {
+          Navigator.of(context).pushReplacementNamed(RouteName.buyers);
+        },
       ),
       PageSelectorOption(
         name: AppLocalizations.of(context)!.goods,
