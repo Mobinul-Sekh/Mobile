@@ -31,4 +31,7 @@ class AppURLs {
   static const String getMachines = "$baseAPI/machines_view/";
   static const String addMachine = "$baseAPI/add_machines/";
   static const String deleteMachine = "$baseAPI/remove_machine/";
+  static const String getWarehouses = "$baseAPI/warehouse/";
+  static const String addWarehouse = "$baseAPI/add_warehouse/";
+  static const String deleteWarehouse = "$baseAPI/remove_warehouse/";
 }

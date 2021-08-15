@@ -5,6 +5,9 @@ import 'package:bitecope/modules/buyers/screens/buyers_list.dart';
 import 'package:bitecope/modules/machines/bloc/machine_list_bloc.dart';
 import 'package:bitecope/modules/machines/repositories/machine_repository.dart';
 import 'package:bitecope/modules/machines/screens/machine_list.dart';
+import 'package:bitecope/modules/warehouse/bloc/warehouse_list_bloc.dart';
+import 'package:bitecope/modules/warehouse/repositories/warehouse_repository.dart';
+import 'package:bitecope/modules/warehouse/screens/warehouse_list.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -157,6 +160,14 @@ class AppRouter {
           builder: (_) => BlocProvider<WorkerListBloc>(
             create: (context) => WorkerListBloc(WorkerRepository()),
             child: const WorkersList(),
+          ),
+        );
+      case RouteName.warehouses:
+        return MaterialPageRoute(
+          settings: routeSettings,
+          builder: (_) => BlocProvider<WarehouseListBloc>(
+            create: (context) => WarehouseListBloc(WarehouseRepository()),
+            child: const WarehouseList(),
           ),
         );
       case RouteName.noNetwork:

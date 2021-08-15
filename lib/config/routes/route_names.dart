@@ -11,5 +11,6 @@ class RouteName {
   static const suppliers = "/suppliers";
   static const buyers = "/buyers";
   static const machines = "/machines";
+  static const warehouses = "/warehouses";
   static const workers = "/workers";
 }

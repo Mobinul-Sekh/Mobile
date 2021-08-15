@@ -602,5 +602,45 @@
   "removeMachine": "Remove this machine?",
   "@removeMachine": {
     "description": "Dialog prompt text to confirm removing machine"
+  },
+  "warehouses": "Warehouses",
+  "@warehouses": {
+    "description": "Title text for Warehouses"
+  },
+  "warehouseDetails": "Warehouse Details",
+  "@warehouseDetails": {
+    "description": "Title text for warehouse details"
+  },
+  "warehouseID": "warehouse ID",
+  "@warehouseID": {
+    "description": "Label text for warehouse ID field"
+  },
+  "warehouseName": "Warehouse Name",
+  "@warehouseName": {
+    "description": "Label text for warehouse name field"
+  },
+  "warehouseNameEmpty": "Please enter warehouse name",
+  "@warehouseNameEmpty": {
+    "description": "Error text for empty warehouse name field"
+  },
+  "addWarehouse": "Add Warehouse",
+  "@addWarehouse": {
+    "description": "Title text for add warehouse"
+  },
+  "addNewWarehouse": "add new warehouse.",
+  "@addNewWarehouse": {
+    "description": "Prompt text (partial) for confirming adding new warehouse"
+  },
+  "backToWarehouse": "Back To Warehouse",
+  "@backToWarehouse": {
+    "description": "Button text for back to warehouse"
+  },
+  "deleteWarehouse": "remove the warehouse.",
+  "@deleteWarehouse": {
+    "description": "Prompt text (partial) for confirming delete warehouse"
+  },
+  "removeWarehouse": "Remove this warehouse?",
+  "@removeWarehouse": {
+    "description": "Dialog prompt text to confirm removing warehouse"
   }
 }
