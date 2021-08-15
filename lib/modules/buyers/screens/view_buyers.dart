@@ -179,7 +179,7 @@ class _ViewBuyerState extends State<ViewBuyer> {
                 builder: (_context) => ConfirmOperation<BuyerBloc, BuyerState>(
                   confirmationPrompt: _deleteConfirmationPrompt(context),
                   onConfirm: () => _context.read<BuyerBloc>().deleteBuyer(),
-                  dialogText: AppLocalizations.of(context)!.removeSupplier,
+                  dialogText: AppLocalizations.of(context)!.removeBuyer,
                   flatButtonText: AppLocalizations.of(context)!.remove,
                   elevatedButtonText: AppLocalizations.of(context)!.no,
                   flipCallback: true,
