@@ -514,5 +514,53 @@
     "tryAgain": "Try Again",
     "@tryAgain": {
       "description": "Button text for try again"
-    }
+    },
+   "buyers": "Buyers",
+    "@Buyers": {
+      "description": "Title text for buyers"
+    },
+  "buyerDetails": "Buyer Details",
+  "@buyerDetails": {
+    "description": "Title text for buyer details"
+  },
+  "buyerID": "Buyer ID",
+  "@buyerID": {
+    "description": "Label text for buyer ID field"
+  },
+  "buyerName": "Buyer Name",
+  "@buyerName": {
+    "description": "Label text for buyer name field"
+  },
+  "buyerNameEmpty": "Please enter buyer name",
+  "@buyerNameEmpty": {
+    "description": "Error text for empty buyer name field"
+  },
+  "buyerAddressEmpty": "Please enter buyer address",
+  "@buyerAddressEmpty": {
+    "description": "Error text for empty buyer address field"
+  },
+  "addBuyer": "Add Buyer",
+  "@addBuyer": {
+    "description": "Title text for add buyer"
+  },
+  "addNewBuyer": "add new buyer. ",
+  "@addNewBuyer": {
+    "description": "Prompt text (partial) for confirming adding new buyer"
+  },
+  "backToBuyer": "Back To Buyer",
+  "@backToBuyer": {
+    "description": "Button text for back to buyers"
+  },
+  "editBuyer": "change details of the buyer. ",
+  "@editBuyer": {
+    "description": "Prompt text (partial) for confirming editing buyer"
+  },
+  "deleteBuyer": "remove the buyer. ",
+  "@deleteBuyer": {
+    "description": "Prompt text (partial) for confirming delete buyer"
+  },
+  "removeBuyer": "Remove this buyer?",
+  "@removeBuyer": {
+    "description": "Dialog prompt text to confirm removing buyer"
+  }
 }
