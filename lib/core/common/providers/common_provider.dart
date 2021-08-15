@@ -67,8 +67,10 @@ class CommonProvider {
   }
 
   Map<String, dynamic>? errorResponse(Object e) {
-    if (e is DioError && e.response!.statusCode! < 500) {
-      return e.response.asMap();
+    if (e is DioError) {
+      if (e.response != null && e.response!.statusCode != null) {
+        return e.response.asMap();
+      }
     }
     return null;
   }

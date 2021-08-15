@@ -11,6 +11,7 @@ import 'package:bitecope/core/common/models/account_status_response.dart';
 import 'package:bitecope/core/common/models/logout_response.dart';
 import 'package:bitecope/core/common/models/user.dart';
 import 'package:bitecope/core/common/repositories/common_repository.dart';
+import 'package:bitecope/core/network/bloc/network_bloc.dart';
 
 // Project imports:
 
@@ -18,9 +19,19 @@ part 'authentication_state.dart';
 
 class AuthenticationBloc extends Cubit<AuthenticationState> {
   final CommonRepository _commonRepository;
+  final NetworkBloc _networkBloc;
+  late StreamSubscription _networkStreamSubscription;
 
-  AuthenticationBloc(this._commonRepository) : super(AuthenticationState()) {
+  AuthenticationBloc(
+    this._commonRepository,
+    this._networkBloc,
+  ) : super(AuthenticationState()) {
     setStatus();
+    _networkStreamSubscription = _networkBloc.stream.listen((state) {
+      if (state.status == NetworkStatus.reconnected) {
+        setStatus();
+      }
+    });
   }
 
   Future<void> setStatus([_AuthenticationData? _authenticationData]) async {
@@ -137,6 +148,12 @@ class AuthenticationBloc extends Cubit<AuthenticationState> {
         androidID: build.androidId,
       );
     }
+  }
+
+  @override
+  Future<void> close() {
+    _networkStreamSubscription.cancel();
+    return super.close();
   }
 }
 

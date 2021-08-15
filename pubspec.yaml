@@ -9,20 +9,21 @@ environment:
   sdk: ">=2.12.0 <3.0.0"
 
 dependencies:
-  flutter:
-    sdk: flutter
-  flutter_localizations:
-    sdk: flutter
+  bloc_test: ^8.0.2
+  connectivity_plus: ^1.0.6
+  cupertino_icons: ^1.0.2
+  device_info_plus: ^2.1.0
   dio:
     git:
       url: https://github.com/arun-muralidharan/dio.git
       path: dio
-  bloc_test: ^8.0.2
-  cupertino_icons: ^1.0.2
-  device_info_plus: ^2.1.0
   email_validator: ^2.0.1
   equatable: ^2.0.3
+  flutter:
+    sdk: flutter
   flutter_bloc: ^7.1.0
+  flutter_localizations:
+    sdk: flutter
   flutter_svg: ^0.22.0
   http: ^0.13.3
   intl: ^0.17.0
