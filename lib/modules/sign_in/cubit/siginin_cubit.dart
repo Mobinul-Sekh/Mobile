@@ -1,3 +1,6 @@
+// Dart imports:
+import 'dart:async';
+
 // Flutter imports:
 import 'package:flutter/material.dart';
 
@@ -7,6 +10,8 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 // Project imports:
 import 'package:bitecope/config/utils/typedefs.dart';
+import 'package:bitecope/core/common/models/account_status_response.dart';
+import 'package:bitecope/core/common/models/user.dart';
 import 'package:bitecope/modules/sign_in/models/signin_reponse_model.dart';
 import 'package:bitecope/modules/sign_in/repositories/sign_in_repository.dart';
 import 'package:bitecope/utils/bloc_utils/bloc_form_field.dart';
@@ -14,15 +19,18 @@ import 'package:bitecope/utils/bloc_utils/bloc_form_field.dart';
 part 'signin_state.dart';
 
 class SignInBloc extends Cubit<SignInState> {
-  SignInRepository signInRepository;
-  SignInBloc({required this.signInRepository}) : super(SignInState());
+  final SignInRepository _signInRepository;
 
-  void validateSignInPage({
+  SignInBloc(this._signInRepository) : super(SignInState());
+
+  Future<void> validateSignInPage({
     String? username,
     String? password,
-  }) {
+  }) async {
+    final String? _username = username?.trim();
+
     final Map<String, LocaleString?> _errors = {
-      "username": _validateUsername(username),
+      "username": _validateUsername(_username),
       "password": _validatePassword(password),
     };
 
@@ -30,32 +38,91 @@ class SignInBloc extends Cubit<SignInState> {
 
     emit(state.copyWith(
       username: BlocFormField(
-        username,
+        _username,
         _errors["username"],
       ),
       password: BlocFormField(
         password,
         _errors["password"],
       ),
+      error: _isValid
+          ? null
+          : (BuildContext context) =>
+              AppLocalizations.of(context)!.signInFieldEmpty,
       signInStatus: _isValid ? SignInStatus.signingIn : SignInStatus.signIn,
     ));
 
     if (_isValid) {
-      loginUser();
+      final AccountStatusResponse? response =
+          await _signInRepository.accountStatus(
+        username: _username!,
+      );
+      if (response == null) {
+        return;
+      }
+      if (!response.status) {
+        String? _error(BuildContext context) => response.error;
+
+        emit(state.copyWith(
+          username: state.username.copyWith(error: _error),
+          password: state.password.copyWith(error: _error),
+          error: _error,
+          signInStatus: SignInStatus.signIn,
+        ));
+        return;
+      }
+
+      emit(state.copyWith(
+        userType: parseUserType[response.userType.toString()],
+      ));
+
+      final bool _emailStatus = _isEmailVerified(response);
+      if (!_emailStatus) return;
+      final bool _activeStatus = _isActive(response);
+      if (!_activeStatus) return;
+      _loginUser();
     }
   }
 
-  Future<void> loginUser() async {
+  bool _isEmailVerified(AccountStatusResponse accountStatus) {
+    if (!accountStatus.mailStatus!) {
+      emit(state.copyWith(signInStatus: SignInStatus.verify));
+      return false;
+    }
+    return true;
+  }
+
+  bool _isActive(AccountStatusResponse accountStatus) {
+    if (!accountStatus.activeStatus!) {
+      if (accountStatus.userType == 0) {
+        emit(state.copyWith(
+          signInStatus: SignInStatus.ownerActivate,
+        ));
+      } else {
+        emit(state.copyWith(
+          error: (BuildContext context) =>
+              AppLocalizations.of(context)!.inactiveOwner,
+          signInStatus: SignInStatus.ownerInactive,
+        ));
+      }
+      return false;
+    }
+    return true;
+  }
+
+  Future<void> _loginUser() async {
     final SignInResponseModel? response =
-        await signInRepository.signInWithUserNameAndPassword(
+        await _signInRepository.signInWithUserNameAndPassword(
       username: state.username.value!,
       password: state.password.value!,
     );
     if (response != null) {
       if (response.token != null) {
-        // TODO We'll set the token when we have logout ready
-        // signInRepository.setToken(response.token!);
-        emit(state.copyWith(signInStatus: SignInStatus.signedIn));
+        emit(state.copyWith(
+          signInStatus: SignInStatus.signedIn,
+          token: response.token,
+          expiresIn: response.expiresIn,
+        ));
       } else {
         _setErrors(response);
       }
@@ -80,18 +147,19 @@ class SignInBloc extends Cubit<SignInState> {
 
   void _setErrors(SignInResponseModel response) {
     //TODO Need a list of possible API errors for each field to localize them; for now returning the errors as they are.
+    String? _error(BuildContext context) {
+      return response.error;
+    }
+
     emit(
       state.copyWith(
         username: state.username.copyWith(
-          error: response.error != null
-              ? (BuildContext context) => response.error
-              : null,
+          error: _error,
         ),
         password: state.password.copyWith(
-          error: response.error != null
-              ? (BuildContext context) => response.error
-              : null,
+          error: _error,
         ),
+        error: _error,
         signInStatus: SignInStatus.signIn,
       ),
     );

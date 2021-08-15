@@ -19,6 +19,14 @@
     "@signUP": {
       "description": "Text for sign up button"
     },
+    "signInFieldEmpty": "Please enter username & password",
+    "@signInFieldEmpty": {
+      "description": "Error text for empty sign in field"
+    },
+    "inactiveOwner": "Owner Account is Inactive",
+    "@inactiveOwner": {
+      "description": "Error text for worker sign in when corresponding owner account is inactive"
+    },
     "email": "Email",
     "@email": {
       "description": "Label text for email field"
@@ -39,10 +47,6 @@
     "@username": {
       "description": "Label text for username field"
     },
-    "sampleUsername": "test",
-    "@sampleUsername": {
-      "description": "username textfield hint text"
-    },
     "usernameEmpty": "Please enter a username",
     "@usernameEmpty": {
       "description": "Error text for empty username"
@@ -59,17 +63,13 @@
     "@password": {
       "description": "Label text for password field"
     },
-    "samplePassword": "**********",
-    "@samplePassword": {
-      "description": "Sample password for text filed hint text"
+    "passwordEmpty": "Please enter password",
+    "@passwordEmpty": {
+      "description": "Error text for empty password"
     },
     "forgotPassword": "Forget Password?",
     "@forgotPassword": {
       "description": "Forget Password text"
-    },
-    "passwordEmpty": "Please enter password",
-    "@passwordEmpty": {
-      "description": "Error text for empty password"
     },
     "passwordWeak": "Password too short; must be at least 6 characters",
     "@passwordWeak": {
@@ -131,10 +131,6 @@
     "@worker": {
       "description": "Label text for worker radio button"
     },
-    "ownerName": "Owner Name",
-    "@ownerName": {
-      "description": "Label text for owner name field"
-    },
     "agreeTerms": "I agree to the ",
     "@agreeTerms": {
       "description": "Label text (partial) for terms and condition agreement"
@@ -186,6 +182,405 @@
   "ownerDetails": "Owner Details",
   "@ownerDetails": {
     "description": ""
+  },
+    "verifyEmail": "Verify Email",
+    "@verifyEmail": {
+      "description": "Title text for email verification page"
+    },
+    "checkInbox": "Please check your email inbox",
+    "@checkInbox": {
+      "description": "Text prompt for check inbox"
+    },
+    "enterOTP": "Please enter the OTP",
+    "@enterOTP": {
+      "description": "Text prompt for enter OTP"
+    },
+    "noOTP": "Did not get the OTP? ",
+    "@noOTP": {
+      "description": "Text prompt for no OTP"
+    },
+    "resendOTP": "Resend OTP",
+    "@resendOTP": {
+      "description": "Text prompt for resend OTP"
+    },
+    "confirmResendOTP": "It might take a few minutes for you to receive the OTP. Please check your spam/junk folder as well.",
+    "@confirmResendOTP": {
+      "description": "Text prompt to confirm resend OTP"
+    },
+    "resend": "Resend",
+    "@resend": {
+      "description": "Button text for resend"
+    },
+    "resendOTPFailed": "Resend OTP failed",
+    "@resendOTPFailed": {
+      "description": "Text prompt for resend OTP failed"
+    },
+    "resendOTPTimer": "Resend option will be available in ",
+    "@resendOTPTimer": {
+      "description": "Text prompt for resend OTP timer"
+    },
+    "resentOTP": "OTP Resent",
+    "@resentOTP": {
+      "description": "Confirmation text when OTP is resent"
+    },
+    "confirm": "Confirm",
+    "@confirm": {
+      "description": "Button text for confirm"
+    },
+    "contactSupport": "If you need any help, please reach out to us at ",
+    "@contactSupport": {
+      "description": "Text prompt for contact support"
+    },
+    "cancel": "Cancel",
+    "@cancel": {
+      "description": "Button text for cancel"
+    },
+    "congratulations": "Congratulations",
+    "@congratulations": {
+      "description": "Congratulatory text in success page"
+    },
+    "emailVerified": "Your email is now verified",
+    "@emailVerified": {
+      "description": "Text prompt for successful email verification"
+    },
+    "choosingBitecope": "Thank you for choosing Bitecope. ",
+    "@choosingBitecope": {
+      "description": "Thank you text in success page"
+    },
+    "continueServices": "Now you can continue using the services without any interruption",
+    "@continueServices": {
+      "description": "Continue text in success page"
+    },
+    "backToLogin": "Go Back to Login",
+    "@backToLogin": {
+      "description": "Button text for back to login"
+    },
+    "emailNotVerified": "Your email is not verified",
+    "@emailNotVerified": {
+      "description": "Text prompt for email not verified"
+    },
+    "verifyToSignIn": "Please verify your email to sign-in",
+    "@verifyToSignIn": {
+      "description": "Text prompt verify email to sign-in"
+    },
+    "verify": "Verify",
+    "@verify": {
+      "description": "Button text for verify"
+    },
+    "ownerName": "Owner Name",
+    "@ownerName": {
+      "description": "Label text for owner name field"
+    },
+    "workerDetails": "Worker Details",
+    "@workerDetails": {
+      "description": "Title text for worker initialize page"
+    },
+    "ownerUsername": "Owner Username",
+    "@ownerUsername": {
+      "description": "Label text for owner username field"
+    },
+    "workerName": "Worker Name",
+    "@workerName": {
+      "description": "Label text for worker name field"
+    },
+    "workerAddress": "Worker Address",
+    "@workerAddress": {
+      "description": "Label text for worker address field"
+    },
+    "userDescription": "About Yourself",
+    "@userDescription": {
+      "description": "Label text for user description field"
+    },
+    "ownerUsernameEmpty": "Please enter owner username",
+    "@ownerUsernameEmpty": {
+      "description": "Error text for empty owner username field"
+    },
+    "workerNameEmpty": "Please enter worker name",
+    "@workerNameEmpty": {
+      "description": "Error text for empty worker name field"
+    },
+    "workerAddressEmpty": "Please enter worker address",
+    "@workerAddressEmpty": {
+      "description": "Error text for empty worker address field"
+    },
+    "subscription": "Subscription",
+    "@subscription": {
+      "description": "Title text for owner subscription page"
+    },
+    "activationKey": "Activation Key",
+    "@activationKey": {
+      "description": "Label text for activation key field"
+    },
+    "activate": "Activate",
+    "@activate": {
+      "description": "Button text for activate"
+    },
+    "keyEmpty": "Please enter a key",
+    "@keyEmpty": {
+      "description": "Error text for empty key field"
+    },
+    "notSubscribed": "Your account is not subscribed",
+    "@notSubscribed": {
+      "description": "Error text for not subscribed page"
+    },
+    "subscribeToUse": "Please subscribe to use the services",
+    "@subscribeToUse": {
+      "description": "Text prompt to subscribe in the not subscribed page"
+    },
+    "subscribe": "Subscribe",
+    "@subscribe": {
+      "description": "Button text for subscribe"
+    },
+    "accountActivated": "Account is successfully activated",
+    "@accountActivated": {
+      "description": "Text prompt for successful subscription"
+    },
+    "suppliers": "Suppliers",
+    "@suppliers": {
+      "description": "Title text for suppliers"
+    },
+    "supplierDetails": "Supplier Details",
+    "@supplierDetails": {
+      "description": "Title text for supplier details"
+    },
+    "supplierID": "Supplier ID",
+    "@supplierID": {
+      "description": "Label text for supplier ID field"
+    },
+    "supplierName": "Supplier Name",
+    "@supplierName": {
+      "description": "Label text for supplier name field"
+    },
+    "supplierNameEmpty": "Please enter supplier name",
+    "@supplierNameEmpty": {
+      "description": "Error text for empty supplier name field"
+    },
+    "address": "Address",
+    "@address": {
+      "description": "Label text for address field"
+    },
+    "supplierAddressEmpty": "Please enter supplier address",
+    "@supplierAddressEmpty": {
+      "description": "Error text for empty supplier address field"
+    },
+    "description": "Description",
+    "@description": {
+      "description": "Label text for description field"
+    },
+    "addSupplier": "Add Supplier",
+    "@addSupplier": {
+      "description": "Title text for add supplier"
+    },
+    "tryingTo": "You are trying to ",
+    "@tryingTo": {
+      "description": "Prompt text (partial) for operation confirmation"
+    },
+    "addNewSupplier": "add new supplier. ",
+    "@addNewSupplier": {
+      "description": "Prompt text (partial) for confirming adding new supplier"
+    },
+    "confirmOperation": "Please do confirm if it is what you want to do?",
+    "@confirmOperation": {
+      "description": "Prompt text (partial) for operation confirmation"
+    },
+    "saved": "Saved",
+    "@saved": {
+      "description": "Prompt text for successful save"
+    },
+    "detailAdded": "New detail is successfully added",
+    "@detailAdded": {
+      "description": "Detailed prompt text for successful save"
+    },
+    "backToSuppliers": "Back To Suppliers",
+    "@backToSuppliers": {
+      "description": "Button text for back to suppliers"
+    },
+    "editSupplier": "change details of the supplier. ",
+    "@editSupplier": {
+      "description": "Prompt text (partial) for confirming editing supplier"
+    },
+    "success": "Success",
+    "@success": {
+      "description": "Prompt text for request success"
+    },
+    "detailEdited": "Change request is accepted",
+    "@detailEdited": {
+      "description": "Detailed prompt text for successful change"
+    },
+    "save": "Save",
+    "@save": {
+      "description": "Button text for save"
+    },
+    "saveUp": "Save up the details?",
+    "@saveUp": {
+      "description": "Default prompt text for change request confirmation dialog"
+    },
+    "phoneNumberInvalid": "Please enter a valid phone number",
+    "@phoneNumberInvalid": {
+      "description": "Error text for invalid phone number"
+    },
+    "deleteSupplier": "remove the supplier. ",
+    "@deleteSupplier": {
+      "description": "Prompt text (partial) for confirming delete supplier"
+    },
+    "deleted": "Deleted",
+    "@deleted": {
+      "description": "Prompt text for delete success"
+    },
+    "removeSupplier": "Remove this supplier?",
+    "@removeSupplier": {
+      "description": "Dialog prompt text to confirm removing supplier"
+    },
+    "remove": "Remove",
+    "@remove": {
+      "description": "Button text for remove"
+    },
+    "no": "No",
+    "@remove": {
+      "description": "Button text for no"
+    },
+    "logout": "Logout",
+    "@logout": {
+      "description": "Button text for logout"
+    },
+    "confirmLogout": "You want to logout?",
+    "@confirmLogout": {
+      "description": "Dialog prompt text to confirm logout"
+    },
+    "support": "Support",
+    "@support": {
+      "description": "Prompt text for support"
+    },
+    "purchase": "Purchase",
+    "@purchase": {
+      "description": "Prompt text for purchase page option"
+    },
+    "shipment": "Shipment",
+    "@shipment": {
+      "description": "Prompt text for shipment page option"
+    },
+    "production": "Production",
+    "@production": {
+      "description": "Prompt text for production page option"
+    },
+    "printing": "Printing",
+    "@printing": {
+      "description": "Prompt text for printing page option"
+    },
+    "buyer": "Buyer",
+    "@buyer": {
+      "description": "Prompt text for buyer page option"
+    },
+    "goods": "Goods",
+    "@goods": {
+      "description": "Prompt text for goods page option"
+    },
+    "items": "Items",
+    "@items": {
+      "description": "Prompt text for items page option"
+    },
+    "machine": "Machine",
+    "@machine": {
+      "description": "Prompt text for machine page option"
+    },
+    "supplier": "Supplier",
+    "@supplier": {
+      "description": "Prompt text for supplier page option"
+    },
+    "warehouse": "Warehouse",
+    "@warehouse": {
+      "description": "Prompt text for warehouse page option"
+    },
+    "worker": "Worker",
+    "@worker": {
+      "description": "Prompt text for worker page option"
+    },
+    "selectOne": "Please select one option",
+    "@selectOne": {
+      "description": "Prompt text to radio buttons"
+    },
+    "workers": "Workers",
+    "@workers": {
+      "description": "Title text for workers list page"
+    },
+    "workerID": "Worker ID",
+    "@workerID": {
+      "description": "Label text for worker ID field"
+    },
+    "removeWorker": "Remove this Worker?",
+    "@removeWorker": {
+      "description": "Dialog prompt text for worker delete"
+    },
+    "deleteWorker": "remove the worker ",
+    "@deleteWorker": {
+      "description": "Prompt text (partial) to confirm worker delete"
+    },
+    "backToWorkers": "Back To Workers",
+    "@backToWorkers": {
+      "description": "Button text for back to workers"
+    },
+    "details": "Details",
+    "@details": {
+      "description": "Title text for details"
+    },
+    "name": "Name",
+    "@name": {
+      "description": "Label text for name field"
+    },
+    "noNetwork": "Unable to connect to the internet",
+    "@noNetwork": {
+      "description": "Error text for no network page"
+    },
+    "tryAgain": "Try Again",
+    "@tryAgain": {
+      "description": "Button text for try again"
+    },
+   "buyers": "Buyers",
+    "@Buyers": {
+      "description": "Title text for buyers"
+    },
+  "buyerDetails": "Buyer Details",
+  "@buyerDetails": {
+    "description": "Title text for buyer details"
+  },
+  "buyerID": "Buyer ID",
+  "@buyerID": {
+    "description": "Label text for buyer ID field"
+  },
+  "buyerName": "Buyer Name",
+  "@buyerName": {
+    "description": "Label text for buyer name field"
+  },
+  "buyerNameEmpty": "Please enter buyer name",
+  "@buyerNameEmpty": {
+    "description": "Error text for empty buyer name field"
+  },
+  "buyerAddressEmpty": "Please enter buyer address",
+  "@buyerAddressEmpty": {
+    "description": "Error text for empty buyer address field"
+  },
+  "addBuyer": "Add Buyer",
+  "@addBuyer": {
+    "description": "Title text for add buyer"
+  },
+  "addNewBuyer": "add new buyer. ",
+  "@addNewBuyer": {
+    "description": "Prompt text (partial) for confirming adding new buyer"
+  },
+  "backToBuyer": "Back To Buyer",
+  "@backToBuyer": {
+    "description": "Button text for back to buyers"
+  },
+  "editBuyer": "change details of the buyer. ",
+  "@editBuyer": {
+    "description": "Prompt text (partial) for confirming editing buyer"
+  },
+  "deleteBuyer": "remove the buyer. ",
+  "@deleteBuyer": {
+    "description": "Prompt text (partial) for confirming delete buyer"
+  },
+  "removeBuyer": "Remove this buyer?",
+  "@removeBuyer": {
+    "description": "Dialog prompt text to confirm removing buyer"
   }
-
 }

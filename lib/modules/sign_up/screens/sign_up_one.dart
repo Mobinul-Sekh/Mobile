@@ -7,12 +7,11 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 // Project imports:
 import 'package:bitecope/config/themes/theme.dart';
+import 'package:bitecope/core/common/components/form_field_decoration.dart';
+import 'package:bitecope/core/common/components/gradient_button.dart';
 import 'package:bitecope/modules/sign_up/bloc/sign_up_bloc.dart';
 import 'package:bitecope/modules/sign_up/components/sign_up_wrapper.dart';
 import 'package:bitecope/modules/sign_up/screens/sign_up_two.dart';
-import 'package:bitecope/widgets/form_field_decoration.dart';
-import 'package:bitecope/widgets/gradient_widget.dart';
-import 'package:bitecope/widgets/rounded_wide_button.dart';
 
 class SignUpOne extends StatefulWidget {
   const SignUpOne({Key? key}) : super(key: key);
@@ -105,6 +104,7 @@ class _SignUpOneState extends State<SignUpOne> {
                       controller: _phoneNumberController,
                       focusNode: _phoneNumberNode,
                       textInputAction: TextInputAction.next,
+                      keyboardType: TextInputType.number,
                       onEditingComplete: () => _passwordNode.requestFocus(),
                       style: Theme.of(context).textTheme.bodyText2,
                       decoration: formFieldDecoration(
@@ -172,7 +172,7 @@ class _SignUpOneState extends State<SignUpOne> {
               ),
             ),
             const SizedBox(height: 36),
-            RoundedWideButton(
+            GradientButton(
               onTap: () {
                 context.read<SignUpBloc>().validatePageOne(
                       email: _emailController.text,
@@ -182,13 +182,14 @@ class _SignUpOneState extends State<SignUpOne> {
                       confirmPassword: _confirmPasswordController.text,
                     );
               },
-              child: GradientWidget(
-                gradient: AppGradients.primaryGradient,
-                child: Text(
-                  AppLocalizations.of(context)!.next,
-                  style: Theme.of(context).primaryTextTheme.headline6,
-                  textAlign: TextAlign.center,
-                ),
+              gradient: AppGradients.primaryLinear,
+              child: Text(
+                AppLocalizations.of(context)!.next,
+                style: Theme.of(context)
+                    .textTheme
+                    .headline6
+                    ?.copyWith(color: AppColors.white),
+                textAlign: TextAlign.center,
               ),
             ),
           ],

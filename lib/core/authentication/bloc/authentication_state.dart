@@ -1,22 +1,31 @@
 part of 'authentication_bloc.dart';
 
-class AuthenticationState with EquatableMixin {
+class AuthenticationState {
   AuthenticationStatus status;
-  String? username;
-  String? token;
+  _AuthenticationData? authData;
 
   AuthenticationState({
     this.status = AuthenticationStatus.loading,
-    this.username,
-    this.token,
+    this.authData,
   });
 
-  @override
-  List<Object?> get props => [status, username, token];
+  AuthenticationState copyWith({
+    AuthenticationStatus? status,
+    _AuthenticationData? authData,
+  }) {
+    return AuthenticationState(
+      status: status ?? this.status,
+      authData: authData ?? this.authData,
+    );
+  }
 }
 
 enum AuthenticationStatus {
   loading,
   loggedIn,
   loggedOut,
+  ownerActivate,
+  ownerInitialize,
+  ownerInactive,
+  workerInitialize,
 }

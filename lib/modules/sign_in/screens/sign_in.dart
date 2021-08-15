@@ -6,12 +6,17 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 // Project imports:
+import 'package:bitecope/config/routes/route_names.dart';
 import 'package:bitecope/config/themes/theme.dart';
+import 'package:bitecope/core/authentication/bloc/authentication_bloc.dart';
+import 'package:bitecope/core/common/components/custom_back_button.dart';
+import 'package:bitecope/core/common/components/form_field_decoration.dart';
+import 'package:bitecope/core/common/components/gradient_widget.dart';
+import 'package:bitecope/core/common/components/rounded_wide_button.dart';
+import 'package:bitecope/core/common/components/sized_cpi.dart';
 import 'package:bitecope/modules/sign_in/cubit/siginin_cubit.dart';
-import 'package:bitecope/widgets/custom_back_button.dart';
-import 'package:bitecope/widgets/form_field_decoration.dart';
-import 'package:bitecope/widgets/gradient_widget.dart';
-import 'package:bitecope/widgets/rounded_wide_button.dart';
+import 'package:bitecope/modules/sign_in/screens/email_not_verified.dart';
+import 'package:bitecope/modules/sign_in/screens/owner_not_subscribed.dart';
 
 class SignIn extends StatefulWidget {
   const SignIn({Key? key}) : super(key: key);
@@ -40,14 +45,15 @@ class _SignInState extends State<SignIn> {
       child: Scaffold(
         backgroundColor: AppColors.nearBlack,
         appBar: AppBar(
+          backgroundColor: AppColors.nearBlack,
           elevation: 0,
           leading: const CustomBackButton(),
           centerTitle: false,
           title: GradientWidget(
-            gradient: AppGradients.primaryGradient,
+            gradient: AppGradients.primaryLinear,
             child: Text(
               AppLocalizations.of(context)!.signIn,
-              style: Theme.of(context).appBarTheme.textTheme?.headline6,
+              style: Theme.of(context).appBarTheme.textTheme?.headline5,
             ),
           ),
         ),
@@ -69,14 +75,21 @@ class _SignInState extends State<SignIn> {
             ),
             child: BlocConsumer<SignInBloc, SignInState>(
               listener: (context, state) {
-                if (state.signInStatus == SignInStatus.signedIn) {
-                  Navigator.of(context).popUntil(ModalRoute.withName('/'));
-                  Navigator.of(context).pushReplacementNamed('/home');
-                }
+                _handleListen(context, state);
               },
               builder: (context, state) {
                 return Column(
                   children: [
+                    if (state.error != null) ...[
+                      Text(
+                        state.error!(context)!,
+                        style: Theme.of(context)
+                            .textTheme
+                            .caption
+                            ?.copyWith(color: Theme.of(context).errorColor),
+                      ),
+                      const SizedBox(height: 18),
+                    ],
                     Expanded(
                       child: SingleChildScrollView(
                         child: Column(
@@ -95,6 +108,7 @@ class _SignInState extends State<SignIn> {
                                 errorText: state.username.error != null
                                     ? state.username.error!(context)
                                     : null,
+                                suppressError: true,
                                 suffixIcon: Icons.person,
                               ),
                             ),
@@ -112,6 +126,7 @@ class _SignInState extends State<SignIn> {
                                 errorText: state.password.error != null
                                     ? state.password.error!(context)
                                     : null,
+                                suppressError: true,
                                 suffixIcon: _hidePassword
                                     ? Icons.visibility_off
                                     : Icons.visibility,
@@ -131,12 +146,12 @@ class _SignInState extends State<SignIn> {
                                     // TODO Push to forgot password page
                                   },
                                   child: GradientWidget(
-                                    gradient: AppGradients.primaryGradient,
+                                    gradient: AppGradients.primaryLinear,
                                     child: Text(
                                       AppLocalizations.of(context)!
                                           .forgotPassword,
                                       style:
-                                          Theme.of(context).textTheme.bodyText2,
+                                          Theme.of(context).textTheme.caption,
                                     ),
                                   ),
                                 )
@@ -158,9 +173,43 @@ class _SignInState extends State<SignIn> {
     );
   }
 
+  void _handleListen(BuildContext context, SignInState state) {
+    switch (state.signInStatus) {
+      case SignInStatus.signIn:
+      case SignInStatus.signingIn:
+        break;
+      case SignInStatus.verify:
+        Navigator.of(context).push(MaterialPageRoute(
+          builder: (context) =>
+              EmailNotVerified(username: state.username.value!),
+        ));
+        break;
+      case SignInStatus.ownerActivate:
+        Navigator.of(context).push(MaterialPageRoute(
+          builder: (context) =>
+              OwnerNotSubscribed(username: state.username.value!),
+        ));
+        break;
+      case SignInStatus.ownerInactive: //This is for worker accounts
+        //TODO Push to owner inactive screen
+        //  (or maybe we should just let the authbloc handle this)
+        break;
+      case SignInStatus.signedIn:
+        context.read<AuthenticationBloc>().signedIn(
+              state.username.value!,
+              state.userType!,
+              state.token!,
+              state.expiresIn!,
+            );
+        Navigator.of(context)
+            .popUntil(ModalRoute.withName(RouteName.splashScreen));
+        break;
+    }
+  }
+
   Widget signInButton(SignInStatus status) {
     return RoundedWideButton(
-      onTap: status == SignInStatus.signIn
+      onTap: status != SignInStatus.signingIn
           ? () {
               context.read<SignInBloc>().validateSignInPage(
                     username: _usernameController.text,
@@ -168,20 +217,16 @@ class _SignInState extends State<SignIn> {
                   );
             }
           : null,
-      child: status == SignInStatus.signIn
+      child: status != SignInStatus.signingIn
           ? GradientWidget(
-              gradient: AppGradients.primaryGradient,
+              gradient: AppGradients.primaryLinear,
               child: Text(
                 AppLocalizations.of(context)!.signIn,
                 style: Theme.of(context).textTheme.headline6,
                 textAlign: TextAlign.center,
               ),
             )
-          : const SizedBox(
-              height: 15,
-              width: 15,
-              child: CircularProgressIndicator(),
-            ),
+          : const SizedCPI(),
     );
   }
 
