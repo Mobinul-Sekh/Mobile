@@ -5,9 +5,6 @@ import 'package:bitecope/modules/post_signin_owner/providers/post_owner_provider
 import 'package:shared_preferences/shared_preferences.dart';
 
 // Project imports:
-import 'package:bitecope/modules/sign_in/models/signin_reponse_model.dart';
-import 'package:bitecope/modules/sign_in/models/signin_request_model.dart';
-import 'package:bitecope/modules/sign_in/providers/sign_in_provider.dart';
 
 class PostOwnerRepository {
   final PostOwnerProvider postOwnerProvider = PostOwnerProvider();

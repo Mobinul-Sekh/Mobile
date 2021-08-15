@@ -13,8 +13,6 @@ import 'package:bitecope/core/authentication/bloc/authentication_bloc.dart';
 import 'package:bitecope/core/common/repositories/common_repository.dart';
 import 'package:bitecope/core/network/bloc/network_bloc.dart';
 
-import 'modules/post_signin_owner/screens/post_owner.dart';
-
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   runApp(BiteCope());

@@ -1,8 +1,8 @@
 import 'package:bitecope/config/themes/theme.dart';
+import 'package:bitecope/core/common/components/form_field_decoration.dart';
+import 'package:bitecope/core/common/components/rounded_wide_button.dart';
 import 'package:bitecope/modules/post_signin_owner/cubit/post_owner_cubit.dart';
-import 'package:bitecope/widgets/form_field_decoration.dart';
-import 'package:bitecope/widgets/gradient_widget.dart';
-import 'package:bitecope/widgets/rounded_wide_button.dart';
+import 'package:bitecope/core/common/components/gradient_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -53,9 +53,7 @@ class _OwnerDetailsState extends State<OwnerDetails> {
             ),
             child: BlocConsumer<PostOwnerCubit, PostOwnerState>(
               listener: (context, state) {
-                if (state.postOwnerStatus == PostOwnerStatus.ownerInserted) {
-                  print('owner inserted ');
-                }
+                if (state.postOwnerStatus == PostOwnerStatus.ownerInserted) {}
               },
               builder: (context, state) {
                 return Column(
@@ -63,7 +61,7 @@ class _OwnerDetailsState extends State<OwnerDetails> {
                     Container(
                       alignment: Alignment.center,
                       child: GradientWidget(
-                        gradient: AppGradients.primaryGradient,
+                        gradient: AppGradients.primaryLinear,
                         child: Text(
                           AppLocalizations.of(context)!.ownerDetails,
                           style: const TextStyle(
@@ -79,7 +77,7 @@ class _OwnerDetailsState extends State<OwnerDetails> {
                       margin: const EdgeInsets.only(top: 5),
                       height: 3,
                       decoration: BoxDecoration(
-                        gradient: AppGradients.primaryGradient,
+                        gradient: AppGradients.primaryLinear,
                         borderRadius: BorderRadius.circular(20),
                       ),
                       width: MediaQuery.of(context).size.width * 0.70,
@@ -198,7 +196,7 @@ class _OwnerDetailsState extends State<OwnerDetails> {
                       child: state.postOwnerStatus ==
                               PostOwnerStatus.ownerInsert
                           ? GradientWidget(
-                              gradient: AppGradients.primaryGradient,
+                              gradient: AppGradients.primaryLinear,
                               child: Text(
                                 AppLocalizations.of(context)!.confirm,
                                 style: Theme.of(context).textTheme.headline6,
