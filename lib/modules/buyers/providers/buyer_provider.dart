@@ -21,7 +21,7 @@ class BuyerProvider extends CommonProvider {
           },
         ),
       );
-      print(response.statusCode);
+
       return response.asMap();
     } catch (e) {
       return errorResponse(e);
@@ -33,7 +33,6 @@ class BuyerProvider extends CommonProvider {
     String token,
   ) async {
     try {
-      print(request.toMap());
       final Response response = await CommonProvider.dio.post(
         AppURLs.addBuyer,
         data: request.toMap(),

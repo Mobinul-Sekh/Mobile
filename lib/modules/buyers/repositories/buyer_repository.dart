@@ -40,7 +40,7 @@ class BuyerRepository extends CommonRepository {
       address: address,
       description: description,
     );
-    print(request.name);
+
     final Map<String, dynamic>? _responseMap =
         await _buyerProvider.addBuyer(request, _authToken);
 
