@@ -35,6 +35,9 @@ import 'package:bitecope/modules/worker_initialize/screens/worker_initialize.dar
 import 'package:bitecope/modules/workers/bloc/worker_list_bloc.dart';
 import 'package:bitecope/modules/workers/repositories/worker_repository.dart';
 import 'package:bitecope/modules/workers/screens/workers_list.dart';
+import 'package:bitecope/modules/post_signin_owner/cubit/post_owner_cubit.dart';
+import 'package:bitecope/modules/post_signin_owner/repositories/post_owner_repository.dart';
+import 'package:bitecope/modules/post_signin_owner/screens/post_owner.dart';
 
 class AppRouter {
   // Declare blocs here
@@ -66,6 +69,17 @@ class AppRouter {
             return BlocProvider<SignUpBloc>(
               create: (context) => SignUpBloc(SignUpRepository()),
               child: const SignUpOne(),
+            );
+          },
+        );
+      case '/postOwner':
+        return MaterialPageRoute(
+          builder: (_) {
+            return BlocProvider<PostOwnerCubit>(
+              create: (context) => PostOwnerCubit(
+                postOwnerRepository: PostOwnerRepository(),
+              ),
+              child: const OwnerDetails(),
             );
           },
         );

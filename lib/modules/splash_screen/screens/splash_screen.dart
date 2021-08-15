@@ -140,8 +140,7 @@ class SplashScreen extends StatelessWidget {
         Navigator.of(context).pushReplacementNamed(RouteName.home);
         break;
       case AuthenticationStatus.ownerInactive:
-        //TODO Push to owner inactive error page for woker sign-in; pushing to home for now
-        Navigator.of(context).pushReplacementNamed(RouteName.home);
+        Navigator.of(context).pushNamed("/postOwner");
         break;
       case AuthenticationStatus.workerInitialize:
         Navigator.of(context).pushNamed(RouteName.workerInitialize);

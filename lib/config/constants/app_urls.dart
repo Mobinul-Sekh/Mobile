@@ -11,6 +11,7 @@ class AppURLs {
   static const String baseAPI = "https://bitecope.co.in";
   static const String register = "$baseAPI/signup/";
   static const String login = "$baseAPI/login/";
+  static const String ownerInsertDetails = "$baseAPI/owner_ins_details/";
   static const String logout = "$baseAPI/logout/";
   static const String accountStatus = "$baseAPI/account_status/";
   static const String deviceDetails = "$baseAPI/device_details/";

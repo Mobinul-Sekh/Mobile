@@ -163,6 +163,26 @@
     "@ownerNameEmpty": {
       "description": "Error text for empty owner name"
     },
+ "companyName": "Company Name",
+  "@companyName": {
+    "description": "Field is mandatory"
+  },
+  "companyAddress": "Company Address",
+  "@companyAddress": {
+    "description": ""
+  },
+  "confirm": "Confirm",
+  "@confirm": {
+    "description": "Confirm button"
+  },
+  "mandatoryStar": "*",
+  "@mandatoryStar": {
+    "description": "*"
+  },
+  "ownerDetails": "Owner Details",
+  "@ownerDetails": {
+    "description": ""
+  },
     "verifyEmail": "Verify Email",
     "@verifyEmail": {
       "description": "Title text for email verification page"
