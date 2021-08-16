@@ -1,13 +1,6 @@
 // Project imports:
 import 'package:bitecope/core/common/repositories/common_repository.dart';
-import 'package:bitecope/modules/buyers/models/add_buyer_request.dart';
-import 'package:bitecope/modules/buyers/models/add_buyer_response.dart';
-import 'package:bitecope/modules/buyers/models/delete_buyer_request.dart';
-import 'package:bitecope/modules/buyers/models/delete_buyer_response.dart';
-import 'package:bitecope/modules/buyers/models/edit_buyer_request.dart';
-import 'package:bitecope/modules/buyers/models/edit_buyer_response.dart';
-import 'package:bitecope/modules/buyers/models/get_buyer_response.dart';
-import 'package:bitecope/modules/buyers/providers/buyer_provider.dart';
+
 import 'package:bitecope/modules/warehouse/models/add_warehouse_request.dart';
 import 'package:bitecope/modules/warehouse/models/add_warehouse_response.dart';
 import 'package:bitecope/modules/warehouse/models/delete_warehouse_request.dart';

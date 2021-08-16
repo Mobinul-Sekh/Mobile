@@ -1,7 +1,5 @@
 // Package imports:
-import 'package:bitecope/modules/buyers/models/buyer.dart';
-import 'package:bitecope/modules/buyers/models/get_buyer_response.dart';
-import 'package:bitecope/modules/buyers/repositories/buyer_repository.dart';
+
 import 'package:bitecope/modules/machines/models/get_machine_response.dart';
 import 'package:bitecope/modules/machines/models/machine.dart';
 import 'package:bitecope/modules/machines/repositories/machine_repository.dart';

@@ -8,9 +8,6 @@ import 'package:dio/dio.dart';
 import 'package:bitecope/config/constants/app_urls.dart';
 import 'package:bitecope/config/utils/extensions/response_extension.dart';
 import 'package:bitecope/core/common/providers/common_provider.dart';
-import 'package:bitecope/modules/buyers/models/add_buyer_request.dart';
-import 'package:bitecope/modules/buyers/models/delete_buyer_request.dart';
-import 'package:bitecope/modules/buyers/models/edit_buyer_request.dart';
 
 class WarehouseProvider extends CommonProvider {
   Future<Map<String, dynamic>?> getWarehouses(String token) async {

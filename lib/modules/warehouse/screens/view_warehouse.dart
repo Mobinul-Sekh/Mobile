@@ -102,6 +102,14 @@ class _ViewWarehouseState extends State<ViewWarehouse> {
                       ],
                     ),
                   ),
+                  if (state.error != null)
+                    Text(
+                      state.error!(context)!,
+                      style: Theme.of(context)
+                          .textTheme
+                          .caption
+                          ?.copyWith(color: Theme.of(context).errorColor),
+                    ),
                   Expanded(
                     child: SingleChildScrollView(
                       padding: const EdgeInsets.symmetric(horizontal: 30.0),

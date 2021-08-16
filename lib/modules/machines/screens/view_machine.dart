@@ -16,7 +16,6 @@ import 'package:bitecope/config/themes/theme.dart';
 import 'package:bitecope/core/authentication/bloc/authentication_bloc.dart';
 import 'package:bitecope/core/common/components/block_button.dart';
 import 'package:bitecope/core/common/components/custom_back_button.dart';
-import 'package:bitecope/core/common/components/gradient_button.dart';
 import 'package:bitecope/core/common/components/gradient_widget.dart';
 import 'package:bitecope/core/common/components/underlined_title.dart';
 import 'package:bitecope/core/common/models/user.dart';
@@ -96,6 +95,14 @@ class _ViewMachineState extends State<ViewMachine> {
                       ],
                     ),
                   ),
+                  if (state.error != null)
+                    Text(
+                      state.error!(context)!,
+                      style: Theme.of(context)
+                          .textTheme
+                          .caption
+                          ?.copyWith(color: Theme.of(context).errorColor),
+                    ),
                   Expanded(
                     child: SingleChildScrollView(
                       padding: const EdgeInsets.symmetric(horizontal: 30.0),
