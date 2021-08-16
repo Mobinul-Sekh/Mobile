@@ -16,7 +16,6 @@ import 'package:bitecope/config/themes/theme.dart';
 import 'package:bitecope/core/authentication/bloc/authentication_bloc.dart';
 import 'package:bitecope/core/common/components/block_button.dart';
 import 'package:bitecope/core/common/components/custom_back_button.dart';
-import 'package:bitecope/core/common/components/gradient_button.dart';
 import 'package:bitecope/core/common/components/gradient_widget.dart';
 import 'package:bitecope/core/common/components/underlined_title.dart';
 import 'package:bitecope/core/common/models/user.dart';
@@ -144,6 +143,7 @@ class _ViewMachineState extends State<ViewMachine> {
                   elevatedButtonText: AppLocalizations.of(context)!.no,
                   flipCallback: true,
                   listener: (context, state) {
+                    //  print(state.machineStatus);
                     if (state.machineStatus == MachineStatus.ready) {
                       Navigator.of(context).maybePop();
                     } else if (state.machineStatus == MachineStatus.done) {

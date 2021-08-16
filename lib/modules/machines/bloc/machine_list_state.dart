@@ -17,7 +17,7 @@ class MachineListState with EquatableMixin {
     MachineListStatus? machineListStatus,
   }) {
     return MachineListState(
-      machines: machines ?? machines,
+      machines: machines ?? this.machines,
       machineListStatus: machineListStatus ?? this.machineListStatus,
     );
   }

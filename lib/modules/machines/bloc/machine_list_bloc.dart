@@ -1,7 +1,4 @@
 // Package imports:
-import 'package:bitecope/modules/buyers/models/buyer.dart';
-import 'package:bitecope/modules/buyers/models/get_buyer_response.dart';
-import 'package:bitecope/modules/buyers/repositories/buyer_repository.dart';
 import 'package:bitecope/modules/machines/models/get_machine_response.dart';
 import 'package:bitecope/modules/machines/models/machine.dart';
 import 'package:bitecope/modules/machines/repositories/machine_repository.dart';
@@ -40,15 +37,19 @@ class MachineListBloc extends Cubit<MachineListState> {
     required String machineID,
   }) {
     emit(state.copyWith(machineListStatus: MachineListStatus.loading));
+
     final int? _machineIndex =
         state.machines?.indexWhere((_machine) => _machine.id == machineID);
+
     if (_machineIndex != null) {
       final List<Machine> _updatedMachines = state.machines!;
       _updatedMachines.removeAt(_machineIndex);
+
       emit(state.copyWith(
         machines: _updatedMachines,
       ));
     }
+
     emit(state.copyWith(machineListStatus: MachineListStatus.ready));
   }
 }
