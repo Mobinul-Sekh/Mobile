@@ -2,6 +2,9 @@
 import 'package:bitecope/modules/buyers/bloc/buyer_list_bloc.dart';
 import 'package:bitecope/modules/buyers/repositories/buyer_repository.dart';
 import 'package:bitecope/modules/buyers/screens/buyers_list.dart';
+import 'package:bitecope/modules/machines/bloc/machine_list_bloc.dart';
+import 'package:bitecope/modules/machines/repositories/machine_repository.dart';
+import 'package:bitecope/modules/machines/screens/machine_list.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -138,6 +141,14 @@ class AppRouter {
           builder: (_) => BlocProvider<BuyerListBloc>(
             create: (context) => BuyerListBloc(BuyerRepository()),
             child: const BuyersList(),
+          ),
+        );
+      case RouteName.machines:
+        return MaterialPageRoute(
+          settings: routeSettings,
+          builder: (_) => BlocProvider<MachineListBloc>(
+            create: (context) => MachineListBloc(MachineRepository()),
+            child: const MachinesList(),
           ),
         );
       case RouteName.workers:

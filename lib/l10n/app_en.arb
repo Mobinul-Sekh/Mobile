@@ -516,7 +516,7 @@
       "description": "Button text for try again"
     },
    "buyers": "Buyers",
-    "@Buyers": {
+    "@buyers": {
       "description": "Title text for buyers"
     },
   "buyerDetails": "Buyer Details",
@@ -562,5 +562,45 @@
   "removeBuyer": "Remove this buyer?",
   "@removeBuyer": {
     "description": "Dialog prompt text to confirm removing buyer"
+  },
+  "machines": "Machines",
+  "@machines": {
+    "description": "Title text for Machines"
+  },
+  "machineDetails": "Machine Details",
+  "@machineDetails": {
+    "description": "Title text for machine details"
+  },
+  "machineID": "machine ID",
+  "@machineID": {
+    "description": "Label text for machine ID field"
+  },
+  "machineName": "Machine Name",
+  "@machineName": {
+    "description": "Label text for machine name field"
+  },
+  "machineNameEmpty": "Please enter machine name",
+  "@machineNameEmpty": {
+    "description": "Error text for empty machine name field"
+  },
+  "addMachine": "Add Machine",
+  "@addMachine": {
+    "description": "Title text for add machine"
+  },
+  "addNewMachine": "add new machine.",
+  "@addNewMachine": {
+    "description": "Prompt text (partial) for confirming adding new machine"
+  },
+  "backToMachine": "Back To Machine",
+  "@backToMachine": {
+    "description": "Button text for back to machine"
+  },
+  "deleteMachine": "remove the machine.",
+  "@deleteMachine": {
+    "description": "Prompt text (partial) for confirming delete machine"
+  },
+  "removeMachine": "Remove this machine?",
+  "@removeMachine": {
+    "description": "Dialog prompt text to confirm removing machine"
   }
 }

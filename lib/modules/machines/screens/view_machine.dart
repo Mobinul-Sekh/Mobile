@@ -1,7 +1,8 @@
 // Flutter imports:
-import 'package:bitecope/modules/buyers/bloc/buyer_bloc.dart';
-import 'package:bitecope/modules/buyers/models/buyer.dart';
-import 'package:bitecope/modules/buyers/components/buyer_form.dart';
+
+import 'package:bitecope/modules/machines/bloc/machine_bloc.dart';
+import 'package:bitecope/modules/machines/components/machine_form.dart';
+import 'package:bitecope/modules/machines/models/machine.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -15,43 +16,32 @@ import 'package:bitecope/config/themes/theme.dart';
 import 'package:bitecope/core/authentication/bloc/authentication_bloc.dart';
 import 'package:bitecope/core/common/components/block_button.dart';
 import 'package:bitecope/core/common/components/custom_back_button.dart';
-import 'package:bitecope/core/common/components/gradient_button.dart';
 import 'package:bitecope/core/common/components/gradient_widget.dart';
 import 'package:bitecope/core/common/components/underlined_title.dart';
 import 'package:bitecope/core/common/models/user.dart';
 import 'package:bitecope/core/common/screens/confirm_operation.dart';
 import 'package:bitecope/core/common/screens/operation_notification.dart';
 
-class ViewBuyer extends StatefulWidget {
-  final Buyer buyer;
+class ViewMachine extends StatefulWidget {
+  final Machine machine;
 
-  const ViewBuyer({
+  const ViewMachine({
     Key? key,
-    required this.buyer,
+    required this.machine,
   }) : super(key: key);
 
   @override
-  _ViewBuyerState createState() => _ViewBuyerState();
+  _ViewMachineState createState() => _ViewMachineState();
 }
 
-class _ViewBuyerState extends State<ViewBuyer> {
+class _ViewMachineState extends State<ViewMachine> {
   late final TextEditingController _nameController;
-  late final TextEditingController _phoneNumberController;
-  late final TextEditingController _addressController;
-  late final TextEditingController _descriptionController;
-  late final FocusNode _descriptionNode;
   bool _isEditing = false;
 
   @override
   void initState() {
     super.initState();
-    _nameController = TextEditingController(text: widget.buyer.name);
-    _phoneNumberController =
-        TextEditingController(text: widget.buyer.phoneNumber);
-    _addressController = TextEditingController(text: widget.buyer.address);
-    _descriptionController =
-        TextEditingController(text: widget.buyer.description);
-    _descriptionNode = FocusNode();
+    _nameController = TextEditingController(text: widget.machine.name);
   }
 
   @override
@@ -64,14 +54,14 @@ class _ViewBuyerState extends State<ViewBuyer> {
             size: 28,
           ),
           title: UnderlinedTitle(
-            title: AppLocalizations.of(context)!.buyerDetails,
+            title: AppLocalizations.of(context)!.machineDetails,
             style: Theme.of(context).appBarTheme.textTheme?.headline6,
             underlineOvershoot: 0,
           ),
         ),
         body: Padding(
           padding: const EdgeInsets.symmetric(vertical: 30.0),
-          child: BlocConsumer<BuyerBloc, BuyerState>(
+          child: BlocConsumer<MachineBloc, MachineState>(
             listener: (context, state) {
               _handleListen(context, state);
             },
@@ -90,7 +80,7 @@ class _ViewBuyerState extends State<ViewBuyer> {
                         TableRow(
                           children: [
                             _tableCell(
-                              text: AppLocalizations.of(context)!.buyerID,
+                              text: AppLocalizations.of(context)!.machineID,
                               style: Theme.of(context)
                                   .textTheme
                                   .bodyText2
@@ -98,7 +88,7 @@ class _ViewBuyerState extends State<ViewBuyer> {
                             ),
                             const SizedBox(),
                             _tableCell(
-                              text: widget.buyer.id,
+                              text: widget.machine.id,
                             ),
                           ],
                         ),
@@ -108,15 +98,11 @@ class _ViewBuyerState extends State<ViewBuyer> {
                   Expanded(
                     child: SingleChildScrollView(
                       padding: const EdgeInsets.symmetric(horizontal: 30.0),
-                      child: BuyerForm(
+                      child: MachineForm(
                         nameController: _nameController,
-                        phoneNumberController: _phoneNumberController,
-                        addressController: _addressController,
-                        descriptionController: _descriptionController,
-                        descriptionNode: _descriptionNode,
                         formMode: _isEditing
-                            ? BuyerFormMode.edit
-                            : BuyerFormMode.display,
+                            ? MachineFormMode.edit
+                            : MachineFormMode.display,
                       ),
                     ),
                   ),
@@ -140,61 +126,35 @@ class _ViewBuyerState extends State<ViewBuyer> {
     );
   }
 
-  void _handleListen(BuildContext context, BuyerState state) {
-    if (state.buyerStatus == BuyerStatus.editValidated) {
+  void _handleListen(BuildContext context, MachineState state) {
+    if (state.machineStatus == MachineStatus.deleteValidated) {
       Navigator.of(context).push(
         MaterialPageRoute(
           builder: (_) {
             return BlocProvider.value(
-              value: context.read<BuyerBloc>(),
+              value: context.read<MachineBloc>(),
               child: Builder(
-                builder: (_context) => ConfirmOperation<BuyerBloc, BuyerState>(
-                  confirmationPrompt: _editConfirmationPrompt(context),
-                  onConfirm: () => _context.read<BuyerBloc>().editBuyer(),
-                  listener: (context, state) {
-                    if (state.buyerStatus == BuyerStatus.ready) {
-                      Navigator.of(context).maybePop();
-                    } else if (state.buyerStatus == BuyerStatus.done) {
-                      Navigator.of(context).pushAndRemoveUntil(
-                        _editSuccessPage(),
-                        ModalRoute.withName(RouteName.buyers),
-                      );
-                    }
-                  },
-                  isLoading: (state) =>
-                      state.buyerStatus == BuyerStatus.loading,
-                ),
-              ),
-            );
-          },
-        ),
-      );
-    } else if (state.buyerStatus == BuyerStatus.deleteValidated) {
-      Navigator.of(context).push(
-        MaterialPageRoute(
-          builder: (_) {
-            return BlocProvider.value(
-              value: context.read<BuyerBloc>(),
-              child: Builder(
-                builder: (_context) => ConfirmOperation<BuyerBloc, BuyerState>(
+                builder: (_context) =>
+                    ConfirmOperation<MachineBloc, MachineState>(
                   confirmationPrompt: _deleteConfirmationPrompt(context),
-                  onConfirm: () => _context.read<BuyerBloc>().deleteBuyer(),
-                  dialogText: AppLocalizations.of(context)!.removeBuyer,
+                  onConfirm: () => _context.read<MachineBloc>().deleteMachine(),
+                  dialogText: AppLocalizations.of(context)!.removeMachine,
                   flatButtonText: AppLocalizations.of(context)!.remove,
                   elevatedButtonText: AppLocalizations.of(context)!.no,
                   flipCallback: true,
                   listener: (context, state) {
-                    if (state.buyerStatus == BuyerStatus.ready) {
+                    //  print(state.machineStatus);
+                    if (state.machineStatus == MachineStatus.ready) {
                       Navigator.of(context).maybePop();
-                    } else if (state.buyerStatus == BuyerStatus.done) {
+                    } else if (state.machineStatus == MachineStatus.done) {
                       Navigator.of(context).pushAndRemoveUntil(
                         _deleteSuccessPage(),
-                        ModalRoute.withName(RouteName.buyers),
+                        ModalRoute.withName(RouteName.machines),
                       );
                     }
                   },
                   isLoading: (state) =>
-                      state.buyerStatus == BuyerStatus.loading,
+                      state.machineStatus == MachineStatus.loading,
                 ),
               ),
             );
@@ -202,29 +162,6 @@ class _ViewBuyerState extends State<ViewBuyer> {
         ),
       );
     }
-  }
-
-  RichText _editConfirmationPrompt(BuildContext context) {
-    return RichText(
-      text: TextSpan(
-        style: Theme.of(context)
-            .textTheme
-            .bodyText1
-            ?.copyWith(color: AppColors.shadowText),
-        children: [
-          TextSpan(
-            text: AppLocalizations.of(context)!.tryingTo,
-          ),
-          TextSpan(
-            text: AppLocalizations.of(context)!.editBuyer,
-            style: Theme.of(context).textTheme.bodyText1,
-          ),
-          TextSpan(
-            text: AppLocalizations.of(context)!.confirmOperation,
-          ),
-        ],
-      ),
-    );
   }
 
   RichText _deleteConfirmationPrompt(BuildContext context) {
@@ -239,7 +176,7 @@ class _ViewBuyerState extends State<ViewBuyer> {
             text: AppLocalizations.of(context)!.tryingTo,
           ),
           TextSpan(
-            text: AppLocalizations.of(context)!.deleteBuyer,
+            text: AppLocalizations.of(context)!.deleteMachine,
             style: Theme.of(context).textTheme.bodyText1,
           ),
           TextSpan(
@@ -247,23 +184,6 @@ class _ViewBuyerState extends State<ViewBuyer> {
           ),
         ],
       ),
-    );
-  }
-
-  Route _editSuccessPage() {
-    return MaterialPageRoute(
-      builder: (context) {
-        return OperationNotification(
-          iconPath: "assets/images/circle_check.svg",
-          title: AppLocalizations.of(context)!.success,
-          message: AppLocalizations.of(context)!.detailEdited,
-          splashImagePath: "assets/images/change_confirmation.svg",
-          nextText: AppLocalizations.of(context)!.backToBuyer,
-          nextCallback: () {
-            Navigator.of(context).maybePop();
-          },
-        );
-      },
     );
   }
 
@@ -275,7 +195,7 @@ class _ViewBuyerState extends State<ViewBuyer> {
           title: AppLocalizations.of(context)!.deleted,
           message: AppLocalizations.of(context)!.detailEdited,
           splashImagePath: "assets/images/change_confirmation.svg",
-          nextText: AppLocalizations.of(context)!.backToBuyer,
+          nextText: AppLocalizations.of(context)!.backToMachine,
           nextCallback: () {
             Navigator.of(context).maybePop();
           },
@@ -285,43 +205,12 @@ class _ViewBuyerState extends State<ViewBuyer> {
   }
 
   Widget _getButtons() {
-    if (_isEditing) {
-      return GradientButton(
-        onTap: () {
-          setState(() => _isEditing = false);
-          context.read<BuyerBloc>().confirmEdit(
-                buyerID: widget.buyer.id,
-                description: _descriptionController.text,
-              );
-          _descriptionController.text = widget.buyer.description ?? "";
-        },
-        gradient: AppGradients.primaryLinear,
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              AppLocalizations.of(context)!.confirm,
-              style: Theme.of(context).textTheme.button,
-            ),
-            const SizedBox(width: 24),
-            const Icon(
-              Icons.check_circle,
-              color: AppColors.white,
-            )
-          ],
-        ),
-      );
-    }
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         BlockButton(
           onTap: () {
             setState(() => _isEditing = true);
-            WidgetsBinding.instance?.addPostFrameCallback((_) {
-              _descriptionNode.requestFocus();
-            });
           },
           position: BlockPosition.left,
           child: const Center(
@@ -336,7 +225,9 @@ class _ViewBuyerState extends State<ViewBuyer> {
         ),
         BlockButton(
           onTap: () {
-            context.read<BuyerBloc>().confirmDelete(buyerID: widget.buyer.id);
+            context
+                .read<MachineBloc>()
+                .confirmDelete(machineID: widget.machine.id);
           },
           position: BlockPosition.right,
           child: Center(
@@ -381,10 +272,6 @@ class _ViewBuyerState extends State<ViewBuyer> {
   @override
   void dispose() {
     _nameController.dispose();
-    _phoneNumberController.dispose();
-    _addressController.dispose();
-    _descriptionController.dispose();
-    _descriptionNode.dispose();
     super.dispose();
   }
 }
