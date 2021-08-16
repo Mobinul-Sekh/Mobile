@@ -151,6 +151,7 @@ class _ViewMachineState extends State<ViewMachine> {
                   elevatedButtonText: AppLocalizations.of(context)!.no,
                   flipCallback: true,
                   listener: (context, state) {
+                    //  print(state.machineStatus);
                     if (state.machineStatus == MachineStatus.ready) {
                       Navigator.of(context).maybePop();
                     } else if (state.machineStatus == MachineStatus.done) {

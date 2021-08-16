@@ -27,7 +27,7 @@ class MachinesList extends StatelessWidget {
     return BlocBuilder<MachineListBloc, MachineListState>(
       builder: (context, state) {
         return Listing<Machine>(
-          title: AppLocalizations.of(context)!.buyers,
+          title: AppLocalizations.of(context)!.machines,
           data: state.machineListStatus == MachineListStatus.loading
               ? null
               : state.machines,
