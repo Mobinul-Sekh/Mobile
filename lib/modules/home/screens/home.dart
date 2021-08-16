@@ -86,6 +86,9 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
       ),
       PageSelectorOption(
         name: AppLocalizations.of(context)!.warehouse,
+        onTap: () {
+          Navigator.of(context).pushReplacementNamed(RouteName.warehouses);
+        },
       ),
     ];
 
